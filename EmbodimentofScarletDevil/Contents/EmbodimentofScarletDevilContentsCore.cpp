@@ -1,7 +1,10 @@
 #include "EmbodimentofScarletDevilContentsCore.h"
 #include "Player.h"
+#include "TitleLevel.h"
+#include "PlayLevel.h"
 
 EmbodimentofScarletDevilContentsCore::EmbodimentofScarletDevilContentsCore()
+	: EngineCore()
 {
 }
 
@@ -9,23 +12,19 @@ EmbodimentofScarletDevilContentsCore::~EmbodimentofScarletDevilContentsCore()
 {
 }
 
-// 게임시작
-void EmbodimentofScarletDevilContentsCore::Start()
+void EmbodimentofScarletDevilContentsCore::BeginPlay()
 {
-	//MainWindow.SetTitle();
-	//MainWindow.SetScale();
 
-	Player NewPlayer;
+	CreateLevel<UTitleLevel>("TitleLevel");
+	CreateLevel<UPlayLevel>("PlayLevel");
 
-	int a = 0;
+	ChangeLevel("PlayLevel");
 }
 
-void EmbodimentofScarletDevilContentsCore::Update()
+void EmbodimentofScarletDevilContentsCore::Tick(float _DeltaTime)
 {
-	int a = 0;
 }
 
 void EmbodimentofScarletDevilContentsCore::End()
 {
-	int a = 0;
 }

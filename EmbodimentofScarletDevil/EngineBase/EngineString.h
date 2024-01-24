@@ -1,8 +1,17 @@
 #pragma once
+#include <string>
+#include <string_view>
 
+// Ό³Έν :
 class EngineString
 {
 public:
+	static std::string ToUpper(std::string_view View);
+
+protected:
+
+private:
+
 	// constrcuter destructer
 	EngineString();
 	~EngineString();
@@ -13,9 +22,6 @@ public:
 	EngineString& operator=(const EngineString& _Other) = delete;
 	EngineString& operator=(EngineString&& _Other) noexcept = delete;
 
-protected:
-
-private:
 
 };
 

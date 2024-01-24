@@ -1,6 +1,8 @@
 #pragma once
+#include <EngineCore\Actor.h>
 
-class Player
+// Ό³Έν :
+class Player : public AActor
 {
 public:
 	// constrcuter destructer
@@ -14,6 +16,8 @@ public:
 	Player& operator=(Player&& _Other) noexcept = delete;
 
 protected:
+	void BeginPlay() override;
+	void Tick(float _DeltaTime) override;
 
 private:
 
