@@ -18,7 +18,6 @@ LRESULT CALLBACK EngineWindow::WndProc(HWND hWnd, UINT message, WPARAM wParam, L
 	break;
 	case WM_DESTROY:
 		WindowLive = false;
-		// PostQuitMessage(123213);
 		break;
 	default:
 		return DefWindowProc(hWnd, message, wParam, lParam);
@@ -42,9 +41,6 @@ EngineWindow::~EngineWindow()
 
 void EngineWindow::Open(std::string_view _Title /*= "Title"*/)
 {
-	// 간혹가다가 앞쪽이이나 뒤쪽에 W가 붙거나 A가 붙어있는 함수들을 보게 될겁니다.
-	// A가 붙어있으면 멀티바이트 함수
-	// W가 붙어있으면 와이드 바이트 함수
 	WNDCLASSEXA wcex;
 
 	wcex.cbSize = sizeof(WNDCLASSEX);
@@ -63,13 +59,6 @@ void EngineWindow::Open(std::string_view _Title /*= "Title"*/)
 
 	RegisterClassExA(&wcex);
 
-	// const std::string& = 내부에 뭘들고 있다고 생각하라고 했나요?
-	// std::vector<char> 들고 있다고 생각하라고 했다.
-	// _Title[0] = char&를 리턴해준 것과 같다.
-	// _Title.c_str(); => 자연스럽게 내부에서 
-	// const char* Test = &_Title[0]
-	// return Test;
-
 	hWnd = CreateWindowA("DefaultWindow", _Title.data(), WS_OVERLAPPEDWINDOW,
 		CW_USEDEFAULT, 0, CW_USEDEFAULT, 0, nullptr, nullptr, hInstance, nullptr);
 
@@ -86,19 +75,28 @@ void EngineWindow::Open(std::string_view _Title /*= "Title"*/)
 
 }
 
-unsigned __int64 EngineWindow::WindowMessageLoop()
+unsigned __int64 EngineWindow::WindowMessageLoop(void(*_Update)(), void(*_End)())
 {
 	MSG msg = {};
 
 	while (WindowLive)
 	{
-		// 기본 메시지 루프입니다:
-		// 10개가 들어있을 
+		// 기본 메시지 루프
 		if (PeekMessage(&msg, nullptr, 0, 0, PM_REMOVE))
 		{
 			TranslateMessage(&msg);
 			DispatchMessage(&msg);
 		}
+
+		if (nullptr != _Update)
+		{
+			_Update();
+		}
+	}
+
+	if (nullptr != _End)
+	{
+		_End();
 	}
 
 	return msg.wParam;
