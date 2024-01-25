@@ -12,6 +12,7 @@ UPlayLevel::~UPlayLevel()
 
 void UPlayLevel::BeginPlay()
 {
-	SpawnActor<Player>();
+	// ULevel* const This = this;
+	this->SpawnActor<Player>();
 
 }

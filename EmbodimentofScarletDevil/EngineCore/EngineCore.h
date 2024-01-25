@@ -1,7 +1,10 @@
 #pragma once
 #include <EngineBase\EngineDebug.h>
-#include <EnginePlatform\EngineWindow.h>
 #include <EngineBase\EngineString.h>
+#include <EngineBase\EngineTime.h>
+
+#include <EnginePlatform\EngineWindow.h>
+#include <EnginePlatform\EngineInput.h>
 #include <map>
 
 
@@ -19,6 +22,7 @@ public:
 	EngineCore& operator=(EngineCore&& _Other) noexcept = delete;
 
 	EngineWindow MainWindow;
+	EngineTime MainTimer;
 
 	static void EngineStart(HINSTANCE _hInstance, EngineCore* _UserCore);
 

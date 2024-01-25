@@ -5,11 +5,13 @@
     <ClCompile Include="EmbodimentofScarletDevilContentsCore.cpp" />
     <ClCompile Include="PlayLevel.cpp" />
     <ClCompile Include="TitleLevel.cpp" />
+    <ClCompile Include="Bullet.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Player.h" />
     <ClInclude Include="EmbodimentofScarletDevilContentsCore.h" />
     <ClInclude Include="PlayLevel.h" />
     <ClInclude Include="TitleLevel.h" />
+    <ClInclude Include="Bullet.h" />
   </ItemGroup>
 </Project>

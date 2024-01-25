@@ -156,6 +156,10 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Bullet.cpp">
+      <SubType>
+      </SubType>
+    </ClCompile>
     <ClCompile Include="EmbodimentofScarletDevilContentsCore.cpp">
       <SubType>
       </SubType>
@@ -174,6 +178,10 @@
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Bullet.h">
+      <SubType>
+      </SubType>
+    </ClInclude>
     <ClInclude Include="EmbodimentofScarletDevilContentsCore.h">
       <SubType>
       </SubType>

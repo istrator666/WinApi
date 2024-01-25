@@ -28,6 +28,12 @@ public:
 	{
 		Position = _Value;
 	}
+
+	void AddPosition(FVector _Value)
+	{
+		Position += _Value;
+	}
+
 	FVector GetPosition()
 	{
 		return Position;
