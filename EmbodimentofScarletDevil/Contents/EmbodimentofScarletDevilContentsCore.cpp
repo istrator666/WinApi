@@ -14,6 +14,7 @@ EmbodimentofScarletDevilContentsCore::~EmbodimentofScarletDevilContentsCore()
 
 void EmbodimentofScarletDevilContentsCore::BeginPlay()
 {
+	SetFrame(60);
 
 	CreateLevel<UTitleLevel>("TitleLevel");
 	CreateLevel<UPlayLevel>("PlayLevel");

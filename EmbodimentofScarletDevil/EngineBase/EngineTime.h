@@ -19,9 +19,15 @@ public:
 
 	float TimeCheck();
 
+	double GetDeltaTime()
+	{
+		return DeltaTime;
+	}
+
 protected:
 
 private:
+	__int64 Count64;
 	LARGE_INTEGER Count;
 	LARGE_INTEGER PrevTime;
 	LARGE_INTEGER CurTime;

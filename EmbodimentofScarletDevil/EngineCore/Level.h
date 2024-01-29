@@ -4,10 +4,15 @@
 #include <list>
 
 class AActor;
+class EngineCore;
+class UImageRenderer;
 
 // Ό³Έν :
 class ULevel : public UNameObject
 {
+	friend EngineCore;
+	friend UImageRenderer;
+
 public:
 	// constrcuter destructer
 	ULevel();
@@ -31,7 +36,6 @@ public:
 		return NewActor;
 	}
 
-	void ActorTick(float _DeltaTime);
 
 protected:
 
@@ -39,6 +43,10 @@ private:
 	std::map<int, std::list<AActor*>> AllActor;
 
 	void ActorInit(AActor* _NewActor);
+	void LevelTick(float _DeltaTime);
+	void LevelRender(float _DeltaTime);
+	void LevelRelease(float _DeltaTime);
 
+	std::map<int, std::list<UImageRenderer*>> Renderers;
 };
 
