@@ -21,7 +21,7 @@ AActor::~AActor()
 	Renderers.clear();
 }
 
-UImageRenderer* AActor::CreateImageRenderer(int Order /*= 0*/)
+UImageRenderer* AActor::CreateImageRenderer(int Order)
 {
 	UImageRenderer* NewRenderer = new UImageRenderer();
 	UActorComponent* ActorCom = NewRenderer;
@@ -30,4 +30,25 @@ UImageRenderer* AActor::CreateImageRenderer(int Order /*= 0*/)
 	ActorCom->BeginPlay();
 	Renderers.push_back(NewRenderer);
 	return NewRenderer;
+}
+
+void AActor::Destroy(float _DestroyTime)
+{
+	UTickObject::Destroy(_DestroyTime);
+
+	for (UImageRenderer* Renderer : Renderers)
+	{
+		Renderer->Destroy(_DestroyTime);
+	}
+}
+
+
+void AActor::DestroyUpdate(float _DeltaTime)
+{
+	UTickObject::DestroyUpdate(_DeltaTime);
+
+	for (UImageRenderer* Renderer : Renderers)
+	{
+		Renderer->DestroyUpdate(_DeltaTime);
+	}
 }

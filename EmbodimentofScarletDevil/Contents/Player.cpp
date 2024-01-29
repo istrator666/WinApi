@@ -63,7 +63,7 @@ void Player::Tick(float _DeltaTime)
 		HeadRenderer->Destroy();
 	}
 
-	if (true == EngineInput::IsDown('Q'))
+	if (true == EngineInput::IsPress('Q'))
 	{
 		ABullet* NewBullet = GetWorld()->SpawnActor<ABullet>();
 		NewBullet->SetActorLocation(GetActorLocation());
