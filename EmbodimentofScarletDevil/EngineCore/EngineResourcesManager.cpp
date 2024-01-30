@@ -42,7 +42,6 @@ UWindowImage* UEngineResourcesManager::LoadImg(std::string_view _Path, std::stri
 	UWindowImage* NewImage = new UWindowImage();
 	NewImage->SetName(UpperName);
 	NewImage->SetPath(_Path);
-	NewImage->Load(GEngine->MainWindow.GetWindowDC());
 	NewImage->Load(GEngine->MainWindow.GetWindowImage());
 
 	Images[UpperName] = NewImage;

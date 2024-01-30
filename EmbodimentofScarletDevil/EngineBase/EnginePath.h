@@ -35,9 +35,8 @@ public:
 	}
 
 protected:
-
+	std::filesystem::path Path;
 private:
 
-	std::filesystem::path Path;
 };
 

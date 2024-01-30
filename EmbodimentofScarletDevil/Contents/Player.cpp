@@ -21,14 +21,14 @@ void Player::BeginPlay()
 	{
 		BodyRenderer = CreateImageRenderer(0);
 		BodyRenderer->SetPosition({ 0, 30 });
-		BodyRenderer->SetImageToScale("CB2.bmp");
+		BodyRenderer->SetImageToScale("Reimu.png");
 	}
 
 
 	{
 		HeadRenderer = CreateImageRenderer(0);
 		HeadRenderer->SetPosition({ 0, -25 });
-		HeadRenderer->SetImageToScale("CB2.bmp");
+		HeadRenderer->SetImageToScale("Reimu.png");
 	}
 
 	SetActorLocation({ 100, 100 });

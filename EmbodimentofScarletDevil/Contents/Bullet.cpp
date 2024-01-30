@@ -15,7 +15,7 @@ void ABullet::BeginPlay()
 {
 	{
 		UImageRenderer* Renderer = CreateImageRenderer(-10);
-		Renderer->SetImageToScale("CB2.bmp");
+		Renderer->SetImageToScale("Reimu.png");
 	}
 
 	Destroy(2.0f);
