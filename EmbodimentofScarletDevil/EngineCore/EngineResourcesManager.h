@@ -4,7 +4,7 @@
 #include <map>
 
 
-class UImage;
+class UWindowImage;
 // Ό³Έν : 
 class UEngineResourcesManager
 {
@@ -21,9 +21,11 @@ public:
 		return Inst;
 	}
 
-	UImage* LoadImg(std::string_view _Path);
+	UWindowImage* LoadImg(std::string_view _Path);
 
-	UImage* FindImg(std::string_view _Name);
+	UWindowImage* LoadImg(std::string_view _Path, std::string_view _Name);
+
+	UWindowImage* FindImg(std::string_view _Name);
 
 
 
@@ -34,7 +36,7 @@ private:
 	UEngineResourcesManager();
 	~UEngineResourcesManager();
 
-	std::map<std::string, UImage*> Images;
+	std::map<std::string, UWindowImage*> Images;
 
 };
 

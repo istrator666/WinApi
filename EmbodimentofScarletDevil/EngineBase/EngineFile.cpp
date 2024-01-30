@@ -1,10 +1,15 @@
 #include "EngineFile.h"
 
-EngineFile::EngineFile()
+UEngineFile::UEngineFile()
 {
 }
 
-EngineFile::~EngineFile()
+UEngineFile::UEngineFile(std::filesystem::path _Path)
+	: UEnginePath(_Path)
 {
+
 }
 
+UEngineFile::~UEngineFile()
+{
+}

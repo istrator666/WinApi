@@ -1,11 +1,12 @@
 #include "EngineWindow.h"
 #include <EngineBase\EngineDebug.h>
+#include "WindowImage.h"
 
-bool EngineWindow::WindowLive = true;
-HINSTANCE EngineWindow::hInstance;
+bool UEngineWindow::WindowLive = true;
+HINSTANCE UEngineWindow::hInstance;
 
 
-LRESULT CALLBACK EngineWindow::WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
+LRESULT CALLBACK UEngineWindow::WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
 {
 	switch (message)
 	{
@@ -25,21 +26,26 @@ LRESULT CALLBACK EngineWindow::WndProc(HWND hWnd, UINT message, WPARAM wParam, L
 	return 0;
 }
 
-void EngineWindow::Init(HINSTANCE _hInst)
+void UEngineWindow::Init(HINSTANCE _hInst)
 {
 	hInstance = _hInst;
 }
 
 
-EngineWindow::EngineWindow() 
+UEngineWindow::UEngineWindow()
 {
 }
 
-EngineWindow::~EngineWindow() 
+UEngineWindow::~UEngineWindow()
 {
+	if (nullptr != WindowImage)
+	{
+		delete WindowImage;
+		WindowImage = nullptr;
+	}
 }
 
-void EngineWindow::Open(std::string_view _Title /*= "Title"*/)
+void UEngineWindow::Open(std::string_view _Title)
 {
 	WNDCLASSEXA wcex;
 
@@ -68,27 +74,33 @@ void EngineWindow::Open(std::string_view _Title /*= "Title"*/)
 		return;
 	}
 
-	hDC = GetDC(hWnd);
+	HDC hDC = GetDC(hWnd);
+
+	if (nullptr == WindowImage)
+	{
+		WindowImage = new UWindowImage();
+		WindowImage->Create(hDC);
+	}
+
 
 	ShowWindow(hWnd, SW_SHOW);
 	UpdateWindow(hWnd);
 
 }
 
-unsigned __int64 EngineWindow::WindowMessageLoop(void(*_Update)(), void(*_End)())
+unsigned __int64 UEngineWindow::WindowMessageLoop(void(*_Update)(), void(*_End)())
 {
 	MSG msg = {};
 
 	while (WindowLive)
 	{
-		// 기본 메시지 루프
+
 		if (PeekMessage(&msg, nullptr, 0, 0, PM_REMOVE))
 		{
 			TranslateMessage(&msg);
 			DispatchMessage(&msg);
 		}
 
-		// 메세지 루프의 데드타임이라는 곳에서 실행
 		if (nullptr != _Update)
 		{
 			_Update();

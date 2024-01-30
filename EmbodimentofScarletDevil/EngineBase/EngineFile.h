@@ -2,22 +2,22 @@
 #include "EnginePath.h"
 
 // Ό³Έν :
-class EngineFile : public EnginePath
+class UEngineFile : public UEnginePath
 {
 public:
 	// constrcuter destructer
-	EngineFile();
-	~EngineFile();
+	UEngineFile();
+	UEngineFile(std::filesystem::path _Path);
+	~UEngineFile();
 
 	// delete Function
-	EngineFile(const EngineFile& _Other) = delete;
-	EngineFile(EngineFile&& _Other) noexcept = delete;
-	EngineFile& operator=(const EngineFile& _Other) = delete;
-	EngineFile& operator=(EngineFile&& _Other) noexcept = delete;
+	//UEngineFile(const UEngineFile& _Other) = delete;
+	//UEngineFile(UEngineFile&& _Other) noexcept = delete;
+	//UEngineFile& operator=(const UEngineFile& _Other) = delete;
+	//UEngineFile& operator=(UEngineFile&& _Other) noexcept = delete;
 
 protected:
 
 private:
 
 };
-

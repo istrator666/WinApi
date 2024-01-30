@@ -4,22 +4,35 @@
 
 
 // Ό³Έν : 
-class EnginePath
+class UEnginePath
 {
 public:
 	// constrcuter destructer
-	EnginePath();
-	~EnginePath();
+	UEnginePath();
+	UEnginePath(std::filesystem::path _Path);
+	~UEnginePath();
 
-	// delete Function
-	EnginePath(const EnginePath& _Other) = delete;
-	EnginePath(EnginePath&& _Other) noexcept = delete;
-	EnginePath& operator=(const EnginePath& _Other) = delete;
-	EnginePath& operator=(EnginePath&& _Other) noexcept = delete;
-
+	//// delete Function
+	//UEnginePath(const UEnginePath& _Other) = delete;
+	//UEnginePath(UEnginePath&& _Other) noexcept = delete;
+	//UEnginePath& operator=(const UEnginePath& _Other) = delete;
+	//UEnginePath& operator=(UEnginePath&& _Other) noexcept = delete;
 
 	bool IsFile();
 	bool IsDirectory();
+
+	bool IsExists();
+
+	std::string GetFileName();
+	std::string GetExtension();
+
+	void MoveParent();
+	void Move(std::string_view _Path);
+
+	std::string GetFullPath()
+	{
+		return Path.string();
+	}
 
 protected:
 

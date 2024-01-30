@@ -3,25 +3,26 @@
 #include <string_view>
 
 // Ό³Έν :
-class EngineString
+class UEngineString
 {
 public:
 	static std::string ToUpper(std::string_view View);
 
+	static std::wstring AnsiToUniCode(std::string_view View);
+
+
 protected:
 
 private:
-
 	// constrcuter destructer
-	EngineString();
-	~EngineString();
+	UEngineString();
+	~UEngineString();
 
 	// delete Function
-	EngineString(const EngineString& _Other) = delete;
-	EngineString(EngineString&& _Other) noexcept = delete;
-	EngineString& operator=(const EngineString& _Other) = delete;
-	EngineString& operator=(EngineString&& _Other) noexcept = delete;
-
+	UEngineString(const UEngineString& _Other) = delete;
+	UEngineString(UEngineString&& _Other) noexcept = delete;
+	UEngineString& operator=(const UEngineString& _Other) = delete;
+	UEngineString& operator=(UEngineString&& _Other) noexcept = delete;
 
 };
 
