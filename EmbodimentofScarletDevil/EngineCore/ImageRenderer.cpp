@@ -39,7 +39,8 @@ void UImageRenderer::Render(float _DeltaTime)
 	ThisTrans.AddPosition(OwnerTrans.GetPosition());
 
 
-	GEngine->MainWindow.GetWindowImage()->BitCopy(Image, ThisTrans);
+	GEngine->MainWindow.GetBackBufferImage()->TransCopy(Image, ThisTrans, ImageCuttingTransform);
+
 
 }
 
@@ -67,5 +68,8 @@ void UImageRenderer::SetImage(std::string_view _Name, bool _IsImageScale)
 	{
 		FVector Scale = Image->GetScale();
 		SetScale(Scale);
+
+		ImageCuttingTransform.SetPosition({ 0,0 });
+		ImageCuttingTransform.SetScale(Scale);
 	}
 }

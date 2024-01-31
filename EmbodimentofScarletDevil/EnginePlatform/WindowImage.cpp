@@ -78,6 +78,13 @@ bool UWindowImage::Load(UWindowImage* _Image)
 
 
 	ImageDC = CreateCompatibleDC(_Image->ImageDC);
+
+	if (nullptr == ImageDC)
+	{
+		MsgBoxAssert("이미지 생성에 실패했습니다");
+		return false;
+	}
+	
 	HBITMAP OldBitMap = (HBITMAP)SelectObject(ImageDC, hBitMap);
 	DeleteObject(OldBitMap);
 
@@ -87,8 +94,40 @@ bool UWindowImage::Load(UWindowImage* _Image)
 	return true;
 }
 
-void UWindowImage::BitCopy(UWindowImage* _CopyImage, FTransform _Trans)
+bool UWindowImage::Create(UWindowImage* _Image, const FVector& _Scale)
 {
+	HANDLE ImageHandle = CreateCompatibleBitmap(_Image->ImageDC, _Scale.iX(), _Scale.iY());
+
+	if (nullptr == ImageHandle)
+	{
+		MsgBoxAssert("이미지 생성에 실패했습니다");
+		return false;
+	}
+
+	hBitMap = reinterpret_cast<HBITMAP>(ImageHandle);
+
+	ImageDC = CreateCompatibleDC(_Image->ImageDC);
+
+	if (nullptr == ImageDC)
+	{
+		MsgBoxAssert("이미지 생성에 실패했습니다");
+		return false;
+	}
+
+	HBITMAP OldBitMap = reinterpret_cast<HBITMAP>(SelectObject(ImageDC, hBitMap));
+	DeleteObject(OldBitMap);
+
+	GetObject(hBitMap, sizeof(BITMAP), &BitMapInfo);
+
+	return true;
+}
+
+void UWindowImage::BitCopy(UWindowImage* _CopyImage, const FTransform& _Trans)
+{
+	if (nullptr == _CopyImage)
+	{
+		MsgBoxAssert("nullptr 인 이미지를 복사할 수 없습니다");
+	}
 
 	HDC hdc = ImageDC;
 
@@ -103,5 +142,30 @@ void UWindowImage::BitCopy(UWindowImage* _CopyImage, FTransform _Trans)
 		0,
 		0,
 		SRCCOPY
+	);
+}
+
+void UWindowImage::TransCopy(UWindowImage* _CopyImage, const FTransform& _Trans, const FTransform& _ImageTrans, Color8Bit _Color)
+{
+	if (nullptr == _CopyImage)
+	{
+		MsgBoxAssert("nullptr 인 이미지를 복사할 수 없습니다");
+	}
+
+	HDC hdc = ImageDC;
+
+	HDC hdcSrc = _CopyImage->ImageDC;
+	TransparentBlt(
+		hdc,
+		_Trans.iLeft(),
+		_Trans.iTop(),
+		_Trans.GetScale().iX(),
+		_Trans.GetScale().iY(),
+		hdcSrc,
+		_ImageTrans.GetPosition().iX(),
+		_ImageTrans.GetPosition().iY(),
+		_ImageTrans.GetScale().iX(),
+		_ImageTrans.GetScale().iY(),
+		_Color.Color
 	);
 }

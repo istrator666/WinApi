@@ -3,18 +3,18 @@
 #include "Level.h"
 #include "EnginePlatform\EngineInput.h"
 
-EngineCore* GEngine = nullptr;
+UEngineCore* GEngine = nullptr;
 
-EngineCore::EngineCore() 
+UEngineCore::UEngineCore() 
 	: MainWindow()
 {
 }
 
-EngineCore::~EngineCore() 
+UEngineCore::~UEngineCore() 
 {
 }
 
-void EngineCore::CoreTick()
+void UEngineCore::CoreTick()
 {
 	float DeltaTime = MainTimer.TimeCheck();
 	double dDeltaTime = MainTimer.GetDeltaTime();
@@ -44,7 +44,11 @@ void EngineCore::CoreTick()
 
 	CurLevel->Tick(DeltaTime);
 	CurLevel->LevelTick(DeltaTime);
+
+	MainWindow.ScreenClear();
 	CurLevel->LevelRender(DeltaTime);
+	MainWindow.ScreenUpdate();
+
 	CurLevel->LevelRelease(DeltaTime);
 
 
@@ -52,12 +56,12 @@ void EngineCore::CoreTick()
 	//Rectangle(WindowDC, -200, -200, 3000, 3000);
 }
 
-void EngineCore::EngineTick()
+void UEngineCore::EngineTick()
 {
 	GEngine->CoreTick();
 }
 
-void EngineCore::EngineEnd()
+void UEngineCore::EngineEnd()
 {
 	// std::map<std::string, ULevel*>::iterator StartI
 
@@ -75,9 +79,9 @@ void EngineCore::EngineEnd()
 	GEngine->AllLevel.clear();
 }
 
-void EngineCore::EngineStart(HINSTANCE _hInstance, EngineCore* _UserCore)
+void UEngineCore::EngineStart(HINSTANCE _hInstance, UEngineCore* _UserCore)
 {
-	EngineCore* Ptr = _UserCore;
+	UEngineCore* Ptr = _UserCore;
 	GEngine = Ptr;
 	Ptr->MainTimer.TimeCheckStart();
 	Ptr->CoreInit(_hInstance);
@@ -85,7 +89,7 @@ void EngineCore::EngineStart(HINSTANCE _hInstance, EngineCore* _UserCore)
 	UEngineWindow::WindowMessageLoop(EngineTick, EngineEnd);
 }
 
-void EngineCore::CoreInit(HINSTANCE _HINSTANCE)
+void UEngineCore::CoreInit(HINSTANCE _HINSTANCE)
 {
 	if (true == EngineInit)
 	{
@@ -100,22 +104,22 @@ void EngineCore::CoreInit(HINSTANCE _HINSTANCE)
 	EngineInit = true;
 }
 
-void EngineCore::BeginPlay()
+void UEngineCore::BeginPlay()
 {
 
 }
 
-void EngineCore::Tick(float _DeltaTime)
+void UEngineCore::Tick(float _DeltaTime)
 {
 
 }
 
-void EngineCore::End()
+void UEngineCore::End()
 {
 
 }
 
-void EngineCore::ChangeLevel(std::string_view _Name)
+void UEngineCore::ChangeLevel(std::string_view _Name)
 {
 	std::string UpperName = UEngineString::ToUpper(_Name);
 
@@ -127,7 +131,7 @@ void EngineCore::ChangeLevel(std::string_view _Name)
 	CurLevel = AllLevel[UpperName];
 }
 
-void EngineCore::LevelInit(ULevel* _Level)
+void UEngineCore::LevelInit(ULevel* _Level)
 {
 	_Level->BeginPlay();
 }

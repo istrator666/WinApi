@@ -12,5 +12,5 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
 {
 	LeakCheck;
 	EmbodimentofScarletDevilContentsCore NewUserCore = EmbodimentofScarletDevilContentsCore();
-	EngineCore::EngineStart(hInstance, &NewUserCore);
+	UEngineCore::EngineStart(hInstance, &NewUserCore);
 }

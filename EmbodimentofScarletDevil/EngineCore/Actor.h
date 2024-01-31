@@ -40,10 +40,6 @@ public:
 		Transform.AddPosition(_Value);
 	}
 
-	void SetActorScale(FVector _Value)
-	{
-		Transform.SetScale(_Value);
-	}
 
 	FTransform GetTransform()
 	{
@@ -62,6 +58,7 @@ public:
 
 
 protected:
+	void Tick(float _DeltaTime) override;
 
 private:
 	std::list<UImageRenderer*> Renderers;

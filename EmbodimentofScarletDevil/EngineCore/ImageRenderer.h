@@ -24,10 +24,17 @@ public:
 
 	void SetImageToScale(std::string_view _Name);
 
+	void SetImageCuttingTransform(const FTransform& _Value)
+	{
+		ImageCuttingTransform = _Value;
+	}
+
+
 protected:
 	void BeginPlay() override;
 
 private:
 	UWindowImage* Image;
+	FTransform ImageCuttingTransform;
 };
 

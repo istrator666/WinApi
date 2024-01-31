@@ -4,7 +4,7 @@
 #include "PlayLevel.h"
 
 EmbodimentofScarletDevilContentsCore::EmbodimentofScarletDevilContentsCore()
-	: EngineCore()
+	: UEngineCore()
 {
 }
 

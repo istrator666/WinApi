@@ -4,13 +4,13 @@
 #include <list>
 
 class AActor;
-class EngineCore;
+class UEngineCore;
 class UImageRenderer;
 
 // Ό³Έν :
 class ULevel : public UNameObject
 {
-	friend EngineCore;
+	friend UEngineCore;
 	friend UImageRenderer;
 
 public:

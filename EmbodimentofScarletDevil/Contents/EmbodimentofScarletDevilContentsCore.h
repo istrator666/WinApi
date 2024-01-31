@@ -1,7 +1,7 @@
 #pragma once
 #include <EngineCore\EngineCore.h>
 
-class EmbodimentofScarletDevilContentsCore : public EngineCore
+class EmbodimentofScarletDevilContentsCore : public UEngineCore
 {
 public:
 	// constrcuter destructer
