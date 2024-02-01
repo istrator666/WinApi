@@ -20,9 +20,17 @@ public:
 	void SetOrder(int _Order) override;
 	void Render(float _DeltaTime);
 
-	void SetImage(std::string_view _Name, bool _IsImageScale = false);
+	void SetImage(std::string_view _Name, int _InfoIndex = 0);
 
-	void SetImageToScale(std::string_view _Name);
+	void SetImageIndex(int _InfoIndex)
+	{
+		InfoIndex = _InfoIndex;
+	}
+
+	void SetTransform(const FTransform& _Value)
+	{
+		USceneComponent::SetTransform(_Value);
+	}
 
 	void SetImageCuttingTransform(const FTransform& _Value)
 	{
@@ -34,6 +42,7 @@ protected:
 	void BeginPlay() override;
 
 private:
+	int InfoIndex = 0;
 	UWindowImage* Image;
 	FTransform ImageCuttingTransform;
 };

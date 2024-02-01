@@ -1,5 +1,5 @@
 #include "TitleLevel.h"
-#include "EngineCore\EngineCore.h"
+#include "TitleLogo.h"
 
 UTitleLevel::UTitleLevel()
 {
@@ -11,5 +11,15 @@ UTitleLevel::~UTitleLevel()
 
 void UTitleLevel::BeginPlay()
 {
-	int a = 0;
+	ULevel::BeginPlay();
+
+	{
+		ATitlelogo* Logo = SpawnActor<ATitlelogo>();
+	}
+
+}
+
+void UTitleLevel::Tick(float _DeltaTime)
+{
+	ULevel::Tick(_DeltaTime);
 }

@@ -6,6 +6,12 @@ UEngineDirectory::UEngineDirectory()
 {
 }
 
+UEngineDirectory::UEngineDirectory(const UEnginePath& _Path)
+	: UEnginePath(_Path.GetFullPath())
+{
+
+}
+
 UEngineDirectory::~UEngineDirectory()
 {
 }
@@ -24,7 +30,7 @@ void UEngineDirectory::AllFileRecursive(
 	{
 
 		std::filesystem::path Path = Entry.path();
-		std::filesystem::path Ext = Entry.path().extension();
+		std::filesystem::path Ext = Entry.path().extension(); // extension 확장자 추출
 		std::string UpperExt = UEngineString::ToUpper(Ext.string());
 
 		if (true == Entry.is_directory())
