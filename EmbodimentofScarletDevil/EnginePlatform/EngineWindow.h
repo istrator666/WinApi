@@ -39,6 +39,13 @@ public:
 	void ScreenClear();
 	void ScreenUpdate();
 
+	FVector GetWindowScale()
+	{
+		return Scale;
+	}
+
+	FVector GetMousePosition();
+
 protected:
 
 private:
@@ -50,5 +57,6 @@ private:
 	UWindowImage* WindowImage = nullptr;
 	UWindowImage* BackBufferImage = nullptr;
 	FVector Scale;
+	FVector Position;
 };
 
