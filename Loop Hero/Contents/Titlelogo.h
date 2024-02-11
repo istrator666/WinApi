@@ -24,14 +24,9 @@ private:
 	void BackGroundImage();
 	void TitleMenu();
 
-	UImageRenderer* BackGroundImageRenderer = nullptr;
-	UImageRenderer* TitleLogoRenderer = nullptr;
+	float LogoChageTime = 2.0f;
+	float TitleMoveTime = 8.0f;
 	UImageRenderer* IntroLogoRenderer = nullptr;
-	UImageRenderer* MenuRenderer = nullptr;
-
-	float ChangeTime = 2.0f;
-	float NextBGTime = 4.0f;
-	float NextLogoTime = 6.0f;
-	float NextMenuTime = 8.0f;
+	UImageRenderer* TitleLogoRenderer = nullptr;
 };
 

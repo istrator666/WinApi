@@ -17,6 +17,7 @@ LoopHeroContentsCore::~LoopHeroContentsCore()
 void LoopHeroContentsCore::BeginPlay()
 {
 	MainWindow.SetWindowScale({1280, 720});
+	MainWindow.SetWindowPosition({ 600, 300 });
 	UEngineCore::BeginPlay();
 	SetFrame(60);
 

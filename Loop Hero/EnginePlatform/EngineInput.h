@@ -6,14 +6,14 @@
 
 // AllStateClass
 // Ό³Έν :
-class EngineInput
+class UEngineInput
 {
 	friend class InputInitCreator;
 
 private:
 	class /*EngineInput::*/EngineKey
 	{
-		friend EngineInput;
+		friend UEngineInput;
 
 	public:
 		bool Down = false;
@@ -41,14 +41,14 @@ private:
 
 public:
 	// constrcuter destructer
-	EngineInput();
-	~EngineInput();
+	UEngineInput();
+	~UEngineInput();
 
 	// delete Function
-	EngineInput(const EngineInput& _Other) = delete;
-	EngineInput(EngineInput&& _Other) noexcept = delete;
-	EngineInput& operator=(const EngineInput& _Other) = delete;
-	EngineInput& operator=(EngineInput&& _Other) noexcept = delete;
+	UEngineInput(const UEngineInput& _Other) = delete;
+	UEngineInput(UEngineInput&& _Other) noexcept = delete;
+	UEngineInput& operator=(const UEngineInput& _Other) = delete;
+	UEngineInput& operator=(UEngineInput&& _Other) noexcept = delete;
 
 	static bool IsDown(int _Key)
 	{

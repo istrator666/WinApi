@@ -1,7 +1,7 @@
 #include "EngineInput.h"
 
-std::map<int, EngineInput::EngineKey> EngineInput::AllKeys;
-void EngineInput::EngineKey::KeyCheck()
+std::map<int, UEngineInput::EngineKey> UEngineInput::AllKeys;
+void UEngineInput::EngineKey::KeyCheck()
 {
 	if (0 != GetAsyncKeyState(Key))
 	{
@@ -40,15 +40,15 @@ void EngineInput::EngineKey::KeyCheck()
 	}
 }
 
-EngineInput::EngineInput()
+UEngineInput::UEngineInput()
 {
 }
 
-EngineInput::~EngineInput()
+UEngineInput::~UEngineInput()
 {
 }
 
-void EngineInput::InputInit()
+void UEngineInput::InputInit()
 {
 	AllKeys[VK_LBUTTON] = EngineKey(VK_LBUTTON);
 	AllKeys[VK_RBUTTON] = EngineKey(VK_RBUTTON);
@@ -64,9 +64,9 @@ void EngineInput::InputInit()
 	AllKeys[VK_MENU] = EngineKey(VK_MENU);
 	AllKeys[VK_PAUSE] = EngineKey(VK_PAUSE);
 	AllKeys[VK_CAPITAL] = EngineKey(VK_CAPITAL);
-	AllKeys[VK_KANA] = EngineKey(VK_KANA);
-	AllKeys[VK_HANGEUL] = EngineKey(VK_HANGEUL);
-	AllKeys[VK_HANGUL] = EngineKey(VK_HANGUL);
+	//AllKeys[VK_KANA] = EngineKey(VK_KANA);
+	//AllKeys[VK_HANGEUL] = EngineKey(VK_HANGEUL);
+	//AllKeys[VK_HANGUL] = EngineKey(VK_HANGUL);
 	AllKeys[VK_IME_ON] = EngineKey(VK_IME_ON);
 	AllKeys[VK_JUNJA] = EngineKey(VK_JUNJA);
 	AllKeys[VK_FINAL] = EngineKey(VK_FINAL);
@@ -155,7 +155,7 @@ void EngineInput::InputInit()
 
 }
 
-void EngineInput::KeyCheckTick(float _DeltaTime)
+void UEngineInput::KeyCheckTick(float _DeltaTime)
 {
 	for (std::pair<const int, EngineKey>& Key : AllKeys)
 	{
@@ -170,7 +170,7 @@ class InputInitCreator
 public:
 	InputInitCreator()
 	{
-		EngineInput::InputInit();
+		UEngineInput::InputInit();
 	}
 };
 

@@ -22,29 +22,17 @@ void ATitlelogo::BeginPlay()
 void ATitlelogo::Tick(float _DeltaTime)
 {
 	AActor::Tick(_DeltaTime);
-	ChangeTime -= _DeltaTime;
-	if (ChangeTime < 0.0f)
+
+	LogoChageTime -= _DeltaTime;
+	if (LogoChageTime <= 0)
 	{
 		IntroLogoRenderer->SetImage("Intro_logo_2.png");
-		
+
 	}
 
-	NextBGTime -= _DeltaTime;
-	if (NextBGTime < 0.0f)
+	TitleMoveTime -= _DeltaTime;
+	if (TitleMoveTime <= 0)
 	{
-		BackGroundImageRenderer->SetActive(true);
-	}
-
-	NextLogoTime -= _DeltaTime;
-	if (NextLogoTime < 0.0f)
-	{
-		TitleLogoRenderer->SetActive(true);
-	}
-
-	NextMenuTime -= _DeltaTime;
-	if (NextMenuTime < 0.0f)
-	{
-		MenuRenderer->SetActive(true);
 		TitleLogoRenderer->SetTransform({ {0,-235}, {350, 350} });
 	}
 
@@ -57,32 +45,29 @@ void ATitlelogo::IntroLogo()
 	IntroBackGroundRenderer->SetScale({ 1280,720 });
 
 	IntroLogoRenderer = CreateImageRenderer();
-
 	IntroLogoRenderer->SetImage("Intro_logo_1.png");
 	IntroLogoRenderer->SetScale({ 500,250 });
-
 	IntroLogoRenderer->Destroy(4.0);
+
 }
 
 void ATitlelogo::BackGroundImage()
 {
-	BackGroundImageRenderer = CreateImageRenderer();
-
+	UImageRenderer* BackGroundImageRenderer = CreateImageRenderer();
+	BackGroundImageRenderer->SetActive(true, 4.0f);
 	BackGroundImageRenderer->SetImage("TitleBackGround.png");
 	BackGroundImageRenderer->SetScale({ 1280,720 });
-	BackGroundImageRenderer->SetActive(false);
 }
 
 void ATitlelogo::TitleMenu()
 {
-	MenuRenderer = CreateImageRenderer();
-	MenuRenderer->SetActive(false);
+	UImageRenderer* MenuRenderer = CreateImageRenderer();
+	MenuRenderer->SetActive(true, 6.0f);
 	MenuRenderer->SetImage("ScreenMenu.png");
-	MenuRenderer->SetTransform({ {0,-50}, {220, 660} });
+	MenuRenderer->SetTransform({ {0,-50}, {220, 880} });
 
 	TitleLogoRenderer = CreateImageRenderer();
-	TitleLogoRenderer->SetActive(false);
+	TitleLogoRenderer->SetActive(true, 6.0f);
 	TitleLogoRenderer->SetImage("TitleLogo.png");
 	TitleLogoRenderer->SetTransform({ {0,-50}, {350, 350} });
-
 }
