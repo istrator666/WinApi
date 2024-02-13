@@ -1,6 +1,6 @@
 #pragma once
 #include "SceneComponent.h"
-#include <EnginePlatform\WindowImage.h>
+#include <EnginePlatform/WindowImage.h>
 #include <map>
 
 class UAnimationInfo

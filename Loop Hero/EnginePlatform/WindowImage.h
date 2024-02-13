@@ -1,7 +1,7 @@
 #pragma once
-#include <EngineBase\PathObject.h>
-#include <EngineBase\EngineMath.h>
-#include <EngineBase\Transform.h>
+#include <EngineBase/PathObject.h>
+#include <EngineBase/EngineMath.h>
+#include <EngineBase/Transform.h>
 #include <Windows.h>
 
 enum class EImageLoadType

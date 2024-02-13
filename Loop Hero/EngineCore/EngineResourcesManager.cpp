@@ -1,9 +1,9 @@
 #include "EngineResourcesManager.h"
-#include <EnginePlatform\WindowImage.h>
-#include <EngineBase\EngineString.h>
-#include <EngineBase\EngineDebug.h>
+#include <EnginePlatform/WindowImage.h>
+#include <EngineBase/EngineString.h>
+#include <EngineBase/EngineDebug.h>
 #include "EngineCore.h"
-#include "EngineBase\EngineDebug.h"
+#include "EngineBase/EngineDebug.h"
 
 UEngineResourcesManager::UEngineResourcesManager()
 {

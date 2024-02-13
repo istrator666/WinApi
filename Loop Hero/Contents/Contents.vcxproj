@@ -160,7 +160,7 @@
       <SubType>
       </SubType>
     </ClCompile>
-    <ClCompile Include="Player.cpp">
+    <ClCompile Include="PlayerRender.cpp">
       <SubType>
       </SubType>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
@@ -180,7 +180,15 @@
       <SubType>
       </SubType>
     </ClCompile>
-    <ClCompile Include="Titlelogo.cpp">
+    <ClCompile Include="TitleRender.cpp">
+      <SubType>
+      </SubType>
+    </ClCompile>
+    <ClCompile Include="TutorialRander.cpp">
+      <SubType>
+      </SubType>
+    </ClCompile>
+    <ClCompile Include="TutorialLevel.cpp">
       <SubType>
       </SubType>
     </ClCompile>
@@ -190,7 +198,7 @@
       <SubType>
       </SubType>
     </ClInclude>
-    <ClInclude Include="Player.h">
+    <ClInclude Include="PlayerRender.h">
       <SubType>
       </SubType>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
@@ -210,7 +218,15 @@
       <SubType>
       </SubType>
     </ClInclude>
-    <ClInclude Include="Titlelogo.h">
+    <ClInclude Include="TitleRender.h">
+      <SubType>
+      </SubType>
+    </ClInclude>
+    <ClInclude Include="TutorialRander.h">
+      <SubType>
+      </SubType>
+    </ClInclude>
+    <ClInclude Include="TutorialLevel.h">
       <SubType>
       </SubType>
     </ClInclude>

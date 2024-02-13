@@ -1,5 +1,5 @@
 #pragma once
-#include <EngineCore\EngineCore.h>
+#include <EngineCore/EngineCore.h>
 
 class LoopHeroContentsCore : public UEngineCore
 {
@@ -20,6 +20,6 @@ protected:
 	void End() override;
 
 private:
-	void TitleFileSetup();
+
 };
 

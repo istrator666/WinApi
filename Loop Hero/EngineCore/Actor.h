@@ -1,7 +1,7 @@
 #pragma once
-#include <EngineBase\Transform.h>
+#include <EngineBase/Transform.h>
 #include "TickObject.h"
-#include <EngineBase\NameObject.h>
+#include <EngineBase/NameObject.h>
 #include "ImageRenderer.h"
 #include "Level.h"
 

@@ -1,14 +1,15 @@
-#include "Titlelogo.h"
+#include "TitleRender.h"
 
-ATitlelogo::ATitlelogo()
+
+ATitleRender::ATitleRender()
 {
 }
 
-ATitlelogo::~ATitlelogo()
+ATitleRender::~ATitleRender()
 {
 }
 
-void ATitlelogo::BeginPlay()
+void ATitleRender::BeginPlay()
 {
 	AActor::BeginPlay();
 
@@ -19,7 +20,7 @@ void ATitlelogo::BeginPlay()
 
 }
 
-void ATitlelogo::Tick(float _DeltaTime)
+void ATitleRender::Tick(float _DeltaTime)
 {
 	AActor::Tick(_DeltaTime);
 
@@ -33,12 +34,11 @@ void ATitlelogo::Tick(float _DeltaTime)
 	TitleMoveTime -= _DeltaTime;
 	if (TitleMoveTime <= 0)
 	{
-		TitleLogoRenderer->SetTransform({ {0,-235}, {350, 350} });
+		TitleLogoRenderer->SetTransform({ {0, -225}, {350, 350} });
 	}
-
 }
 
-void ATitlelogo::IntroLogo()
+void ATitleRender::IntroLogo()
 {
 	UImageRenderer* IntroBackGroundRenderer = CreateImageRenderer();
 	IntroBackGroundRenderer->SetImage("Intro_BackGround.png");
@@ -51,7 +51,7 @@ void ATitlelogo::IntroLogo()
 
 }
 
-void ATitlelogo::BackGroundImage()
+void ATitleRender::BackGroundImage()
 {
 	UImageRenderer* BackGroundImageRenderer = CreateImageRenderer();
 	BackGroundImageRenderer->SetActive(true, 4.0f);
@@ -59,7 +59,7 @@ void ATitlelogo::BackGroundImage()
 	BackGroundImageRenderer->SetScale({ 1280,720 });
 }
 
-void ATitlelogo::TitleMenu()
+void ATitleRender::TitleMenu()
 {
 	UImageRenderer* MenuRenderer = CreateImageRenderer();
 	MenuRenderer->SetActive(true, 6.0f);
@@ -67,7 +67,12 @@ void ATitlelogo::TitleMenu()
 	MenuRenderer->SetTransform({ {0,-50}, {220, 880} });
 
 	TitleLogoRenderer = CreateImageRenderer();
-	TitleLogoRenderer->SetActive(true, 6.0f);
+	TitleLogoRenderer->SetActive(true, 4.0f);
 	TitleLogoRenderer->SetImage("TitleLogo.png");
 	TitleLogoRenderer->SetTransform({ {0,-50}, {350, 350} });
+
+	UImageRenderer* PlayButton = CreateImageRenderer();
+	PlayButton->SetActive(true, 6.0f);
+	PlayButton->SetImage("Button_0.png");
+	PlayButton->SetTransform({ {0,0}, {180, 40} });
 }

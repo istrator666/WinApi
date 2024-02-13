@@ -1,9 +1,9 @@
 #include "WindowImage.h"
-#include <EngineBase\EngineString.h>
+#include <EngineBase/EngineString.h>
 #include <Windows.h>
-#include <EngineBase\EngineDebug.h>
-#include <EngineBase\EngineDirectory.h>
-#include <EngineBase\EngineFile.h>
+#include <EngineBase/EngineDebug.h>
+#include <EngineBase/EngineDirectory.h>
+#include <EngineBase/EngineFile.h>
 
 #pragma comment(lib, "Msimg32.lib")
 

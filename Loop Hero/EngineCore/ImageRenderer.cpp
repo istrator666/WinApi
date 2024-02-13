@@ -2,7 +2,7 @@
 #include "EngineCore.h"
 #include "Actor.h"
 #include "Level.h"
-#include <EngineCore\EngineResourcesManager.h>
+#include <EngineCore/EngineResourcesManager.h>
 
 UImageRenderer::UImageRenderer()
 {

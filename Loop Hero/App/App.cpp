@@ -1,7 +1,7 @@
 #include <Windows.h>
-#include <EngineCore\EngineCore.h>
-#include <EnginePlatform\EngineWindow.h>
-#include <Contents\LoopHero.h>
+#include <EngineCore/EngineCore.h>
+#include <EnginePlatform/EngineWindow.h>
+#include <Contents/LoopHero.h>
 
 //ENGINESTART(LoopHeroContentsCore)
 

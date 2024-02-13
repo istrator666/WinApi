@@ -1,9 +1,8 @@
 #include "LoopHero.h"
 #include "TitleLevel.h"
-#include "PlayLevel.h"
-#include <EngineBase/EngineDirectory.h>
-#include <EngineBase\EngineFile.h>
-#include <EngineCore\EngineResourcesManager.h>
+//#include "PlayLevel.h"
+#include "TutorialLevel.h"
+
 
 LoopHeroContentsCore::LoopHeroContentsCore()
 	: UEngineCore()
@@ -21,9 +20,9 @@ void LoopHeroContentsCore::BeginPlay()
 	UEngineCore::BeginPlay();
 	SetFrame(60);
 
-	TitleFileSetup();
-
 	CreateLevel<UTitleLevel>("TitleLevel");
+	CreateLevel<UTutorialLevel>("TutorialLevel");
+	//CreateLevel<UPlayLevel>("Player");
 
 	ChangeLevel("TitleLevel");
 
@@ -38,28 +37,3 @@ void LoopHeroContentsCore::End()
 {
 }
 
-void LoopHeroContentsCore::TitleFileSetup()
-{
-	UEngineDirectory TitleDir;
-	TitleDir.MoveParent();
-	TitleDir.Move("Recource");
-	TitleDir.Move("Title");
-
-	std::list<UEngineFile> TitleList = TitleDir.AllFile({ ".png", ".bmp" }, true);
-
-	for (UEngineFile& File : TitleList)
-	{
-		UEngineResourcesManager::GetInst().LoadImg(File.GetFullPath());
-	}
-
-	UEngineDirectory ButtonDir;
-	ButtonDir.MoveParent();
-	ButtonDir.Move("Recource");
-	ButtonDir.Move("Button");
-
-	std::list<UEngineFile> ButtonList = ButtonDir.AllFile({ ".png", ".bmp" }, true);
-	for (UEngineFile& File : ButtonList)
-	{
-		UEngineResourcesManager::GetInst().LoadImg(File.GetFullPath());
-	}
-}

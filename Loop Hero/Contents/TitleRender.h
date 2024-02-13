@@ -2,18 +2,18 @@
 #include <EngineCore/Actor.h>
 
 
-class ATitlelogo : public AActor
+class ATitleRender : public AActor
 {
 public:
 	// constrcuter destructer
-	ATitlelogo();
-	~ATitlelogo();
+	ATitleRender();
+	~ATitleRender();
 
 	// delete Function
-	ATitlelogo(const ATitlelogo& _Other) = delete;
-	ATitlelogo(ATitlelogo&& _Other) noexcept = delete;
-	ATitlelogo& operator=(const ATitlelogo& _Other) = delete;
-	ATitlelogo& operator=(ATitlelogo&& _Other) noexcept = delete;
+	ATitleRender(const ATitleRender& _Other) = delete;
+	ATitleRender(ATitleRender&& _Other) noexcept = delete;
+	ATitleRender& operator=(const ATitleRender& _Other) = delete;
+	ATitleRender& operator=(ATitleRender&& _Other) noexcept = delete;
 
 protected:
 	void BeginPlay() override;
@@ -25,7 +25,7 @@ private:
 	void TitleMenu();
 
 	float LogoChageTime = 2.0f;
-	float TitleMoveTime = 8.0f;
+	float TitleMoveTime = 6.0f;
 	UImageRenderer* IntroLogoRenderer = nullptr;
 	UImageRenderer* TitleLogoRenderer = nullptr;
 };

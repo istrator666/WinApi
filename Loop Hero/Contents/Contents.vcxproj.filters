@@ -8,10 +8,16 @@
     <ClCompile Include="TitleLevel.cpp">
       <Filter>Level</Filter>
     </ClCompile>
-    <ClCompile Include="Player.cpp">
+    <ClCompile Include="PlayerRender.cpp">
       <Filter>Actor</Filter>
     </ClCompile>
-    <ClCompile Include="Titlelogo.cpp">
+    <ClCompile Include="TitleRender.cpp">
+      <Filter>Actor</Filter>
+    </ClCompile>
+    <ClCompile Include="TutorialLevel.cpp">
+      <Filter>Level</Filter>
+    </ClCompile>
+    <ClCompile Include="TutorialRander.cpp">
       <Filter>Actor</Filter>
     </ClCompile>
   </ItemGroup>
@@ -23,10 +29,16 @@
     <ClInclude Include="TitleLevel.h">
       <Filter>Level</Filter>
     </ClInclude>
-    <ClInclude Include="Player.h">
+    <ClInclude Include="PlayerRender.h">
       <Filter>Actor</Filter>
     </ClInclude>
-    <ClInclude Include="Titlelogo.h">
+    <ClInclude Include="TitleRender.h">
+      <Filter>Actor</Filter>
+    </ClInclude>
+    <ClInclude Include="TutorialLevel.h">
+      <Filter>Level</Filter>
+    </ClInclude>
+    <ClInclude Include="TutorialRander.h">
       <Filter>Actor</Filter>
     </ClInclude>
   </ItemGroup>

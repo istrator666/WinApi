@@ -1,10 +1,10 @@
 #pragma once
-#include <EngineBase\EngineDebug.h>
-#include <EngineBase\EngineString.h>
-#include <EngineBase\EngineTime.h>
+#include <EngineBase/EngineDebug.h>
+#include <EngineBase/EngineString.h>
+#include <EngineBase/EngineTime.h>
 
-#include <EnginePlatform\EngineWindow.h>
-#include <EnginePlatform\EngineInput.h>
+#include <EnginePlatform/EngineWindow.h>
+#include <EnginePlatform/EngineInput.h>
 #include <map>
 
 
