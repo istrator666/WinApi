@@ -6,7 +6,6 @@
 class UAnimationInfo
 {
 public:
-	// 애니메이션을 구성할때 이미지는 1장
 	UWindowImage* Image = nullptr;
 	std::string Name;
 	int CurFrame = 0;

@@ -3,11 +3,13 @@
 #include "TickObject.h"
 #include <EngineBase/NameObject.h>
 #include "ImageRenderer.h"
+#include "Collision.h"
 #include "Level.h"
 
 class ULevel;
 class UActorComponent;
 class UImageRenderer;
+class UCollision;
 
 // Ό³Έν : 
 class AActor : public UNameObject, public UTickObject
@@ -51,9 +53,23 @@ public:
 		return World;
 	}
 
-	UImageRenderer* CreateImageRenderer(int Order = 0);
+	template<typename EnumType>
+	UCollision* CreateCollision(EnumType _Order = 0)
+	{
+		return CreateCollision(static_cast<int>(_Order));
+	}
 
-	void Destroy(float _DestroyTime) override;
+	template<typename EnumType>
+	UImageRenderer* CreateImageRenderer(EnumType _Order = 0)
+	{
+		return CreateImageRenderer(static_cast<int>(_Order));
+	}
+
+	UCollision* CreateCollision(int _Order = 0);
+
+	UImageRenderer* CreateImageRenderer(int _Order = 0);
+
+	void Destroy(float _DestroyTime = 0.0f) override;
 	void DestroyUpdate(float _DeltaTime) override;
 
 	void ActiveUpdate(float _DeltaTime) override;
@@ -64,6 +80,7 @@ protected:
 
 private:
 	std::list<UImageRenderer*> Renderers;
+	std::list<UCollision*> Collisions;
 
 	ULevel* World = nullptr;
 	FTransform Transform = FTransform();

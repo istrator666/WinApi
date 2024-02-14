@@ -35,6 +35,8 @@ public:
 		return Transform;
 	}
 
+	FTransform GetActorBaseTransform();
+
 protected:
 
 

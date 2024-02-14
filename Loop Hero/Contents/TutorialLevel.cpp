@@ -45,6 +45,7 @@ void UTutorialLevel::BeginPlay()
 	}
 
 	UEngineResourcesManager::GetInst().CuttingImage("WarriorPlayer.png", 5, 8);
+	UEngineResourcesManager::GetInst().CuttingImage("001.png", 5, 8);
 
 	ATutorialRander* Tutorial = SpawnActor<ATutorialRander>();
 }
