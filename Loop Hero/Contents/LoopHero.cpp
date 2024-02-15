@@ -1,5 +1,6 @@
 #include "LoopHero.h"
 #include "TitleLevel.h"
+#include "IntroLevel.h"
 #include "TutorialLevel.h"
 
 #include <EngineBase\EngineDirectory.h>
@@ -37,6 +38,7 @@ void LoopHeroContentsCore::BeginPlay()
 	UEngineResourcesManager::GetInst().CuttingImage("WarriorPlayer.png", 5, 8);
 
 	CreateLevel<UTitleLevel>("TitleLevel");
+	CreateLevel<UIntroLevel>("IntroLevel");
 	CreateLevel<UTutorialLevel>("TutorialLevel");
 	ChangeLevel("TitleLevel");
 }

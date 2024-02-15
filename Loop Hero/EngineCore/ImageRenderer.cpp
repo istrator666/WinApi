@@ -59,47 +59,13 @@ int UAnimationInfo::Update(float _DeltaTime)
 
 void UImageRenderer::Render(float _DeltaTime)
 {
-	if (nullptr == Image)
+	if (false == Text.empty())
 	{
-		MsgBoxAssert("이미지가 존재하지 않는 랜더러 입니다");
+		TextRender(_DeltaTime);
 	}
-
-	if (nullptr != CurAnimation)
+	else 
 	{
-		Image = CurAnimation->Image;
-		InfoIndex = CurAnimation->Update(_DeltaTime);
-	}
-
-	FTransform RendererTrans = GetTransform();
-
-	FTransform ActorTrans = GetOwner()->GetTransform();
-
-	RendererTrans.AddPosition(ActorTrans.GetPosition());
-
-	if (true == CameraEffect)
-	{
-		AActor* Actor = GetOwner();
-		ULevel* World = Actor->GetWorld();
-		FVector CameraPos = World->GetCameraPos();
-		RendererTrans.AddPosition(-CameraPos);
-	}
-
-	EWIndowImageType ImageType = Image->GetImageType();
-
-	GEngine->MainWindow.GetBackBufferImage()->TransCopy(Image, RendererTrans, InfoIndex, TransColor);
-
-
-	switch (ImageType)
-	{
-	case EWIndowImageType::IMG_BMP:
-		GEngine->MainWindow.GetBackBufferImage()->TransCopy(Image, RendererTrans, InfoIndex, TransColor);
-		break;
-	case EWIndowImageType::IMG_PNG:
-		GEngine->MainWindow.GetBackBufferImage()->AlphaCopy(Image, RendererTrans, InfoIndex, TransColor);
-		break;
-	default:
-		MsgBoxAssert("투명처리가 불가능한 이미지 입니다.");
-		break;
+		ImageRender(_DeltaTime);
 	}
 }
 
@@ -114,7 +80,6 @@ void UImageRenderer::SetImage(std::string_view _Name, int _InfoIndex)
 
 	if (nullptr == Image)
 	{
-		// 예외를 출력하게 하는것도 중요하다.
 		MsgBoxAssert(std::string(_Name) + "이미지가 존재하지 않습니다.");
 		return;
 	}
@@ -214,4 +179,63 @@ void UImageRenderer::ChangeAnimation(std::string_view _AnimationName, bool _IsFo
 void UImageRenderer::AnimationReset()
 {
 	CurAnimation = nullptr;
+}
+
+FTransform UImageRenderer::GetRenderTransForm()
+{
+	FTransform RendererTrans = GetActorBaseTransform();
+
+	if (true == CameraEffect)
+	{
+		AActor* Actor = GetOwner();
+		ULevel* World = Actor->GetWorld();
+		FVector CameraPos = World->GetCameraPos();
+		RendererTrans.AddPosition(-CameraPos);
+	}
+
+	return RendererTrans;
+}
+
+void UImageRenderer::TextRender(float _DeltaTime)
+{
+	FTransform RendererTrans = GetRenderTransForm();
+
+	float TextCount = static_cast<float>(Text.size());
+
+	//RendererTrans.AddPosition(float4::Up * Size * 0.5f);
+	// RendererTrans.AddPosition(float4::Left * (Size * 0.5f) * (TextCount * 0.5f));
+
+	GEngine->MainWindow.GetBackBufferImage()->TextCopy(Text, Font, Size, RendererTrans, TextColor);
+}
+
+void UImageRenderer::ImageRender(float _DeltaTime)
+{
+
+	if (nullptr == Image)
+	{
+		MsgBoxAssert("이미지가 존재하지 않는 랜더러 입니다");
+	}
+
+	if (nullptr != CurAnimation)
+	{
+		Image = CurAnimation->Image;
+		InfoIndex = CurAnimation->Update(_DeltaTime);
+	}
+
+	FTransform RendererTrans = GetRenderTransForm();
+
+	EWIndowImageType ImageType = Image->GetImageType();
+
+	switch (ImageType)
+	{
+	case EWIndowImageType::IMG_BMP:
+		GEngine->MainWindow.GetBackBufferImage()->TransCopy(Image, RendererTrans, InfoIndex, TransColor);
+		break;
+	case EWIndowImageType::IMG_PNG:
+		GEngine->MainWindow.GetBackBufferImage()->AlphaCopy(Image, RendererTrans, InfoIndex, TransColor);
+		break;
+	default:
+		MsgBoxAssert("투명처리가 불가능한 이미지 입니다.");
+		break;
+	}
 }

@@ -1,6 +1,7 @@
 #include "Level.h"
 #include "Actor.h"
 #include <EngineBase/EngineDebug.h>
+#include "EngineCore.h"
 
 ULevel::ULevel()
 {
@@ -51,15 +52,29 @@ void ULevel::LevelRender(float _DeltaTime)
 		std::list<UImageRenderer*>& RendererList = OrderListPair.second;
 		for (UImageRenderer* Renderer : RendererList)
 		{
-			// Ranged for는 중간에 리스트의 원소의 개수가 변경되면 굉장히 불안정해지고
-			// 치명적인 오류가 발생할 가능성이 높아진다.
-			// 절대로 파괴하지 
 			if (false == Renderer->IsActive())
 			{
 				continue;
 			}
 
 			Renderer->Render(_DeltaTime);
+		}
+	}
+
+	if (true == GEngine->IsDebug())
+	{
+		for (std::pair<const int, std::list<UCollision*>>& OrderListPair : Collisions)
+		{
+			std::list<UCollision*>& RendererList = OrderListPair.second;
+			for (UCollision* Collision : RendererList)
+			{
+				if (false == Collision->IsActive())
+				{
+					continue;
+				}
+
+				Collision->DebugRender(CameraPos);
+			}
 		}
 	}
 
@@ -75,8 +90,6 @@ void ULevel::LevelRelease(float _DeltaTime)
 			std::list<UCollision*>::iterator StartIter = List.begin();
 			std::list<UCollision*>::iterator EndIter = List.end();
 
-			// 삭제는 절대로 Ranged for로 하면 안되다.
-			// for (UImageRenderer* Renderer : RendererList)
 			for (; StartIter != EndIter; )
 			{
 				UCollision* Collision = StartIter.operator*();

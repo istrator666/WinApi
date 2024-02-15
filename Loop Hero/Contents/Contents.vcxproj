@@ -156,6 +156,14 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="IntroLevel.cpp">
+      <SubType>
+      </SubType>
+    </ClCompile>
+    <ClCompile Include="IntroRender.cpp">
+      <SubType>
+      </SubType>
+    </ClCompile>
     <ClCompile Include="LoopHero.cpp">
       <SubType>
       </SubType>
@@ -194,6 +202,14 @@
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="IntroLevel.h">
+      <SubType>
+      </SubType>
+    </ClInclude>
+    <ClInclude Include="IntroRender.h">
+      <SubType>
+      </SubType>
+    </ClInclude>
     <ClInclude Include="LoopHero.h">
       <SubType>
       </SubType>

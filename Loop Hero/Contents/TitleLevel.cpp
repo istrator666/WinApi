@@ -18,7 +18,6 @@ UTitleLevel::~UTitleLevel()
 void UTitleLevel::BeginPlay()
 {
 	ULevel::BeginPlay();
-
 	ATitleRender* Title = SpawnActor<ATitleRender>();
 }
 
@@ -28,7 +27,7 @@ void UTitleLevel::Tick(float _DeltaTime)
 
 	if (UEngineInput::IsDown('P'))
 	{
-		GEngine->ChangeLevel("TutorialLevel");
+		GEngine->ChangeLevel("IntroLevel");
 	}
 
 }

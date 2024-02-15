@@ -36,6 +36,7 @@ void ATitleRender::Tick(float _DeltaTime)
 	{
 		TitleLogoRenderer->SetTransform({ {0, -225}, {350, 350} });
 	}
+
 }
 
 void ATitleRender::IntroLogo()
@@ -75,3 +76,4 @@ void ATitleRender::TitleMenu()
 	PlayButton->SetImage("Button_0.png");
 	PlayButton->SetTransform({ {0,0}, {180, 40} });
 }
+

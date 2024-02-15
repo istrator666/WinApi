@@ -28,5 +28,6 @@ private:
 	float TitleMoveTime = 6.0f;
 	UImageRenderer* IntroLogoRenderer = nullptr;
 	UImageRenderer* TitleLogoRenderer = nullptr;
+
 };
 

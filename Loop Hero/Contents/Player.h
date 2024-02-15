@@ -15,13 +15,15 @@ public:
 	APlayer& operator=(const APlayer& _Other) = delete;
 	APlayer& operator=(APlayer&& _Other) noexcept = delete;
 
-	void PlayerRender();
+	void SetPlayerImage();
 
 protected:
 	void BeginPlay() override;
 	void Tick(float _DeltaTime) override;
 
 private:
+	void WayPoints(float _DeltaTime);
+	UImageRenderer* PlayerRender = nullptr;
 
 };
 

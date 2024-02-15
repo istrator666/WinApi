@@ -20,6 +20,12 @@
     <ClCompile Include="StageMap.cpp">
       <Filter>Actor</Filter>
     </ClCompile>
+    <ClCompile Include="IntroLevel.cpp">
+      <Filter>Level</Filter>
+    </ClCompile>
+    <ClCompile Include="IntroRender.cpp">
+      <Filter>Actor</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="LoopHero.h" />
@@ -39,6 +45,12 @@
       <Filter>Actor</Filter>
     </ClInclude>
     <ClInclude Include="StageMap.h">
+      <Filter>Actor</Filter>
+    </ClInclude>
+    <ClInclude Include="IntroLevel.h">
+      <Filter>Level</Filter>
+    </ClInclude>
+    <ClInclude Include="IntroRender.h">
       <Filter>Actor</Filter>
     </ClInclude>
   </ItemGroup>
