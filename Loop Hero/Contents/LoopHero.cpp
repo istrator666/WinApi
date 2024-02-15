@@ -1,7 +1,10 @@
 #include "LoopHero.h"
 #include "TitleLevel.h"
-//#include "PlayLevel.h"
 #include "TutorialLevel.h"
+
+#include <EngineBase\EngineDirectory.h>
+#include <EngineBase\EngineFile.h>
+#include <EngineCore\EngineResourcesManager.h>
 
 
 LoopHeroContentsCore::LoopHeroContentsCore()
@@ -20,12 +23,22 @@ void LoopHeroContentsCore::BeginPlay()
 	UEngineCore::BeginPlay();
 	SetFrame(60);
 
+	UEngineDirectory RecourceDir;
+	RecourceDir.MoveParent();
+	RecourceDir.Move("Recource");
+
+	std::list<UEngineFile> RecourceList = RecourceDir.AllFile({ ".png", ".bmp" }, true);
+
+	for (UEngineFile& File : RecourceList)
+	{
+		UEngineResourcesManager::GetInst().LoadImg(File.GetFullPath());
+	}
+
+	UEngineResourcesManager::GetInst().CuttingImage("WarriorPlayer.png", 5, 8);
+
 	CreateLevel<UTitleLevel>("TitleLevel");
 	CreateLevel<UTutorialLevel>("TutorialLevel");
-	//CreateLevel<UPlayLevel>("Player");
-
 	ChangeLevel("TitleLevel");
-
 }
 
 void LoopHeroContentsCore::Tick(float _DeltaTime)
@@ -35,5 +48,6 @@ void LoopHeroContentsCore::Tick(float _DeltaTime)
 
 void LoopHeroContentsCore::End()
 {
+	UEngineCore::End();
 }
 

@@ -1,7 +1,6 @@
 #pragma once
 #include <EngineCore/Actor.h>
 
-
 class ATutorialRander : public AActor
 {
 public:
@@ -23,7 +22,9 @@ private:
 	void GameIntro();
 	void TutorialStage();
 	void TutorialBaseCamp();
-	void PlayerRender();
+
+	bool GameIntroCheck = false;
+	int ImageNumber = 0;
 
 };
 

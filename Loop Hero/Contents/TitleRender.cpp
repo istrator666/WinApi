@@ -48,7 +48,6 @@ void ATitleRender::IntroLogo()
 	IntroLogoRenderer->SetImage("Intro_logo_1.png");
 	IntroLogoRenderer->SetScale({ 500,250 });
 	IntroLogoRenderer->Destroy(4.0);
-
 }
 
 void ATitleRender::BackGroundImage()
