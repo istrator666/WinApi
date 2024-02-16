@@ -24,6 +24,7 @@ protected:
 private:
 	void WayPoints(float _DeltaTime);
 	UImageRenderer* PlayerRender = nullptr;
+	float MoveSpeed = 100.0f;
 
 };
 
