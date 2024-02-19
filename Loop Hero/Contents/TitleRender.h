@@ -20,14 +20,18 @@ protected:
 	void Tick(float _DeltaTime) override;
 
 private:
+	UImageRenderer* IntroBackGroundRender = nullptr;
+	UImageRenderer* IntroLogoRender = nullptr;
+	UImageRenderer* BackGroundImageRender = nullptr;
+	UImageRenderer* MenuRender = nullptr;
+	UImageRenderer* TitleLogoRender = nullptr;
+	UImageRenderer* PlayButton = nullptr;
+
 	void IntroLogo();
 	void BackGroundImage();
 	void TitleMenu();
 
-	float LogoChageTime = 2.0f;
-	float TitleMoveTime = 6.0f;
-	UImageRenderer* IntroLogoRenderer = nullptr;
-	UImageRenderer* TitleLogoRenderer = nullptr;
-
+	float LogoChageTime = 4.0f;
+	float TitleMoveTime = 9.0f;
 };
 

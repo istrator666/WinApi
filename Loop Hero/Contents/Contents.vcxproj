@@ -156,6 +156,10 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Enum.cpp">
+      <SubType>
+      </SubType>
+    </ClCompile>
     <ClCompile Include="IntroLevel.cpp">
       <SubType>
       </SubType>
@@ -165,6 +169,10 @@
       </SubType>
     </ClCompile>
     <ClCompile Include="LoopHero.cpp">
+      <SubType>
+      </SubType>
+    </ClCompile>
+    <ClCompile Include="Monster.cpp">
       <SubType>
       </SubType>
     </ClCompile>
@@ -188,20 +196,16 @@
       <SubType>
       </SubType>
     </ClCompile>
-    <ClCompile Include="TutorialRander.cpp">
-      <SubType>
-      </SubType>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
-    </ClCompile>
-    <ClCompile Include="TutorialLevel.cpp">
+    <ClCompile Include="StageLevel.cpp">
       <SubType>
       </SubType>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Enum.h">
+      <SubType>
+      </SubType>
+    </ClInclude>
     <ClInclude Include="IntroLevel.h">
       <SubType>
       </SubType>
@@ -211,6 +215,10 @@
       </SubType>
     </ClInclude>
     <ClInclude Include="LoopHero.h">
+      <SubType>
+      </SubType>
+    </ClInclude>
+    <ClInclude Include="Monster.h">
       <SubType>
       </SubType>
     </ClInclude>
@@ -234,15 +242,7 @@
       <SubType>
       </SubType>
     </ClInclude>
-    <ClInclude Include="TutorialRander.h">
-      <SubType>
-      </SubType>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
-    </ClInclude>
-    <ClInclude Include="TutorialLevel.h">
+    <ClInclude Include="StageLevel.h">
       <SubType>
       </SubType>
     </ClInclude>

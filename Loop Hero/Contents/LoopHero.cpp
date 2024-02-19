@@ -1,7 +1,7 @@
 #include "LoopHero.h"
 #include "TitleLevel.h"
 #include "IntroLevel.h"
-#include "TutorialLevel.h"
+#include "StageLevel.h"
 
 #include <EngineBase\EngineDirectory.h>
 #include <EngineBase\EngineFile.h>
@@ -36,11 +36,12 @@ void LoopHeroContentsCore::BeginPlay()
 	}
 
 	UEngineResourcesManager::GetInst().CuttingImage("WarriorPlayer.png", 5, 8);
+	UEngineResourcesManager::GetInst().CuttingImage("Overworld Enemies.png", 4, 12);
 
 	CreateLevel<UTitleLevel>("TitleLevel");
 	CreateLevel<UIntroLevel>("IntroLevel");
-	CreateLevel<UTutorialLevel>("TutorialLevel");
-	ChangeLevel("TitleLevel");
+	CreateLevel<UStageLevel>("StageLevel");
+	ChangeLevel("StageLevel");
 }
 
 void LoopHeroContentsCore::Tick(float _DeltaTime)

@@ -1,5 +1,6 @@
 #pragma once
 #include <EngineCore/Actor.h>
+#include <list>
 
 // Ό³Έν :
 class APlayer : public AActor
@@ -16,6 +17,7 @@ public:
 	APlayer& operator=(APlayer&& _Other) noexcept = delete;
 
 	void SetPlayerImage();
+	void SetWayPoint(FVector _WayPoint);
 
 protected:
 	void BeginPlay() override;
@@ -23,7 +25,11 @@ protected:
 
 private:
 	void WayPoints(float _DeltaTime);
+
 	UImageRenderer* PlayerRender = nullptr;
+
+	std::list<FVector> WayPoint;
+	std::list<FVector>::iterator CurrentWayPoint;
 	float MoveSpeed = 100.0f;
 
 };

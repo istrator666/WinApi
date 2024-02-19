@@ -12,8 +12,6 @@ ATitleRender::~ATitleRender()
 void ATitleRender::BeginPlay()
 {
 	AActor::BeginPlay();
-
-	SetActorLocation({ 640, 360 });
 	IntroLogo();
 	BackGroundImage();
 	TitleMenu();
@@ -27,53 +25,65 @@ void ATitleRender::Tick(float _DeltaTime)
 	LogoChageTime -= _DeltaTime;
 	if (LogoChageTime <= 0)
 	{
-		IntroLogoRenderer->SetImage("Intro_logo_2.png");
+		IntroLogoRender->SetImage("Intro_logo_2.png");
 
 	}
 
 	TitleMoveTime -= _DeltaTime;
 	if (TitleMoveTime <= 0)
 	{
-		TitleLogoRenderer->SetTransform({ {0, -225}, {350, 350} });
+		TitleLogoRender->SetTransform({ {640, 140}, {380, 400} });
 	}
 
 }
 
 void ATitleRender::IntroLogo()
 {
-	UImageRenderer* IntroBackGroundRenderer = CreateImageRenderer();
-	IntroBackGroundRenderer->SetImage("Intro_BackGround.png");
-	IntroBackGroundRenderer->SetScale({ 1280,720 });
+	IntroBackGroundRender = CreateImageRenderer();
+	IntroBackGroundRender->SetImage("Intro_BackGround.png");
+	UWindowImage* IntroBackGroundImage = IntroBackGroundRender->GetImage();
+	FVector IntroBackGroundScale = IntroBackGroundImage->GetScale();
+	IntroBackGroundRender->SetTransform({ IntroBackGroundScale.Half2D(),IntroBackGroundScale });
 
-	IntroLogoRenderer = CreateImageRenderer();
-	IntroLogoRenderer->SetImage("Intro_logo_1.png");
-	IntroLogoRenderer->SetScale({ 500,250 });
-	IntroLogoRenderer->Destroy(4.0);
+	IntroLogoRender = CreateImageRenderer();
+	IntroLogoRender->SetImage("Intro_logo_1.png");
+	UWindowImage* IntroLogoImage = IntroLogoRender->GetImage();
+	FVector IntroLogoScale = IntroLogoImage->GetScale();
+	IntroLogoRender->SetTransform({ IntroBackGroundScale.Half2D(),IntroLogoScale });
+	IntroLogoRender->Destroy(6.0);
 }
 
 void ATitleRender::BackGroundImage()
 {
-	UImageRenderer* BackGroundImageRenderer = CreateImageRenderer();
-	BackGroundImageRenderer->SetActive(true, 4.0f);
-	BackGroundImageRenderer->SetImage("TitleBackGround.png");
-	BackGroundImageRenderer->SetScale({ 1280,720 });
+	BackGroundImageRender = CreateImageRenderer();
+	BackGroundImageRender->SetActive(true, 6.0f);
+	BackGroundImageRender->SetImage("TitleBackGround.png");
+	UWindowImage* BackGroundImage = BackGroundImageRender->GetImage();
+	FVector BackGroundScale = BackGroundImage->GetScale();
+	BackGroundImageRender->SetTransform({ BackGroundScale.Half2D(),BackGroundScale });
 }
 
 void ATitleRender::TitleMenu()
 {
-	UImageRenderer* MenuRenderer = CreateImageRenderer();
-	MenuRenderer->SetActive(true, 6.0f);
-	MenuRenderer->SetImage("ScreenMenu.png");
-	MenuRenderer->SetTransform({ {0,-50}, {220, 880} });
+	MenuRender = CreateImageRenderer();
+	MenuRender->SetActive(true, 9.0f);
+	MenuRender->SetImage("ScreenMenu.png");
+	UWindowImage* MenuImage = MenuRender->GetImage();
+	FVector MenuScale = MenuImage->GetScale();
+	MenuRender->SetTransform({ {640, 310}, {225, 880} });
 
-	TitleLogoRenderer = CreateImageRenderer();
-	TitleLogoRenderer->SetActive(true, 4.0f);
-	TitleLogoRenderer->SetImage("TitleLogo.png");
-	TitleLogoRenderer->SetTransform({ {0,-50}, {350, 350} });
+	TitleLogoRender = CreateImageRenderer();
+	TitleLogoRender->SetActive(true, 7.0f);
+	TitleLogoRender->SetImage("TitleLogo.png");
+	UWindowImage* TitleLogoImage = TitleLogoRender->GetImage();
+	FVector TitleLogoScale = TitleLogoImage->GetScale();
+	TitleLogoRender->SetTransform({ {640, 325}, {380, 400} });
 
-	UImageRenderer* PlayButton = CreateImageRenderer();
-	PlayButton->SetActive(true, 6.0f);
+	PlayButton = CreateImageRenderer();
+	PlayButton->SetActive(true, 9.0f);
 	PlayButton->SetImage("Button_0.png");
-	PlayButton->SetTransform({ {0,0}, {180, 40} });
+	UWindowImage* PlayButtonImage = PlayButton->GetImage();
+	FVector PlayButtonScale = PlayButtonImage->GetScale();
+	PlayButton->SetTransform({ {640, 360}, {180, 40} });
 }
 
