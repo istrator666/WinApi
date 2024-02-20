@@ -29,6 +29,9 @@
     <ClCompile Include="Monster.cpp">
       <Filter>Actor</Filter>
     </ClCompile>
+    <ClCompile Include="EQInventory.cpp">
+      <Filter>Actor</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="LoopHero.h" />
@@ -57,6 +60,9 @@
       <Filter>Config</Filter>
     </ClInclude>
     <ClInclude Include="Monster.h">
+      <Filter>Actor</Filter>
+    </ClInclude>
+    <ClInclude Include="EQInventory.h">
       <Filter>Actor</Filter>
     </ClInclude>
   </ItemGroup>

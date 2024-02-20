@@ -2,6 +2,7 @@
 #include <EngineCore/Level.h>
 #include "Player.h"
 #include "Monster.h"
+#include "EQInventory.h"
 #include "Enum.h"
 
 

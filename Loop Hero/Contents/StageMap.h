@@ -15,16 +15,20 @@ public:
 	AStageMap& operator=(const AStageMap& _Other) = delete;
 	AStageMap& operator=(AStageMap&& _Other) noexcept = delete;
 
-	void SetMapImage(std::string_view _BackImageName, std::string_view _StageImageName, std::string_view _CampImageName);
+	void IsTileSet();
 
 protected:
 	void BeginPlay() override;
 	void Tick(float _DeltaTime) override;
 
 private:
-	UImageRenderer* BackStageRender = nullptr;
-	UImageRenderer* MainStageRender = nullptr;
-	UImageRenderer* BaseCampRender = nullptr;
+	UImageRenderer* IsTile = nullptr;
+	std::vector<std::vector<UImageRenderer*>> IsTileList;
+	bool IsTileCheck = false;
+
+	void BackStage();
+	void MainStage();
+	void BaseCamp();
 
 };
 

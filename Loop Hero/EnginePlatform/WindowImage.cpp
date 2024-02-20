@@ -350,6 +350,30 @@ void UWindowImage::AlphaCopy(UWindowImage* _CopyImage, const FTransform& _Trans,
 	);
 }
 
+void UWindowImage::PlgCopy(UWindowImage* _CopyImage, const FTransform& _Trans, int _Index, float _Angle)
+{
+	if (nullptr == _CopyImage)
+	{
+		MsgBoxAssert("nullptr 인 이미지를 복사할 수 없습니다");
+	}
+
+	if (_Index >= _CopyImage->Infos.size())
+	{
+		MsgBoxAssert(GetName() + "이미지 정보의 인덱스를 오버하여 사용했습니다");
+	}
+
+
+	FTransform& ImageTrans = _CopyImage->Infos[_Index].CuttingTrans;
+
+	{
+		FTransform Trans = FTransform(float4::Zero, _Trans.GetScale());
+
+		FVector LeftTop = Trans.LeftTop();
+		FVector RightTop = Trans.RightTop();
+		FVector LeftBot = Trans.LeftBottom();
+	}
+}
+
 void UWindowImage::Cutting(int _X, int _Y)
 {
 	Infos.clear();

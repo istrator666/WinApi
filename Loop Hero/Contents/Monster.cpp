@@ -24,7 +24,7 @@ void AMonster::SetMonsterImage(LoopHeroRenderOrder _Monster)
 {
 	MonsterRender = CreateImageRenderer();
 	MonsterRender->SetImage("Overworld Enemies.png");
-	MonsterRender->SetTransform({ {690, 260}, {250,250} });
+	MonsterRender->SetTransform({ {525, 225}, {250,250} });
 	MonsterRender->CreateAnimation("Idle", "Overworld Enemies.png", 38, 39, 0.3f, true);
 	MonsterRender->ChangeAnimation("Idle");
 }
