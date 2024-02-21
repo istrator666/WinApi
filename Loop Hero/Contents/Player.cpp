@@ -30,6 +30,7 @@ void APlayer::SetPlayerImage()
 {
 	PlayerRender = CreateImageRenderer();
 	PlayerRender->SetImage("WarriorPlayer.png");
+	PlayerRender->SetOrder(5);
 	PlayerRender->SetTransform({ {575, 225}, {125,125} });
 	PlayerRender->CreateAnimation("Idle", "WarriorPlayer.png", 0, 3, 0.3f, true);
 	PlayerRender->ChangeAnimation("Idle");

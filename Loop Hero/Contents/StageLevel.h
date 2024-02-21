@@ -3,6 +3,7 @@
 #include "Player.h"
 #include "Monster.h"
 #include "EQInventory.h"
+#include "StageUI.h"
 #include "Enum.h"
 
 

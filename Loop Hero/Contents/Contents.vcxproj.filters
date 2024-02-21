@@ -32,6 +32,12 @@
     <ClCompile Include="EQInventory.cpp">
       <Filter>Actor</Filter>
     </ClCompile>
+    <ClCompile Include="CardInventory.cpp">
+      <Filter>Actor</Filter>
+    </ClCompile>
+    <ClCompile Include="StageUI.cpp">
+      <Filter>Actor</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="LoopHero.h" />
@@ -63,6 +69,12 @@
       <Filter>Actor</Filter>
     </ClInclude>
     <ClInclude Include="EQInventory.h">
+      <Filter>Actor</Filter>
+    </ClInclude>
+    <ClInclude Include="CardInventory.h">
+      <Filter>Actor</Filter>
+    </ClInclude>
+    <ClInclude Include="StageUI.h">
       <Filter>Actor</Filter>
     </ClInclude>
   </ItemGroup>

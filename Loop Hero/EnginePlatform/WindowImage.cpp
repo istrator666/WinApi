@@ -7,9 +7,6 @@
 
 #pragma comment(lib, "Msimg32.lib")
 
-#include <objidl.h>
-#include <gdiplus.h>
-
 #pragma comment(lib, "Gdiplus.lib")
 
 UWindowImage::UWindowImage()
@@ -281,7 +278,15 @@ void UWindowImage::TransCopy(UWindowImage* _CopyImage, const FTransform& _Trans,
 	);
 }
 
-void UWindowImage::TextCopy(const std::string& _Text, const std::string& _Font, float _Size, const FTransform& _Trans, Color8Bit _Color)
+void UWindowImage::TextCopy(const std::string& _Text, const std::string& _Font, float _Size, const FTransform& _Trans, Color8Bit _Color/* = Color8Bit::Black*/)
+{
+	Gdiplus::StringFormat stringFormat;
+	stringFormat.SetAlignment(Gdiplus::StringAlignmentCenter);
+	stringFormat.SetLineAlignment(Gdiplus::StringAlignmentCenter);
+	TextCopyFormat(_Text, _Font, stringFormat, _Size, _Trans, _Color);
+}
+
+void UWindowImage::TextCopyFormat(const std::string& _Text, const std::string& _Font, const Gdiplus::StringFormat& stringFormat, float _Size, const FTransform& _Trans, Color8Bit _Color)
 {
 	Gdiplus::Graphics graphics(ImageDC);
 	std::wstring WFont = UEngineString::AnsiToUniCode(_Font);
@@ -292,11 +297,8 @@ void UWindowImage::TextCopy(const std::string& _Text, const std::string& _Font, 
 	// Gdiplus::PointF ptf(Pos.X, Pos.Y);
 	Gdiplus::RectF  rectF(_Trans.GetPosition().X, _Trans.GetPosition().Y, 0, 0);
 
-	Gdiplus::StringFormat stringFormat;
-	stringFormat.SetAlignment(Gdiplus::StringAlignmentCenter);
-	stringFormat.SetLineAlignment(Gdiplus::StringAlignmentCenter);
 	std::wstring WText = UEngineString::AnsiToUniCode(_Text);
-	graphics.DrawString(WText.c_str(), -1, &fnt, rectF, &stringFormat, &hB);
+	graphics.DrawString(WText.c_str(), -1, &fnt, rectF, &stringFormat, &hB);  //출력
 }
 
 void UWindowImage::AlphaCopy(UWindowImage* _CopyImage, const FTransform& _Trans, int _Index, Color8Bit _Color /*= Color8Bit::Black*/)
@@ -350,7 +352,7 @@ void UWindowImage::AlphaCopy(UWindowImage* _CopyImage, const FTransform& _Trans,
 	);
 }
 
-void UWindowImage::PlgCopy(UWindowImage* _CopyImage, const FTransform& _Trans, int _Index, float _Angle)
+void UWindowImage::PlgCopy(UWindowImage* _CopyImage, const FTransform& _Trans, int _Index, float _RadAngle)
 {
 	if (nullptr == _CopyImage)
 	{
@@ -365,13 +367,53 @@ void UWindowImage::PlgCopy(UWindowImage* _CopyImage, const FTransform& _Trans, i
 
 	FTransform& ImageTrans = _CopyImage->Infos[_Index].CuttingTrans;
 
+	POINT Arr[3];
+
 	{
 		FTransform Trans = FTransform(float4::Zero, _Trans.GetScale());
 
 		FVector LeftTop = Trans.LeftTop();
 		FVector RightTop = Trans.RightTop();
 		FVector LeftBot = Trans.LeftBottom();
+
+		LeftTop.RotationZToRad(_RadAngle);
+		RightTop.RotationZToRad(_RadAngle);
+		LeftBot.RotationZToRad(_RadAngle);
+
+		LeftTop += _Trans.GetPosition();
+		RightTop += _Trans.GetPosition();
+		LeftBot += _Trans.GetPosition();
+
+		Arr[0] = LeftTop.ConvertToWinApiPOINT();
+		Arr[1] = RightTop.ConvertToWinApiPOINT();
+		Arr[2] = LeftBot.ConvertToWinApiPOINT();
 	}
+
+	int ImageLeft = ImageTrans.GetPosition().iX();
+	int ImageTop = ImageTrans.GetPosition().iY();
+	int ImageScaleX = ImageTrans.GetScale().iX();
+	int ImageScaleY = ImageTrans.GetScale().iY();
+
+	if (nullptr == _CopyImage->RotationMaskImage)
+	{
+		MsgBoxAssert("이미지를 회전시키려고 했는데 이미지가 없습니다.");
+	}
+
+	HDC hdc = ImageDC;
+	HDC hdcSrc = _CopyImage->Infos[_Index].ImageDC;
+
+	PlgBlt(
+		hdc,
+		Arr,
+		hdcSrc,
+		ImageLeft,
+		ImageTop,
+		ImageScaleX,
+		ImageScaleY,
+		_CopyImage->RotationMaskImage->hBitMap,
+		ImageLeft,
+		ImageTop
+	);
 }
 
 void UWindowImage::Cutting(int _X, int _Y)
@@ -436,4 +478,9 @@ void UWindowImage::DrawRectangle(const FTransform& _Trans)
 void UWindowImage::DrawEllipse(const FTransform& _Trans)
 {
 	Ellipse(ImageDC, _Trans.iLeft(), _Trans.iTop(), _Trans.iRight(), _Trans.iBottom());
+}
+
+void UWindowImage::TextPrint(std::string_view _Text, FVector _Pos)
+{
+	TextOutA(ImageDC, _Pos.iX(), _Pos.iY(), _Text.data(), static_cast<int>(_Text.size()));
 }

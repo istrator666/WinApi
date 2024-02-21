@@ -24,6 +24,8 @@ void UStageLevel::BeginPlay()
 	AMonster* Monster = SpawnActor<AMonster>();
 
 	AEQInventory* EQInventory = SpawnActor<AEQInventory>();
+	AStageUI* StageUI = SpawnActor<AStageUI>();
+
 }
 
 void UStageLevel::Tick(float _DeltaTime)
