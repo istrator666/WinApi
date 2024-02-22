@@ -278,12 +278,73 @@ void UWindowImage::TransCopy(UWindowImage* _CopyImage, const FTransform& _Trans,
 	);
 }
 
-void UWindowImage::TextCopy(const std::string& _Text, const std::string& _Font, float _Size, const FTransform& _Trans, Color8Bit _Color/* = Color8Bit::Black*/)
+void UWindowImage::TextCopy(const std::string& _Text, const std::string& _Font, float _Size, const FTransform& _Trans, Color8Bit _Color)
 {
 	Gdiplus::StringFormat stringFormat;
 	stringFormat.SetAlignment(Gdiplus::StringAlignmentCenter);
 	stringFormat.SetLineAlignment(Gdiplus::StringAlignmentCenter);
 	TextCopyFormat(_Text, _Font, stringFormat, _Size, _Trans, _Color);
+}
+
+void UWindowImage::TextCopy(const std::string& _Text, const std::string& _Font, float _Size, const FTransform& _Trans, Color8Bit _OutLineColor, Color8Bit _FillColor)
+{
+	Gdiplus::Graphics graphics(ImageDC);
+	std::wstring WFont = UEngineString::AnsiToUniCode(_Font);
+	Gdiplus::Font fnt(WFont.c_str(), _Size, Gdiplus::FontStyleBold | Gdiplus::FontStyleItalic, Gdiplus::UnitPixel);
+
+	Gdiplus::SolidBrush OutLineBrush(Gdiplus::Color(_OutLineColor.R, _OutLineColor.G, _OutLineColor.B));
+
+	Gdiplus::SolidBrush fillBrush(Gdiplus::Color(_FillColor.R, _FillColor.G, _FillColor.B));
+
+	FVector Pos = _Trans.GetPosition();
+	Gdiplus::RectF rectF(Pos.X, Pos.Y, 0, 0);
+
+	Gdiplus::StringFormat stringFormat;
+	stringFormat.SetAlignment(Gdiplus::StringAlignmentCenter);
+	stringFormat.SetLineAlignment(Gdiplus::StringAlignmentCenter);
+	std::wstring WText = UEngineString::AnsiToUniCode(_Text);
+
+	float offsetsX[] = { -3.f, 3.f };
+	float offsetsY[] = { -2.f, 2.f };
+	for (float dx : offsetsX)
+	{
+		for (float dy : offsetsY)
+		{
+			Gdiplus::RectF borderRect = rectF;
+			borderRect.X += dx;
+			borderRect.Y += dy;
+			graphics.DrawString(WText.c_str(), -1, &fnt, borderRect, &stringFormat, &OutLineBrush);
+		}
+	}
+	float offsets_X[] = { -2.f, 2.f };
+	float offsets_Y[] = { -1.f, 1.f };
+	for (float dx : offsets_X)
+	{
+		for (float dy : offsets_Y)
+		{
+			Gdiplus::RectF borderRect = rectF;
+			borderRect.X += dx;
+			borderRect.Y += dy;
+			graphics.DrawString(WText.c_str(), -1, &fnt, borderRect, &stringFormat, &fillBrush);
+		}
+	}
+}
+
+void UWindowImage::TextCopyBold(const std::string& _Text, const std::string& _Font, float _Size, const FTransform& _Trans, Color8Bit _Color)
+{
+	Gdiplus::StringFormat stringFormat;
+	stringFormat.SetAlignment(Gdiplus::StringAlignmentCenter);
+	stringFormat.SetLineAlignment(Gdiplus::StringAlignmentCenter);
+
+	Gdiplus::Graphics graphics(ImageDC);
+	std::wstring WFont = UEngineString::AnsiToUniCode(_Font);
+	Gdiplus::Font fnt(WFont.c_str(), _Size, Gdiplus::FontStyleBold, Gdiplus::UnitPixel);
+	Gdiplus::SolidBrush hB(Gdiplus::Color(_Color.R, _Color.G, _Color.B));
+	FVector Pos = _Trans.GetPosition();
+	Gdiplus::RectF  rectF(_Trans.GetPosition().X, _Trans.GetPosition().Y, 0, 0);
+
+	std::wstring WText = UEngineString::AnsiToUniCode(_Text);
+	graphics.DrawString(WText.c_str(), -1, &fnt, rectF, &stringFormat, &hB);
 }
 
 void UWindowImage::TextCopyFormat(const std::string& _Text, const std::string& _Font, const Gdiplus::StringFormat& stringFormat, float _Size, const FTransform& _Trans, Color8Bit _Color)
@@ -298,7 +359,7 @@ void UWindowImage::TextCopyFormat(const std::string& _Text, const std::string& _
 	Gdiplus::RectF  rectF(_Trans.GetPosition().X, _Trans.GetPosition().Y, 0, 0);
 
 	std::wstring WText = UEngineString::AnsiToUniCode(_Text);
-	graphics.DrawString(WText.c_str(), -1, &fnt, rectF, &stringFormat, &hB);  //출력
+	graphics.DrawString(WText.c_str(), -1, &fnt, rectF, &stringFormat, &hB);
 }
 
 void UWindowImage::AlphaCopy(UWindowImage* _CopyImage, const FTransform& _Trans, int _Index, Color8Bit _Color /*= Color8Bit::Black*/)
@@ -313,6 +374,7 @@ void UWindowImage::AlphaCopy(UWindowImage* _CopyImage, const FTransform& _Trans,
 		MsgBoxAssert(GetName() + "이미지 정보의 인덱스를 오버하여 사용했습니다");
 	}
 
+	UImageInfo& CurInfo = _CopyImage->Infos[_Index];
 
 	FTransform& ImageTrans = _CopyImage->Infos[_Index].CuttingTrans;
 
@@ -328,7 +390,6 @@ void UWindowImage::AlphaCopy(UWindowImage* _CopyImage, const FTransform& _Trans,
 
 
 	HDC hdc = ImageDC;
-	// 이미지
 	HDC hdcSrc = _CopyImage->Infos[_Index].ImageDC;
 
 	BLENDFUNCTION Function;
@@ -364,6 +425,7 @@ void UWindowImage::PlgCopy(UWindowImage* _CopyImage, const FTransform& _Trans, i
 		MsgBoxAssert(GetName() + "이미지 정보의 인덱스를 오버하여 사용했습니다");
 	}
 
+	UImageInfo& CurInfo = _CopyImage->Infos[_Index];
 
 	FTransform& ImageTrans = _CopyImage->Infos[_Index].CuttingTrans;
 
@@ -394,7 +456,7 @@ void UWindowImage::PlgCopy(UWindowImage* _CopyImage, const FTransform& _Trans, i
 	int ImageScaleX = ImageTrans.GetScale().iX();
 	int ImageScaleY = ImageTrans.GetScale().iY();
 
-	if (nullptr == _CopyImage->RotationMaskImage)
+	if (nullptr == CurInfo.RotationMaskImage)
 	{
 		MsgBoxAssert("이미지를 회전시키려고 했는데 이미지가 없습니다.");
 	}
@@ -410,7 +472,7 @@ void UWindowImage::PlgCopy(UWindowImage* _CopyImage, const FTransform& _Trans, i
 		ImageTop,
 		ImageScaleX,
 		ImageScaleY,
-		_CopyImage->RotationMaskImage->hBitMap,
+		CurInfo.RotationMaskImage->hBitMap,
 		ImageLeft,
 		ImageTop
 	);

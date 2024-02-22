@@ -24,19 +24,7 @@ void LoopHeroContentsCore::BeginPlay()
 	UEngineCore::BeginPlay();
 	SetFrame(60);
 
-	UEngineDirectory RecourceDir;
-	RecourceDir.MoveParent();
-	RecourceDir.Move("Recource");
-
-	std::list<UEngineFile> RecourceList = RecourceDir.AllFile({ ".png", ".bmp" }, true);
-
-	for (UEngineFile& File : RecourceList)
-	{
-		UEngineResourcesManager::GetInst().LoadImg(File.GetFullPath());
-	}
-
-	UEngineResourcesManager::GetInst().CuttingImage("WarriorPlayer.png", 5, 8);
-	UEngineResourcesManager::GetInst().CuttingImage("Overworld Enemies.png", 4, 12);
+	RecourceLoad();
 
 	CreateLevel<UTitleLevel>("TitleLevel");
 	CreateLevel<UIntroLevel>("IntroLevel");
@@ -52,5 +40,22 @@ void LoopHeroContentsCore::Tick(float _DeltaTime)
 void LoopHeroContentsCore::End()
 {
 	UEngineCore::End();
+}
+
+void LoopHeroContentsCore::RecourceLoad()
+{
+	UEngineDirectory RecourceDir;
+	RecourceDir.MoveParent();
+	RecourceDir.Move("Recource");
+
+	std::list<UEngineFile> RecourceList = RecourceDir.AllFile({ ".png", ".bmp" }, true);
+
+	for (UEngineFile& File : RecourceList)
+	{
+		UEngineResourcesManager::GetInst().LoadImg(File.GetFullPath());
+	}
+
+	UEngineResourcesManager::GetInst().CuttingImage("WarriorPlayer.png", 5, 8);
+	UEngineResourcesManager::GetInst().CuttingImage("Overworld Enemies.png", 4, 12);
 }
 

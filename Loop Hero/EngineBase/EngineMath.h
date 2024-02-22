@@ -20,9 +20,7 @@ public:
 	static const float PI;
 	static const float PI2;
 
-	// 디그리가 => 라디안
 	static const float DToR;
-	// 라디안이 => 디그리로
 	static const float RToD;
 
 protected:
@@ -325,15 +323,19 @@ public:
 	static const Color8Bit Red;
 	static const Color8Bit Green;
 	static const Color8Bit Blue;
+	static const Color8Bit Yellow;
 	static const Color8Bit White;
 	static const Color8Bit Magenta;
+	static const Color8Bit Orange;
 
 	static const Color8Bit BlackA;
 	static const Color8Bit RedA;
 	static const Color8Bit GreenA;
 	static const Color8Bit BlueA;
+	static const Color8Bit YellowA;
 	static const Color8Bit WhiteA;
 	static const Color8Bit MagentaA;
+	static const Color8Bit OrangeA;
 
 	union
 	{

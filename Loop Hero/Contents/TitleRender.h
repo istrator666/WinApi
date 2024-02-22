@@ -22,16 +22,27 @@ protected:
 private:
 	UImageRenderer* IntroBackGroundRender = nullptr;
 	UImageRenderer* IntroLogoRender = nullptr;
+	UImageRenderer* IntroLogoRender2 = nullptr;
 	UImageRenderer* BackGroundImageRender = nullptr;
 	UImageRenderer* MenuRender = nullptr;
 	UImageRenderer* TitleLogoRender = nullptr;
-	UImageRenderer* PlayButton = nullptr;
+	UImageRenderer* PlayButtonRender = nullptr;
 
 	void IntroLogo();
 	void BackGroundImage();
 	void TitleMenu();
+	void MenuMove(float _DeltaTime);
+	void AlphaUpdate(UImageRenderer* _RendererAlpha, float _DeltaTime);
 
-	float LogoChageTime = 4.0f;
-	float TitleMoveTime = 9.0f;
+	float BackTime = 7.0f;
+	float LogoTime = 10.0f;
+	float TitleMoveTime = 14.0f;
+	float IntroAlpha = 0.0f;
+	float BackAlpha = 0.0f;
+	float LogoAlpha = 0.0f;
+	float MenuDT = 0.0f;
+
+	bool IsAlphaIncreasing = false;
+
 };
 

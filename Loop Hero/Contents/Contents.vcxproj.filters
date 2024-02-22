@@ -41,6 +41,9 @@
     <ClCompile Include="MouseFunction.cpp">
       <Filter>Config</Filter>
     </ClCompile>
+    <ClCompile Include="FightZone.cpp">
+      <Filter>Actor</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="LoopHero.h" />
@@ -82,6 +85,9 @@
     </ClInclude>
     <ClInclude Include="MouseFunction.h">
       <Filter>Config</Filter>
+    </ClInclude>
+    <ClInclude Include="FightZone.h">
+      <Filter>Actor</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

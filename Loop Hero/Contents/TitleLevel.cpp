@@ -22,7 +22,7 @@ void UTitleLevel::Tick(float _DeltaTime)
 {
 	ULevel::Tick(_DeltaTime);
 
-	if (UEngineInput::IsDown('P'))
+	if (UEngineInput::IsDown(VK_LBUTTON))
 	{
 		GEngine->ChangeLevel("IntroLevel");
 	}

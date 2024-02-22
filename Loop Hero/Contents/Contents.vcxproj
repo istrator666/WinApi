@@ -164,6 +164,10 @@
       <SubType>
       </SubType>
     </ClCompile>
+    <ClCompile Include="FightZone.cpp">
+      <SubType>
+      </SubType>
+    </ClCompile>
     <ClCompile Include="IntroLevel.cpp">
       <SubType>
       </SubType>
@@ -223,6 +227,10 @@
       </SubType>
     </ClInclude>
     <ClInclude Include="Enum.h">
+      <SubType>
+      </SubType>
+    </ClInclude>
+    <ClInclude Include="FightZone.h">
       <SubType>
       </SubType>
     </ClInclude>
