@@ -184,6 +184,10 @@
       <SubType>
       </SubType>
     </ClCompile>
+    <ClCompile Include="MouseFunction.cpp">
+      <SubType>
+      </SubType>
+    </ClCompile>
     <ClCompile Include="Player.cpp">
       <SubType>
       </SubType>
@@ -239,6 +243,10 @@
       </SubType>
     </ClInclude>
     <ClInclude Include="Monster.h">
+      <SubType>
+      </SubType>
+    </ClInclude>
+    <ClInclude Include="MouseFunction.h">
       <SubType>
       </SubType>
     </ClInclude>

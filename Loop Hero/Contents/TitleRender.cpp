@@ -81,7 +81,7 @@ void ATitleRender::TitleMenu()
 
 	PlayButton = CreateImageRenderer();
 	PlayButton->SetActive(true, 9.0f);
-	PlayButton->SetImage("Button_0.png");
+	PlayButton->SetImage("s_button_start_0.png");
 	UWindowImage* PlayButtonImage = PlayButton->GetImage();
 	FVector PlayButtonScale = PlayButtonImage->GetScale();
 	PlayButton->SetTransform({ {640, 360}, {180, 40} });

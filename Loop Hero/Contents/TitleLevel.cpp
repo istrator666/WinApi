@@ -1,5 +1,4 @@
 #include "TitleLevel.h"
-#include "TitleRender.h"
 
 #include "EngineCore/EngineCore.h"
 
@@ -15,7 +14,7 @@ void UTitleLevel::BeginPlay()
 {
 	ULevel::BeginPlay();
 
-	ATitleRender* Title = SpawnActor<ATitleRender>();
+	Title = SpawnActor<ATitleRender>();
 
 }
 

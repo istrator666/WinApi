@@ -1,5 +1,7 @@
 #pragma once
 #include <EngineCore/Level.h>
+#include "TitleRender.h"
+#include "MouseFunction.h"
 
 // Ό³Έν :
 class UTitleLevel : public ULevel
@@ -20,6 +22,7 @@ protected:
 	void Tick(float _DeltaTime) override;
 
 private:
+	ATitleRender* Title = nullptr;
 
 };
 

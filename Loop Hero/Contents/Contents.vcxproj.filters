@@ -38,6 +38,9 @@
     <ClCompile Include="StageUI.cpp">
       <Filter>Actor</Filter>
     </ClCompile>
+    <ClCompile Include="MouseFunction.cpp">
+      <Filter>Config</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="LoopHero.h" />
@@ -76,6 +79,9 @@
     </ClInclude>
     <ClInclude Include="StageUI.h">
       <Filter>Actor</Filter>
+    </ClInclude>
+    <ClInclude Include="MouseFunction.h">
+      <Filter>Config</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
