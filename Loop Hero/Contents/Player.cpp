@@ -22,7 +22,6 @@ void APlayer::BeginPlay()
 void APlayer::Tick(float _DeltaTime)
 {
 	AActor::Tick(_DeltaTime);
-	//AddActorLocation(float4::Left * MoveSpeed * _DeltaTime);
 
 	WayPoints(_DeltaTime);
 }

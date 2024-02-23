@@ -30,6 +30,8 @@ void UStageLevel::BeginPlay()
 
 	StageUI = SpawnActor<AStageUI>();
 
+	FightZone = SpawnActor<AFightZone>();
+	FightZone->SetActive(false, 0.1f);
 }
 
 void UStageLevel::Tick(float _DeltaTime)
@@ -89,7 +91,11 @@ void UStageLevel::Fight(APlayer* _Player, AMonster* _Monster)
 
 	if (PlayerX == MonsterX && PlayerY == MonsterY)
 	{
-		int a = 0;
+		FightZone->AllRenderersActiveOn();
+	}
+	else
+	{
+		FightZone->AllRenderersActiveOff();
 	}
 
 }

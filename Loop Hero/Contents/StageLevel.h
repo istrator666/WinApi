@@ -32,6 +32,7 @@ private:
 	AMonster* Monster = nullptr;
 	AEQInventory* EQInventory = nullptr;
 	AStageUI* StageUI = nullptr;
+	AFightZone* FightZone = nullptr;
 
 	bool TileSetup = false;
 	std::vector<FVector> StagePoints(const std::string& _StageName);
