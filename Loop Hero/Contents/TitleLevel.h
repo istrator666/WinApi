@@ -24,5 +24,6 @@ protected:
 private:
 	ATitleRender* Title = nullptr;
 
+
 };
 

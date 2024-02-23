@@ -25,5 +25,5 @@ void AEQInventory::EQInventory()
 	EQInventoryRender = CreateImageRenderer();
 	EQInventoryRender->SetImage("Equipment.png");
 	EQInventoryRender->SetOrder(5);
-	EQInventoryRender->SetTransform({ {1130, 360}, {295,730} });
+	EQInventoryRender->SetTransform({ {0, 0}, {295,730} });
 }

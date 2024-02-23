@@ -1,5 +1,6 @@
 #include "TitleRender.h"
 #include <EngineBase/EngineMath.h>
+#include "MouseFunction.h"
 
 
 ATitleRender::ATitleRender()
@@ -52,6 +53,8 @@ void ATitleRender::Tick(float _DeltaTime)
 		MenuMove(_DeltaTime);
 
 	}
+
+	Mousehover();
 
 }
 
@@ -132,8 +135,6 @@ void ATitleRender::MenuMove(float _DeltaTime)
 	FVector PlayButtonPos = float4::LerpClamp(PlayButtonStartPos, PlayButtonEndPos, MenuDT);
 	PlayButtonRender->SetTransform({ {PlayButtonPos.X, PlayButtonPos.Y}, {180, 40} });
 
-
-
 }
 
 void ATitleRender::AlphaUpdate(UImageRenderer* _RendererAlpha, float _DeltaTime)
@@ -160,4 +161,23 @@ void ATitleRender::AlphaUpdate(UImageRenderer* _RendererAlpha, float _DeltaTime)
 	}
 
 	_RendererAlpha->SetAlpha(IntroAlpha);
+}
+
+void ATitleRender::Mousehover()
+{
+	FVector PosCheck = UMouseFunction::GetMousePos();
+	if ((550 <= PosCheck.X && 730 >= PosCheck.X) && (340 <= PosCheck.Y && 380 >= PosCheck.Y))
+	{
+		PlayButtonRender->SetImage("s_button_start_1.png");
+
+		if (UEngineInput::IsDown(VK_LBUTTON))
+		{
+			PlayButtonRender->SetImage("s_button_start_2.png");
+		}
+
+	}
+	else
+	{
+		PlayButtonRender->SetImage("s_button_start_0.png");
+	}
 }

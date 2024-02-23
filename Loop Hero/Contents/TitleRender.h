@@ -33,6 +33,7 @@ private:
 	void TitleMenu();
 	void MenuMove(float _DeltaTime);
 	void AlphaUpdate(UImageRenderer* _RendererAlpha, float _DeltaTime);
+	void Mousehover();
 
 	float BackTime = 7.0f;
 	float LogoTime = 10.0f;

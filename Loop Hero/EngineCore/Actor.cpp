@@ -64,6 +64,21 @@ UCollision* AActor::CreateCollision(int _Order)
 	return Component;
 }
 
+void AActor::SetActive(bool _Active, float _ActiveTime)
+{
+	UTickObject::SetActive(_Active, _ActiveTime);
+
+	for (UImageRenderer* Renderer : Renderers)
+	{
+		Renderer->SetActive(_Active, _ActiveTime);
+	}
+
+	for (UCollision* Collision : Collisions)
+	{
+		Collision->SetActive(_Active, _ActiveTime);
+	}
+}
+
 void AActor::Destroy(float _DestroyTime)
 {
 	UTickObject::Destroy(_DestroyTime);

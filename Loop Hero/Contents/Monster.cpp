@@ -11,7 +11,7 @@ AMonster::~AMonster()
 void AMonster::BeginPlay()
 {
 	AActor::BeginPlay();
-	SetMonsterImage(LoopHeroRenderOrder::MONSTER);
+	SetMonsterImage();
 }
 
 void AMonster::Tick(float _DeltaTime)
@@ -20,12 +20,12 @@ void AMonster::Tick(float _DeltaTime)
 
 }
 
-void AMonster::SetMonsterImage(LoopHeroRenderOrder _Monster)
+void AMonster::SetMonsterImage()
 {
 	MonsterRender = CreateImageRenderer();
 	MonsterRender->SetImage("Overworld Enemies.png");
 	MonsterRender->SetOrder(4);
-	MonsterRender->SetTransform({ {525, 225}, {250,250} });
+	MonsterRender->SetTransform({ {0,0}, {250,250} });
 	MonsterRender->CreateAnimation("Idle", "Overworld Enemies.png", 38, 39, 0.3f, true);
 	MonsterRender->ChangeAnimation("Idle");
 }

@@ -4,6 +4,7 @@
 #include "Monster.h"
 #include "EQInventory.h"
 #include "StageUI.h"
+#include "FightZone.h"
 #include "Enum.h"
 
 
@@ -20,11 +21,18 @@ public:
 	UStageLevel& operator=(const UStageLevel& _Other) = delete;
 	UStageLevel& operator=(UStageLevel&& _Other) noexcept = delete;
 
+	void Fight(APlayer* _Player, AMonster* _Monster);
+
 protected:
 	void BeginPlay() override;
 	void Tick(float _DeltaTime) override;
 
 private:
+	APlayer* Player = nullptr;
+	AMonster* Monster = nullptr;
+	AEQInventory* EQInventory = nullptr;
+	AStageUI* StageUI = nullptr;
+
 	bool TileSetup = false;
 	std::vector<FVector> StagePoints(const std::string& _StageName);
 	void StageMovePlayer(APlayer* _Player);

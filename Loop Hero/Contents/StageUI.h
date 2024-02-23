@@ -14,16 +14,16 @@ public:
 	AStageUI& operator=(const AStageUI& _Other) = delete;
 	AStageUI& operator=(AStageUI&& _Other) noexcept = delete;
 
-protected:
-	void BeginPlay() override;
-	void Tick(float _DeltaTime) override;
-
-private:
 	void StageProgressGauge();
 	void SpeedPanel();
 	void Plashka();
 	void TravelitemPanel();
 
+protected:
+	void BeginPlay() override;
+	void Tick(float _DeltaTime) override;
+
+private:
 	UImageRenderer* StageProgressGaugeRender = nullptr;
 	UImageRenderer* SpeedPanelRender = nullptr;
 	UImageRenderer* PlashkaRender = nullptr;

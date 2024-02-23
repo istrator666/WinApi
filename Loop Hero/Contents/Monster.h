@@ -16,7 +16,7 @@ public:
 	AMonster& operator=(const AMonster& _Other) = delete;
 	AMonster& operator=(AMonster&& _Other) noexcept = delete;
 
-	void SetMonsterImage(LoopHeroRenderOrder _Monster);
+	void SetMonsterImage();
 	void SetWayPoint(FVector _WayPoint);
 
 protected:

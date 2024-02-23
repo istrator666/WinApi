@@ -18,6 +18,7 @@ public:
 
 	void SetPlayerImage();
 	void SetWayPoint(FVector _WayPoint);
+	
 
 protected:
 	void BeginPlay() override;
@@ -25,7 +26,6 @@ protected:
 
 private:
 	void WayPoints(float _DeltaTime);
-
 	UImageRenderer* PlayerRender = nullptr;
 
 	std::list<FVector> WayPoint;
