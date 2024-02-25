@@ -8,20 +8,8 @@
     <ClCompile Include="Player.cpp">
       <Filter>Actor</Filter>
     </ClCompile>
-    <ClCompile Include="TitleRender.cpp">
-      <Filter>Actor</Filter>
-    </ClCompile>
-    <ClCompile Include="StageLevel.cpp">
-      <Filter>Level</Filter>
-    </ClCompile>
-    <ClCompile Include="StageMap.cpp">
-      <Filter>Actor</Filter>
-    </ClCompile>
     <ClCompile Include="IntroLevel.cpp">
       <Filter>Level</Filter>
-    </ClCompile>
-    <ClCompile Include="IntroRender.cpp">
-      <Filter>Actor</Filter>
     </ClCompile>
     <ClCompile Include="Enum.cpp">
       <Filter>Config</Filter>
@@ -29,20 +17,32 @@
     <ClCompile Include="Monster.cpp">
       <Filter>Actor</Filter>
     </ClCompile>
-    <ClCompile Include="EQInventory.cpp">
-      <Filter>Actor</Filter>
-    </ClCompile>
-    <ClCompile Include="CardInventory.cpp">
-      <Filter>Actor</Filter>
-    </ClCompile>
-    <ClCompile Include="StageUI.cpp">
-      <Filter>Actor</Filter>
-    </ClCompile>
     <ClCompile Include="MouseFunction.cpp">
       <Filter>Config</Filter>
     </ClCompile>
     <ClCompile Include="FightZone.cpp">
       <Filter>Actor</Filter>
+    </ClCompile>
+    <ClCompile Include="EQInventory.cpp">
+      <Filter>Actor\UI</Filter>
+    </ClCompile>
+    <ClCompile Include="CardInventory.cpp">
+      <Filter>Actor\UI</Filter>
+    </ClCompile>
+    <ClCompile Include="StageUI.cpp">
+      <Filter>Actor\UI</Filter>
+    </ClCompile>
+    <ClCompile Include="TitleRender.cpp">
+      <Filter>Actor\Render</Filter>
+    </ClCompile>
+    <ClCompile Include="IntroRender.cpp">
+      <Filter>Actor\Render</Filter>
+    </ClCompile>
+    <ClCompile Include="StageMap.cpp">
+      <Filter>Actor\Render</Filter>
+    </ClCompile>
+    <ClCompile Include="TestStageLevel.cpp">
+      <Filter>Level\Stage</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -53,20 +53,8 @@
     <ClInclude Include="Player.h">
       <Filter>Actor</Filter>
     </ClInclude>
-    <ClInclude Include="TitleRender.h">
-      <Filter>Actor</Filter>
-    </ClInclude>
-    <ClInclude Include="StageLevel.h">
-      <Filter>Level</Filter>
-    </ClInclude>
-    <ClInclude Include="StageMap.h">
-      <Filter>Actor</Filter>
-    </ClInclude>
     <ClInclude Include="IntroLevel.h">
       <Filter>Level</Filter>
-    </ClInclude>
-    <ClInclude Include="IntroRender.h">
-      <Filter>Actor</Filter>
     </ClInclude>
     <ClInclude Include="Enum.h">
       <Filter>Config</Filter>
@@ -74,20 +62,35 @@
     <ClInclude Include="Monster.h">
       <Filter>Actor</Filter>
     </ClInclude>
-    <ClInclude Include="EQInventory.h">
-      <Filter>Actor</Filter>
-    </ClInclude>
-    <ClInclude Include="CardInventory.h">
-      <Filter>Actor</Filter>
-    </ClInclude>
-    <ClInclude Include="StageUI.h">
-      <Filter>Actor</Filter>
-    </ClInclude>
     <ClInclude Include="MouseFunction.h">
       <Filter>Config</Filter>
     </ClInclude>
     <ClInclude Include="FightZone.h">
       <Filter>Actor</Filter>
+    </ClInclude>
+    <ClInclude Include="EQInventory.h">
+      <Filter>Actor\UI</Filter>
+    </ClInclude>
+    <ClInclude Include="CardInventory.h">
+      <Filter>Actor\UI</Filter>
+    </ClInclude>
+    <ClInclude Include="StageUI.h">
+      <Filter>Actor\UI</Filter>
+    </ClInclude>
+    <ClInclude Include="TitleRender.h">
+      <Filter>Actor\Render</Filter>
+    </ClInclude>
+    <ClInclude Include="IntroRender.h">
+      <Filter>Actor\Render</Filter>
+    </ClInclude>
+    <ClInclude Include="StageMap.h">
+      <Filter>Actor\Render</Filter>
+    </ClInclude>
+    <ClInclude Include="Level.h">
+      <Filter>Config</Filter>
+    </ClInclude>
+    <ClInclude Include="TestStageLevel.h">
+      <Filter>Level\Stage</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -99,6 +102,15 @@
     </Filter>
     <Filter Include="Config">
       <UniqueIdentifier>{9301b16c-a379-4dd0-9fe3-f85c92580a8b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Actor\UI">
+      <UniqueIdentifier>{65902e74-17db-44f4-a482-1945c72890ca}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Actor\Render">
+      <UniqueIdentifier>{91d992d9-1fbf-418e-8b19-c4d9169e9f2e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Level\Stage">
+      <UniqueIdentifier>{96f30666-5d3d-4860-bfc3-d6fd7a67c4dc}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

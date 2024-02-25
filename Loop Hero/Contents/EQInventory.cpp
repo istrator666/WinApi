@@ -1,26 +1,26 @@
 #include "EQInventory.h"
 
-AEQInventory::AEQInventory()
+EQInventory::EQInventory()
 {
 }
 
-AEQInventory::~AEQInventory()
+EQInventory::~EQInventory()
 {
 }
 
-void AEQInventory::BeginPlay()
+void EQInventory::AEQInventoryUI::BeginPlay()
 {
 	AActor::BeginPlay();
-	EQInventory();
+	EQInventoryUI();
 }
 
-void AEQInventory::Tick(float _DeltaTime)
+void EQInventory::AEQInventoryUI::Tick(float _DeltaTime)
 {
 	AActor::Tick(_DeltaTime);
 
 }
 
-void AEQInventory::EQInventory()
+void EQInventory::AEQInventoryUI::EQInventoryUI()
 {
 	EQInventoryRender = CreateImageRenderer();
 	EQInventoryRender->SetImage("Equipment.png");

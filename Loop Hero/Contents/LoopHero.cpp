@@ -1,7 +1,5 @@
 #include "LoopHero.h"
-#include "TitleLevel.h"
-#include "IntroLevel.h"
-#include "StageLevel.h"
+#include "Level.h"
 
 #include <EngineBase\EngineDirectory.h>
 #include <EngineBase\EngineFile.h>
@@ -28,7 +26,7 @@ void LoopHeroContentsCore::BeginPlay()
 
 	CreateLevel<UTitleLevel>("TitleLevel");
 	CreateLevel<UIntroLevel>("IntroLevel");
-	CreateLevel<UStageLevel>("StageLevel");
+	CreateLevel<UTestStageLevel>("StageLevel");
 	ChangeLevel("StageLevel");
 }
 

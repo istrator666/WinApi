@@ -1,18 +1,18 @@
-#include "StageLevel.h"
+#include "TestStageLevel.h"
 #include "StageMap.h"
 
 #include "EngineCore/EngineCore.h"
 
 
-UStageLevel::UStageLevel()
+UTestStageLevel::UTestStageLevel()
 {
 }
 
-UStageLevel::~UStageLevel()
+UTestStageLevel::~UTestStageLevel()
 {
 }
 
-void UStageLevel::BeginPlay()
+void UTestStageLevel::BeginPlay()
 {
 	ULevel::BeginPlay();
 
@@ -25,23 +25,25 @@ void UStageLevel::BeginPlay()
 	Monster = SpawnActor<AMonster>();
 	Monster->SetActorLocation({ 525, 425 });
 
-	EQInventory = SpawnActor<AEQInventory>();
-	EQInventory->SetActorLocation({ 1130, 360 });
+	SetStageUI();
+	SetEQInventory();
 
-	StageUI = SpawnActor<AStageUI>();
 
 	FightZone = SpawnActor<AFightZone>();
 	FightZone->SetActive(false, 0.1f);
+	FightZone->SetActorLocation({ 550, 360 });
+
+
 }
 
-void UStageLevel::Tick(float _DeltaTime)
+void UTestStageLevel::Tick(float _DeltaTime)
 {
 	ULevel::Tick(_DeltaTime);
 
 	Fight(Player, Monster);
 }
 
-std::vector<FVector> UStageLevel::StagePoints(const std::string& _StageName)
+std::vector<FVector> UTestStageLevel::StagePoints(const std::string& _StageName)
 {
 
 	std::vector<FVector> Tutorial =
@@ -67,7 +69,7 @@ std::vector<FVector> UStageLevel::StagePoints(const std::string& _StageName)
 	return Tutorial;
 }
 
-void UStageLevel::StageMovePlayer(APlayer* _Player)
+void UTestStageLevel::StageMovePlayer(APlayer* _Player)
 {
 	std::vector<FVector> MovePoint = StagePoints("Tutorial");
 
@@ -78,7 +80,7 @@ void UStageLevel::StageMovePlayer(APlayer* _Player)
 }
 
 
-void UStageLevel::Fight(APlayer* _Player, AMonster* _Monster)
+void UTestStageLevel::Fight(APlayer* _Player, AMonster* _Monster)
 {
 	FVector PlayerLocation = _Player->GetActorLocation();
 	FVector MonsterLocation = _Monster->GetActorLocation();
@@ -91,11 +93,37 @@ void UStageLevel::Fight(APlayer* _Player, AMonster* _Monster)
 
 	if (PlayerX == MonsterX && PlayerY == MonsterY)
 	{
-		FightZone->AllRenderersActiveOn();
+		if (fmod(PlayerLocation.X, 50.0f) == 25.0f && fmod(PlayerLocation.Y, 50.0f) == 25.0f)
+		{
+			_Player->IsMove = false;
+			FightZone->AllRenderersActiveOn();
+		}
 	}
 	else
 	{
+		Player->IsMove = true;
 		FightZone->AllRenderersActiveOff();
 	}
 
+}
+
+void UTestStageLevel::SetStageUI()
+{
+	StageprogressGauge = SpawnActor<StageUI::AStageProgressGauge>();
+	StageprogressGauge->SetActorLocation({ 115, 25 });
+
+	SppedPanel = SpawnActor<StageUI::ASpeedPanel>();
+	SppedPanel->SetActorLocation({ 308, 25 });
+
+	APlashka = SpawnActor<StageUI::APlashka>();
+	APlashka->SetActorLocation({ 533, 25 });
+
+	TravelitemPanel = SpawnActor<StageUI::ATravelitemPanel>();
+	TravelitemPanel->SetActorLocation({ 866,25 });
+}
+
+void UTestStageLevel::SetEQInventory()
+{
+	EQInventory = SpawnActor<EQInventory::AEQInventoryUI>();
+	EQInventory->SetActorLocation({ 1130, 360 });
 }

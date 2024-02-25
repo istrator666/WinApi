@@ -23,7 +23,7 @@ void APlayer::Tick(float _DeltaTime)
 {
 	AActor::Tick(_DeltaTime);
 
-	WayPoints(_DeltaTime);
+	WayPoints(_DeltaTime, IsMove);
 }
 
 void APlayer::SetPlayerImage()
@@ -44,8 +44,13 @@ void APlayer::SetWayPoint(FVector _WayPoint)
 
 }
 
-void APlayer::WayPoints(float _DeltaTime)
+void APlayer::WayPoints(float _DeltaTime, bool _IsMove)
 {
+	if (false == _IsMove)
+	{
+		return;
+	}
+
 	if (CurrentWayPoint == WayPoint.end())
 	{
 		CurrentWayPoint = WayPoint.begin();
@@ -67,4 +72,5 @@ void APlayer::WayPoints(float _DeltaTime)
 		direction.Normalize2D();
 		AddActorLocation(direction * MoveSpeed * _DeltaTime);
 	}
+
 }

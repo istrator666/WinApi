@@ -1,26 +1,35 @@
 #pragma once
 #include <EngineCore/Actor.h>
 
-class AEQInventory : public AActor
+class EQInventory
 {
 public:
 	// constrcuter destructer
-	AEQInventory();
-	~AEQInventory();
+	EQInventory();
+	~EQInventory();
 
 	// delete Function
-	AEQInventory(const AEQInventory& _Other) = delete;
-	AEQInventory(AEQInventory&& _Other) noexcept = delete;
-	AEQInventory& operator=(const AEQInventory& _Other) = delete;
-	AEQInventory& operator=(AEQInventory&& _Other) noexcept = delete;
+	EQInventory(const EQInventory& _Other) = delete;
+	EQInventory(EQInventory&& _Other) noexcept = delete;
+	EQInventory& operator=(const EQInventory& _Other) = delete;
+	EQInventory& operator=(EQInventory&& _Other) noexcept = delete;
+
+	class AEQInventoryUI : public AActor
+	{
+	public:
+		void EQInventoryUI();
+
+	protected:
+		void BeginPlay() override;
+		void Tick(float _DeltaTime) override;
+
+	private:
+		UImageRenderer* EQInventoryRender = nullptr;
+	};
 
 protected:
-	void BeginPlay() override;
-	void Tick(float _DeltaTime) override;
 
 private:
-	void EQInventory();
-	UImageRenderer* EQInventoryRender = nullptr;
 
 };
 

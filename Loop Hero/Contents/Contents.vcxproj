@@ -216,7 +216,7 @@
       <SubType>
       </SubType>
     </ClCompile>
-    <ClCompile Include="StageLevel.cpp">
+    <ClCompile Include="TestStageLevel.cpp">
       <SubType>
       </SubType>
     </ClCompile>
@@ -246,6 +246,7 @@
       <SubType>
       </SubType>
     </ClInclude>
+    <ClInclude Include="Level.h" />
     <ClInclude Include="LoopHero.h">
       <SubType>
       </SubType>
@@ -282,7 +283,7 @@
       <SubType>
       </SubType>
     </ClInclude>
-    <ClInclude Include="StageLevel.h">
+    <ClInclude Include="TestStageLevel.h">
       <SubType>
       </SubType>
     </ClInclude>

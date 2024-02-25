@@ -18,19 +18,20 @@ public:
 
 	void SetPlayerImage();
 	void SetWayPoint(FVector _WayPoint);
-	
+	bool IsMove = true;
 
 protected:
 	void BeginPlay() override;
 	void Tick(float _DeltaTime) override;
 
 private:
-	void WayPoints(float _DeltaTime);
+	void WayPoints(float _DeltaTime, bool _IsMove);
 	UImageRenderer* PlayerRender = nullptr;
 
 	std::list<FVector> WayPoint;
 	std::list<FVector>::iterator CurrentWayPoint;
 	float MoveSpeed = 100.0f;
+
 
 };
 

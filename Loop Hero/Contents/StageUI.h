@@ -1,32 +1,73 @@
 #pragma once
 #include <EngineCore/Actor.h>
 
-class AStageUI : public AActor
+class StageUI
 {
 public:
 	// constrcuter destructer
-	AStageUI();
-	~AStageUI();
+	StageUI();
+	~StageUI();
 
 	// delete Function
-	AStageUI(const AStageUI& _Other) = delete;
-	AStageUI(AStageUI&& _Other) noexcept = delete;
-	AStageUI& operator=(const AStageUI& _Other) = delete;
-	AStageUI& operator=(AStageUI&& _Other) noexcept = delete;
+	StageUI(const StageUI& _Other) = delete;
+	StageUI(StageUI&& _Other) noexcept = delete;
+	StageUI& operator=(const StageUI& _Other) = delete;
+	StageUI& operator=(StageUI&& _Other) noexcept = delete;
 
-	void StageProgressGauge();
-	void SpeedPanel();
-	void Plashka();
-	void TravelitemPanel();
+	class AStageProgressGauge : public AActor
+	{
+	public:
+		void StageProgressGauge();
+
+	protected:
+		void BeginPlay() override;
+		void Tick(float _DeltaTime) override;
+
+	private:
+		UImageRenderer* StageProgressGaugeRender = nullptr;
+	};
+
+	class ASpeedPanel : public AActor
+	{
+	public:
+		void SpeedPanel();
+
+	protected:
+		void BeginPlay() override;
+		void Tick(float _DeltaTime) override;
+		
+	private:
+		UImageRenderer* SpeedPanelRender = nullptr;
+	};
+
+	class APlashka : public AActor
+	{
+	public:
+		void Plashka();
+
+	protected:
+		void BeginPlay() override;
+		void Tick(float _DeltaTime) override;
+
+	private:
+		UImageRenderer* PlashkaRender = nullptr;
+	};
+
+	class ATravelitemPanel : public AActor
+	{
+	public:
+		void TravelitemPanel();
+
+	protected:
+		void BeginPlay() override;
+		void Tick(float _DeltaTime) override;
+
+	private:
+		UImageRenderer* TravelitemPanelRender = nullptr;
+	};
 
 protected:
-	void BeginPlay() override;
-	void Tick(float _DeltaTime) override;
 
 private:
-	UImageRenderer* StageProgressGaugeRender = nullptr;
-	UImageRenderer* SpeedPanelRender = nullptr;
-	UImageRenderer* PlashkaRender = nullptr;
-	UImageRenderer* TravelitemPanelRender = nullptr;
+	
 };
-

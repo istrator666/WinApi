@@ -1,56 +1,85 @@
 #include "StageUI.h"
 
-AStageUI::AStageUI()
+StageUI::StageUI()
 {
 }
 
-AStageUI::~AStageUI()
+StageUI::~StageUI()
 {
 }
 
-void AStageUI::BeginPlay()
+void StageUI::AStageProgressGauge::BeginPlay()
 {
 	AActor::BeginPlay();
 	StageProgressGauge();
-	SpeedPanel();
-	Plashka();
-	TravelitemPanel();
 }
 
-void AStageUI::Tick(float _DeltaTime)
+void StageUI::AStageProgressGauge::Tick(float _DeltaTime)
 {
 	AActor::Tick(_DeltaTime);
-
 }
 
-void AStageUI::StageProgressGauge()
+void StageUI::AStageProgressGauge::StageProgressGauge()
 {
 	StageProgressGaugeRender = CreateImageRenderer();
 	StageProgressGaugeRender->SetImage("StageProgressGauge.png");
 	StageProgressGaugeRender->SetOrder(5);
-	StageProgressGaugeRender->SetTransform({ {115, 25}, {230,50} });
+	StageProgressGaugeRender->SetTransform({ {0, 0}, {230,50} });
 }
 
-void AStageUI::SpeedPanel()
+void StageUI::ASpeedPanel::BeginPlay()
 {
-	StageProgressGaugeRender = CreateImageRenderer();
-	StageProgressGaugeRender->SetImage("s_speedpanel_1.png");
-	StageProgressGaugeRender->SetOrder(5);
-	StageProgressGaugeRender->SetTransform({ {308, 25}, {150,50} });
+	AActor::BeginPlay();
+	SpeedPanel();
 }
 
-void AStageUI::Plashka()
+void StageUI::ASpeedPanel::Tick(float _DeltaTime)
+{
+	AActor::Tick(_DeltaTime);
+}
+
+void StageUI::ASpeedPanel::SpeedPanel()
+{
+	SpeedPanelRender = CreateImageRenderer();
+	SpeedPanelRender->SetImage("s_speedpanel_1.png");
+	SpeedPanelRender->SetOrder(5);
+	SpeedPanelRender->SetTransform({ {0, 0}, {150,50} });
+}
+
+void StageUI::APlashka::BeginPlay()
+{
+	AActor::BeginPlay();
+	Plashka();
+}
+
+void StageUI::APlashka::Tick(float _DeltaTime)
+{
+	AActor::Tick(_DeltaTime);
+}
+
+void StageUI::APlashka::Plashka()
 {
 	PlashkaRender = CreateImageRenderer();
 	PlashkaRender->SetImage("s_plashka.png");
 	PlashkaRender->SetOrder(5);
-	PlashkaRender->SetTransform({ {533, 25}, {300,50} });
+	PlashkaRender->SetTransform({ {0, 0}, {300,50} });
 }
 
-void AStageUI::TravelitemPanel()
+void StageUI::ATravelitemPanel::BeginPlay()
+{
+	AActor::BeginPlay();
+	TravelitemPanel();
+}
+
+void StageUI::ATravelitemPanel::Tick(float _DeltaTime)
+{
+	AActor::Tick(_DeltaTime);
+}
+
+void StageUI::ATravelitemPanel::TravelitemPanel()
 {
 	TravelitemPanelRender = CreateImageRenderer();
 	TravelitemPanelRender->SetImage("s_travelitempanel.png");
 	TravelitemPanelRender->SetOrder(5);
-	TravelitemPanelRender->SetTransform({ {866, 25}, {365,50} });
+	TravelitemPanelRender->SetTransform({ {0, 0}, {365,50} });
 }
