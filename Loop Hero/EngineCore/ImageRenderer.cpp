@@ -82,6 +82,17 @@ void UImageRenderer::BeginPlay()
 	USceneComponent::BeginPlay();
 }
 
+void UImageRenderer::Tick(float _DeltaTime)
+{
+	USceneComponent::Tick(_DeltaTime);
+
+	if (nullptr != CurAnimation)
+	{
+		Image = CurAnimation->Image;
+		InfoIndex = CurAnimation->Update(_DeltaTime);
+	}
+}
+
 void UImageRenderer::SetImage(std::string_view _Name, int _InfoIndex)
 {
 	Image = UEngineResourcesManager::GetInst().FindImg(_Name);

@@ -35,6 +35,11 @@ public:
 		return Transform;
 	}
 
+	FVector GetPosition() const
+	{
+		return Transform.GetPosition();
+	}
+
 	FTransform GetActorBaseTransform();
 
 protected:

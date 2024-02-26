@@ -35,6 +35,29 @@ AActor::~AActor()
 
 }
 
+void AActor::SetActive(bool _Active, float _ActiveTime /*= 0.0f*/)
+{
+	UTickObject::SetActive(_Active, _ActiveTime);
+
+	for (UImageRenderer* Renderer : Renderers)
+	{
+		Renderer->SetActive(_Active, _ActiveTime);
+	}
+
+	for (UCollision* Collision : Collisions)
+	{
+		Collision->SetActive(_Active, _ActiveTime);
+	}
+}
+
+void AActor::ChildTick(float _DeltaTime)
+{
+	for (UImageRenderer* Renderer : Renderers)
+	{
+		Renderer->Tick(_DeltaTime);
+	}
+}
+
 void AActor::Tick(float _DeltaTime)
 {
 	UTickObject::Tick(_DeltaTime);
@@ -62,21 +85,6 @@ UCollision* AActor::CreateCollision(int _Order)
 	ActorCom->BeginPlay();
 	Collisions.push_back(Component);
 	return Component;
-}
-
-void AActor::SetActive(bool _Active, float _ActiveTime)
-{
-	UTickObject::SetActive(_Active, _ActiveTime);
-
-	for (UImageRenderer* Renderer : Renderers)
-	{
-		Renderer->SetActive(_Active, _ActiveTime);
-	}
-
-	for (UCollision* Collision : Collisions)
-	{
-		Collision->SetActive(_Active, _ActiveTime);
-	}
 }
 
 void AActor::Destroy(float _DestroyTime)

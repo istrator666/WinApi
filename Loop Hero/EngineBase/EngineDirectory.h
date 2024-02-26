@@ -18,6 +18,8 @@ public:
 	//UEngineDirectory& operator=(const UEngineDirectory& _Other) = delete;
 	//UEngineDirectory& operator=(UEngineDirectory&& _Other) noexcept = delete;
 
+	void MoveToSearchChild(std::string_view _Path);
+
 	/// <summary>
 	/// 특정 확장자 파일 탐색 함수
 	/// </summary>
@@ -26,9 +28,14 @@ public:
 	/// <returns></returns>
 	std::list<UEngineFile> AllFile(std::vector<std::string> _Ext = std::vector<std::string>(), bool _Recursive = false);
 
+	std::list<UEngineDirectory> AllDirectory(bool _Recursive = false);
+
 protected:
 
 private:
+
+	void AllDirectoryRecursive(const std::string_view _Path, std::list<UEngineDirectory>& _Result, bool _Recursive = false);
+
 	/// <summary>
 	/// 재귀로 파일을 검색하는 함수
 	/// </summary>
@@ -37,5 +44,6 @@ private:
 	/// <param name="_Ext"> 확장자 입력(빈 값이면 전부 탐색) ex) .png. bmp </param>
 	/// <param name="_Recursive"> true면 하위 디렉토리까지 모두 탐색 </param>
 	void AllFileRecursive(const std::string_view _Path, std::list<UEngineFile>& _Result, std::vector<std::string> _Ext = std::vector<std::string>(), bool _Recursive = false);
+
 };
 
