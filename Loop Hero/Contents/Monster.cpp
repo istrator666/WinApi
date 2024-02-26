@@ -58,3 +58,32 @@ void AMonster::WayPoints(float _DeltaTime)
 		AddActorLocation(direction * MoveSpeed * _DeltaTime);
 	}
 }
+
+AMonsterFight::AMonsterFight()
+{
+}
+
+AMonsterFight::~AMonsterFight()
+{
+}
+
+void AMonsterFight::BeginPlay()
+{
+	AActor::BeginPlay();
+	SetMosnterFightImage();
+}
+
+void AMonsterFight::Tick(float _DeltaTime)
+{
+	AActor::Tick(_DeltaTime);
+}
+
+void AMonsterFight::SetMosnterFightImage()
+{
+	MonsterFightRender = CreateImageRenderer();
+	MonsterFightRender->SetImage("Slime.png");
+	MonsterFightRender->SetOrder(7);
+	MonsterFightRender->SetTransform({ {0,0}, {250,250} });
+	MonsterFightRender->CreateAnimation("Idle", "Slime.png", 0, 0, 0.3f, true);
+	MonsterFightRender->ChangeAnimation("Idle");
+}

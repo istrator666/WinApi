@@ -1,9 +1,11 @@
 #pragma once
-#include <EngineCore/Actor.h>
+#include "UnitStatus.h"
 #include <list>
+#include"Enum.h"
+
 
 // Ό³Έν :
-class APlayer : public AActor
+class APlayer : public UnitStatus
 {
 public:
 	// constrcuter destructer
@@ -27,11 +29,33 @@ protected:
 private:
 	void WayPoints(float _DeltaTime, bool _IsMove);
 	UImageRenderer* PlayerRender = nullptr;
+	UImageRenderer* PlayerFightRender = nullptr;
 
 	std::list<FVector> WayPoint;
 	std::list<FVector>::iterator CurrentWayPoint;
-	float MoveSpeed = 100.0f;
-
 
 };
 
+class APlayerFight : public UnitStatus
+{
+public:
+	// constrcuter destructer
+	APlayerFight();
+	~APlayerFight();
+
+	// delete Function
+	APlayerFight(const APlayerFight& _Other) = delete;
+	APlayerFight(APlayerFight&& _Other) noexcept = delete;
+	APlayerFight& operator=(const APlayerFight& _Other) = delete;
+	APlayerFight& operator=(APlayerFight&& _Other) noexcept = delete;
+
+	void SetPlayerFightImage();
+
+protected:
+	void BeginPlay() override;
+	void Tick(float _DeltaTime) override;
+
+private:
+	UImageRenderer* PlayerFightRender = nullptr;
+
+};

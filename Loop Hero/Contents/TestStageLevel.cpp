@@ -23,16 +23,10 @@ void UTestStageLevel::BeginPlay()
 	StageMovePlayer(Player);
 
 	Monster = SpawnActor<AMonster>();
-	Monster->SetActorLocation({ 525, 425 });
+	Monster->SetActorLocation({ 625, 225 });
 
 	SetStageUI();
 	SetEQInventory();
-
-
-	FightZone = SpawnActor<AFightZone>();
-	FightZone->SetActive(false, 0.1f);
-	FightZone->SetActorLocation({ 550, 360 });
-
 
 }
 
@@ -96,13 +90,22 @@ void UTestStageLevel::Fight(APlayer* _Player, AMonster* _Monster)
 		if (fmod(PlayerLocation.X, 50.0f) == 25.0f && fmod(PlayerLocation.Y, 50.0f) == 25.0f)
 		{
 			_Player->IsMove = false;
-			FightZone->AllRenderersActiveOn();
+			FightZone = SpawnActor<AFightZone>();
+			FightZone->SetActive(true);
+			FightZone->SetActorLocation({ 530, 340 });
+
+			PlayerFight = SpawnActor<APlayerFight>();
+			PlayerFight->SetActive(true);
+			PlayerFight->SetActorLocation({ 380, 400 });
+
+			MonsterFight = SpawnActor<AMonsterFight>();
+			MonsterFight->SetActive(true);
+			MonsterFight->SetActorLocation({600, 400});
 		}
 	}
 	else
 	{
 		Player->IsMove = true;
-		FightZone->AllRenderersActiveOff();
 	}
 
 }

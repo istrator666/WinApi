@@ -1,9 +1,9 @@
 #pragma once
-#include <EngineCore/Actor.h>
+#include "UnitStatus.h"
 #include <list>
 #include "Enum.h"
 
-class AMonster : public AActor
+class AMonster : public UnitStatus
 {
 public:
 	// constrcuter destructer
@@ -30,6 +30,30 @@ private:
 
 	std::list<FVector> WayPoint;
 	std::list<FVector>::iterator CurrentWayPoint;
-	float MoveSpeed = 50.0f;
+
+	float MoveSpeed = GetMoveSpeed();
 };
 
+class AMonsterFight : public UnitStatus
+{
+public:
+	// constrcuter destructer
+	AMonsterFight();
+	~AMonsterFight();
+
+	// delete Function
+	AMonsterFight(const AMonsterFight& _Other) = delete;
+	AMonsterFight(AMonsterFight&& _Other) noexcept = delete;
+	AMonsterFight& operator=(const AMonsterFight& _Other) = delete;
+	AMonsterFight& operator=(AMonsterFight&& _Other) noexcept = delete;
+
+	void SetMosnterFightImage();
+
+protected:
+	void BeginPlay() override;
+	void Tick(float _DeltaTime) override;
+
+private:
+	UImageRenderer* MonsterFightRender = nullptr;
+
+};

@@ -5,17 +5,11 @@
     <ClCompile Include="TitleLevel.cpp">
       <Filter>Level</Filter>
     </ClCompile>
-    <ClCompile Include="Player.cpp">
-      <Filter>Actor</Filter>
-    </ClCompile>
     <ClCompile Include="IntroLevel.cpp">
       <Filter>Level</Filter>
     </ClCompile>
     <ClCompile Include="Enum.cpp">
       <Filter>Config</Filter>
-    </ClCompile>
-    <ClCompile Include="Monster.cpp">
-      <Filter>Actor</Filter>
     </ClCompile>
     <ClCompile Include="MouseFunction.cpp">
       <Filter>Config</Filter>
@@ -44,23 +38,26 @@
     <ClCompile Include="TestStageLevel.cpp">
       <Filter>Level\Stage</Filter>
     </ClCompile>
+    <ClCompile Include="Monster.cpp">
+      <Filter>Actor\Unit</Filter>
+    </ClCompile>
+    <ClCompile Include="Player.cpp">
+      <Filter>Actor\Unit</Filter>
+    </ClCompile>
+    <ClCompile Include="UnitStatus.cpp">
+      <Filter>Actor\Unit</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="LoopHero.h" />
     <ClInclude Include="TitleLevel.h">
       <Filter>Level</Filter>
     </ClInclude>
-    <ClInclude Include="Player.h">
-      <Filter>Actor</Filter>
-    </ClInclude>
     <ClInclude Include="IntroLevel.h">
       <Filter>Level</Filter>
     </ClInclude>
     <ClInclude Include="Enum.h">
       <Filter>Config</Filter>
-    </ClInclude>
-    <ClInclude Include="Monster.h">
-      <Filter>Actor</Filter>
     </ClInclude>
     <ClInclude Include="MouseFunction.h">
       <Filter>Config</Filter>
@@ -92,6 +89,15 @@
     <ClInclude Include="TestStageLevel.h">
       <Filter>Level\Stage</Filter>
     </ClInclude>
+    <ClInclude Include="Monster.h">
+      <Filter>Actor\Unit</Filter>
+    </ClInclude>
+    <ClInclude Include="Player.h">
+      <Filter>Actor\Unit</Filter>
+    </ClInclude>
+    <ClInclude Include="UnitStatus.h">
+      <Filter>Actor\Unit</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Level">
@@ -111,6 +117,9 @@
     </Filter>
     <Filter Include="Level\Stage">
       <UniqueIdentifier>{96f30666-5d3d-4860-bfc3-d6fd7a67c4dc}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Actor\Unit">
+      <UniqueIdentifier>{ea501ff1-f777-4b35-8ab2-ebe8c1296302}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

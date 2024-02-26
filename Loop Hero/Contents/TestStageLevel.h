@@ -32,12 +32,17 @@ protected:
 private:
 	APlayer* Player = nullptr;
 	AMonster* Monster = nullptr;
+
 	StageUI::AStageProgressGauge* StageprogressGauge = nullptr;
 	StageUI::ASpeedPanel* SppedPanel = nullptr;
 	StageUI::APlashka* APlashka = nullptr;
 	StageUI::ATravelitemPanel* TravelitemPanel = nullptr;
+	
 	EQInventory::AEQInventoryUI* EQInventory = nullptr;
+	
 	AFightZone* FightZone = nullptr;
+	APlayerFight* PlayerFight = nullptr;
+	AMonsterFight* MonsterFight = nullptr;
 
 	bool TileSetup = false;
 	std::vector<FVector> StagePoints(const std::string& _StageName);

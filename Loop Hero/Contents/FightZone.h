@@ -21,5 +21,6 @@ protected:
 private:
 	void FightZone();
 	UImageRenderer* FightZoneRender = nullptr;
+
 };
 

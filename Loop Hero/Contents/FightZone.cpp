@@ -25,5 +25,5 @@ void AFightZone::FightZone()
 	FightZoneRender = CreateImageRenderer();
 	FightZoneRender->SetImage("s_fight_window.png");
 	FightZoneRender->SetOrder(6);
-	FightZoneRender->SetTransform({ {0, 0}, {700,500} });
+	FightZoneRender->SetTransform({ {0, 0}, {620,500} });
 }
