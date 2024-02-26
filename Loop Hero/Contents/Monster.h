@@ -48,6 +48,7 @@ public:
 	AMonsterFight& operator=(AMonsterFight&& _Other) noexcept = delete;
 
 	void SetMosnterFightImage();
+	void SetMonsterHealthBar();
 
 protected:
 	void BeginPlay() override;
@@ -55,5 +56,8 @@ protected:
 
 private:
 	UImageRenderer* MonsterFightRender = nullptr;
+	UImageRenderer* MonsterHealthBar = nullptr;
+	UImageRenderer* MonsterHPBar = nullptr;
+	UImageRenderer* MonsterAttSpeedBar = nullptr;
 
 };

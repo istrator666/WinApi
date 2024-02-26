@@ -87,6 +87,7 @@ void APlayerFight::BeginPlay()
 {
 	AActor::BeginPlay();
 	SetPlayerFightImage();
+	SetPlayerHealthBar();
 }
 
 void APlayerFight::Tick(float _DeltaTime)
@@ -104,4 +105,27 @@ void APlayerFight::SetPlayerFightImage()
 	PlayerFightRender->CreateAnimation("Idle", "Warrior.png", 17, 17, 0.3f, true);
 	PlayerFightRender->ChangeAnimation("Idle");
 
+}
+
+void APlayerFight::SetPlayerHealthBar()
+{
+	PlayerHealthBar = CreateImageRenderer();
+	PlayerHealthBar->SetImage("s_healthbar_0.png");
+	PlayerHealthBar->SetOrder(7);
+	PlayerHealthBar->SetTransform({ {0, -50}, {80,20} });
+
+	PlayerHPBar = CreateImageRenderer();
+	PlayerHPBar->SetImage("s_healthbar_1.png");
+	PlayerHPBar->SetOrder(8);
+	PlayerHPBar->SetTransform({ {0, -51}, {52,20} });
+
+	PlayerAttSpeedBar = CreateImageRenderer();
+	PlayerAttSpeedBar->SetImage("s_healthbar_2.png");
+	PlayerAttSpeedBar->SetOrder(8);
+	PlayerAttSpeedBar->SetTransform({ {0, -48}, {52,20} });
+
+	PlayerStaminaBar = CreateImageRenderer();
+	PlayerStaminaBar->SetImage("s_healthbar_3.png");
+	PlayerStaminaBar->SetOrder(8);
+	PlayerStaminaBar->SetTransform({ {0, -47}, {52, 15} });
 }

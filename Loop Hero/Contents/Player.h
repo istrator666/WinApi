@@ -50,6 +50,7 @@ public:
 	APlayerFight& operator=(APlayerFight&& _Other) noexcept = delete;
 
 	void SetPlayerFightImage();
+	void SetPlayerHealthBar();
 
 protected:
 	void BeginPlay() override;
@@ -57,5 +58,9 @@ protected:
 
 private:
 	UImageRenderer* PlayerFightRender = nullptr;
+	UImageRenderer* PlayerHealthBar = nullptr;
+	UImageRenderer* PlayerHPBar = nullptr;
+	UImageRenderer* PlayerAttSpeedBar = nullptr;
+	UImageRenderer* PlayerStaminaBar = nullptr;
 
 };

@@ -71,6 +71,7 @@ void AMonsterFight::BeginPlay()
 {
 	AActor::BeginPlay();
 	SetMosnterFightImage();
+	SetMonsterHealthBar();
 }
 
 void AMonsterFight::Tick(float _DeltaTime)
@@ -86,4 +87,22 @@ void AMonsterFight::SetMosnterFightImage()
 	MonsterFightRender->SetTransform({ {0,0}, {250,250} });
 	MonsterFightRender->CreateAnimation("Idle", "Slime.png", 0, 0, 0.3f, true);
 	MonsterFightRender->ChangeAnimation("Idle");
+}
+
+void AMonsterFight::SetMonsterHealthBar()
+{
+	MonsterHealthBar = CreateImageRenderer();
+	MonsterHealthBar->SetImage("s_healthbar_0.png");
+	MonsterHealthBar->SetOrder(7);
+	MonsterHealthBar->SetTransform({ {0,-50}, {80,20} });
+
+	MonsterHPBar = CreateImageRenderer();
+	MonsterHPBar->SetImage("s_healthbar_1.png");
+	MonsterHPBar->SetOrder(8);
+	MonsterHPBar->SetTransform({ {0, -51}, {52,20} });
+
+	MonsterAttSpeedBar = CreateImageRenderer();
+	MonsterAttSpeedBar->SetImage("s_healthbar_2.png");
+	MonsterAttSpeedBar->SetOrder(8);
+	MonsterAttSpeedBar->SetTransform({ {0, -48}, {52,20} });
 }
