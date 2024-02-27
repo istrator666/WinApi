@@ -28,13 +28,22 @@ void UTestStageLevel::BeginPlay()
 	SetStageUI();
 	SetEQInventory();
 
+	FightZone = SpawnActor<AFightZone>();
+	FightZone->SetActive(false, 0.1f);
+
+	PlayerFight = SpawnActor<APlayerFight>();
+	PlayerFight->SetActive(false, 0.1f);
+
+	MonsterFight = SpawnActor<AMonsterFight>();
+	MonsterFight->SetActive(false, 0.1f);
+
 }
 
 void UTestStageLevel::Tick(float _DeltaTime)
 {
 	ULevel::Tick(_DeltaTime);
 
-	Fight(Player, Monster);
+	Fight(Player, Monster, _DeltaTime);
 }
 
 std::vector<FVector> UTestStageLevel::StagePoints(const std::string& _StageName)
@@ -74,7 +83,7 @@ void UTestStageLevel::StageMovePlayer(APlayer* _Player)
 }
 
 
-void UTestStageLevel::Fight(APlayer* _Player, AMonster* _Monster)
+void UTestStageLevel::Fight(APlayer* _Player, AMonster* _Monster, float _DeltaTime)
 {
 	FVector PlayerLocation = _Player->GetActorLocation();
 	FVector MonsterLocation = _Monster->GetActorLocation();
@@ -90,22 +99,27 @@ void UTestStageLevel::Fight(APlayer* _Player, AMonster* _Monster)
 		if (fmod(PlayerLocation.X, 50.0f) == 25.0f && fmod(PlayerLocation.Y, 50.0f) == 25.0f)
 		{
 			_Player->IsMove = false;
-			FightZone = SpawnActor<AFightZone>();
-			FightZone->SetActive(true);
+
 			FightZone->SetActorLocation({ 530, 340 });
+			FightZone->SetActive(true);
 
-			PlayerFight = SpawnActor<APlayerFight>();
-			PlayerFight->SetActive(true);
 			PlayerFight->SetActorLocation({ 380, 400 });
+			PlayerFight->SetActive(true);
 
-			MonsterFight = SpawnActor<AMonsterFight>();
-			MonsterFight->SetActive(true);
 			MonsterFight->SetActorLocation({600, 400});
+			MonsterFight->SetActive(true);
+
+			FightZone->SetPlayer(PlayerFight);
+			FightZone->SetMonster(MonsterFight);
+			FightZone->Battle(_DeltaTime);
 		}
 	}
 	else
 	{
 		Player->IsMove = true;
+		FightZone->SetActive(false, 0.1f);
+		PlayerFight->SetActive(false, 0.1f);
+		MonsterFight->SetActive(false, 0.1f);
 	}
 
 }

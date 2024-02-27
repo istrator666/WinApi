@@ -103,6 +103,7 @@ void APlayerFight::SetPlayerFightImage()
 	PlayerFightRender->SetOrder(7);
 	PlayerFightRender->SetTransform({ {0, 0}, {125,125} });
 	PlayerFightRender->CreateAnimation("Idle", "Warrior.png", 17, 17, 0.3f, true);
+	PlayerFightRender->CreateAnimation("Attck", "Warrior.png", 17, 22, 0.3f, false);
 	PlayerFightRender->ChangeAnimation("Idle");
 
 }
@@ -129,3 +130,25 @@ void APlayerFight::SetPlayerHealthBar()
 	PlayerStaminaBar->SetOrder(8);
 	PlayerStaminaBar->SetTransform({ {0, -47}, {52, 15} });
 }
+
+void APlayerFight::AttDamege(UnitFight& _Unit, float _DeltaTime)
+{
+	float Speed = GetSpeed();
+	int Stamina = GetStamina();
+
+	UnitFight::AttDamege(_Unit, _DeltaTime);
+
+	Stamina += static_cast<int>(25.0f * _DeltaTime);
+
+	if (100 <= Speed)
+	{
+		PlayerFightRender->ChangeAnimation("Attck");
+		Stamina -= 30;
+		SetStamina(Stamina);
+	}
+	else
+	{
+		PlayerFightRender->ChangeAnimation("Idle");
+	}
+}
+

@@ -47,6 +47,9 @@
     <ClCompile Include="UnitStatus.cpp">
       <Filter>Actor\Unit</Filter>
     </ClCompile>
+    <ClCompile Include="UnitFight.cpp">
+      <Filter>Actor\Unit</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="LoopHero.h" />
@@ -96,6 +99,9 @@
       <Filter>Actor\Unit</Filter>
     </ClInclude>
     <ClInclude Include="UnitStatus.h">
+      <Filter>Actor\Unit</Filter>
+    </ClInclude>
+    <ClInclude Include="UnitFight.h">
       <Filter>Actor\Unit</Filter>
     </ClInclude>
   </ItemGroup>

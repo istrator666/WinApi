@@ -1,11 +1,11 @@
 #pragma once
-#include "UnitStatus.h"
+#include "UnitFight.h"
 #include <list>
 #include"Enum.h"
 
 
 // Ό³Έν :
-class APlayer : public UnitStatus
+class APlayer : public UnitFight
 {
 public:
 	// constrcuter destructer
@@ -36,7 +36,7 @@ private:
 
 };
 
-class APlayerFight : public UnitStatus
+class APlayerFight : public UnitFight
 {
 public:
 	// constrcuter destructer
@@ -51,6 +51,7 @@ public:
 
 	void SetPlayerFightImage();
 	void SetPlayerHealthBar();
+	void AttDamege(UnitFight& _Unit, float _DeltaTime) override;
 
 protected:
 	void BeginPlay() override;

@@ -1,5 +1,7 @@
 #pragma once
 #include <EngineCore/Actor.h>
+#include "Player.h"
+#include "Monster.h"
 
 class AFightZone : public AActor
 {
@@ -14,13 +16,20 @@ public:
 	AFightZone& operator=(const AFightZone& _Other) = delete;
 	AFightZone& operator=(AFightZone&& _Other) noexcept = delete;
 
+	void FightZoneImage();
+
+	void SetPlayer(APlayerFight* player);
+	void SetMonster(AMonsterFight* monster);
+	void Battle(float _DeltaTime);
+
 protected:
 	void BeginPlay() override;
 	void Tick(float _DeltaTime) override;
 
 private:
-	void FightZone();
 	UImageRenderer* FightZoneRender = nullptr;
+	APlayerFight* Player;
+	AMonsterFight* Monster;
 
 };
 

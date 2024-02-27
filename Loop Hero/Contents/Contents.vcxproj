@@ -99,6 +99,7 @@
       <ConformanceMode>true</ConformanceMode>
       <LanguageStandard>stdcpp20</LanguageStandard>
       <TreatWarningAsError>true</TreatWarningAsError>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -115,6 +116,7 @@
       <ConformanceMode>true</ConformanceMode>
       <LanguageStandard>stdcpp20</LanguageStandard>
       <TreatWarningAsError>true</TreatWarningAsError>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -131,6 +133,7 @@
       <ConformanceMode>true</ConformanceMode>
       <LanguageStandard>stdcpp20</LanguageStandard>
       <TreatWarningAsError>true</TreatWarningAsError>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -147,6 +150,7 @@
       <ConformanceMode>true</ConformanceMode>
       <LanguageStandard>stdcpp20</LanguageStandard>
       <TreatWarningAsError>true</TreatWarningAsError>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -220,6 +224,10 @@
       <SubType>
       </SubType>
     </ClCompile>
+    <ClCompile Include="UnitFight.cpp">
+      <SubType>
+      </SubType>
+    </ClCompile>
     <ClCompile Include="UnitStatus.cpp">
       <SubType>
       </SubType>
@@ -288,6 +296,10 @@
       </SubType>
     </ClInclude>
     <ClInclude Include="TestStageLevel.h">
+      <SubType>
+      </SubType>
+    </ClInclude>
+    <ClInclude Include="UnitFight.h">
       <SubType>
       </SubType>
     </ClInclude>

@@ -106,3 +106,8 @@ void AMonsterFight::SetMonsterHealthBar()
 	MonsterAttSpeedBar->SetOrder(8);
 	MonsterAttSpeedBar->SetTransform({ {0, -48}, {52,20} });
 }
+
+void AMonsterFight::AttDamege(UnitFight& _Unit, float _DeltaTime)
+{
+	UnitFight::AttDamege(_Unit, _DeltaTime);
+}

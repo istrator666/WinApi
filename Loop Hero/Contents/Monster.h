@@ -1,9 +1,9 @@
 #pragma once
-#include "UnitStatus.h"
+#include "UnitFight.h"
 #include <list>
 #include "Enum.h"
 
-class AMonster : public UnitStatus
+class AMonster : public UnitFight
 {
 public:
 	// constrcuter destructer
@@ -34,7 +34,7 @@ private:
 	float MoveSpeed = GetMoveSpeed();
 };
 
-class AMonsterFight : public UnitStatus
+class AMonsterFight : public UnitFight
 {
 public:
 	// constrcuter destructer
@@ -49,6 +49,7 @@ public:
 
 	void SetMosnterFightImage();
 	void SetMonsterHealthBar();
+	void AttDamege(UnitFight& _Unit, float _DeltaTime) override;
 
 protected:
 	void BeginPlay() override;

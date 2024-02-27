@@ -21,7 +21,7 @@ public:
 	UTestStageLevel& operator=(const UTestStageLevel& _Other) = delete;
 	UTestStageLevel& operator=(UTestStageLevel&& _Other) noexcept = delete;
 
-	void Fight(APlayer* _Player, AMonster* _Monster);
+	void Fight(APlayer* _Player, AMonster* _Monster, float _DeltaTime);
 	void SetStageUI();
 	void SetEQInventory();
 
