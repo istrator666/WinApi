@@ -67,6 +67,12 @@ void UEngineDirectory::AllFileRecursive(
 	}
 }
 
+UEngineFile UEngineDirectory::NewFile(std::string_view FileName)
+{
+	std::string NewFilePath = GetFullPath() + "\\" + FileName.data();
+	return std::filesystem::path(NewFilePath);
+}
+
 std::list<UEngineFile> UEngineDirectory::AllFile(
 	std::vector<std::string> _Ext,
 	bool _Rescursive
