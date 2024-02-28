@@ -103,13 +103,20 @@ void AMonsterFight::SetMonsterHealthBar()
 	MonsterHPBar->SetImage("s_healthbar_1.png");
 	MonsterHPBar->SetSortType(EImageSortType::Left);
 	MonsterHPBar->SetOrder(8);
-	MonsterHPBar->SetTransform({ {-26, -51}, {22,20} });
+	MonsterHPBar->SetTransform({ {-26, -51}, {52,20} });
 
 	MonsterAttSpeedBar = CreateImageRenderer();
 	MonsterAttSpeedBar->SetImage("s_healthbar_2.png");
 	MonsterAttSpeedBar->SetOrder(8);
 	MonsterAttSpeedBar->SetTransform({ {0, -48}, {52,20} });
 }
+
+void AMonsterFight::SetMonsterHPbar(int _Damage)
+{
+	int HPbar = 52 - _Damage;
+	MonsterHPBar->SetTransform({ {-26, -51}, {HPbar,20} });
+}
+
 
 void AMonsterFight::SetChangeAnimation(CharacterStatus _Status)
 {

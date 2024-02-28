@@ -45,6 +45,7 @@ void AFightZone::Battle(APlayerFight* _PlayerFight, AMonsterFight* _MonsterFight
 		if (false == MonsterFight->IsAnimationPlaying())
 		{
 			MonsterFight->SetChangeAnimation(CharacterStatus::Hurt);
+			MonsterFight->SetMonsterHPbar(30);
 		}
 	}
 

@@ -49,6 +49,7 @@ public:
 
 	void SetMosnterFightImage();
 	void SetMonsterHealthBar();
+	void SetMonsterHPbar(int _Damage);
 	void SetChangeAnimation(CharacterStatus _Status);
 	bool IsAnimationPlaying();
 
