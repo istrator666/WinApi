@@ -34,42 +34,55 @@ void AFightZone::Battle(APlayerFight* _PlayerFight, AMonsterFight* _MonsterFight
 	PlayerFight = _PlayerFight;
 	MonsterFight = _MonsterFight;
 
-	float PlayerAttackSpeed = PlayerFight->GetAttackSpeed();
-	float MonsterAttackSpeed = MonsterFight->GetAttackSpeed();
-
-	if (true == PlayerFight->AttackSpeed(*PlayerFight, _DeltaTime))
+	if (nullptr != PlayerFight && nullptr != MonsterFight)
 	{
-		PlayerFight->SetChangeAnimation(CharacterStatus::Attack);
-		PlayerFight->AttackDamege(*MonsterFight);
+		float PlayerAttackSpeed = PlayerFight->GetAttackSpeed();
+		float MonsterAttackSpeed = MonsterFight->GetAttackSpeed();
 
-		if (false == MonsterFight->IsAnimationPlaying())
+		if (true == PlayerFight->AttackSpeed(*PlayerFight, _DeltaTime) && "DEATH" != MonsterFight->GetCurrentAnimation())
 		{
-			MonsterFight->SetChangeAnimation(CharacterStatus::Hurt);
-			MonsterFight->SetMonsterHPbar(30);
+			PlayerFight->SetChangeAnimation(CharacterStatus::Attack);
+			PlayerFight->AttackDamege(*PlayerFight, *MonsterFight);
+
+			if ("ATTACK" != MonsterFight->GetCurrentAnimation())
+			{
+
+				MonsterFight->SetChangeAnimation(CharacterStatus::Hurt);
+				MonsterFight->SetMonsterHPbar(30);
+			}
+		}
+
+		if (true == MonsterFight->AttackSpeed(*MonsterFight, _DeltaTime) && "DEATH" != MonsterFight->GetCurrentAnimation())
+		{
+			MonsterFight->SetChangeAnimation(CharacterStatus::Attack);
+			MonsterFight->AttackDamege(*MonsterFight, *PlayerFight);
+
+			if ("ATTACK" != PlayerFight->GetCurrentAnimation())
+			{
+				PlayerFight->SetChangeAnimation(CharacterStatus::Hurt);
+			}
+		}
+
+		if (MonsterFight->IsDeath())
+		{
+			MonsterFight->SetChangeAnimation(CharacterStatus::Death);
+			if (MonsterFight->IsAnimationPlaying())
+			{
+				IsBattle = true;
+				return;
+			}
+		}
+
+		if (true == MonsterFight->IsAnimationPlaying() && "DEATH" != MonsterFight->GetCurrentAnimation())
+		{
+			MonsterFight->SetChangeAnimation(CharacterStatus::Idle);
+		}
+
+		if (true == PlayerFight->IsAnimationPlaying() && "DEATH" != PlayerFight->GetCurrentAnimation())
+		{
+			PlayerFight->SetChangeAnimation(CharacterStatus::Idle);
+
 		}
 	}
-
-	if (true == MonsterFight->AttackSpeed(*MonsterFight, _DeltaTime))
-	{
-		MonsterFight->SetChangeAnimation(CharacterStatus::Attack);
-		MonsterFight->AttackDamege(*MonsterFight);
-		
-
-		if (false == PlayerFight->IsAnimationPlaying())
-		{
-			PlayerFight->SetChangeAnimation(CharacterStatus::Hurt);
-		}
-	}
-
-	if (true == MonsterFight->IsAnimationPlaying())
-	{
-		MonsterFight->SetChangeAnimation(CharacterStatus::Idle);
-	}
-
-	if (true == PlayerFight->IsAnimationPlaying())
-	{
-		PlayerFight->SetChangeAnimation(CharacterStatus::Idle);
-	}
-
 }
 

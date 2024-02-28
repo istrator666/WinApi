@@ -30,8 +30,8 @@ void AStageMap::Tick(float _DeltaTime)
 		{
 			for (int j = 0; j < 21; j++)
 			{
-				UImageRenderer* IsTile = IsTileList[i][j];
-				IsTile->ActiveOff();
+				IsTile = IsTileList[i][j];
+				IsTile->SetActive(false);
 			}
 		}
 	}
@@ -55,7 +55,7 @@ void AStageMap::IsTileSet()
 	{
 		for (int j = 0; j < 21; j++)
 		{
-			UImageRenderer* IsTile = CreateImageRenderer();
+			IsTile = CreateImageRenderer();
 			IsTile->SetImage("IsTile.png");
 			IsTile->SetOrder(1);
 			IsTileList[i][j] = IsTile;

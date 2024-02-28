@@ -20,6 +20,8 @@ public:
 
 	void Battle(APlayerFight* _PlyerFight, AMonsterFight* _MonsterFight, float _DeltaTime);
 
+	bool IsBattle = false;
+
 protected:
 	void BeginPlay() override;
 	void Tick(float _DeltaTime) override;

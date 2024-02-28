@@ -103,9 +103,9 @@ void APlayerFight::SetPlayerFightImage()
 	PlayerFightRender->SetOrder(7);
 	PlayerFightRender->SetTransform({ {0, 0}, {125,125} });
 	PlayerFightRender->CreateAnimation("Idle", "Warrior.png", 17, 17, 0.3f, false);
-	PlayerFightRender->CreateAnimation("Attack", "Warrior.png", 18, 22, 0.3f, false);
-	PlayerFightRender->CreateAnimation("Hurt", "Warrior.png", 23, 26, 0.3f, false);
-	PlayerFightRender->CreateAnimation("Death", "Warrior.png", 27, 31, 0.3f, false);
+	PlayerFightRender->CreateAnimation("Attack", "Warrior.png", 18, 22, 0.25f, false);
+	PlayerFightRender->CreateAnimation("Hurt", "Warrior.png", 23, 26, 0.4f, false);
+	PlayerFightRender->CreateAnimation("Death", "Warrior.png", 27, 31, 0.5f, false);
 	PlayerFightRender->ChangeAnimation("Idle");
 
 }
@@ -164,3 +164,9 @@ bool APlayerFight::IsAnimationPlaying()
 	return false;
 }
 
+std::string APlayerFight::GetCurrentAnimation()
+{
+	std::string CurAnimation = PlayerFightRender->GetCurAnimation()->Name;
+
+	return CurAnimation;
+}

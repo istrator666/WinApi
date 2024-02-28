@@ -15,31 +15,31 @@ bool UnitFight::IsDeath()
     return HP <= 0;
 }
 
-int UnitFight::GetRandomAtt()
+int UnitFight::GetRandomAtt(int _MinAtt, int _MaxAtt)
 {
     std::random_device rd;
     std::mt19937 gen(rd());
-    std::uniform_int_distribution<> distr(400, 600);
+    std::uniform_int_distribution<> distr(_MinAtt, _MaxAtt);
 
     return distr(gen);
 }
 
-void UnitFight::AttackDamege(UnitFight& _Unit)
+void UnitFight::AttackDamege(UnitFight& _AttUnit, UnitFight& _DefUnit)
 {
-	int HP = GetHP();
-    HP -= _Unit.GetRandomAtt();
-    SetHP(HP);
+	int HP = _DefUnit.GetHP();
+    HP -= _DefUnit.GetRandomAtt(_AttUnit.GetMinAttck(), _AttUnit.GetMaxAttck());
+    _DefUnit.SetHP(HP);
 }
 
 bool UnitFight::AttackSpeed(UnitFight& _Unit, float _DeltaTime)
 {
-    float Speed = GetAttackSpeed();
-    Speed += 100 * (_DeltaTime / 2.0f);
-    SetAttackSpeed(Speed);
+    float AttackSpeed = GetAttackTime();
+    AttackSpeed += 100 * (_DeltaTime / GetAttackSpeed());
+    SetAttackTime(AttackSpeed);
 
-    if (100 <= Speed)
+    if (100 <= AttackSpeed)
     {
-        SetAttackSpeed(0);
+        SetAttackTime(0);
 
         return true;
     }

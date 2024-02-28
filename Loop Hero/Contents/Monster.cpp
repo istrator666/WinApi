@@ -86,9 +86,9 @@ void AMonsterFight::SetMosnterFightImage()
 	MonsterFightRender->SetOrder(7);
 	MonsterFightRender->SetTransform({ {0,0}, {250,250} });
 	MonsterFightRender->CreateAnimation("Idle", "Slime.png", 0, 0, 0.3f, false);
-	MonsterFightRender->CreateAnimation("Attack", "Slime.png", 1, 5, 0.3f, false);
-	MonsterFightRender->CreateAnimation("Hurt", "Slime.png", 6, 9, 0.3f, false);
-	MonsterFightRender->CreateAnimation("Death", "Slime.png", 10, 14, 0.3f, false);
+	MonsterFightRender->CreateAnimation("Attack", "Slime.png", 1, 5, 0.4f, false);
+	MonsterFightRender->CreateAnimation("Hurt", "Slime.png", 6, 9, 0.4f, false);
+	MonsterFightRender->CreateAnimation("Death", "Slime.png", 10, 14, 0.5f, false);
 	MonsterFightRender->ChangeAnimation("Idle");
 }
 
@@ -147,4 +147,11 @@ bool AMonsterFight::IsAnimationPlaying()
 	}
 
 	return false;
+}
+
+std::string AMonsterFight::GetCurrentAnimation()
+{
+	std::string CurAnimation = MonsterFightRender->GetCurAnimation()->Name;
+
+	return CurAnimation;
 }

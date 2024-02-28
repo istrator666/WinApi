@@ -15,9 +15,9 @@ public:
 	UnitFight& operator=(UnitFight&& _Other) noexcept = delete;
 
 	bool IsDeath();
-	int GetRandomAtt();
+	int GetRandomAtt(int _MinAtt, int _MaxAtt);
 
-	void AttackDamege(UnitFight& _Unit);
+	void AttackDamege(UnitFight& _AttUnit, UnitFight& _DefUnit);
 	bool AttackSpeed(UnitFight& _Unit, float _DeltaTime);
 
 protected:

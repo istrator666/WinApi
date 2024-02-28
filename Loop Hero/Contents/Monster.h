@@ -52,6 +52,7 @@ public:
 	void SetMonsterHPbar(int _Damage);
 	void SetChangeAnimation(CharacterStatus _Status);
 	bool IsAnimationPlaying();
+	std::string GetCurrentAnimation();
 
 protected:
 	void BeginPlay() override;

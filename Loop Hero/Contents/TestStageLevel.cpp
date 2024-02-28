@@ -36,7 +36,7 @@ void UTestStageLevel::BeginPlay()
 
 	MonsterFight = SpawnActor<AMonsterFight>();
 	MonsterFight->SetActive(false, 0.1f);
-	MonsterFight->StatusInit(300, 1, 1, 1, 25.0f, 25, 25, 25, 25);
+	MonsterFight->StatusInit(26, 1, 1, 1, 0.6f, 0, 25, 25, 25, 25);
 
 }
 
@@ -97,7 +97,7 @@ void UTestStageLevel::Fight(APlayer* _Player, AMonster* _Monster, float _DeltaTi
 
 	if (PlayerX == MonsterX && PlayerY == MonsterY)
 	{
-		if (fmod(PlayerLocation.X, 50.0f) == 25.0f && fmod(PlayerLocation.Y, 50.0f) == 25.0f)
+		if (fmod(PlayerLocation.X, 50.0f) == 25.0f && fmod(PlayerLocation.Y, 50.0f) == 25.0f && false == FightZone->IsBattle)
 		{
 			_Player->IsMove = false;
 
@@ -112,15 +112,16 @@ void UTestStageLevel::Fight(APlayer* _Player, AMonster* _Monster, float _DeltaTi
 
 			FightZone->Battle(PlayerFight, MonsterFight, _DeltaTime);
 		}
-	}
-	else
-	{
-		Player->IsMove = true;
-		FightZone->SetActive(false, 0.1f);
-		PlayerFight->SetActive(false, 0.1f);
-		MonsterFight->SetActive(false, 0.1f);
-	}
 
+		else
+		{
+			Player->IsMove = true;
+			FightZone->IsBattle = false;
+			FightZone->SetActive(false, 0.1f);
+			PlayerFight->SetActive(false, 0.1f);
+			MonsterFight->SetActive(false, 0.1f);
+		}
+	}
 }
 
 void UTestStageLevel::SetStageUI()

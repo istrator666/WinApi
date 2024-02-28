@@ -53,6 +53,7 @@ public:
 	void SetPlayerHealthBar();
 	void SetChangeAnimation(CharacterStatus _Status);
 	bool IsAnimationPlaying();
+	std::string GetCurrentAnimation();
 
 protected:
 	void BeginPlay() override;
