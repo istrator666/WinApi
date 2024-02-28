@@ -66,6 +66,11 @@ public:
 		Position += _Value;
 	}
 
+	void AddScale(FVector _Value)
+	{
+		Scale += _Value;
+	}
+
 	FVector GetPosition() const
 	{
 		return Position;

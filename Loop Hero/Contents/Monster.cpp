@@ -101,8 +101,9 @@ void AMonsterFight::SetMonsterHealthBar()
 
 	MonsterHPBar = CreateImageRenderer();
 	MonsterHPBar->SetImage("s_healthbar_1.png");
+	MonsterHPBar->SetSortType(EImageSortType::Left);
 	MonsterHPBar->SetOrder(8);
-	MonsterHPBar->SetTransform({ {0, -51}, {52,20} });
+	MonsterHPBar->SetTransform({ {-26, -51}, {22,20} });
 
 	MonsterAttSpeedBar = CreateImageRenderer();
 	MonsterAttSpeedBar->SetImage("s_healthbar_2.png");
