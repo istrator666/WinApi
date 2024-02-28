@@ -164,10 +164,6 @@
       <SubType>
       </SubType>
     </ClCompile>
-    <ClCompile Include="Enum.cpp">
-      <SubType>
-      </SubType>
-    </ClCompile>
     <ClCompile Include="FightZone.cpp">
       <SubType>
       </SubType>

@@ -103,7 +103,7 @@ void APlayerFight::SetPlayerFightImage()
 	PlayerFightRender->SetOrder(7);
 	PlayerFightRender->SetTransform({ {0, 0}, {125,125} });
 	PlayerFightRender->CreateAnimation("Idle", "Warrior.png", 17, 17, 0.3f, true);
-	PlayerFightRender->CreateAnimation("Attck", "Warrior.png", 17, 22, 0.3f, false);
+	PlayerFightRender->CreateAnimation("Attack", "Warrior.png", 17, 22, 0.3f, false);
 	PlayerFightRender->ChangeAnimation("Idle");
 
 }
@@ -131,24 +131,31 @@ void APlayerFight::SetPlayerHealthBar()
 	PlayerStaminaBar->SetTransform({ {0, -47}, {52, 15} });
 }
 
-void APlayerFight::AttDamege(UnitFight& _Unit, float _DeltaTime)
+void APlayerFight::SetChangeAnimation(CharacterStatus _Status)
 {
-	float Speed = GetSpeed();
-	int Stamina = GetStamina();
-
-	UnitFight::AttDamege(_Unit, _DeltaTime);
-
-	Stamina += static_cast<int>(25.0f * _DeltaTime);
-
-	if (100 <= Speed)
+	switch (_Status)
 	{
-		PlayerFightRender->ChangeAnimation("Attck");
-		Stamina -= 30;
-		SetStamina(Stamina);
-	}
-	else
-	{
+	case CharacterStatus::Idle:
 		PlayerFightRender->ChangeAnimation("Idle");
+		break;
+	case CharacterStatus::Attack:
+		PlayerFightRender->ChangeAnimation("Attack");
+		break;
+	case CharacterStatus::Hurt:
+		PlayerFightRender->ChangeAnimation("Idle");
+		break;
+	default:
+		break;
 	}
+}
+
+bool APlayerFight::IsAnimationPlay()
+{
+	if (PlayerFightRender->IsCurAnimationEnd())
+	{
+		return true;
+	}
+
+	return false;
 }
 

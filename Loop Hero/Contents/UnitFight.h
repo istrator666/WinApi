@@ -17,7 +17,8 @@ public:
 	bool IsDeath();
 	int GetRandomAtt();
 
-	virtual void AttDamege(UnitFight& _Unit, float _DeltaTime);
+	void AttDamege(UnitFight& _Unit);
+	bool AttSpeed(UnitFight& _Unit, float _DeltaTime);
 
 protected:
 

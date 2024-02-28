@@ -8,9 +8,6 @@
     <ClCompile Include="IntroLevel.cpp">
       <Filter>Level</Filter>
     </ClCompile>
-    <ClCompile Include="Enum.cpp">
-      <Filter>Config</Filter>
-    </ClCompile>
     <ClCompile Include="MouseFunction.cpp">
       <Filter>Config</Filter>
     </ClCompile>

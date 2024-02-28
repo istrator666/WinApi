@@ -109,9 +109,7 @@ void UTestStageLevel::Fight(APlayer* _Player, AMonster* _Monster, float _DeltaTi
 			MonsterFight->SetActorLocation({600, 400});
 			MonsterFight->SetActive(true);
 
-			FightZone->SetPlayer(PlayerFight);
-			FightZone->SetMonster(MonsterFight);
-			FightZone->Battle(_DeltaTime);
+			FightZone->Battle(PlayerFight, MonsterFight, _DeltaTime);
 		}
 	}
 	else

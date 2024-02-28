@@ -51,7 +51,8 @@ public:
 
 	void SetPlayerFightImage();
 	void SetPlayerHealthBar();
-	void AttDamege(UnitFight& _Unit, float _DeltaTime) override;
+	void SetChangeAnimation(CharacterStatus _Status);
+	bool IsAnimationPlay();
 
 protected:
 	void BeginPlay() override;

@@ -29,22 +29,24 @@ void AFightZone::FightZoneImage()
 
 }
 
-void AFightZone::SetPlayer(APlayerFight* _Player)
+void AFightZone::Battle(APlayerFight* _PlayerFight, AMonsterFight* _MonsterFight, float _DeltaTime)
 {
-	Player = _Player;
-}
+	PlayerFight = _PlayerFight;
+	MonsterFight = _MonsterFight;
 
-void AFightZone::SetMonster(AMonsterFight* _Monster)
-{
-	Monster = _Monster;
-}
+	float PlayerAttackSpeed = PlayerFight->GetSpeed();
 
-void AFightZone::Battle(float _DeltaTime)
-{
-	if (Player != nullptr && Monster != nullptr)
+	if (true == PlayerFight->AttSpeed(*PlayerFight, _DeltaTime))
 	{
-		Player->AttDamege(*Monster, _DeltaTime);
-		Monster->AttDamege(*Player, _DeltaTime);
+		PlayerFight->SetChangeAnimation(CharacterStatus::Attack);
+		PlayerFight->AttDamege(*MonsterFight);
 	}
+
+	if (PlayerFight->IsAnimationPlay())
+	{
+		PlayerFight->SetChangeAnimation(CharacterStatus::Idle);
+	}
+
+
 }
 

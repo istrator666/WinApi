@@ -49,7 +49,7 @@ public:
 
 	void SetMosnterFightImage();
 	void SetMonsterHealthBar();
-	void AttDamege(UnitFight& _Unit, float _DeltaTime) override;
+	void SetChangeAnimation(CharacterStatus _Status);
 
 protected:
 	void BeginPlay() override;

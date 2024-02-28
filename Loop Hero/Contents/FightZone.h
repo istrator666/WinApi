@@ -18,9 +18,7 @@ public:
 
 	void FightZoneImage();
 
-	void SetPlayer(APlayerFight* player);
-	void SetMonster(AMonsterFight* monster);
-	void Battle(float _DeltaTime);
+	void Battle(APlayerFight* _PlyerFight, AMonsterFight* _MonsterFight, float _DeltaTime);
 
 protected:
 	void BeginPlay() override;
@@ -28,8 +26,8 @@ protected:
 
 private:
 	UImageRenderer* FightZoneRender = nullptr;
-	APlayerFight* Player;
-	AMonsterFight* Monster;
+	APlayerFight* PlayerFight;
+	AMonsterFight* MonsterFight;
 
 };
 

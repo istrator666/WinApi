@@ -13,6 +13,15 @@ enum class LoopHeroRenderOrder
 
 };
 
+enum class CharacterStatus
+{
+	Idle,
+	Attack,
+	Hurt,
+	Death,
+
+};
+
 /// <summary>
 /// 0. È²¹«Áö
 /// 1. ¹¦Áö
@@ -147,25 +156,5 @@ enum class TileSpecialType
 	BEACON,
 	TEMPORALBEACON,
 	LICHSPALACE,
-};
-
-
-class Enum
-{
-public:
-	// constrcuter destructer
-	Enum();
-	~Enum();
-
-	// delete Function
-	Enum(const Enum& _Other) = delete;
-	Enum(Enum&& _Other) noexcept = delete;
-	Enum& operator=(const Enum& _Other) = delete;
-	Enum& operator=(Enum&& _Other) noexcept = delete;
-
-protected:
-
-private:
-
 };
 
