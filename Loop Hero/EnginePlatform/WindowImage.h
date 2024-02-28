@@ -110,6 +110,10 @@ public:
 	}
 
 	void TextPrint(std::string_view _Text, FVector _Pos);
+	const UImageInfo& ImageInfo(int _Index)
+	{
+		return Infos[_Index];
+	}
 
 protected:
 
