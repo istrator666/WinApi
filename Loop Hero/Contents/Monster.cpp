@@ -85,7 +85,7 @@ void AMonsterFight::SetMosnterFightImage()
 	MonsterFightRender->SetImage("Slime.png");
 	MonsterFightRender->SetOrder(7);
 	MonsterFightRender->SetTransform({ {0,0}, {250,250} });
-	MonsterFightRender->CreateAnimation("Idle", "Slime.png", 0, 0, 0.3f, true);
+	MonsterFightRender->CreateAnimation("Idle", "Slime.png", 0, 0, 0.3f, false);
 	MonsterFightRender->CreateAnimation("Attack", "Slime.png", 1, 5, 0.3f, false);
 	MonsterFightRender->CreateAnimation("Hurt", "Slime.png", 6, 9, 0.3f, false);
 	MonsterFightRender->CreateAnimation("Death", "Slime.png", 10, 14, 0.3f, false);
@@ -129,4 +129,14 @@ void AMonsterFight::SetChangeAnimation(CharacterStatus _Status)
 	default:
 		break;
 	}
+}
+
+bool AMonsterFight::IsAnimationPlaying()
+{
+	if (MonsterFightRender->IsCurAnimationEnd())
+	{
+		return true;
+	}
+
+	return false;
 }

@@ -102,8 +102,10 @@ void APlayerFight::SetPlayerFightImage()
 	PlayerFightRender->SetImage("Warrior.png");
 	PlayerFightRender->SetOrder(7);
 	PlayerFightRender->SetTransform({ {0, 0}, {125,125} });
-	PlayerFightRender->CreateAnimation("Idle", "Warrior.png", 17, 17, 0.3f, true);
-	PlayerFightRender->CreateAnimation("Attack", "Warrior.png", 17, 22, 0.3f, false);
+	PlayerFightRender->CreateAnimation("Idle", "Warrior.png", 17, 17, 0.3f, false);
+	PlayerFightRender->CreateAnimation("Attack", "Warrior.png", 18, 22, 0.3f, false);
+	PlayerFightRender->CreateAnimation("Hurt", "Warrior.png", 23, 26, 0.3f, false);
+	PlayerFightRender->CreateAnimation("Death", "Warrior.png", 27, 31, 0.3f, false);
 	PlayerFightRender->ChangeAnimation("Idle");
 
 }
@@ -142,14 +144,17 @@ void APlayerFight::SetChangeAnimation(CharacterStatus _Status)
 		PlayerFightRender->ChangeAnimation("Attack");
 		break;
 	case CharacterStatus::Hurt:
-		PlayerFightRender->ChangeAnimation("Idle");
+		PlayerFightRender->ChangeAnimation("Hurt");
+		break;
+	case CharacterStatus::Death:
+		PlayerFightRender->ChangeAnimation("Death");
 		break;
 	default:
 		break;
 	}
 }
 
-bool APlayerFight::IsAnimationPlay()
+bool APlayerFight::IsAnimationPlaying()
 {
 	if (PlayerFightRender->IsCurAnimationEnd())
 	{

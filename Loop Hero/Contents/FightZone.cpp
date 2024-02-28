@@ -34,19 +34,41 @@ void AFightZone::Battle(APlayerFight* _PlayerFight, AMonsterFight* _MonsterFight
 	PlayerFight = _PlayerFight;
 	MonsterFight = _MonsterFight;
 
-	float PlayerAttackSpeed = PlayerFight->GetSpeed();
+	float PlayerAttackSpeed = PlayerFight->GetAttackSpeed();
+	float MonsterAttackSpeed = MonsterFight->GetAttackSpeed();
 
-	if (true == PlayerFight->AttSpeed(*PlayerFight, _DeltaTime))
+	if (true == PlayerFight->AttackSpeed(*PlayerFight, _DeltaTime))
 	{
 		PlayerFight->SetChangeAnimation(CharacterStatus::Attack);
-		PlayerFight->AttDamege(*MonsterFight);
+		PlayerFight->AttackDamege(*MonsterFight);
+
+		if (false == MonsterFight->IsAnimationPlaying())
+		{
+			MonsterFight->SetChangeAnimation(CharacterStatus::Hurt);
+		}
 	}
 
-	if (PlayerFight->IsAnimationPlay())
+	if (true == MonsterFight->AttackSpeed(*MonsterFight, _DeltaTime))
+	{
+		MonsterFight->SetChangeAnimation(CharacterStatus::Attack);
+		MonsterFight->AttackDamege(*MonsterFight);
+		
+
+		if (false == PlayerFight->IsAnimationPlaying())
+		{
+			PlayerFight->SetChangeAnimation(CharacterStatus::Hurt);
+		}
+	}
+
+	if (true == MonsterFight->IsAnimationPlaying())
+	{
+		MonsterFight->SetChangeAnimation(CharacterStatus::Idle);
+	}
+
+	if (true == PlayerFight->IsAnimationPlaying())
 	{
 		PlayerFight->SetChangeAnimation(CharacterStatus::Idle);
 	}
-
 
 }
 

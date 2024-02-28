@@ -39,19 +39,14 @@ public:
 		Defense = _Defense;
 	}
 
-	void SetSpeed(float _Speed)
-	{
-		Speed = _Speed;
-	}
-
 	void SetStamina(int _Stamina)
 	{
 		Stamina = _Stamina;
 	}
 
-	void SetAttckSpeed(int _AttckSpeed)
+	void SetAttackSpeed(float _AttackSpeed)
 	{
-		AttckSpeed = _AttckSpeed;
+		AttackSpeed = _AttackSpeed;
 	}
 
 	void SetHPRegen(int _HPRegen)
@@ -109,19 +104,14 @@ public:
 		return Defense;
 	}
 
-	float GetSpeed()
-	{
-		return Speed;
-	}
-
 	int GetStamina()
 	{
 		return Stamina;
 	}
 
-	int GetAttckSpeed()
+	float GetAttackSpeed()
 	{
-		return AttckSpeed;
+		return AttackSpeed;
 	}
 
 	int GetHPRegen()
@@ -154,7 +144,7 @@ public:
 		return MoveSpeed;
 	}
 
-	void StatusInit(int _HP, int _MinAttck, int MaxAttck, int _Defense, float _Speed, int _AttckSpeed, int _HPRegen, int _Critical, int _CounterAttack, int _LifeDrain);
+	void StatusInit(int _HP, int _MinAttck, int MaxAttck, int _Defense, float _AttackSpeed, int _HPRegen, int _Critical, int _CounterAttack, int _LifeDrain);
 
 protected:
 
@@ -164,9 +154,8 @@ private:
 	int MinAttck = 400; //4
 	int MaxAttck = 600; //6
 	int Defense = 0;
-	float Speed = 0;
+	float AttackSpeed = 0;
 	int Stamina = 100;
-	int AttckSpeed = 0;
 	int HPRegen = 0;
 	int Evasion = 0;
 	int Critical = 0;

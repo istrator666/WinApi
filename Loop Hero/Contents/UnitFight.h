@@ -17,8 +17,8 @@ public:
 	bool IsDeath();
 	int GetRandomAtt();
 
-	void AttDamege(UnitFight& _Unit);
-	bool AttSpeed(UnitFight& _Unit, float _DeltaTime);
+	void AttackDamege(UnitFight& _Unit);
+	bool AttackSpeed(UnitFight& _Unit, float _DeltaTime);
 
 protected:
 

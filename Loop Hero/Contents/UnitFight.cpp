@@ -24,22 +24,22 @@ int UnitFight::GetRandomAtt()
     return distr(gen);
 }
 
-void UnitFight::AttDamege(UnitFight& _Unit)
+void UnitFight::AttackDamege(UnitFight& _Unit)
 {
 	int HP = GetHP();
     HP -= _Unit.GetRandomAtt();
     SetHP(HP);
 }
 
-bool UnitFight::AttSpeed(UnitFight& _Unit, float _DeltaTime)
+bool UnitFight::AttackSpeed(UnitFight& _Unit, float _DeltaTime)
 {
-    float Speed = GetSpeed();
+    float Speed = GetAttackSpeed();
     Speed += 100 * (_DeltaTime / 2.0f);
-    SetSpeed(Speed);
+    SetAttackSpeed(Speed);
 
     if (100 <= Speed)
     {
-        SetSpeed(0);
+        SetAttackSpeed(0);
 
         return true;
     }

@@ -50,6 +50,7 @@ public:
 	void SetMosnterFightImage();
 	void SetMonsterHealthBar();
 	void SetChangeAnimation(CharacterStatus _Status);
+	bool IsAnimationPlaying();
 
 protected:
 	void BeginPlay() override;

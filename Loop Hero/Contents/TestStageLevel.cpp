@@ -36,6 +36,7 @@ void UTestStageLevel::BeginPlay()
 
 	MonsterFight = SpawnActor<AMonsterFight>();
 	MonsterFight->SetActive(false, 0.1f);
+	MonsterFight->StatusInit(300, 1, 1, 1, 25.0f, 25, 25, 25, 25);
 
 }
 

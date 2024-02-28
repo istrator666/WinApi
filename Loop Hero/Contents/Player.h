@@ -52,7 +52,7 @@ public:
 	void SetPlayerFightImage();
 	void SetPlayerHealthBar();
 	void SetChangeAnimation(CharacterStatus _Status);
-	bool IsAnimationPlay();
+	bool IsAnimationPlaying();
 
 protected:
 	void BeginPlay() override;
