@@ -48,5 +48,8 @@ private:
 	std::vector<FVector> StagePoints(const std::string& _StageName);
 	void StageMovePlayer(APlayer* _Player);
 
+	std::vector<FVector> MonterMovePoints();
+	void StageMoveMonster(AMonster* _Monster);
+
 };
 

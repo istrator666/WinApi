@@ -23,7 +23,8 @@ void UTestStageLevel::BeginPlay()
 	StageMovePlayer(Player);
 
 	Monster = SpawnActor<AMonster>();
-	Monster->SetActorLocation({ 625, 225 });
+	Monster->SetActorLocation({ 605, 205 });
+	StageMoveMonster(Monster);
 
 	SetStageUI();
 	SetEQInventory();
@@ -80,6 +81,29 @@ void UTestStageLevel::StageMovePlayer(APlayer* _Player)
 	for (const FVector &MovePoints : MovePoint)
 	{
 		_Player->SetWayPoint(MovePoints);
+	}
+}
+
+std::vector<FVector> UTestStageLevel::MonterMovePoints()
+{
+	std::vector<FVector> Tutorial =
+	{
+		{605, 205, 0, 0},
+		{645, 205, 0, 0},
+		{645, 245, 0, 0},
+		{605, 245, 0, 0},
+	};
+
+	return Tutorial;
+}
+
+void UTestStageLevel::StageMoveMonster(AMonster* _Monster)
+{
+	std::vector<FVector> MovePoint = MonterMovePoints();
+
+	for (const FVector& MovePoints : MovePoint)
+	{
+		_Monster->SetWayPoint(MovePoints);
 	}
 }
 

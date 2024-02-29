@@ -18,13 +18,14 @@ public:
 
 	void SetMonsterImage();
 	void SetWayPoint(FVector _WayPoint);
+	bool IsMove = true;
 
 protected:
 	void BeginPlay() override;
 	void Tick(float _DeltaTime) override;
 
 private:
-	void WayPoints(float _DeltaTime);
+	void WayPoints(float _DeltaTime, bool _IsMove);
 
 	UImageRenderer* MonsterRender = nullptr;
 

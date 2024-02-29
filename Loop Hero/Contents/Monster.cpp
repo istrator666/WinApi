@@ -18,6 +18,7 @@ void AMonster::Tick(float _DeltaTime)
 {
 	AActor::Tick(_DeltaTime);
 
+	WayPoints(_DeltaTime, IsMove);
 }
 
 void AMonster::SetMonsterImage()
@@ -37,17 +38,26 @@ void AMonster::SetWayPoint(FVector _WayPoint)
 	CurrentWayPoint = WayPoint.begin();
 }
 
-void AMonster::WayPoints(float _DeltaTime)
+void AMonster::WayPoints(float _DeltaTime, bool _IsMove)
 {
+	float CurMoveSpeed = GetMoveSpeed();
+	if (false == _IsMove)
+	{
+		return;
+	}
+
 	if (CurrentWayPoint == WayPoint.end())
 	{
 		CurrentWayPoint = WayPoint.begin();
 	}
 
-	FVector direction = *CurrentWayPoint - GetActorLocation();
+	FVector PointValue = *CurrentWayPoint;
+	FVector LocationValue = GetActorLocation();
+
+	FVector direction = PointValue - LocationValue;
 	float distance = direction.Size2D();
 
-	if (distance < MoveSpeed * _DeltaTime)
+	if (distance < CurMoveSpeed * _DeltaTime)
 	{
 		SetActorLocation(*CurrentWayPoint);
 		++CurrentWayPoint;
@@ -55,7 +65,7 @@ void AMonster::WayPoints(float _DeltaTime)
 	else
 	{
 		direction.Normalize2D();
-		AddActorLocation(direction * MoveSpeed * _DeltaTime);
+		AddActorLocation(direction * CurMoveSpeed * _DeltaTime);
 	}
 }
 
