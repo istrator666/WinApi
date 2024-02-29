@@ -7,6 +7,12 @@
 #include "FightZone.h"
 #include "Enum.h"
 
+struct SpawnTileData {
+	FVector TileLocation;
+	TileType Tile;
+	MonsterType Monster;
+};
+
 
 class UTestStageLevel : public ULevel
 {
@@ -21,7 +27,7 @@ public:
 	UTestStageLevel& operator=(const UTestStageLevel& _Other) = delete;
 	UTestStageLevel& operator=(UTestStageLevel&& _Other) noexcept = delete;
 
-	void Fight(APlayer* _Player, AMonster* _Monster, float _DeltaTime);
+	void Fight(APlayer* _Player, std::vector<AMonster*> _Monsters, float _DeltaTime);
 	void SetStageUI();
 	void SetEQInventory();
 
@@ -31,6 +37,7 @@ protected:
 
 private:
 	APlayer* Player = nullptr;
+	std::vector<AMonster*> Monsters;
 	AMonster* Monster = nullptr;
 
 	StageUI::AStageProgressGauge* StageprogressGauge = nullptr;
@@ -42,14 +49,23 @@ private:
 	
 	AFightZone* FightZone = nullptr;
 	APlayerFight* PlayerFight = nullptr;
+
+	std::vector<AMonsterFight*> MonsterFights;
 	AMonsterFight* MonsterFight = nullptr;
 
 	bool TileSetup = false;
+
 	std::vector<FVector> StagePoints(const std::string& _StageName);
 	void StageMovePlayer(APlayer* _Player);
 
-	std::vector<FVector> MonterMovePoints();
-	void StageMoveMonster(AMonster* _Monster);
+	std::vector<FVector> MonsterMovePoints(FVector _Location);
+	void StageMoveMonster(AMonster* _Monster, FVector _Location);
+
+	std::vector<SpawnTileData> mSpawn;
+	FVector RandomSpawnLocation(FVector _Location);
+	std::vector<SpawnTileData> SpawnTileLocation();
+	void SpawnTileType(FVector _Location, TileType _TileType, MonsterType _MonsterType);
+	void MonsterSpawn(FVector _Location, MonsterType _MonsterType);
 
 };
 

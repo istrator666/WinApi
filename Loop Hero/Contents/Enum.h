@@ -22,6 +22,30 @@ enum class CharacterStatus
 
 };
 
+enum class MonsterType
+{
+	Slime,
+	Ratwolf,
+	Spider,
+	Skeleton,
+	CrackedSkeleton,
+	SkeletonArcher,
+	CrackedSkeletonArcher,
+	Mimic,
+	BloodClot,
+	Harpy,
+};
+
+enum class BossType
+{
+	Lich,
+	Priestess,
+	PriestessAngel,
+	Hunter,
+	HunterPet,
+	Omega,
+};
+
 /// <summary>
 /// 0. 황무지
 /// 1. 묘지
