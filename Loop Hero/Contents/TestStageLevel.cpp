@@ -52,7 +52,7 @@ void UTestStageLevel::Tick(float _DeltaTime)
 {
 	ULevel::Tick(_DeltaTime);
 
-	//Fight(Player, Monsters, _DeltaTime);
+	Fight(Player, Monsters, _DeltaTime);
 
 	//for (const SpawnTileData& Tile : mSpawn)
 	//{
@@ -133,8 +133,8 @@ std::vector<FVector> UTestStageLevel::MonsterMovePoints(FVector _Location)
 		return {
 			{_Location.X, _Location.Y},
 			{_Location.X - 40, _Location.Y },
-			{_Location.X - 40, _Location.Y + 40},
-			{_Location.X, _Location.Y + 40},
+			{_Location.X - 40, _Location.Y - 40},
+			{_Location.X, _Location.Y - 40},
 		};
 	}
 	else
