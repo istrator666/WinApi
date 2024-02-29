@@ -86,9 +86,6 @@
     <ClInclude Include="Level.h">
       <Filter>Config</Filter>
     </ClInclude>
-    <ClInclude Include="TestStageLevel.h">
-      <Filter>Level\Stage</Filter>
-    </ClInclude>
     <ClInclude Include="Monster.h">
       <Filter>Actor\Unit</Filter>
     </ClInclude>
@@ -100,6 +97,9 @@
     </ClInclude>
     <ClInclude Include="UnitFight.h">
       <Filter>Actor\Unit</Filter>
+    </ClInclude>
+    <ClInclude Include="TestStageLevel.h">
+      <Filter>Level\Stage</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
