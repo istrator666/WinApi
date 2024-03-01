@@ -190,6 +190,11 @@ public:
 		SortType = _SortType;
 	}
 
+	void AutoImageScale()
+	{
+		AutoImageScaleValue = true;
+	}
+
 protected:
 	void BeginPlay() override;
 	void Tick(float _Time) override;
@@ -214,6 +219,8 @@ private:
 	Color8Bit TextColor = Color8Bit::BlackA;
 	Color8Bit TextColor2 = Color8Bit::BlackA;
 	int TextEffect = 0;
+
+	bool AutoImageScaleValue = false;
 
 	EImageSortType SortType = EImageSortType::Center;
 };
