@@ -66,6 +66,7 @@ private:
 	std::vector<SpawnTileData> SpawnTileLocation();
 	void SpawnTileType(FVector _Location, TileType _TileType, MonsterType _MonsterType);
 	void MonsterSpawn(FVector _Location, MonsterType _MonsterType);
+	float SpawnTimeCheck = 0.0f;
 
 };
 
