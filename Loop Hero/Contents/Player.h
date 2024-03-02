@@ -51,6 +51,7 @@ public:
 
 	void SetPlayerFightImage();
 	void SetPlayerHealthBar();
+	void SetPlayerHPbar(int _Damage);
 	void SetChangeAnimation(CharacterStatus _Status);
 	bool IsAnimationPlaying();
 	std::string GetCurrentAnimation();

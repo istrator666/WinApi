@@ -102,10 +102,10 @@ void APlayerFight::SetPlayerFightImage()
 	PlayerFightRender->SetImage("Warrior.png");
 	PlayerFightRender->SetOrder(7);
 	PlayerFightRender->SetTransform({ {0, 0}, {125,125} });
-	PlayerFightRender->CreateAnimation("Idle", "Warrior.png", 17, 17, 0.3f, false);
+	PlayerFightRender->CreateAnimation("Idle", "Warrior.png", 17, 17, 0.1f, false);
 	PlayerFightRender->CreateAnimation("Attack", "Warrior.png", 18, 22, 0.25f, false);
 	PlayerFightRender->CreateAnimation("Hurt", "Warrior.png", 23, 26, 0.4f, false);
-	PlayerFightRender->CreateAnimation("Death", "Warrior.png", 27, 31, 0.5f, false);
+	PlayerFightRender->CreateAnimation("Death", "Warrior.png", 27, 31, 0.4f, false);
 	PlayerFightRender->ChangeAnimation("Idle");
 
 }
@@ -119,8 +119,9 @@ void APlayerFight::SetPlayerHealthBar()
 
 	PlayerHPBar = CreateImageRenderer();
 	PlayerHPBar->SetImage("s_healthbar_1.png");
+	PlayerHPBar->SetSortType(EImageSortType::Left);
 	PlayerHPBar->SetOrder(8);
-	PlayerHPBar->SetTransform({ {0, -51}, {52,20} });
+	PlayerHPBar->SetTransform({ {-26, -51}, {52,20} });
 
 	PlayerAttSpeedBar = CreateImageRenderer();
 	PlayerAttSpeedBar->SetImage("s_healthbar_2.png");
@@ -131,6 +132,11 @@ void APlayerFight::SetPlayerHealthBar()
 	PlayerStaminaBar->SetImage("s_healthbar_3.png");
 	PlayerStaminaBar->SetOrder(8);
 	PlayerStaminaBar->SetTransform({ {0, -47}, {52, 15} });
+}
+
+void APlayerFight::SetPlayerHPbar(int _CurrentHP)
+{
+	PlayerHPBar->SetTransform({ {-26, -51}, {_CurrentHP, 20} });
 }
 
 void APlayerFight::SetChangeAnimation(CharacterStatus _Status)

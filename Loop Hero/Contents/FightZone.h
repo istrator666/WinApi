@@ -19,7 +19,6 @@ public:
 	void FightZoneImage();
 
 	void Battle(APlayerFight* _PlyerFight, AMonsterFight* _MonsterFight, float _DeltaTime);
-
 	bool IsBattle = false;
 
 protected:
