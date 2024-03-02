@@ -17,6 +17,16 @@ void StageUI::AStageProgressGauge::BeginPlay()
 void StageUI::AStageProgressGauge::Tick(float _DeltaTime)
 {
 	AActor::Tick(_DeltaTime);
+	StageProgressGaugeUpdate(_DeltaTime);
+}
+
+void StageUI::AStageProgressGauge::StageProgressGaugeUpdate(float _DeltaTime)
+{
+	StageProgressGaugeBar = CreateImageRenderer();
+	StageProgressGaugeBar->SetImage("StageProgressGaugebar.png");
+	StageProgressGaugeBar->SetSortType(EImageSortType::Left);
+	StageProgressGaugeBar->SetOrder(6);
+	StageProgressGaugeBar->SetTransform({ {-86, -15}, {195,20} });
 }
 
 void StageUI::AStageProgressGauge::StageProgressGauge()

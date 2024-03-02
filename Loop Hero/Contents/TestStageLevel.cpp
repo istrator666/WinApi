@@ -44,7 +44,7 @@ void UTestStageLevel::BeginPlay()
 	{
 		MonsterFight = SpawnActor<AMonsterFight>();
 		MonsterFight->SetActive(false, 0.1f);
-		MonsterFight->StatusInit(26, 1, 1, 1, 0.6f, 0, 25, 25, 25, 25);
+		MonsterFight->StatusInit(26, 26, 1, 3, 1, 0.6f, 0, 25, 25, 25, 25);
 		MonsterFights.push_back(MonsterFight);
 	}
 }
@@ -53,7 +53,7 @@ void UTestStageLevel::Tick(float _DeltaTime)
 {
 	ULevel::Tick(_DeltaTime);
 
-	Fight(Player, Monsters, _DeltaTime);
+	//Fight(Player, Monsters, _DeltaTime);
 
 }
 
@@ -200,7 +200,7 @@ void UTestStageLevel::SpawnTileType(FVector _Location, TileType _TileType, Monst
 	switch (_TileType)
 	{
 	case TileType::WASTELAND:
-		if (random < RAND_MAX * 0.5) 
+		if (random < RAND_MAX * 0.55) 
 		{
 			MonsterSpawn(_Location, _MonsterType);
 		}

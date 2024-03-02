@@ -25,6 +25,8 @@ public:
 
 	private:
 		UImageRenderer* StageProgressGaugeRender = nullptr;
+		UImageRenderer* StageProgressGaugeBar = nullptr;
+		void StageProgressGaugeUpdate(float _DeltaTime);
 	};
 
 	class ASpeedPanel : public AActor
