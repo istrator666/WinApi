@@ -24,8 +24,10 @@ public:
 		void Tick(float _DeltaTime) override;
 
 	private:
+		float ElapsedTime = 0.0f;
 		UImageRenderer* StageProgressGaugeRender = nullptr;
-		UImageRenderer* StageProgressGaugeBar = nullptr;
+		UImageRenderer* StageProgressGaugeBarDaily = nullptr;
+		UImageRenderer* StageProgressGaugeBarBoss = nullptr;
 		void StageProgressGaugeUpdate(float _DeltaTime);
 	};
 

@@ -22,11 +22,23 @@ void StageUI::AStageProgressGauge::Tick(float _DeltaTime)
 
 void StageUI::AStageProgressGauge::StageProgressGaugeUpdate(float _DeltaTime)
 {
-	StageProgressGaugeBar = CreateImageRenderer();
-	StageProgressGaugeBar->SetImage("StageProgressGaugebar.png");
-	StageProgressGaugeBar->SetSortType(EImageSortType::Left);
-	StageProgressGaugeBar->SetOrder(6);
-	StageProgressGaugeBar->SetTransform({ {-86, -15}, {195,20} });
+	ElapsedTime += _DeltaTime;
+
+	int GaugeUpdate = static_cast<int>(ElapsedTime / 5 * 195);
+
+	if (195 <= GaugeUpdate)
+	{
+		ElapsedTime = 0.0f;
+		GaugeUpdate = 0;
+	}
+	StageProgressGaugeBarDaily->SetTransform({ {-86, -15}, {GaugeUpdate, 20} });
+
+	if (true) // 타일 수에 따라 게이지 상승
+	{
+		StageProgressGaugeBarBoss->SetTransform({ {-86, 15}, {100, 20} });
+	}
+
+
 }
 
 void StageUI::AStageProgressGauge::StageProgressGauge()
@@ -35,6 +47,16 @@ void StageUI::AStageProgressGauge::StageProgressGauge()
 	StageProgressGaugeRender->SetImage("StageProgressGauge.png");
 	StageProgressGaugeRender->SetOrder(5);
 	StageProgressGaugeRender->SetTransform({ {0, 0}, {230,50} });
+
+	StageProgressGaugeBarDaily = CreateImageRenderer();
+	StageProgressGaugeBarDaily->SetImage("StageProgressGaugebar.png");
+	StageProgressGaugeBarDaily->SetSortType(EImageSortType::Left);
+	StageProgressGaugeBarDaily->SetOrder(6);
+
+	StageProgressGaugeBarBoss = CreateImageRenderer();
+	StageProgressGaugeBarBoss->SetImage("StageProgressGaugebar.png");
+	StageProgressGaugeBarBoss->SetSortType(EImageSortType::Left);
+	StageProgressGaugeBarBoss->SetOrder(6);
 }
 
 void StageUI::ASpeedPanel::BeginPlay()
