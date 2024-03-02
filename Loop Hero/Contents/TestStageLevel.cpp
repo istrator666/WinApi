@@ -97,41 +97,41 @@ std::vector<FVector> UTestStageLevel::MonsterMovePoints(FVector _Location)
 {
 	FVector CenterLocation = { (int)(_Location.X / 50) * 50, (int)(_Location.Y / 50) * 50};
 
-	if (_Location.X == CenterLocation.X + 5 && _Location.Y == CenterLocation.Y +5)
+	if (_Location.X == CenterLocation.X + 10 && _Location.Y == CenterLocation.Y + 10)
 	{
 		return {
 			{_Location.X, _Location.Y},
-			{_Location.X + 40, _Location.Y},
-			{_Location.X + 40, _Location.Y + 40},
-			{_Location.X, _Location.Y + 40},
+			{_Location.X + 30, _Location.Y},
+			{_Location.X + 30, _Location.Y + 30},
+			{_Location.X, _Location.Y + 30},
 		};
 	}
 
-	else if (_Location.X == CenterLocation.X + 45 && _Location.Y == CenterLocation.Y +5)
+	else if (_Location.X == CenterLocation.X + 40 && _Location.Y == CenterLocation.Y + 10)
 	{
 		return {
 			{_Location.X, _Location.Y},
-			{_Location.X, _Location.Y + 40},
-			{_Location.X - 40, _Location.Y + 40},
-			{_Location.X - 40, _Location.Y},
+			{_Location.X, _Location.Y + 30},
+			{_Location.X - 30, _Location.Y + 30},
+			{_Location.X - 30, _Location.Y},
 		};
 	}
-	else if (_Location.X == CenterLocation.X +5 && _Location.Y == CenterLocation.Y +45)
+	else if (_Location.X == CenterLocation.X + 10 && _Location.Y == CenterLocation.Y + 40)
 	{
 		return {
 			{_Location.X, _Location.Y},
-			{_Location.X, _Location.Y - 40},
-			{_Location.X + 40, _Location.Y - 40},
-			{_Location.X + 40, _Location.Y},
+			{_Location.X, _Location.Y - 30},
+			{_Location.X + 30, _Location.Y - 30},
+			{_Location.X + 30, _Location.Y},
 		};
 	}
-	else if (_Location.X == CenterLocation.X + 45 && _Location.Y == CenterLocation.Y + 45)
+	else if (_Location.X == CenterLocation.X + 40 && _Location.Y == CenterLocation.Y + 40)
 	{
 		return {
 			{_Location.X, _Location.Y},
-			{_Location.X - 40, _Location.Y },
-			{_Location.X - 40, _Location.Y - 40},
-			{_Location.X, _Location.Y - 40},
+			{_Location.X - 30, _Location.Y },
+			{_Location.X - 30, _Location.Y - 30},
+			{_Location.X, _Location.Y - 30},
 		};
 	}
 	else
@@ -163,9 +163,9 @@ FVector UTestStageLevel::RandomSpawnLocation(FVector _Location)
 	switch (selectedIndex)
 	{
 	case 0: return _Location;
-	case 1: return { _Location.X + 40, _Location.Y };
-	case 2: return { _Location.X + 40, _Location.Y + 40 };
-	case 3: return { _Location.X, _Location.Y + 40 };
+	case 1: return { _Location.X + 30, _Location.Y };
+	case 2: return { _Location.X + 30, _Location.Y + 30 };
+	case 3: return { _Location.X, _Location.Y + 30 };
 	default: return _Location;
 	}
 }
@@ -174,21 +174,21 @@ std::vector<SpawnTileData> UTestStageLevel::SpawnTileLocation()
 {
 	std::vector<SpawnTileData> SpawnTile =
 	{
-		{ RandomSpawnLocation({605, 205, 0, 0}), TileType::WASTELAND, MonsterType::Slime },
-		{ RandomSpawnLocation({605, 255, 0, 0}), TileType::WASTELAND, MonsterType::Slime },
-		{ RandomSpawnLocation({605, 305, 0, 0}), TileType::WASTELAND, MonsterType::Slime },
-		{ RandomSpawnLocation({605, 355, 0, 0}), TileType::WASTELAND, MonsterType::Slime },
-		{ RandomSpawnLocation({555, 355, 0, 0}), TileType::WASTELAND, MonsterType::Slime },
-		{ RandomSpawnLocation({555, 405, 0, 0}), TileType::WASTELAND, MonsterType::Slime },
-		{ RandomSpawnLocation({505, 405, 0, 0}), TileType::WASTELAND, MonsterType::Slime },
-		{ RandomSpawnLocation({455, 405, 0, 0}), TileType::WASTELAND, MonsterType::Slime },
-		{ RandomSpawnLocation({405, 405, 0, 0}), TileType::WASTELAND, MonsterType::Slime },
-		{ RandomSpawnLocation({405, 355, 0, 0}), TileType::WASTELAND, MonsterType::Slime },
-		{ RandomSpawnLocation({405, 305, 0, 0}), TileType::WASTELAND, MonsterType::Slime },
-		{ RandomSpawnLocation({405, 255, 0, 0}), TileType::WASTELAND, MonsterType::Slime },
-		{ RandomSpawnLocation({455, 255, 0, 0}), TileType::WASTELAND, MonsterType::Slime },
-		{ RandomSpawnLocation({455, 205, 0, 0}), TileType::WASTELAND, MonsterType::Slime },
-		{ RandomSpawnLocation({455, 205, 0, 0}), TileType::WASTELAND, MonsterType::Slime },
+		{ RandomSpawnLocation({610, 210, 0, 0}), TileType::WASTELAND, MonsterType::Slime },
+		{ RandomSpawnLocation({610, 260, 0, 0}), TileType::WASTELAND, MonsterType::Slime },
+		{ RandomSpawnLocation({610, 310, 0, 0}), TileType::WASTELAND, MonsterType::Slime },
+		{ RandomSpawnLocation({610, 360, 0, 0}), TileType::WASTELAND, MonsterType::Slime },
+		{ RandomSpawnLocation({560, 360, 0, 0}), TileType::WASTELAND, MonsterType::Slime },
+		{ RandomSpawnLocation({560, 410, 0, 0}), TileType::WASTELAND, MonsterType::Slime },
+		{ RandomSpawnLocation({510, 410, 0, 0}), TileType::WASTELAND, MonsterType::Slime },
+		{ RandomSpawnLocation({460, 410, 0, 0}), TileType::WASTELAND, MonsterType::Slime },
+		{ RandomSpawnLocation({410, 410, 0, 0}), TileType::WASTELAND, MonsterType::Slime },
+		{ RandomSpawnLocation({410, 360, 0, 0}), TileType::WASTELAND, MonsterType::Slime },
+		{ RandomSpawnLocation({410, 310, 0, 0}), TileType::WASTELAND, MonsterType::Slime },
+		{ RandomSpawnLocation({410, 260, 0, 0}), TileType::WASTELAND, MonsterType::Slime },
+		{ RandomSpawnLocation({460, 260, 0, 0}), TileType::WASTELAND, MonsterType::Slime },
+		{ RandomSpawnLocation({460, 210, 0, 0}), TileType::WASTELAND, MonsterType::Slime },
+		{ RandomSpawnLocation({460, 210, 0, 0}), TileType::WASTELAND, MonsterType::Slime },
 	};
 
 	return SpawnTile;
