@@ -28,7 +28,11 @@ public:
 		UImageRenderer* StageProgressGaugeRender = nullptr;
 		UImageRenderer* StageProgressGaugeBarDaily = nullptr;
 		UImageRenderer* StageProgressGaugeBarBoss = nullptr;
+
+		UImageRenderer* DailyDescription = nullptr;
+		UImageRenderer* BossDescription = nullptr;
 		void StageProgressGaugeUpdate(float _DeltaTime);
+		void Mousehover();
 	};
 
 	class ASpeedPanel : public AActor
@@ -42,6 +46,7 @@ public:
 		
 	private:
 		UImageRenderer* SpeedPanelRender = nullptr;
+		void Mousehover();
 	};
 
 	class APlashka : public AActor
@@ -55,6 +60,7 @@ public:
 
 	private:
 		UImageRenderer* PlashkaRender = nullptr;
+		void Mousehover();
 	};
 
 	class ATravelitemPanel : public AActor
@@ -68,6 +74,7 @@ public:
 
 	private:
 		UImageRenderer* TravelitemPanelRender = nullptr;
+		void Mousehover();
 	};
 
 protected:

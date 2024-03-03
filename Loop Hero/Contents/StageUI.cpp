@@ -1,4 +1,5 @@
 #include "StageUI.h"
+#include "MouseFunction.h"
 
 StageUI::StageUI()
 {
@@ -18,6 +19,7 @@ void StageUI::AStageProgressGauge::Tick(float _DeltaTime)
 {
 	AActor::Tick(_DeltaTime);
 	StageProgressGaugeUpdate(_DeltaTime);
+	Mousehover();
 }
 
 void StageUI::AStageProgressGauge::StageProgressGaugeUpdate(float _DeltaTime)
@@ -41,6 +43,35 @@ void StageUI::AStageProgressGauge::StageProgressGaugeUpdate(float _DeltaTime)
 
 }
 
+void StageUI::AStageProgressGauge::Mousehover()
+{
+	FVector PosCheck = UMouseFunction::GetMousePos();
+	int  DescriptionPositionX = static_cast<int>(PosCheck.X) - 100;
+	int  DescriptionPositionY = static_cast<int>(PosCheck.Y) + 25;
+
+	if ((20 <= PosCheck.X && 225 >= PosCheck.X) && (0 <= PosCheck.Y && 20 >= PosCheck.Y))
+	{
+
+		DailyDescription->SetActive(true);
+		DailyDescription->SetTransform({ {DescriptionPositionX, DescriptionPositionY }, {200,100} });
+	}
+	else
+	{
+		DailyDescription->SetActive(false, 0.1f);
+	}
+
+	if ((20 <= PosCheck.X && 225 >= PosCheck.X) && (40 <= PosCheck.Y && 60 >= PosCheck.Y))
+	{
+		BossDescription->SetActive(true);
+		BossDescription->SetTransform({ {DescriptionPositionX, DescriptionPositionY}, {200,100} });
+	}
+	else
+	{
+		BossDescription->SetActive(false, 0.1f);
+	}
+
+}
+
 void StageUI::AStageProgressGauge::StageProgressGauge()
 {
 	StageProgressGaugeRender = CreateImageRenderer();
@@ -57,6 +88,16 @@ void StageUI::AStageProgressGauge::StageProgressGauge()
 	StageProgressGaugeBarBoss->SetImage("StageProgressGaugebar.png");
 	StageProgressGaugeBarBoss->SetSortType(EImageSortType::Left);
 	StageProgressGaugeBarBoss->SetOrder(6);
+
+	DailyDescription = CreateImageRenderer();
+	DailyDescription->SetImage("Description.png");
+	DailyDescription->SetOrder(7);
+	DailyDescription->SetActive(false, 0.1f);
+
+	BossDescription = CreateImageRenderer();
+	BossDescription->SetImage("Description.png");
+	BossDescription->SetOrder(7);
+	BossDescription->SetActive(false, 0.1f);
 }
 
 void StageUI::ASpeedPanel::BeginPlay()
