@@ -18,12 +18,16 @@ public:
 	{
 	public:
 		void StageProgressGauge();
-
+		int GetDailyGaugeUpdate()
+		{
+			return DailyGaugeUpdate;
+		}
 	protected:
 		void BeginPlay() override;
 		void Tick(float _DeltaTime) override;
 
 	private:
+		int DailyGaugeUpdate = 0;
 		float ElapsedTime = 0.0f;
 		UImageRenderer* StageProgressGaugeRender = nullptr;
 		UImageRenderer* StageProgressGaugeBarDaily = nullptr;

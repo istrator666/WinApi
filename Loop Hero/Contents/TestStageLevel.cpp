@@ -23,14 +23,6 @@ void UTestStageLevel::BeginPlay()
 	Player->SetActorLocation({ 575, 225 });
 	StageMovePlayer(Player);
 
-	
-
-	mSpawn = SpawnTileLocation();
-	for (const SpawnTileData& Tile : mSpawn)
-	{
-		SpawnTileType(Tile.TileLocation, Tile.Tile, Tile.Monster);
-	}
-
 	SetStageUI();
 	SetEQInventory();
 
@@ -40,21 +32,50 @@ void UTestStageLevel::BeginPlay()
 	PlayerFight = SpawnActor<APlayerFight>();
 	PlayerFight->SetActive(false, 0.1f);
 
-	for (auto& FightMonster : Monsters)
-	{
-		MonsterFight = SpawnActor<AMonsterFight>();
-		MonsterFight->SetActive(false, 0.1f);
-		MonsterFight->StatusInit(26, 26, 1, 3, 1, 0.6f, 0, 25, 25, 25, 25);
-		MonsterFights.push_back(MonsterFight);
-	}
+	//mSpawn = SpawnTileLocation();
+	//for (const SpawnTileData& Tile : mSpawn)
+	//{
+	//	SpawnTileType(Tile.TileLocation, Tile.Tile, Tile.Monster);
+	//}
+
+	//for (auto& FightMonster : Monsters)
+	//{
+	//	MonsterFight = SpawnActor<AMonsterFight>();
+	//	MonsterFight->SetActive(false, 0.1f);
+	//	MonsterFight->StatusInit(26, 26, 1, 3, 1, 0.6f, 0, 25, 25, 25, 25);
+	//	MonsterFights.push_back(MonsterFight);
+	//}
+
+	
 }
 
 void UTestStageLevel::Tick(float _DeltaTime)
 {
 	ULevel::Tick(_DeltaTime);
 
-	//Fight(Player, Monsters, _DeltaTime);
+	if (0 == StageprogressGauge->GetDailyGaugeUpdate())
+	{
+		if (MonsterFights.size() != Monsters.size())
+		{
+			MonsterFights.resize(Monsters.size());
+		}
 
+		mSpawn = SpawnTileLocation();
+		for (const SpawnTileData& Tile : mSpawn)
+		{
+			SpawnTileType(Tile.TileLocation, Tile.Tile, Tile.Monster);
+		}
+
+		for (auto& FightMonster : Monsters)
+		{
+			MonsterFight = SpawnActor<AMonsterFight>();
+			MonsterFight->SetActive(false, 0.1f);
+			MonsterFight->StatusInit(26, 26, 1, 3, 1, 0.6f, 0, 25, 25, 25, 25);
+			MonsterFights.push_back(MonsterFight);
+		}
+	}
+
+	Fight(Player, Monsters, _DeltaTime);
 }
 
 std::vector<FVector> UTestStageLevel::StagePoints(const std::string& _StageName)
@@ -77,7 +98,7 @@ std::vector<FVector> UTestStageLevel::StagePoints(const std::string& _StageName)
 		{425, 275, 0, 0},
 		{475, 275, 0, 0},
 		{475, 225, 0, 0},
-		{475, 225, 0, 0},
+		{525, 225, 0, 0},
 	};
 
 	return Tutorial;
@@ -200,7 +221,7 @@ void UTestStageLevel::SpawnTileType(FVector _Location, TileType _TileType, Monst
 	switch (_TileType)
 	{
 	case TileType::WASTELAND:
-		if (RandomEngine.RandomFloat(0, 1.0) < 0.55)
+		if (RandomEngine.RandomFloat(0, 1.0) < 0.05)
 		{
 			MonsterSpawn(_Location, _MonsterType);
 		}
@@ -241,7 +262,6 @@ void UTestStageLevel::MonsterSpawn(FVector _Location, MonsterType _MonsterType)
 	Monster->SetMoveSpeed(50.0f);
 	StageMoveMonster(Monster, _Location);
 	Monsters.push_back(Monster);
-
 }
 
 
@@ -253,6 +273,11 @@ void UTestStageLevel::Fight(APlayer* _Player, std::vector<AMonster*> _Monsters, 
 
 	for (int i = 0; i < _Monsters.size(); ++i)
 	{
+		if (nullptr == _Monsters[i])
+		{
+			continue;
+		}
+
 		Monster = _Monsters[i];
 		MonsterFight = MonsterFights[i];
 
@@ -287,6 +312,9 @@ void UTestStageLevel::Fight(APlayer* _Player, std::vector<AMonster*> _Monsters, 
 
 				if (MonsterFight->IsDeath())
 				{
+					_Monsters[i] = nullptr;
+					MonsterFights[i] = nullptr;
+
 					MonsterFight->Destroy();
 					Monster->Destroy();
 				}
