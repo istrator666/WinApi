@@ -2,7 +2,7 @@
 #include "StageMap.h"
 
 #include "EngineCore/EngineCore.h"
-#include <random>
+
 
 
 UTestStageLevel::UTestStageLevel()
@@ -160,6 +160,7 @@ FVector UTestStageLevel::RandomSpawnLocation(FVector _Location)
 	std::uniform_int_distribution<> dis(0, 3);
 
 	int selectedIndex = dis(gen);
+
 	switch (selectedIndex)
 	{
 	case 0: return _Location;
@@ -188,7 +189,7 @@ std::vector<SpawnTileData> UTestStageLevel::SpawnTileLocation()
 		{ RandomSpawnLocation({410, 260, 0, 0}), TileType::WASTELAND, MonsterType::Slime },
 		{ RandomSpawnLocation({460, 260, 0, 0}), TileType::WASTELAND, MonsterType::Slime },
 		{ RandomSpawnLocation({460, 210, 0, 0}), TileType::WASTELAND, MonsterType::Slime },
-		{ RandomSpawnLocation({460, 210, 0, 0}), TileType::WASTELAND, MonsterType::Slime },
+		{ RandomSpawnLocation({510, 210, 0, 0}), TileType::WASTELAND, MonsterType::Slime },
 	};
 
 	return SpawnTile;
@@ -196,11 +197,10 @@ std::vector<SpawnTileData> UTestStageLevel::SpawnTileLocation()
 
 void UTestStageLevel::SpawnTileType(FVector _Location, TileType _TileType, MonsterType _MonsterType)
 {
-	int random = rand();
 	switch (_TileType)
 	{
 	case TileType::WASTELAND:
-		if (random < RAND_MAX * 0.55) 
+		if (RandomEngine.RandomFloat(0, 1.0) < 0.55)
 		{
 			MonsterSpawn(_Location, _MonsterType);
 		}
@@ -272,7 +272,7 @@ void UTestStageLevel::Fight(APlayer* _Player, std::vector<AMonster*> _Monsters, 
 				PlayerFight->SetActorLocation({ 380, 400 });
 				PlayerFight->SetActive(true);
 
-				MonsterFight->SetActorLocation({ 600, 400 });
+				MonsterFight->SetActorLocation({600, 400});
 				MonsterFight->SetActive(true);
 
 				FightZone->Battle(PlayerFight, MonsterFight, _DeltaTime);
@@ -284,6 +284,12 @@ void UTestStageLevel::Fight(APlayer* _Player, std::vector<AMonster*> _Monsters, 
 				FightZone->SetActive(false, 0.1f);
 				PlayerFight->SetActive(false, 0.1f);
 				MonsterFight->SetActive(false, 0.1f);
+
+				if (MonsterFight->IsDeath())
+				{
+					MonsterFight->Destroy();
+					Monster->Destroy();
+				}
 			}
 		}
 	}
