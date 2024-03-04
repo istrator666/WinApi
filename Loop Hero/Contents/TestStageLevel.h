@@ -7,6 +7,8 @@
 #include "FightZone.h"
 #include "Enum.h"
 
+#include <EngineBase/EngineRandom.h>
+
 struct SpawnTileData {
 	FVector TileLocation;
 	TileType Tile;
@@ -67,6 +69,8 @@ private:
 	void SpawnTileType(FVector _Location, TileType _TileType, MonsterType _MonsterType);
 	void MonsterSpawn(FVector _Location, MonsterType _MonsterType);
 	float SpawnTimeCheck = 0.0f;
+
+	UEngineRandom RandomEngine;
 
 };
 
