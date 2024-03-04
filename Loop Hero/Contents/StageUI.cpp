@@ -26,21 +26,19 @@ void StageUI::AStageProgressGauge::StageProgressGaugeUpdate(float _DeltaTime)
 {
 	ElapsedTime += _DeltaTime;
 
-	int GaugeUpdate = static_cast<int>(ElapsedTime / 5 * 195);
+	DailyGaugeUpdate = static_cast<int>(ElapsedTime / 5 * 195);
 
-	if (195 <= GaugeUpdate)
+	if (195 <= DailyGaugeUpdate)
 	{
 		ElapsedTime = 0.0f;
-		GaugeUpdate = 0;
+		DailyGaugeUpdate = 0;
 	}
-	StageProgressGaugeBarDaily->SetTransform({ {-86, -15}, {GaugeUpdate, 20} });
+	StageProgressGaugeBarDaily->SetTransform({ {-86, -15}, {DailyGaugeUpdate, 20} });
 
 	if (true) // 타일 수에 따라 게이지 상승
 	{
 		StageProgressGaugeBarBoss->SetTransform({ {-86, 15}, {100, 20} });
 	}
-
-
 }
 
 void StageUI::AStageProgressGauge::Mousehover()

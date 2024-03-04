@@ -64,10 +64,12 @@ private:
 	void StageMoveMonster(AMonster* _Monster, FVector _Location);
 
 	std::vector<SpawnTileData> mSpawn;
-	FVector RandomSpawnLocation(FVector _Location);
 	std::vector<SpawnTileData> SpawnTileLocation();
+
+	FVector RandomSpawnLocation(FVector _Location);
 	void SpawnTileType(FVector _Location, TileType _TileType, MonsterType _MonsterType);
 	void MonsterSpawn(FVector _Location, MonsterType _MonsterType);
+	
 	float SpawnTimeCheck = 0.0f;
 
 	UEngineRandom RandomEngine;
