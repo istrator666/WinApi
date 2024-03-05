@@ -18,7 +18,7 @@ public:
 
 	void FightZoneImage();
 
-	void Battle(APlayerFight* _PlyerFight, AMonsterFight* _MonsterFight, float _DeltaTime);
+	void Battle(APlayerFight* _PlyerFight, std::vector<AMonsterFight*> _MonsterFights, float _DeltaTime);
 	bool IsBattle = false;
 
 protected:
@@ -28,7 +28,7 @@ protected:
 private:
 	UImageRenderer* FightZoneRender = nullptr;
 	APlayerFight* PlayerFight;
-	AMonsterFight* MonsterFight;
+	std::vector<AMonsterFight*> MonsterFights;
 
 };
 

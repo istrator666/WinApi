@@ -18,7 +18,6 @@ void StageUI::AStageProgressGauge::BeginPlay()
 void StageUI::AStageProgressGauge::Tick(float _DeltaTime)
 {
 	AActor::Tick(_DeltaTime);
-	StageProgressGaugeUpdate(_DeltaTime);
 	Mousehover();
 }
 

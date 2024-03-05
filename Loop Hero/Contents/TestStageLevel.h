@@ -56,6 +56,7 @@ private:
 	AMonsterFight* MonsterFight = nullptr;
 
 	bool TileSetup = false;
+	bool IsFight = false;
 
 	std::vector<FVector> StagePoints(const std::string& _StageName);
 	void StageMovePlayer(APlayer* _Player);

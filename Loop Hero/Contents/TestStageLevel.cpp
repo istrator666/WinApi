@@ -38,6 +38,16 @@ void UTestStageLevel::Tick(float _DeltaTime)
 {
 	ULevel::Tick(_DeltaTime);
 
+	if (false == FightZone->IsBattle)
+	{
+		StageprogressGauge->StageProgressGaugeUpdate(_DeltaTime);
+	}
+	else
+	{
+		float FightDailyTime = _DeltaTime / 10;
+		StageprogressGauge->StageProgressGaugeUpdate(FightDailyTime);
+	}
+
 	if (UEngineInput::IsDown('P'))
 	{
 		Player->SetMoveSpeed(500.0f);
@@ -206,7 +216,7 @@ void UTestStageLevel::SpawnTileType(FVector _Location, TileType _TileType, Monst
 	switch (_TileType)
 	{
 	case TileType::WASTELAND:
-		if (RandomEngine.RandomFloat(0, 1.0) < 0.05)
+		if (RandomEngine.RandomFloat(0, 1.0) < 0.25)
 		{
 			MonsterSpawn(_Location, _MonsterType);
 		}
@@ -264,6 +274,8 @@ void UTestStageLevel::Fight(APlayer* _Player, float _DeltaTime)
 	{ 700, 300 }
 	};
 
+	int MonsterPositionIndex = 0;
+
 	for (int i = 0; i < Monsters.size(); ++i)
 	{
 		if (nullptr == Monsters[i])
@@ -280,7 +292,7 @@ void UTestStageLevel::Fight(APlayer* _Player, float _DeltaTime)
 
 		if (PlayerX == MonsterX && PlayerY == MonsterY)
 		{
-			if (fmod(PlayerLocation.X, 50.0f) == 25.0f && fmod(PlayerLocation.Y, 50.0f) == 25.0f && false == FightZone->IsBattle)
+			if (fmod(PlayerLocation.X, 50.0f) == 25.0f && fmod(PlayerLocation.Y, 50.0f) == 25.0f && false == IsFight)
 			{
 				_Player->IsMove = false;
 
@@ -290,14 +302,23 @@ void UTestStageLevel::Fight(APlayer* _Player, float _DeltaTime)
 				PlayerFight->SetActorLocation({ 380, 400 });
 				PlayerFight->SetActive(true);
 
-				MonsterFight->SetActorLocation(MonsterPositions[0]);
+				MonsterFight->SetActorLocation(MonsterPositions[MonsterPositionIndex]);
 				MonsterFight->SetActive(true);
+				MonsterPositionIndex = (MonsterPositionIndex + 1) % MonsterPositions.size();
 
-				FightZone->Battle(PlayerFight, MonsterFight, _DeltaTime);
+				if (false == FightZone->IsBattle)
+				{
+					FightZone->Battle(PlayerFight, MonsterFights, _DeltaTime);
+				}
+				else
+				{
+					IsFight = true;
+				}
 			}
 			else
 			{
 				_Player->IsMove = true;
+				IsFight = false;
 				FightZone->IsBattle = false;
 				FightZone->SetActive(false, 0.1f);
 				PlayerFight->SetActive(false, 0.1f);

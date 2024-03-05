@@ -18,6 +18,7 @@ public:
 	{
 	public:
 		void StageProgressGauge();
+		void StageProgressGaugeUpdate(float _DeltaTime);
 		int GetDailyGaugeUpdate()
 		{
 			return DailyGaugeUpdate;
@@ -33,10 +34,9 @@ public:
 		UImageRenderer* StageProgressGaugeRender = nullptr;
 		UImageRenderer* StageProgressGaugeBarDaily = nullptr;
 		UImageRenderer* StageProgressGaugeBarBoss = nullptr;
-
 		UImageRenderer* DailyDescription = nullptr;
 		UImageRenderer* BossDescription = nullptr;
-		void StageProgressGaugeUpdate(float _DeltaTime);
+
 		void Mousehover();
 	};
 
