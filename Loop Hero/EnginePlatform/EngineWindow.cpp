@@ -1,5 +1,5 @@
 #include "EngineWindow.h"
-#include <EngineBase/EngineDebug.h>
+#include <EngineBase\EngineDebug.h>
 #include "WindowImage.h"
 
 bool UEngineWindow::WindowLive = true;
@@ -32,6 +32,7 @@ void UEngineWindow::Init(HINSTANCE _hInst)
 }
 
 
+
 UEngineWindow::UEngineWindow()
 {
 }
@@ -49,6 +50,7 @@ UEngineWindow::~UEngineWindow()
 		delete WindowImage;
 		WindowImage = nullptr;
 	}
+
 }
 
 void UEngineWindow::Open(std::string_view _Title)
@@ -98,7 +100,6 @@ void UEngineWindow::Open(std::string_view _Title)
 
 	ShowWindow(hWnd, SW_SHOW);
 	UpdateWindow(hWnd);
-
 }
 
 unsigned __int64 UEngineWindow::WindowMessageLoop(void(*_Update)(), void(*_End)())
@@ -107,7 +108,6 @@ unsigned __int64 UEngineWindow::WindowMessageLoop(void(*_Update)(), void(*_End)(
 
 	while (WindowLive)
 	{
-
 		if (PeekMessage(&msg, nullptr, 0, 0, PM_REMOVE))
 		{
 			TranslateMessage(&msg);
@@ -132,6 +132,7 @@ unsigned __int64 UEngineWindow::WindowMessageLoop(void(*_Update)(), void(*_End)(
 
 	return msg.wParam;
 }
+
 
 FVector UEngineWindow::GetMousePosition()
 {
@@ -176,7 +177,6 @@ void UEngineWindow::ScreenClear()
 	Rectangle(BackBufferImage->ImageDC, -1, -1, Scale.iX() + 1, Scale.iY() + 1);
 	SelectObject(BackBufferImage->ImageDC, oldBrush);
 	DeleteObject(myBrush);
-
 }
 
 void UEngineWindow::ScreenUpdate()

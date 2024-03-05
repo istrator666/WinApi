@@ -2,17 +2,17 @@
 #include <Windows.h>
 #include "Level.h"
 #include <EnginePlatform\EngineSound.h>
-#include "EnginePlatform/EngineInput.h"
+#include "EnginePlatform\EngineInput.h"
 
 bool UEngineCore::IsDebugValue = false;
 UEngineCore* GEngine = nullptr;
 
-UEngineCore::UEngineCore() 
+UEngineCore::UEngineCore()
 	: MainWindow()
 {
 }
 
-UEngineCore::~UEngineCore() 
+UEngineCore::~UEngineCore()
 {
 }
 
@@ -70,7 +70,6 @@ void UEngineCore::CoreTick()
 
 		AllLevel.erase(DestroyLevelName[i]);
 	}
-
 	DestroyLevelName.clear();
 
 	if (nullptr == CurLevel)
@@ -79,7 +78,9 @@ void UEngineCore::CoreTick()
 	}
 
 	GEngine->Tick(DeltaTime);
+
 	CurLevel->Tick(DeltaTime);
+
 	CurLevel->LevelTick(DeltaTime);
 
 	MainWindow.ScreenClear();

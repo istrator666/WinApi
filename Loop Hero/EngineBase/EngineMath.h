@@ -3,6 +3,7 @@
 #include <cmath>
 #include <Windows.h>
 
+
 // Ό³Έν :
 class UEngineMath
 {
@@ -31,6 +32,7 @@ private:
 
 struct float4
 {
+
 public:
 	static const float4 Zero;
 	static const float4 Left;
@@ -50,8 +52,8 @@ public:
 
 		struct
 		{
-			float R;
-			float G;
+			float R; // 2D
+			float G; // 2D
 			float B;
 			float A;
 		};
@@ -93,6 +95,7 @@ public:
 	{
 
 	}
+
 
 public:
 	static float4 VectorRotationZToDeg(float4 _OriginVector, float _Angle)
@@ -136,6 +139,7 @@ public:
 	{
 		return (p1 * (1.0f - d1)) + (p2 * d1);
 	}
+
 
 	float Size2D()
 	{
@@ -187,6 +191,7 @@ public:
 		return X == 0.0f && Y == 0.0f;
 	}
 
+
 	int iX() const
 	{
 		return std::lround(X);
@@ -196,6 +201,7 @@ public:
 	{
 		return std::lround(Y);
 	}
+
 
 	float hX() const
 	{
@@ -226,6 +232,7 @@ public:
 		W = _Other.W;
 		return *this;
 	}
+
 
 	float4 operator+(const float4& _Other) const
 	{
@@ -312,15 +319,14 @@ public:
 	{
 		return { iX(),iY() };
 	}
-
 };
-
 
 using FVector = float4;
 using FColor = float4;
 
 class Color8Bit
 {
+
 public:
 	static const Color8Bit Black;
 	static const Color8Bit Red;
@@ -339,6 +345,7 @@ public:
 	static const Color8Bit WhiteA;
 	static const Color8Bit MagentaA;
 	static const Color8Bit OrangeA;
+
 
 	union
 	{
@@ -370,6 +377,7 @@ public:
 
 	}
 
+
 	bool operator==(Color8Bit _Color)
 	{
 		return Color == _Color.Color;
@@ -380,4 +388,3 @@ public:
 		return Color8Bit{ R,G,B,0 };
 	}
 };
-

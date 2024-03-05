@@ -3,7 +3,7 @@
 #include <filesystem> 
 
 
-// 설명 : 
+// 설명 : 파일 경로 편집 및 이동 처리
 class UEnginePath
 {
 public:

@@ -34,6 +34,8 @@ public:
 	//FTransform& operator=(const FTransform& _Other) = delete;
 	//FTransform& operator=(FTransform&& _Other) noexcept = delete;
 
+	// bool CircleToPoint(const FTransform& _Left, const FTransform& _Right);
+
 	static bool CircleToCircle(const FTransform& _Left, const FTransform& _Right);
 	static bool CircleToRect(const FTransform& _Left, const FTransform& _Right);
 	static bool CircleToPoint(const FTransform& _Left, const FTransform& _Right);
@@ -46,7 +48,6 @@ public:
 
 	static bool PointToRect(const FTransform& _Left, const FTransform& _Right);
 	static bool PointToCircle(const FTransform& _Left, const FTransform& _Right);
-
 public:
 	void SetScale(FVector _Value)
 	{
@@ -60,17 +61,14 @@ public:
 	{
 		Position = _Value;
 	}
-
 	void AddPosition(FVector _Value)
 	{
 		Position += _Value;
 	}
-
 	void AddScale(FVector _Value)
 	{
 		Scale += _Value;
 	}
-
 	FVector GetPosition() const
 	{
 		return Position;
@@ -100,17 +98,14 @@ public:
 	{
 		return Position.X - Scale.hX();
 	}
-
 	float Top() const
 	{
 		return Position.Y - Scale.hY();
 	}
-
 	float Right() const
 	{
 		return Position.X + Scale.hX();
 	}
-
 	float Bottom() const
 	{
 		return Position.Y + Scale.hY();

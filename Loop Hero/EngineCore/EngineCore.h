@@ -1,15 +1,16 @@
 #pragma once
-#include <EngineBase/EngineDebug.h>
-#include <EngineBase/EngineString.h>
-#include <EngineBase/EngineTime.h>
+#include <EngineBase\EngineDebug.h>
+#include <EngineBase\EngineString.h>
+#include <EngineBase\EngineTime.h>
 
-#include <EnginePlatform/EngineWindow.h>
-#include <EnginePlatform/EngineInput.h>
+#include <EnginePlatform\EngineWindow.h>
+#include <EnginePlatform\EngineInput.h>
 #include <map>
 #include <vector>
 
-class ULevel;
 
+class ULevel;
+// Ό³Έν :
 class UEngineCore
 {
 public:
@@ -78,7 +79,6 @@ private:
 	float CurFrameTime = 0.0f;
 
 	bool EngineInit = false;
-
 	std::map<std::string, ULevel*> AllLevel;
 	ULevel* CurLevel = nullptr;
 	ULevel* NextLevel = nullptr;

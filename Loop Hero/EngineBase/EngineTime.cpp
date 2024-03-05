@@ -26,6 +26,7 @@ EngineTime::~EngineTime()
 void EngineTime::TimeCheckStart()
 {
 	QueryPerformanceFrequency(&Count);
+
 	QueryPerformanceCounter(&PrevTime);
 
 	dCount = static_cast<double>(Count.QuadPart);

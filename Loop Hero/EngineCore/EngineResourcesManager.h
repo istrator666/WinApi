@@ -3,9 +3,8 @@
 #include <string_view>
 #include <map>
 
-
 class UWindowImage;
-// Ό³Έν : 
+
 class UEngineResourcesManager
 {
 public:
@@ -38,7 +37,6 @@ public:
 protected:
 
 private:
-	// constrcuter destructer
 	UEngineResourcesManager();
 	~UEngineResourcesManager();
 

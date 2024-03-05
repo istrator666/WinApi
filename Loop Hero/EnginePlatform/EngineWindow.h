@@ -1,7 +1,7 @@
 #pragma once
 #include <Windows.h>
 #include <string>
-#include <EngineBase/EngineMath.h>
+#include <EngineBase\EngineMath.h>
 
 class UWindowImage;
 // Ό³Έν :
@@ -18,7 +18,7 @@ public:
 	UEngineWindow& operator=(const UEngineWindow& _Other) = delete;
 	UEngineWindow& operator=(UEngineWindow&& _Other) noexcept = delete;
 
-	void Open(std::string_view _Title = "LOOP HERO");
+	void Open(std::string_view _Title = "Title");
 
 	static void Init(HINSTANCE _hInst);
 	static unsigned __int64 WindowMessageLoop(void(*_Update)(), void(*_End)());
@@ -50,6 +50,7 @@ public:
 		ClearColor = _Color;
 	}
 
+
 	FVector GetMousePosition();
 
 	void Off()
@@ -71,5 +72,6 @@ private:
 	UWindowImage* BackBufferImage = nullptr;
 	FVector Scale;
 	FVector Position;
+
 };
 

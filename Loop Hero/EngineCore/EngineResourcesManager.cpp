@@ -1,9 +1,9 @@
 #include "EngineResourcesManager.h"
-#include <EnginePlatform/WindowImage.h>
-#include <EngineBase/EngineString.h>
-#include <EngineBase/EngineDebug.h>
+#include <EnginePlatform\WindowImage.h>
+#include <EngineBase\EngineString.h>
+#include <EngineBase\EngineDebug.h>
 #include "EngineCore.h"
-#include "EngineBase/EngineDebug.h"
+#include "EngineBase\EngineDebug.h"
 
 UEngineResourcesManager::UEngineResourcesManager()
 {
@@ -29,12 +29,10 @@ UWindowImage* UEngineResourcesManager::LoadImg(std::string_view _Path)
 
 UWindowImage* UEngineResourcesManager::LoadImg(std::string_view _Path, std::string_view _Name)
 {
-
 	std::string UpperName = UEngineString::ToUpper(_Name);
 
 	if (true == Images.contains(UpperName))
 	{
-
 		MsgBoxAssert(std::string("경로 : ") + std::string(_Path) + "파일명 : " + std::string(_Name) + "이미 로드한 파일을 또 로드하려고 했습니다");
 		return nullptr;
 	}

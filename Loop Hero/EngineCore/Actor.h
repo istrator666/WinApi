@@ -1,7 +1,7 @@
 #pragma once
-#include <EngineBase/Transform.h>
+#include <EngineBase\Transform.h>
 #include "TickObject.h"
-#include <EngineBase/NameObject.h>
+#include <EngineBase\NameObject.h>
 #include "ImageRenderer.h"
 #include "Collision.h"
 #include "Level.h"
@@ -11,7 +11,6 @@ class UActorComponent;
 class UImageRenderer;
 class UCollision;
 
-// Ό³Έν : 
 class AActor : public UNameObject, public UTickObject
 {
 	friend ULevel;
@@ -42,7 +41,6 @@ public:
 		Transform.AddPosition(_Value);
 	}
 
-
 	FTransform GetTransform()
 	{
 		return Transform;
@@ -66,7 +64,6 @@ public:
 	}
 
 	UCollision* CreateCollision(int _Order = 0);
-
 	UImageRenderer* CreateImageRenderer(int _Order = 0);
 
 	void Destroy(float _DestroyTime = 0.0f) override;
@@ -96,6 +93,5 @@ private:
 	{
 		World = _Value;
 	}
-
 };
 

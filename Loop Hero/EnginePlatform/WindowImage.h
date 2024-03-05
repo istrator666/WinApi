@@ -1,8 +1,8 @@
 #pragma once
-#include <EngineBase/PathObject.h>
-#include <EngineBase/EngineMath.h>
+#include <EngineBase\PathObject.h>
+#include <EngineBase\EngineMath.h>
+#include <EngineBase\Transform.h>
 #include <EngineBase\EngineDebug.h>
-#include <EngineBase/Transform.h>
 #include <Windows.h>
 #include <string>
 #include <string_view>
@@ -15,7 +15,6 @@ enum class EImageLoadType
 	IMG_Folder,
 	IMG_Cutting,
 };
-
 
 enum class EWIndowImageType
 {
@@ -65,13 +64,13 @@ public:
 
 	void PlgCopy(UWindowImage* _CopyImage, const FTransform& _Trans, int _Index, float _RadAngle);
 
-	void TextCopy(const std::string& _Text, const std::string& _Font, float _Size, const FTransform& _Trans, Color8Bit _Color);
+	void TextCopy(const std::string& _Text, const std::string& _Font, float _Size, const FTransform& _Trans, Color8Bit _Color /*= Color8Bit::Black*/);
 
 	void TextCopy(const std::string& _Text, const std::string& _Font, float _Size, const FTransform& _Trans, Color8Bit _OutLineColor, Color8Bit _FillColor);
 
-	void TextCopyBold(const std::string& _Text, const std::string& _Font, float _Size, const FTransform& _Trans, Color8Bit _Color);
+	void TextCopyBold(const std::string& _Text, const std::string& _Font, float _Size, const FTransform& _Trans, Color8Bit _Color /*= Color8Bit::Black*/);
 
-	void TextCopyFormat(const std::string& _Text, const std::string& _Font, const Gdiplus::StringFormat& stringFormat, float _Size, const FTransform& _Trans, Color8Bit _Color);
+	void TextCopyFormat(const std::string& _Text, const std::string& _Font, const Gdiplus::StringFormat& stringFormat, float _Size, const FTransform& _Trans, Color8Bit _Color /*= Color8Bit::Black*/);
 
 	bool Create(UWindowImage* _Image, const FVector& _Scale);
 
@@ -118,10 +117,8 @@ public:
 protected:
 
 private:
-	UWindowImage* RotationMaskImage = nullptr;
 
 	EImageLoadType LoadType = EImageLoadType::IMG_Cutting;
-
 	HBITMAP hBitMap = 0;
 	HDC ImageDC = 0;
 	BITMAP BitMapInfo = BITMAP();

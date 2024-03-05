@@ -1,6 +1,6 @@
 #pragma once
 #include "SceneComponent.h"
-#include <EnginePlatform/WindowImage.h>
+#include <EnginePlatform\WindowImage.h>
 #include <map>
 
 enum class EImageSortType
@@ -69,7 +69,7 @@ public:
 		int _Start,
 		int _End,
 		float _Inter,
-		bool Loop = true
+		bool _Loop = true
 	);
 
 	void CreateAnimation(
@@ -87,6 +87,7 @@ public:
 		std::vector<float> _Inters,
 		bool _Loop = true
 	);
+
 
 	void ChangeAnimation(std::string_view _AnimationName, bool _IsForce = false, int _StartIndex = 0, float _Time = -1.0f);
 	void AnimationReset();
@@ -172,7 +173,6 @@ public:
 		TextColor = _Color;
 		TextColor2 = _Color2;
 	}
-
 	void SetCameraRatio(float _Ratio)
 	{
 		CameraRatio = _Ratio;
@@ -190,9 +190,10 @@ public:
 		SortType = _SortType;
 	}
 
-	void AutoImageScale()
+	void AutoImageScale(float _AutoScale = 1.0f)
 	{
 		AutoImageScaleValue = true;
+		AutoImageScaleRatio = _AutoScale;
 	}
 
 protected:
@@ -221,7 +222,9 @@ private:
 	int TextEffect = 0;
 
 	bool AutoImageScaleValue = false;
+	float AutoImageScaleRatio = 1.0f;
 
 	EImageSortType SortType = EImageSortType::Center;
+
 };
 

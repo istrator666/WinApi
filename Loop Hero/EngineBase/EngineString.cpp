@@ -20,10 +20,8 @@ std::wstring UEngineString::AnsiToUniCode(std::string_view _View)
 		return L"";
 	}
 
-
 	std::wstring Result;
 	Result.resize(Size);
-
 
 	Size = MultiByteToWideChar(CP_ACP, 0, _View.data(), static_cast<int>(_View.size()), &Result[0], Size);
 
@@ -32,7 +30,6 @@ std::wstring UEngineString::AnsiToUniCode(std::string_view _View)
 		MsgBoxAssert("문자열 변환에 실패했거나 크기가 0인 문자열을 넣어줬습니다");
 		return L"";
 	}
-
 
 	return Result;
 }
@@ -48,4 +45,3 @@ std::string UEngineString::ToUpper(std::string_view View)
 
 	return Name;
 }
-

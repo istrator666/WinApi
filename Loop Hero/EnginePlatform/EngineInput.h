@@ -2,9 +2,8 @@
 
 #include <Windows.h>
 #include <map>
-#include <EngineBase/EngineDebug.h>
+#include <EngineBase\EngineDebug.h>
 
-// AllStateClass
 // Ό³Έν :
 class UEngineInput
 {
@@ -24,7 +23,7 @@ private:
 		float PressTime = 0.0f;
 		float UpTime = 0.0f;
 
-		int Key = -1; // VK_LBUTTON
+		int Key = -1;
 
 		void KeyCheck(float _DeltaTime);
 
@@ -88,6 +87,7 @@ public:
 
 		return AllKeys[_Key].PressTime;
 	}
+
 
 	static bool IsPress(int _Key)
 	{

@@ -63,8 +63,7 @@ void AActor::Tick(float _DeltaTime)
 	UTickObject::Tick(_DeltaTime);
 }
 
-
-UImageRenderer* AActor::CreateImageRenderer(int _Order)
+UImageRenderer* AActor::CreateImageRenderer(int _Order /*= 0*/)
 {
 	UImageRenderer* Component = new UImageRenderer();
 	UActorComponent* ActorCom = Component;
@@ -76,7 +75,7 @@ UImageRenderer* AActor::CreateImageRenderer(int _Order)
 }
 
 
-UCollision* AActor::CreateCollision(int _Order)
+UCollision* AActor::CreateCollision(int _Order /*= 0*/)
 {
 	UCollision* Component = new UCollision();
 	UActorComponent* ActorCom = Component;
@@ -87,7 +86,7 @@ UCollision* AActor::CreateCollision(int _Order)
 	return Component;
 }
 
-void AActor::Destroy(float _DestroyTime)
+void AActor::Destroy(float _DestroyTime /*= 0.0f*/)
 {
 	UTickObject::Destroy(_DestroyTime);
 
@@ -100,6 +99,7 @@ void AActor::Destroy(float _DestroyTime)
 	{
 		Collision->Destroy(_DestroyTime);
 	}
+
 }
 
 void AActor::CheckReleaseChild()

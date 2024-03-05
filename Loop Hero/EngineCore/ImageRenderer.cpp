@@ -2,7 +2,7 @@
 #include "EngineCore.h"
 #include "Actor.h"
 #include "Level.h"
-#include <EngineCore/EngineResourcesManager.h>
+#include <EngineCore\EngineResourcesManager.h>
 
 UImageRenderer::UImageRenderer()
 {
@@ -29,7 +29,6 @@ void UImageRenderer::SetOrder(int _Order)
 int UAnimationInfo::Update(float _DeltaTime)
 {
 	IsEnd = false;
-
 	CurTime -= _DeltaTime;
 
 	if (0.0f >= CurTime)
@@ -49,7 +48,6 @@ int UAnimationInfo::Update(float _DeltaTime)
 		{
 			IsEnd = true;
 		}
-
 		if (true == Loop)
 		{
 			CurFrame = 0;
@@ -65,16 +63,17 @@ int UAnimationInfo::Update(float _DeltaTime)
 	return Index;
 }
 
+
 void UImageRenderer::Render(float _DeltaTime)
 {
 	if (false == Text.empty())
 	{
 		TextRender(_DeltaTime);
 	}
-	else 
-	{
+	else {
 		ImageRender(_DeltaTime);
 	}
+
 }
 
 void UImageRenderer::BeginPlay()
@@ -93,7 +92,7 @@ void UImageRenderer::Tick(float _DeltaTime)
 	}
 }
 
-void UImageRenderer::SetImage(std::string_view _Name, int _InfoIndex)
+void UImageRenderer::SetImage(std::string_view _Name, int _InfoIndex /*= 0*/)
 {
 	Image = UEngineResourcesManager::GetInst().FindImg(_Name);
 
@@ -102,6 +101,7 @@ void UImageRenderer::SetImage(std::string_view _Name, int _InfoIndex)
 		MsgBoxAssert(std::string(_Name) + "이미지가 존재하지 않습니다.");
 		return;
 	}
+
 	InfoIndex = _InfoIndex;
 }
 
@@ -111,7 +111,7 @@ void UImageRenderer::CreateAnimation(
 	int _Start,
 	int _End,
 	float _Inter,
-	bool _Loop
+	bool _Loop /*= true*/
 )
 {
 	std::vector<int> Indexs;
@@ -131,12 +131,11 @@ void UImageRenderer::CreateAnimation(
 	std::string_view _ImageName,
 	std::vector<int> _Indexs,
 	float _Inter,
-	bool _Loop
+	bool _Loop/* = true*/
 )
-
 {
-	std::vector<float> Inters;
 
+	std::vector<float> Inters;
 	int Size = static_cast<int>(_Indexs.size());
 	Inters.reserve(Size);
 	for (int i = 0; i <= Size; i++)
@@ -155,7 +154,6 @@ void UImageRenderer::CreateAnimation(
 	bool _Loop /*= true*/
 )
 {
-
 	UWindowImage* FindImage = UEngineResourcesManager::GetInst().FindImg(_ImageName);
 
 	if (nullptr == FindImage)
@@ -179,11 +177,10 @@ void UImageRenderer::CreateAnimation(
 	Info.CurTime = 0.0f;
 	Info.Loop = _Loop;
 	Info.Times = _Inters;
-
 	Info.Indexs = _Indexs;
 }
 
-void UImageRenderer::ChangeAnimation(std::string_view _AnimationName, bool _IsForce, int _StartIndex, float _Time)
+void UImageRenderer::ChangeAnimation(std::string_view _AnimationName, bool _IsForce /*= false*/, int _StartIndex/* = 0*/, float _Time /*= -1.0f*/)
 {
 	std::string UpperAniName = UEngineString::ToUpper(_AnimationName);
 
@@ -256,12 +253,6 @@ void UImageRenderer::ImageRender(float _DeltaTime)
 		MsgBoxAssert("이미지가 존재하지 않는 랜더러 입니다");
 	}
 
-	if (nullptr != CurAnimation)
-	{
-		Image = CurAnimation->Image;
-		InfoIndex = CurAnimation->Update(_DeltaTime);
-	}
-
 	FTransform RendererTrans = GetRenderTransForm();
 
 	EWIndowImageType ImageType = Image->GetImageType();
@@ -280,7 +271,7 @@ void UImageRenderer::ImageRender(float _DeltaTime)
 
 	if (true == AutoImageScaleValue)
 	{
-		RendererTrans.SetScale(Info.CuttingTrans.GetScale());
+		RendererTrans.SetScale(Info.CuttingTrans.GetScale() * AutoImageScaleRatio);
 	}
 
 	switch (ImageType)

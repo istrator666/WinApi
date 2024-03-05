@@ -70,7 +70,6 @@ public:
 	UEngineSound& operator=(const UEngineSound& _Other) = delete;
 	UEngineSound& operator=(UEngineSound&& _Other) noexcept = delete;
 
-
 	static UEngineSoundPlayer SoundPlay(std::string_view _Name);
 
 	static void Load(std::string_view _Path)

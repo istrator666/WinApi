@@ -1,8 +1,10 @@
 #pragma once
-#include <EngineBase/EngineDebug.h>
+#include <EngineBase\EngineDebug.h>
 
+// Ό³Έν :
 class UTickObject
 {
+
 public:
 	// constrcuter destructer
 	UTickObject();
@@ -38,7 +40,6 @@ public:
 		{
 			IsActiveUpdate = true;
 		}
-
 		IsActiveValue = false;
 	}
 
@@ -70,12 +71,6 @@ public:
 
 	virtual void ActiveUpdate(float _DeltaTime)
 	{
-		if (0.0f == ActiveTime)
-		{
-			IsActiveValue = true;
-			return;
-		}
-
 		ActiveTime -= _DeltaTime;
 
 		if (true == IsActiveUpdate)
@@ -115,6 +110,7 @@ protected:
 
 private:
 	int Order = 0;
+
 	bool IsDestroyUpdate = false;
 	float DestroyTime = 0.0f;
 	bool IsDestroyValue = false;

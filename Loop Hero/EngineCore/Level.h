@@ -1,6 +1,6 @@
 #pragma once
-#include <EngineBase/NameObject.h>
-#include <EngineBase/EngineMath.h>
+#include <EngineBase\NameObject.h>
+#include <EngineBase\EngineMath.h>
 #include <map>
 #include <list>
 
@@ -9,9 +9,9 @@ class UCollision;
 class UEngineCore;
 class UImageRenderer;
 
-// Ό³Έν :
 class ULevel : public UNameObject
 {
+
 	friend UEngineCore;
 	friend UImageRenderer;
 	friend UCollision;
@@ -97,9 +97,11 @@ public:
 		TimeScale[_Value] = _Scale;
 	}
 
+
 protected:
 
 private:
+
 	std::map<int, std::list<AActor*>> AllActor;
 
 	void ActorInit(AActor* _NewActor);
@@ -110,6 +112,7 @@ private:
 	std::map<int, float> TimeScale;
 
 	std::map<int, std::list<UImageRenderer*>> Renderers;
+
 	std::map<int, std::list<UCollision*>> Collisions;
 
 	FVector CameraPos = FVector::Zero;

@@ -67,12 +67,12 @@ void UEngineFile::Open(IOOpenMode _OpenType, IODataType _DataType)
 
 void UEngineFile::Save(UEngineSerializer& _Data)
 {
+	std::vector<char>& SaveData = _Data.Data;
+
 	if (OpenMode != IOOpenMode::Write)
 	{
 		MsgBoxAssert("쓰기 모드로 오픈하지 않은 파일로 쓰려고 했습니다.");
 	}
-
-	std::vector<char>& SaveData = _Data.Data;
 
 	char* StartPtr = &SaveData[0];
 	fwrite(StartPtr, SaveData.size(), 1, FileHandle);

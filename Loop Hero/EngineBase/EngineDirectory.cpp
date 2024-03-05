@@ -25,13 +25,10 @@ void UEngineDirectory::AllFileRecursive(
 {
 	std::filesystem::directory_iterator DirIter = std::filesystem::directory_iterator(_Path);
 
-
-
 	for (const std::filesystem::directory_entry& Entry : DirIter)
 	{
-
 		std::filesystem::path Path = Entry.path();
-		std::filesystem::path Ext = Entry.path().extension(); // extension 확장자 추출
+		std::filesystem::path Ext = Entry.path().extension();
 		std::string UpperExt = UEngineString::ToUpper(Ext.string());
 
 		if (true == Entry.is_directory())
@@ -89,7 +86,7 @@ std::list<UEngineFile> UEngineDirectory::AllFile(
 	return Result;
 }
 
-std::list<UEngineDirectory> UEngineDirectory::AllDirectory(bool _Recursive/* = false*/)
+std::list<UEngineDirectory> UEngineDirectory::AllDirectory(bool _Recursive)
 {
 	std::list<UEngineDirectory> Result;
 	AllDirectoryRecursive(Path.string(), Result, _Recursive);

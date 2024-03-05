@@ -1,6 +1,12 @@
 #include "EngineInput.h"
 
 std::map<int, UEngineInput::EngineKey> UEngineInput::AllKeys;
+
+bool UEngineInput::AnykeyDown = false;
+bool UEngineInput::AnykeyPress = false;
+bool UEngineInput::AnykeyUp = false;
+bool UEngineInput::AnykeyFree = true;
+
 void UEngineInput::EngineKey::KeyCheck(float _DeltaTime)
 {
 	if (0 != GetAsyncKeyState(Key))
@@ -70,7 +76,7 @@ void UEngineInput::InputInit()
 	AllKeys[VK_MENU] = EngineKey(VK_MENU);
 	AllKeys[VK_PAUSE] = EngineKey(VK_PAUSE);
 	AllKeys[VK_CAPITAL] = EngineKey(VK_CAPITAL);
-	//AllKeys[VK_KANA] = EngineKey(VK_KANA);
+	// AllKeys[VK_KANA] = EngineKey(VK_KANA);
 	//AllKeys[VK_HANGEUL] = EngineKey(VK_HANGEUL);
 	//AllKeys[VK_HANGUL] = EngineKey(VK_HANGUL);
 	AllKeys[VK_IME_ON] = EngineKey(VK_IME_ON);
@@ -169,10 +175,47 @@ void UEngineInput::KeyCheckTick(float _DeltaTime)
 	{
 		EngineKey& CurKey = Key.second;
 		CurKey.KeyCheck(_DeltaTime);
+
 		if (true == CurKey.Press)
 		{
 			KeyCheck = true;
 		}
+	}
+
+	if (true == KeyCheck)
+	{
+		if (true == AnykeyFree)
+		{
+			AnykeyDown = true;
+			AnykeyPress = true;
+			AnykeyUp = false;
+			AnykeyFree = false;
+		}
+		else if (true == AnykeyDown)
+		{
+			AnykeyDown = false;
+			AnykeyPress = true;
+			AnykeyUp = false;
+			AnykeyFree = false;
+		}
+	}
+	else
+	{
+		if (true == AnykeyPress)
+		{
+			AnykeyDown = false;
+			AnykeyPress = false;
+			AnykeyUp = true;
+			AnykeyFree = false;
+		}
+		else if (true == AnykeyUp)
+		{
+			AnykeyDown = false;
+			AnykeyPress = false;
+			AnykeyUp = false;
+			AnykeyFree = true;
+		}
+
 	}
 }
 

@@ -2,11 +2,16 @@
 #include <EngineBase\EngineString.h>
 #include <EngineBase\EngineDebug.h>
 
+// Debug 일때는
+// #pragma comment(lib, "ThirdParty\\FMOD\\inc\\fmodL_vc.lib")
 #pragma comment(lib, "fmodL_vc.lib")
-//#pragma comment(lib, "fmod_vc.lib")
+
+// Release 일때는 
+// #pragma comment(lib, "fmod_vc.lib")
 
 std::map<std::string, UEngineSound*> UEngineSound::Resources;
 
+// FMOD와 관련된 사운드를 로드할 수 있는 권한
 FMOD::System* SoundSystem = nullptr;
 
 class ResControl
@@ -54,9 +59,11 @@ UEngineSound::~UEngineSound()
 {
 }
 
+
 void UEngineSound::ResLoad(std::string_view _Path)
 {
 
+	// FMOD_DEFAULT; => 반복재생 X
 	SoundSystem->createSound(_Path.data(), FMOD_LOOP_NORMAL, nullptr, &SoundHandle);
 	if (nullptr == SoundHandle)
 	{

@@ -1,6 +1,6 @@
 #include "Level.h"
 #include "Actor.h"
-#include <EngineBase/EngineDebug.h>
+#include <EngineBase\EngineDebug.h>
 #include "EngineDebug.h"
 #include "EngineCore.h"
 
@@ -89,7 +89,6 @@ void ULevel::LevelRender(float _DeltaTime)
 		}
 		UEngineDebug::PrintDebugText(GEngine->MainWindow.GetBackBufferImage());
 	}
-
 }
 
 void ULevel::LevelRelease(float _DeltaTime)
@@ -117,23 +116,26 @@ void ULevel::LevelRelease(float _DeltaTime)
 		}
 	}
 
-	for (std::pair<const int, std::list<UImageRenderer*>>& OrderListPair : Renderers)
 	{
-		std::list<UImageRenderer*>& List = OrderListPair.second;
-
-		std::list<UImageRenderer*>::iterator StartIter = List.begin();
-		std::list<UImageRenderer*>::iterator EndIter = List.end();
-
-		for (; StartIter != EndIter; )
+		for (std::pair<const int, std::list<UImageRenderer*>>& OrderListPair : Renderers)
 		{
-			UImageRenderer* Renderer = StartIter.operator*();
+			std::list<UImageRenderer*>& List = OrderListPair.second;
 
-			if (false == Renderer->IsDestroy())
+			std::list<UImageRenderer*>::iterator StartIter = List.begin();
+			std::list<UImageRenderer*>::iterator EndIter = List.end();
+
+			for (; StartIter != EndIter; )
 			{
-				++StartIter;
-				continue;
+				UImageRenderer* Renderer = StartIter.operator*();
+
+				if (false == Renderer->IsDestroy())
+				{
+					++StartIter;
+					continue;
+				}
+
+				StartIter = List.erase(StartIter);
 			}
-			StartIter = List.erase(StartIter);
 		}
 	}
 
@@ -168,8 +170,11 @@ void ULevel::LevelRelease(float _DeltaTime)
 	}
 }
 
+
 void ULevel::ActorInit(AActor* _NewActor)
 {
 	_NewActor->SetWorld(this);
 	_NewActor->BeginPlay();
 }
+
+
