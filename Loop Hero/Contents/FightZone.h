@@ -17,8 +17,11 @@ public:
 	AFightZone& operator=(AFightZone&& _Other) noexcept = delete;
 
 	void FightZoneImage();
+	void FightZoneInit(APlayerFight* _PlyerFight, std::vector<AMonsterFight*>& _MonsterFights);
 
-	void Battle(APlayerFight* _PlyerFight, std::vector<AMonsterFight*> _MonsterFights, float _DeltaTime);
+	bool AllMonsterDeath();
+
+	void Battle(float _DeltaTime);
 	bool IsBattle = false;
 
 protected:

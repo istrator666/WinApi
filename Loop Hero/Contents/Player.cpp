@@ -22,7 +22,7 @@ void APlayer::Tick(float _DeltaTime)
 {
 	AActor::Tick(_DeltaTime);
 
-	WayPoints(_DeltaTime, IsMove);
+	// WayPoints(_DeltaTime, IsMove);
 }
 
 void APlayer::SetPlayerImage()
@@ -43,13 +43,9 @@ void APlayer::SetWayPoint(FVector _WayPoint)
 
 }
 
-void APlayer::WayPoints(float _DeltaTime, bool _IsMove)
+void APlayer::WayPoints(float _DeltaTime)
 {
 	float CurMoveSpeed = GetMoveSpeed();
-	if (false == _IsMove)
-	{
-		return;
-	}
 
 	if (CurrentWayPoint == WayPoint.end())
 	{

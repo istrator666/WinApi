@@ -15,6 +15,12 @@ struct SpawnTileData {
 	MonsterType Monster;
 };
 
+enum class EStageState
+{
+	Move,
+	Fight,
+};
+
 
 class UTestStageLevel : public ULevel
 {
@@ -29,9 +35,25 @@ public:
 	UTestStageLevel& operator=(const UTestStageLevel& _Other) = delete;
 	UTestStageLevel& operator=(UTestStageLevel&& _Other) noexcept = delete;
 
-	void Fight(APlayer* _Player, float _DeltaTime);
+	// void Fight(APlayer* _Player, float _DeltaTime);
 	void SetStageUI();
 	void SetEQInventory();
+
+	void ChangeState(EStageState _State);
+	void StateUpdate(float _DeltaTime);
+
+	// 공통함수
+	void MonsterSpawnTimeCheck(float _DeltaTime);
+
+	// Move
+	void MoveStart() {}
+	void Move(float _DeltaTime);
+	void MonsterFightCheck();
+
+	// Fight
+	void FightStart();
+	void Fight(float _DeltaTime);
+
 
 protected:
 	void BeginPlay() override;
@@ -40,6 +62,7 @@ protected:
 private:
 	APlayer* Player = nullptr;
 	std::vector<AMonster*> Monsters;
+	std::vector<AMonster*> FightCheckMonsters;
 	AMonster* Monster = nullptr;
 
 	StageUI::AStageProgressGauge* StageprogressGauge = nullptr;
@@ -53,7 +76,6 @@ private:
 	APlayerFight* PlayerFight = nullptr;
 
 	std::vector<AMonsterFight*> MonsterFights;
-	AMonsterFight* MonsterFight = nullptr;
 
 	bool TileSetup = false;
 	bool IsFight = false;
@@ -73,4 +95,5 @@ private:
 
 	UEngineRandom RandomEngine;
 
+	EStageState CurState = EStageState::Move;
 };

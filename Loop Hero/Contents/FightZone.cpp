@@ -29,21 +29,51 @@ void AFightZone::FightZoneImage()
 
 }
 
-void AFightZone::Battle(APlayerFight* _PlayerFight, std::vector<AMonsterFight*> _MonsterFights, float _DeltaTime)
+void AFightZone::FightZoneInit(APlayerFight* _PlayerFight, std::vector<AMonsterFight*>& _MonsterFights)
 {
 	PlayerFight = _PlayerFight;
 	MonsterFights = _MonsterFights;
+}
 
-	bool allMonstersDead = true;
+bool AFightZone::AllMonsterDeath()
+{
+	int DeathMonsterCount = 0;
 
 	for (auto& MonsterFight : MonsterFights)
 	{
+		if (true == MonsterFight->IsDeath())
+		{
+			++DeathMonsterCount;
+		}
+	}
+
+	if (DeathMonsterCount == MonsterFights.size())
+	{
+		return true;
+	}
+
+	return false;
+}
+
+void AFightZone::Battle(float _DeltaTime)
+{
+	bool allMonstersDead = true;
+
+	if ("DEATH" == PlayerFight->GetCurrentAnimation())
+	{
+		return;
+	}
+
+	for (auto& MonsterFight : MonsterFights)
+	{
+		if (true == MonsterFight->IsDeath())
+		{
+			continue;
+		}
+
 		if (nullptr != PlayerFight && nullptr != MonsterFight)
 		{
-			if (true == PlayerFight->AttackSpeed(*PlayerFight, _DeltaTime)
-				&& "DEATH" != MonsterFight->GetCurrentAnimation()
-				&& "DEATH" != PlayerFight->GetCurrentAnimation()
-				&& "ATTACK" != PlayerFight->GetCurrentAnimation())
+			if (true == PlayerFight->AttackSpeed(*PlayerFight, _DeltaTime) && "ATTACK" != PlayerFight->GetCurrentAnimation())
 			{
 				PlayerFight->SetChangeAnimation(CharacterStatus::Attack);
 				PlayerFight->AttackDamege(*PlayerFight, *MonsterFight);
@@ -58,10 +88,7 @@ void AFightZone::Battle(APlayerFight* _PlayerFight, std::vector<AMonsterFight*> 
 				}
 			}
 
-			if (true == MonsterFight->AttackSpeed(*MonsterFight, _DeltaTime)
-				&& "DEATH" != PlayerFight->GetCurrentAnimation()
-				&& "DEATH" != MonsterFight->GetCurrentAnimation()
-				&& "ATTACK" != MonsterFight->GetCurrentAnimation())
+			if (true == MonsterFight->AttackSpeed(*MonsterFight, _DeltaTime) && "ATTACK" != MonsterFight->GetCurrentAnimation())
 			{
 				MonsterFight->SetChangeAnimation(CharacterStatus::Attack);
 				MonsterFight->AttackDamege(*MonsterFight, *PlayerFight);
@@ -84,10 +111,6 @@ void AFightZone::Battle(APlayerFight* _PlayerFight, std::vector<AMonsterFight*> 
 					continue;
 				}
 			}
-			else
-			{
-				allMonstersDead = false;
-			}
 
 			if (true == PlayerFight->IsAnimationPlaying() && "DEATH" != PlayerFight->GetCurrentAnimation())
 			{
@@ -104,12 +127,6 @@ void AFightZone::Battle(APlayerFight* _PlayerFight, std::vector<AMonsterFight*> 
 	if (PlayerFight->IsDeath())
 	{
 		PlayerFight->SetChangeAnimation(CharacterStatus::Death);
-	}
-
-	if (allMonstersDead)
-	{
-		IsBattle = true;
-		return;
 	}
 }
 
