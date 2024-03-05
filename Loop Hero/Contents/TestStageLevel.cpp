@@ -38,6 +38,11 @@ void UTestStageLevel::Tick(float _DeltaTime)
 {
 	ULevel::Tick(_DeltaTime);
 
+	if (UEngineInput::IsDown('P'))
+	{
+		Player->SetMoveSpeed(500.0f);
+	}
+
 	if (0 == StageprogressGauge->GetDailyGaugeUpdate())
 	{
 		mSpawn = SpawnTileLocation();
@@ -201,7 +206,7 @@ void UTestStageLevel::SpawnTileType(FVector _Location, TileType _TileType, Monst
 	switch (_TileType)
 	{
 	case TileType::WASTELAND:
-		if (RandomEngine.RandomFloat(0, 1.0) < 0.25)
+		if (RandomEngine.RandomFloat(0, 1.0) < 0.05)
 		{
 			MonsterSpawn(_Location, _MonsterType);
 		}
@@ -285,7 +290,7 @@ void UTestStageLevel::Fight(APlayer* _Player, float _DeltaTime)
 				PlayerFight->SetActorLocation({ 380, 400 });
 				PlayerFight->SetActive(true);
 
-				MonsterFight->SetActorLocation(MonsterPositions[4]);
+				MonsterFight->SetActorLocation(MonsterPositions[0]);
 				MonsterFight->SetActive(true);
 
 				FightZone->Battle(PlayerFight, MonsterFight, _DeltaTime);
