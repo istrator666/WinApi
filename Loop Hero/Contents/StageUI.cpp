@@ -18,56 +18,6 @@ void StageUI::AStageProgressGauge::BeginPlay()
 void StageUI::AStageProgressGauge::Tick(float _DeltaTime)
 {
 	AActor::Tick(_DeltaTime);
-	StageProgressGaugeUpdate(_DeltaTime);
-	Mousehover();
-}
-
-void StageUI::AStageProgressGauge::StageProgressGaugeUpdate(float _DeltaTime)
-{
-	ElapsedTime += _DeltaTime;
-
-	DailyGaugeUpdate = static_cast<int>(ElapsedTime / 5 * 195);
-
-	if (195 <= DailyGaugeUpdate)
-	{
-		ElapsedTime = 0.0f;
-		DailyGaugeUpdate = 0;
-	}
-	StageProgressGaugeBarDaily->SetTransform({ {-86, -15}, {DailyGaugeUpdate, 20} });
-
-	if (true) // 타일 수에 따라 게이지 상승
-	{
-		StageProgressGaugeBarBoss->SetTransform({ {-86, 15}, {100, 20} });
-	}
-}
-
-void StageUI::AStageProgressGauge::Mousehover()
-{
-	FVector PosCheck = UMouseFunction::GetMousePos();
-	int  DescriptionPositionX = static_cast<int>(PosCheck.X) - 100;
-	int  DescriptionPositionY = static_cast<int>(PosCheck.Y) + 25;
-
-	if ((20 <= PosCheck.X && 225 >= PosCheck.X) && (0 <= PosCheck.Y && 20 >= PosCheck.Y))
-	{
-
-		DailyDescription->SetActive(true);
-		DailyDescription->SetTransform({ {DescriptionPositionX, DescriptionPositionY }, {200,100} });
-	}
-	else
-	{
-		DailyDescription->SetActive(false, 0.1f);
-	}
-
-	if ((20 <= PosCheck.X && 225 >= PosCheck.X) && (40 <= PosCheck.Y && 60 >= PosCheck.Y))
-	{
-		BossDescription->SetActive(true);
-		BossDescription->SetTransform({ {DescriptionPositionX, DescriptionPositionY}, {200,100} });
-	}
-	else
-	{
-		BossDescription->SetActive(false, 0.1f);
-	}
-
 }
 
 void StageUI::AStageProgressGauge::StageProgressGauge()

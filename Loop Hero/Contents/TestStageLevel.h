@@ -7,7 +7,6 @@
 #include "FightZone.h"
 #include "Enum.h"
 
-#include <EngineBase/EngineRandom.h>
 
 struct SpawnTileData {
 	FVector TileLocation;
@@ -29,7 +28,7 @@ public:
 	UTestStageLevel& operator=(const UTestStageLevel& _Other) = delete;
 	UTestStageLevel& operator=(UTestStageLevel&& _Other) noexcept = delete;
 
-	void Fight(APlayer* _Player, std::vector<AMonster*> _Monsters, float _DeltaTime);
+	void Fight(APlayer* _Player, AMonster* _Monster, float _DeltaTime);
 	void SetStageUI();
 	void SetEQInventory();
 
@@ -60,19 +59,8 @@ private:
 	std::vector<FVector> StagePoints(const std::string& _StageName);
 	void StageMovePlayer(APlayer* _Player);
 
-	std::vector<FVector> MonsterMovePoints(FVector _Location);
-	void StageMoveMonster(AMonster* _Monster, FVector _Location);
-
-	std::vector<SpawnTileData> mSpawn;
-	std::vector<SpawnTileData> SpawnTileLocation();
-
-	FVector RandomSpawnLocation(FVector _Location);
-	void SpawnTileType(FVector _Location, TileType _TileType, MonsterType _MonsterType);
-	void MonsterSpawn(FVector _Location, MonsterType _MonsterType);
-	
-	float SpawnTimeCheck = 0.0f;
-
-	UEngineRandom RandomEngine;
+	std::vector<FVector> MonterMovePoints();
+	void StageMoveMonster(AMonster* _Monster);
 
 };
 

@@ -18,10 +18,6 @@ public:
 	{
 	public:
 		void StageProgressGauge();
-		int GetDailyGaugeUpdate()
-		{
-			return DailyGaugeUpdate;
-		}
 
 	protected:
 		void BeginPlay() override;
