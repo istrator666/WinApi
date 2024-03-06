@@ -79,6 +79,7 @@ public:
 		LifeDrain = _LifeDrain;
 	}
 
+
 	void SetMoveSpeed(float _MoveSpeed)
 	{
 		MoveSpeed = _MoveSpeed;
@@ -155,6 +156,10 @@ public:
 	}
 
 	void StatusInit(int _HP, int _MaxHP, int _MinAttck, int MaxAttck, int _Defense, float _AttackSpeed, float _AttackGauge, int _HPRegen, int _Critical, int _CounterAttack, int _LifeDrain);
+	void LevelUP()
+	{
+		Level += 1;
+	}
 
 protected:
 
@@ -172,6 +177,7 @@ private:
 	int Critical = 0;
 	int CounterAttack = 0;
 	int LifeDrain = 0;
+	int Level = 0;
 
 	float MoveSpeed = 100;
 
