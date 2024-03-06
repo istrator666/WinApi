@@ -99,9 +99,9 @@ void APlayerFight::SetPlayerFightImage()
 	PlayerFightRender->SetOrder(7);
 	PlayerFightRender->SetTransform({ {0, 0}, {125,125} });
 	PlayerFightRender->CreateAnimation("Idle", "Warrior.png", 17, 17, 0.1f, false);
-	PlayerFightRender->CreateAnimation("Attack", "Warrior.png", 18, 22, 0.25f, false);
-	PlayerFightRender->CreateAnimation("Hurt", "Warrior.png", 23, 26, 0.4f, false);
-	PlayerFightRender->CreateAnimation("Death", "Warrior.png", 27, 31, 0.4f, false);
+	PlayerFightRender->CreateAnimation("Attack", "Warrior.png", 18, 22, 0.1f, false);
+	PlayerFightRender->CreateAnimation("Hurt", "Warrior.png", 23, 26, 0.25f, false);
+	PlayerFightRender->CreateAnimation("Death", "Warrior.png", 27, 31, 0.25f, false);
 	PlayerFightRender->ChangeAnimation("Idle");
 
 }
@@ -119,20 +119,32 @@ void APlayerFight::SetPlayerHealthBar()
 	PlayerHPBar->SetOrder(8);
 	PlayerHPBar->SetTransform({ {-26, -51}, {52,20} });
 
-	PlayerAttSpeedBar = CreateImageRenderer();
-	PlayerAttSpeedBar->SetImage("s_healthbar_2.png");
-	PlayerAttSpeedBar->SetOrder(8);
-	PlayerAttSpeedBar->SetTransform({ {0, -48}, {52,20} });
+	PlayerAttackGaugeBar = CreateImageRenderer();
+	PlayerAttackGaugeBar->SetImage("s_healthbar_2.png");
+	PlayerAttackGaugeBar->SetSortType(EImageSortType::Left);
+	PlayerAttackGaugeBar->SetOrder(8);
+	PlayerAttackGaugeBar->SetTransform({ {-26, -48}, {0,20} });
 
 	PlayerStaminaBar = CreateImageRenderer();
 	PlayerStaminaBar->SetImage("s_healthbar_3.png");
+	PlayerStaminaBar->SetSortType(EImageSortType::Left);
 	PlayerStaminaBar->SetOrder(8);
-	PlayerStaminaBar->SetTransform({ {0, -47}, {52, 15} });
+	PlayerStaminaBar->SetTransform({ {-26, -47}, {0, 15} });
 }
 
 void APlayerFight::SetPlayerHPbar(int _CurrentHP)
 {
 	PlayerHPBar->SetTransform({ {-26, -51}, {_CurrentHP, 20} });
+}
+
+void APlayerFight::SetPlyerAttackGaugeBar(int _AttackTime)
+{
+	PlayerAttackGaugeBar->SetTransform({ {-26, -48}, {_AttackTime, 20} });
+}
+
+void APlayerFight::SetPlayerStaminaBar(int _Stamina)
+{
+	PlayerStaminaBar->SetTransform({ {-26, -47}, {_Stamina, 15} });
 }
 
 void APlayerFight::SetChangeAnimation(CharacterStatus _Status)

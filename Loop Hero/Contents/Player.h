@@ -52,6 +52,8 @@ public:
 	void SetPlayerFightImage();
 	void SetPlayerHealthBar();
 	void SetPlayerHPbar(int _Damage);
+	void SetPlyerAttackGaugeBar(int _AttackTime);
+	void SetPlayerStaminaBar(int _Stamina);
 	void SetChangeAnimation(CharacterStatus _Status);
 	bool IsAnimationPlaying();
 	std::string GetCurrentAnimation();
@@ -64,7 +66,9 @@ private:
 	UImageRenderer* PlayerFightRender = nullptr;
 	UImageRenderer* PlayerHealthBar = nullptr;
 	UImageRenderer* PlayerHPBar = nullptr;
-	UImageRenderer* PlayerAttSpeedBar = nullptr;
+	UImageRenderer* PlayerAttackGaugeBar = nullptr;
 	UImageRenderer* PlayerStaminaBar = nullptr;
+
+	int Level = 0;
 
 };

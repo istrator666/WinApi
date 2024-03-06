@@ -49,9 +49,9 @@ public:
 		AttackSpeed = _AttackSpeed;
 	}
 
-	void SetAttackTime(float _AttackTime)
+	void SetAttackGauge(float _AttackGauge)
 	{
-		AttackTime = _AttackTime;
+		AttackGauge = _AttackGauge;
 	}
 
 	void SetHPRegen(int _HPRegen)
@@ -119,9 +119,9 @@ public:
 		return AttackSpeed;
 	}
 	
-	float GetAttackTime()
+	float GetAttackGauge()
 	{
-		return AttackTime;
+		return AttackGauge;
 	}
 
 	int GetHPRegen()
@@ -154,18 +154,18 @@ public:
 		return MoveSpeed;
 	}
 
-	void StatusInit(int _HP, int _MaxHP, int _MinAttck, int MaxAttck, int _Defense, float _AttackSpeed, float _AttackTime, int _HPRegen, int _Critical, int _CounterAttack, int _LifeDrain);
+	void StatusInit(int _HP, int _MaxHP, int _MinAttck, int MaxAttck, int _Defense, float _AttackSpeed, float _AttackGauge, int _HPRegen, int _Critical, int _CounterAttack, int _LifeDrain);
 
 protected:
 
 private:
 	int HP = 250;
 	int MaxHP = 250;
-	int MinAttck = 40; //4
+	int MinAttck = 30; //4
 	int MaxAttck = 60; //6
 	int Defense = 0;
-	float AttackSpeed = 0.6f;
-	float AttackTime = 0;
+	float AttackSpeed = 1.5f;
+	float AttackGauge = 0;
 	int Stamina = 100;
 	int HPRegen = 0;
 	int Evasion = 0;

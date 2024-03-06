@@ -58,6 +58,7 @@ bool AFightZone::AllMonsterDeath()
 void AFightZone::Battle(float _DeltaTime)
 {
 	bool allMonstersDead = true;
+	
 
 	if ("DEATH" == PlayerFight->GetCurrentAnimation())
 	{
@@ -66,29 +67,37 @@ void AFightZone::Battle(float _DeltaTime)
 
 	for (auto& MonsterFight : MonsterFights)
 	{
-		if (true == MonsterFight->IsDeath())
+		if (MonsterFight->IsDeath())
 		{
 			continue;
 		}
 
 		if (nullptr != PlayerFight && nullptr != MonsterFight)
 		{
-			if (true == PlayerFight->AttackSpeed(*PlayerFight, _DeltaTime) && "ATTACK" != PlayerFight->GetCurrentAnimation())
+			int PlayerAttackGauge = static_cast<int>((PlayerFight->GetAttackGauge() / 100) * 52);
+			PlayerFight->SetPlyerAttackGaugeBar(PlayerAttackGauge);
+			int MonsterAttackGauge = static_cast<int>((MonsterFight->GetAttackGauge() / 100) * 52);
+			MonsterFight->SetPlyerAttackGaugeBar(MonsterAttackGauge);
+
+			if (true == PlayerFight->AttackSpeed(*PlayerFight, _DeltaTime))
 			{
-				PlayerFight->SetChangeAnimation(CharacterStatus::Attack);
-				PlayerFight->AttackDamege(*PlayerFight, *MonsterFight);
-
-				int CurrentHPBar = MonsterFight->GetHP();
-				int HPbar = static_cast<int>((static_cast<float>(CurrentHPBar) / MonsterFight->GetMaxHP()) * 52);
-				MonsterFight->SetMonsterHPbar(HPbar);
-
-				if ("ATTACK" != MonsterFight->GetCurrentAnimation())
+				if (!MonsterFight->IsDeath())
 				{
-					MonsterFight->SetChangeAnimation(CharacterStatus::Hurt);
+					PlayerFight->SetChangeAnimation(CharacterStatus::Attack);
+					PlayerFight->AttackDamege(*PlayerFight, *MonsterFight);
+
+					int CurrentHPBar = MonsterFight->GetHP();
+					int HPbar = static_cast<int>((static_cast<float>(CurrentHPBar) / MonsterFight->GetMaxHP()) * 52);
+					MonsterFight->SetMonsterHPbar(HPbar);
+
+					if ("ATTACK" != MonsterFight->GetCurrentAnimation())
+					{
+						MonsterFight->SetChangeAnimation(CharacterStatus::Hurt);
+					}
 				}
 			}
 
-			if (true == MonsterFight->AttackSpeed(*MonsterFight, _DeltaTime) && "ATTACK" != MonsterFight->GetCurrentAnimation())
+			if (true == MonsterFight->AttackSpeed(*MonsterFight, _DeltaTime))
 			{
 				MonsterFight->SetChangeAnimation(CharacterStatus::Attack);
 				MonsterFight->AttackDamege(*MonsterFight, *PlayerFight);

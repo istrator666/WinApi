@@ -96,9 +96,9 @@ void AMonsterFight::SetMosnterFightImage()
 	MonsterFightRender->SetOrder(7);
 	MonsterFightRender->SetTransform({ {0,0}, {250,250} });
 	MonsterFightRender->CreateAnimation("Idle", "Slime.png", 0, 0, 0.1f, false);
-	MonsterFightRender->CreateAnimation("Attack", "Slime.png", 1, 5, 0.25f, false);
-	MonsterFightRender->CreateAnimation("Hurt", "Slime.png", 6, 9, 0.4f, false);
-	MonsterFightRender->CreateAnimation("Death", "Slime.png", 10, 14, 0.4f, false);
+	MonsterFightRender->CreateAnimation("Attack", "Slime.png", 1, 5, 0.1f, false);
+	MonsterFightRender->CreateAnimation("Hurt", "Slime.png", 6, 9, 0.25f, false);
+	MonsterFightRender->CreateAnimation("Death", "Slime.png", 10, 14, 0.25f, false);
 	MonsterFightRender->ChangeAnimation("Idle");
 }
 
@@ -115,15 +115,21 @@ void AMonsterFight::SetMonsterHealthBar()
 	MonsterHPBar->SetOrder(8);
 	MonsterHPBar->SetTransform({ {-26, -51}, {52,20} });
 
-	MonsterAttSpeedBar = CreateImageRenderer();
-	MonsterAttSpeedBar->SetImage("s_healthbar_2.png");
-	MonsterAttSpeedBar->SetOrder(8);
-	MonsterAttSpeedBar->SetTransform({ {0, -48}, {52,20} });
+	MonsterAttackGaugeBar = CreateImageRenderer();
+	MonsterAttackGaugeBar->SetImage("s_healthbar_2.png");
+	MonsterAttackGaugeBar->SetSortType(EImageSortType::Left);
+	MonsterAttackGaugeBar->SetOrder(8);
+	MonsterAttackGaugeBar->SetTransform({ {-26, -48}, {52,20} });
 }
 
 void AMonsterFight::SetMonsterHPbar(int _CurrentHP)
 {
 	MonsterHPBar->SetTransform({ {-26, -51}, {_CurrentHP, 20} });
+}
+
+void AMonsterFight::SetPlyerAttackGaugeBar(int _AttackTime)
+{
+	MonsterAttackGaugeBar->SetTransform({ {-26, -48}, {_AttackTime, 20} });
 }
 
 

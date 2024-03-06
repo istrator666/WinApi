@@ -51,6 +51,7 @@ public:
 	void SetMosnterFightImage();
 	void SetMonsterHealthBar();
 	void SetMonsterHPbar(int _Damage);
+	void SetPlyerAttackGaugeBar(int _AttackTime);
 	void SetChangeAnimation(CharacterStatus _Status);
 	bool IsAnimationPlaying();
 	std::string GetCurrentAnimation();
@@ -63,6 +64,6 @@ private:
 	UImageRenderer* MonsterFightRender = nullptr;
 	UImageRenderer* MonsterHealthBar = nullptr;
 	UImageRenderer* MonsterHPBar = nullptr;
-	UImageRenderer* MonsterAttSpeedBar = nullptr;
+	UImageRenderer* MonsterAttackGaugeBar = nullptr;
 
 };

@@ -1,9 +1,6 @@
 #include "TestStageLevel.h"
 #include "StageMap.h"
-
 #include "EngineCore/EngineCore.h"
-
-
 
 UTestStageLevel::UTestStageLevel()
 {
@@ -61,7 +58,6 @@ void UTestStageLevel::MonsterSpawnTimeCheck(float _DeltaTime)
 		for (const SpawnTileData& Tile : mSpawn)
 		{
 			SpawnTileType(Tile.TileLocation, Tile.Tile, Tile.Monster);
-			// SpawnTileType(Tile.TileLocation, Tile.Tile, Tile.Monster);
 		}
 	}
 }
@@ -125,7 +121,7 @@ void UTestStageLevel::FightStart()
 	for (size_t i = 0; i < FightCheckMonsters.size(); i++)
 	{
 		AMonsterFight* MonsterFight = SpawnActor<AMonsterFight>();
-		MonsterFight->StatusInit(26, 26, 1, 3, 1, 0.6f, 0, 25, 25, 25, 25);
+		MonsterFight->StatusInit(26, 26, 1, 3, 1, 1.5f, 0, 25, 25, 25, 25);
 		MonsterFights.push_back(MonsterFight);
 	}
 
@@ -137,7 +133,6 @@ void UTestStageLevel::FightStart()
 	{ 700, 300 }
 	};
 
-	// 5마리
 	for (size_t i = 0; i < MonsterFights.size(); i++)
 	{
 		AMonsterFight* MonsterFight = MonsterFights[i];
@@ -188,8 +183,6 @@ void UTestStageLevel::StateUpdate(float _DeltaTime)
 	default:
 		break;
 	}
-
-
 }
 
 void UTestStageLevel::Tick(float _DeltaTime)
@@ -197,42 +190,6 @@ void UTestStageLevel::Tick(float _DeltaTime)
 	ULevel::Tick(_DeltaTime);
 
 	StateUpdate(_DeltaTime);
-
-	// 몬스터가 만들
-
-	//if (false == FightZone->IsBattle)
-	//{
-	//	StageprogressGauge->StageProgressGaugeUpdate(_DeltaTime);
-	//}
-	//else
-	//{
-	//	float FightDailyTime = _DeltaTime / 10;
-	//	StageprogressGauge->StageProgressGaugeUpdate(FightDailyTime);
-	//}
-
-	//if (UEngineInput::IsDown('P'))
-	//{
-	//	Player->SetMoveSpeed(500.0f);
-	//}
-
-	//if (0 == StageprogressGauge->GetDailyGaugeUpdate())
-	//{
-	//	mSpawn = SpawnTileLocation();
-	//	for (const SpawnTileData& Tile : mSpawn)
-	//	{
-	//		SpawnTileType(Tile.TileLocation, Tile.Tile, Tile.Monster);
-	//	}
-
-	//	for (auto& FightMonster : Monsters)
-	//	{
-	//		MonsterFight = SpawnActor<AMonsterFight>();
-	//		MonsterFight->SetActive(false, 0.1f);
-	//		MonsterFight->StatusInit(26, 26, 1, 3, 1, 0.6f, 0, 25, 25, 25, 25);
-	//		MonsterFights.push_back(MonsterFight);
-	//	}
-	//}
-
-	//Fight(Player, _DeltaTime);
 }
 
 std::vector<FVector> UTestStageLevel::StagePoints(const std::string& _StageName)
@@ -422,91 +379,10 @@ void UTestStageLevel::MonsterSpawn(FVector _Location, MonsterType _MonsterType)
 	Monsters.push_back(Monster);
 }
 
-
-//void UTestStageLevel::Fight(APlayer* _Player, float _DeltaTime)
-// {
-	//FVector PlayerLocation = _Player->GetActorLocation();
-	//int PlayerX = static_cast<int>(PlayerLocation.X / 50);
-	//int PlayerY = static_cast<int>(PlayerLocation.Y / 50);
-
-	//std::vector<FVector> MonsterPositions = {
-	//{ 600, 400 },
-	//{ 600, 300 },
-	//{ 700, 500 },
-	//{ 700, 400 },
-	//{ 700, 300 }
-	//};
-
-	//int MonsterPositionIndex = 0;
-
-	//for (int i = 0; i < Monsters.size(); ++i)
-	//{
-	//	if (nullptr == Monsters[i])
-	//	{
-	//		continue;
-	//	}
-
-	//	Monster = Monsters[i];
-	//	MonsterFight = MonsterFights[i];
-
-	//	FVector MonsterLocation = Monster->GetActorLocation();
-	//	int MonsterX = static_cast<int>(MonsterLocation.X / 50);
-	//	int MonsterY = static_cast<int>(MonsterLocation.Y / 50);
-
-	//	if (PlayerX == MonsterX && PlayerY == MonsterY)
-	//	{
-	//		if (fmod(PlayerLocation.X, 50.0f) == 25.0f && fmod(PlayerLocation.Y, 50.0f) == 25.0f && false == IsFight)
-	//		{
-	//			_Player->IsMove = false;
-
-	//			FightZone->SetActorLocation({ 530, 340 });
-	//			FightZone->SetActive(true);
-
-	//			PlayerFight->SetActorLocation({ 380, 400 });
-	//			PlayerFight->SetActive(true);
-
-	//			MonsterFight->SetActorLocation(MonsterPositions[MonsterPositionIndex]);
-	//			MonsterFight->SetActive(true);
-	//			MonsterPositionIndex = (MonsterPositionIndex + 1) % MonsterPositions.size();
-
-	//			if (false == FightZone->IsBattle)
-	//			{
-	//				FightZone->Battle(PlayerFight, MonsterFights, _DeltaTime);
-	//			}
-	//			else
-	//			{
-	//				IsFight = true;
-	//			}
-	//		}
-	//		else
-	//		{
-	//			_Player->IsMove = true;
-	//			IsFight = false;
-	//			FightZone->IsBattle = false;
-	//			FightZone->SetActive(false, 0.1f);
-	//			PlayerFight->SetActive(false, 0.1f);
-	//			MonsterFight->SetActive(false, 0.1f);
-
-	//			if (MonsterFight->IsDeath())
-	//			{
-	//				Monsters[i] = nullptr;
-	//				MonsterFights[i] = nullptr;
-
-	//				MonsterFight->Destroy();
-	//				Monster->Destroy();
-	//			}
-	//		}
-	//	}
-	//}
-//}
-
 void UTestStageLevel::SetStageUI()
 {
 	StageprogressGauge = SpawnActor<StageUI::AStageProgressGauge>();
 	StageprogressGauge->SetActorLocation({ 115, 25 });
-
-
-
 
 	SppedPanel = SpawnActor<StageUI::ASpeedPanel>();
 	SppedPanel->SetActorLocation({ 308, 25 });
