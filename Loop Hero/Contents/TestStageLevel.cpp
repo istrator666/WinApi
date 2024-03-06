@@ -29,6 +29,9 @@ void UTestStageLevel::BeginPlay()
 	PlayerFight = SpawnActor<APlayerFight>();
 	PlayerFight->SetActive(false, 0.1f);
 
+	CardInventory = SpawnActor<ACardInventory>();
+	CardInventory->SetActorLocation({40, 700});
+
 }
 
 void UTestStageLevel::ChangeState(EStageState _State)
@@ -144,6 +147,7 @@ void UTestStageLevel::FightStart()
 
 void UTestStageLevel::Fight(float _DeltaTime)
 {
+	MonsterSpawnTimeCheck(_DeltaTime / 5);
 	FightZone->Battle(_DeltaTime);
 
 	if (true == FightZone->AllMonsterDeath())

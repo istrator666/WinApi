@@ -3,6 +3,7 @@
 #include "Player.h"
 #include "Monster.h"
 #include "EQInventory.h"
+#include "CardInventory.h"
 #include "StageUI.h"
 #include "FightZone.h"
 #include "Enum.h"
@@ -69,6 +70,8 @@ private:
 	StageUI::ASpeedPanel* SppedPanel = nullptr;
 	StageUI::APlashka* APlashka = nullptr;
 	StageUI::ATravelitemPanel* TravelitemPanel = nullptr;
+
+	ACardInventory* CardInventory = nullptr;
 
 	EQInventory::AEQInventoryUI* EQInventory = nullptr;
 

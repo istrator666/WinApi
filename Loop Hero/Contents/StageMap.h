@@ -16,6 +16,8 @@ public:
 	AStageMap& operator=(AStageMap&& _Other) noexcept = delete;
 
 	void IsTileSet();
+	void ShowAvailableTiles();
+	
 
 protected:
 	void BeginPlay() override;

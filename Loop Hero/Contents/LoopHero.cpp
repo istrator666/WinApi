@@ -56,5 +56,6 @@ void LoopHeroContentsCore::RecourceLoad()
 	UEngineResourcesManager::GetInst().CuttingImage("Warrior.png", 5, 8);
 	UEngineResourcesManager::GetInst().CuttingImage("Overworld Enemies.png", 4, 12);
 	UEngineResourcesManager::GetInst().CuttingImage("Slime.png", 5, 3);
+	UEngineResourcesManager::GetInst().CuttingImage("Cards.png", 5, 2);
 }
 

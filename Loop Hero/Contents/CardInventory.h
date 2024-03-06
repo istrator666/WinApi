@@ -1,6 +1,15 @@
 #pragma once
 #include <EngineCore/Actor.h>
 
+typedef int Card;
+class Node
+{
+public:
+	UImageRenderer* CardRander = nullptr;
+	Node* Next = nullptr;
+	Node* Prev = nullptr;
+};
+
 class ACardInventory : public AActor
 {
 public:
@@ -14,9 +23,18 @@ public:
 	ACardInventory& operator=(const ACardInventory& _Other) = delete;
 	ACardInventory& operator=(ACardInventory&& _Other) noexcept = delete;
 
+	void CardList();
+
 protected:
+	void BeginPlay() override;
+	void Tick(float _DeltaTime) override;
 
 private:
+	Node* head = nullptr;
+	Node* tail = nullptr;
+	bool IsPause = false;
+
+	void GamePause();
 
 };
 

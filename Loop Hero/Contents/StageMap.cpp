@@ -23,19 +23,7 @@ void AStageMap::BeginPlay()
 void AStageMap::Tick(float _DeltaTime)
 {
 	AActor::Tick(_DeltaTime);
-
-	if (UEngineInput::IsDown('O'))
-	{
-		for (int i = 0; i < 12; i++)
-		{
-			for (int j = 0; j < 21; j++)
-			{
-				IsTile = IsTileList[i][j];
-				IsTile->SetActive(false);
-			}
-		}
-	}
-
+	ShowAvailableTiles();
 }
 
 void AStageMap::BackStage()
@@ -58,6 +46,7 @@ void AStageMap::IsTileSet()
 			IsTile = CreateImageRenderer();
 			IsTile->SetImage("IsTile.png");
 			IsTile->SetOrder(1);
+			IsTile->SetActive(false);
 			IsTileList[i][j] = IsTile;
 		}
 	}
@@ -109,6 +98,32 @@ void AStageMap::IsTileSet()
 		IsTileList[8][9]->SetImage("DisableTile.png");
 		IsTileList[8][10]->SetImage("DisableTile.png");
 		IsTileList[8][11]->SetImage("DisableTile.png");
+	}
+}
+
+void AStageMap::ShowAvailableTiles()
+{
+	if (UEngineInput::IsDown('O'))
+	{
+		for (int i = 0; i < 12; i++)
+		{
+			for (int j = 0; j < 21; j++)
+			{
+				IsTile = IsTileList[i][j];
+				IsTile->SetActive(false);
+			}
+		}
+	}
+	else if (UEngineInput::IsDown('T'))
+	{
+		for (int i = 0; i < 12; i++)
+		{
+			for (int j = 0; j < 21; j++)
+			{
+				IsTile = IsTileList[i][j];
+				IsTile->SetActive(true);
+			}
+		}
 	}
 }
 
