@@ -106,9 +106,23 @@ public:
 	virtual void BeginPlay();
 	virtual void Tick(float _DeltaTime);
 
+	void DebugOn()
+	{
+		CheckDebug = true;
+	}
+
+	void DebugCheck()
+	{
+		if (true== CheckDebug)
+		{
+			int a = 0;
+		}
+	}
+
 protected:
 
 private:
+	bool CheckDebug = false;
 	int Order = 0;
 
 	bool IsDestroyUpdate = false;

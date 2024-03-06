@@ -148,6 +148,8 @@ void UTestStageLevel::Fight(float _DeltaTime)
 
 	if (true == FightZone->AllMonsterDeath())
 	{
+
+
 		FightZone->SetActive(false);
 		PlayerFight->SetActive(false);
 

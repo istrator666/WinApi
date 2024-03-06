@@ -41,7 +41,7 @@ bool AFightZone::AllMonsterDeath()
 
 	for (auto& MonsterFight : MonsterFights)
 	{
-		if (true == MonsterFight->IsDeath())
+		if (MonsterFight->GetCurrentAnimation() == "DEATH" && true == MonsterFight->IsAnimationPlaying())
 		{
 			++DeathMonsterCount;
 		}

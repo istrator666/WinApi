@@ -28,6 +28,11 @@ void UImageRenderer::SetOrder(int _Order)
 
 int UAnimationInfo::Update(float _DeltaTime)
 {
+	if (false == Loop && true == IsEnd)
+	{
+		return Indexs[CurFrame];
+	}
+
 	IsEnd = false;
 	CurTime -= _DeltaTime;
 
@@ -37,6 +42,11 @@ int UAnimationInfo::Update(float _DeltaTime)
 		++CurFrame;
 
 		if (1 == Indexs.size())
+		{
+			IsEnd = true;
+		}
+
+		if (false == Loop && Indexs.size() <= CurFrame)
 		{
 			IsEnd = true;
 		}
@@ -84,6 +94,8 @@ void UImageRenderer::BeginPlay()
 void UImageRenderer::Tick(float _DeltaTime)
 {
 	USceneComponent::Tick(_DeltaTime);
+
+	DebugCheck();
 
 	if (nullptr != CurAnimation)
 	{
