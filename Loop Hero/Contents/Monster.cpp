@@ -154,7 +154,7 @@ void AMonsterFight::SetChangeAnimation(CharacterStatus _Status)
 	}
 }
 
-bool AMonsterFight::IsAnimationPlaying()
+bool AMonsterFight::IsAnimationEnd()
 {
 	if (MonsterFightRender->IsCurAnimationEnd())
 	{
@@ -164,7 +164,7 @@ bool AMonsterFight::IsAnimationPlaying()
 	return false;
 }
 
-std::string AMonsterFight::GetCurrentAnimation()
+std::string AMonsterFight::GetCurrentAnimationName()
 {
 	std::string CurAnimation = MonsterFightRender->GetCurAnimation()->Name;
 

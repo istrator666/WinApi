@@ -55,8 +55,8 @@ public:
 	void SetPlyerAttackGaugeBar(int _AttackTime);
 	void SetPlayerStaminaBar(int _Stamina);
 	void SetChangeAnimation(CharacterStatus _Status);
-	bool IsAnimationPlaying();
-	std::string GetCurrentAnimation();
+	bool IsAnimationEnd();
+	std::string GetCurrentAnimationName();
 
 protected:
 	void BeginPlay() override;
@@ -68,7 +68,4 @@ private:
 	UImageRenderer* PlayerHPBar = nullptr;
 	UImageRenderer* PlayerAttackGaugeBar = nullptr;
 	UImageRenderer* PlayerStaminaBar = nullptr;
-
-	int Level = 0;
-
 };

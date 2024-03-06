@@ -168,7 +168,7 @@ void APlayerFight::SetChangeAnimation(CharacterStatus _Status)
 	}
 }
 
-bool APlayerFight::IsAnimationPlaying()
+bool APlayerFight::IsAnimationEnd()
 {
 	if (PlayerFightRender->IsCurAnimationEnd())
 	{
@@ -178,7 +178,7 @@ bool APlayerFight::IsAnimationPlaying()
 	return false;
 }
 
-std::string APlayerFight::GetCurrentAnimation()
+std::string APlayerFight::GetCurrentAnimationName()
 {
 	std::string CurAnimation = PlayerFightRender->GetCurAnimation()->Name;
 

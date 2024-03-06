@@ -53,8 +53,8 @@ public:
 	void SetMonsterHPbar(int _Damage);
 	void SetPlyerAttackGaugeBar(int _AttackTime);
 	void SetChangeAnimation(CharacterStatus _Status);
-	bool IsAnimationPlaying();
-	std::string GetCurrentAnimation();
+	bool IsAnimationEnd();
+	std::string GetCurrentAnimationName();
 
 protected:
 	void BeginPlay() override;
