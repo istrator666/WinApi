@@ -66,15 +66,36 @@ void AFightZone::Battle(float _DeltaTime)
 	{
 		if (MonsterFight->IsDeath())
 		{
+			if (true == PlayerFight->IsAnimationEnd() && "DEATH" != PlayerFight->GetCurrentAnimationName())
+			{
+				PlayerFight->SetChangeAnimation(CharacterStatus::Idle);
+			}
 			continue;
+		}
+		else
+		{
+			if (true == PlayerFight->IsAnimationEnd() && "DEATH" != PlayerFight->GetCurrentAnimationName())
+			{
+				PlayerFight->SetChangeAnimation(CharacterStatus::Idle);
+			}
+
+			if (true == MonsterFight->IsAnimationEnd() && "DEATH" != MonsterFight->GetCurrentAnimationName())
+			{
+				MonsterFight->SetChangeAnimation(CharacterStatus::Idle);
+			}
 		}
 
 		if (nullptr != PlayerFight && nullptr != MonsterFight)
 		{
-			if (!MonsterFight->IsDeath())
+
+			if (!PlayerFight->IsDeath())
 			{
 				int PlayerAttackGauge = static_cast<int>((PlayerFight->GetAttackGauge() / 100) * 52);
 				PlayerFight->SetPlyerAttackGaugeBar(PlayerAttackGauge);
+			}
+
+			if (!MonsterFight->IsDeath())
+			{
 				int MonsterAttackGauge = static_cast<int>((MonsterFight->GetAttackGauge() / 100) * 52);
 				MonsterFight->SetPlyerAttackGaugeBar(MonsterAttackGauge);
 			}
@@ -116,16 +137,6 @@ void AFightZone::Battle(float _DeltaTime)
 				{
 					continue;
 				}
-			}
-
-			if (true == PlayerFight->IsAnimationEnd() && "DEATH" != PlayerFight->GetCurrentAnimationName())
-			{
-				PlayerFight->SetChangeAnimation(CharacterStatus::Idle);
-			}
-
-			if (true == MonsterFight->IsAnimationEnd() && "DEATH" != MonsterFight->GetCurrentAnimationName())
-			{
-				MonsterFight->SetChangeAnimation(CharacterStatus::Idle);
 			}
 		}
 	}
