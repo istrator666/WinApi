@@ -23,7 +23,8 @@ public:
 	ACardInventory& operator=(const ACardInventory& _Other) = delete;
 	ACardInventory& operator=(ACardInventory&& _Other) noexcept = delete;
 
-	void CardList();
+	void AddCard(int card);
+	int CardListSize();
 
 protected:
 	void BeginPlay() override;

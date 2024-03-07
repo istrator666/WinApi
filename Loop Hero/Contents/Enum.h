@@ -13,6 +13,13 @@ enum class LoopHeroRenderOrder
 
 };
 
+enum class EStageState
+{
+	Move,
+	Fight,
+	Pause,
+};
+
 enum class CharacterStatus
 {
 	Idle,

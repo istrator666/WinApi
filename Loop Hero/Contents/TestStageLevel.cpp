@@ -150,10 +150,20 @@ void UTestStageLevel::Fight(float _DeltaTime)
 	MonsterSpawnTimeCheck(_DeltaTime / 5);
 	FightZone->Battle(_DeltaTime);
 
+	for (size_t i = 0; i < MonsterFights.size(); i++)
+	{
+		if (true == MonsterFights[i]->IsDeath())
+		{
+			MonsterDrop();
+		}
+		else
+		{
+			return;
+		}
+	}
+
 	if (true == FightZone->AllMonsterDeath())
 	{
-
-
 		FightZone->SetActive(false);
 		PlayerFight->SetActive(false);
 
@@ -172,6 +182,13 @@ void UTestStageLevel::Fight(float _DeltaTime)
 
 		ChangeState(EStageState::Move);
 	}
+}
+
+void UTestStageLevel::MonsterDrop()
+{
+	int card = RandomEngine.RandomInt(0, 3);
+
+	CardInventory->AddCard(card);
 }
 
 void UTestStageLevel::StateUpdate(float _DeltaTime)

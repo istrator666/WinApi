@@ -16,13 +16,6 @@ struct SpawnTileData {
 	MonsterType Monster;
 };
 
-enum class EStageState
-{
-	Move,
-	Fight,
-};
-
-
 class UTestStageLevel : public ULevel
 {
 public:
@@ -55,6 +48,8 @@ public:
 	void FightStart();
 	void Fight(float _DeltaTime);
 
+	// Drop
+	void MonsterDrop();
 
 protected:
 	void BeginPlay() override;

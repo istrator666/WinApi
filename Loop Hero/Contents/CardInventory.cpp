@@ -16,39 +16,51 @@ ACardInventory::~ACardInventory()
 	}
 }
 
+void ACardInventory::AddCard(int card)
+{
+    if (CardListSize() < 13)
+    {
+        Node* newNode = new Node();
+        newNode->CardRander = CreateImageRenderer();
+        newNode->CardRander->SetImage("Cards.png");
+        newNode->CardRander->SetOrder(7);
+        newNode->CardRander->SetTransform({ {75 * CardListSize(), 0}, {250,250} });
+        newNode->CardRander->CreateAnimation("Card" + std::to_string(card), "Cards.png", 3, 3, 0.3f, false);
+        newNode->CardRander->ChangeAnimation("Card" + std::to_string(card));
+
+        if (head == nullptr) {
+            head = tail = newNode;
+        }
+        else {
+            tail->Next = newNode;
+            newNode->Prev = tail;
+            tail = newNode;
+        }
+    }
+}
+
+int ACardInventory::CardListSize()
+{
+    int size = 0;
+    Node* currentNode = head;
+    while (currentNode != nullptr)
+    {
+        size++;
+        currentNode = currentNode->Next;
+    }
+
+    return size;
+}
+
 void ACardInventory::ACardInventory::BeginPlay()
 {
 	AActor::BeginPlay();
-	CardList();
 }
 
 void ACardInventory::ACardInventory::Tick(float _DeltaTime)
 {
 	AActor::Tick(_DeltaTime);
 	GamePause();
-}
-
-void ACardInventory::CardList()
-{
-	for (int i = 0; i < 13; ++i) {
-		Node* newNode = new Node();
-		newNode->CardRander = CreateImageRenderer();
-		newNode->CardRander->SetImage("Cards.png");
-		newNode->CardRander->SetOrder(7);
-		newNode->CardRander->SetTransform({ {75 * i, 0}, {250,250} });
-		newNode->CardRander->CreateAnimation("ZeroBubble", "Cards.png", 3, 3, 0.3f, false);
-		newNode->CardRander->ChangeAnimation("ZeroBubble");
-		//newNode->CardRander->SetActive(false);
-
-		if (head == nullptr) {
-			head = tail = newNode;
-		}
-		else {
-			tail->Next = newNode;
-			newNode->Prev = tail;
-			tail = newNode;
-		}
-	}
 }
 
 void ACardInventory::GamePause()
