@@ -20,6 +20,9 @@ void ACardInventory::AddCard(int _Card)
 {
     for (size_t i = 0; i < _Card; i++)
     {
+        if (CardList.size() > 13) {
+            CardList.erase(CardList.begin());
+        }
 
         Node newNode;
         newNode.CardRander = CreateImageRenderer();
@@ -34,15 +37,7 @@ void ACardInventory::AddCard(int _Card)
 
 int ACardInventory::CardListSize()
 {
-    int size = 0;
-    Node* currentNode = head;
-    while (currentNode != nullptr)
-    {
-        size++;
-        currentNode = currentNode->Next;
-    }
-
-    return size;
+    return static_cast<int>(CardList.size());
 }
 
 void ACardInventory::ACardInventory::BeginPlay()

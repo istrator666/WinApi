@@ -300,12 +300,7 @@ void UTestStageLevel::StageMoveMonster(AMonster* _Monster, FVector _Location)
 
 FVector UTestStageLevel::RandomSpawnLocation(FVector _Location)
 {
-
-	static std::random_device rd;
-	static std::mt19937 gen(rd());
-	std::uniform_int_distribution<> dis(0, 3);
-
-	int selectedIndex = dis(gen);
+	int selectedIndex = RandomEngine.RandomInt(0, 3);
 
 	switch (selectedIndex)
 	{
@@ -346,10 +341,10 @@ void UTestStageLevel::SpawnTileType(FVector _Location, TileType _TileType, Monst
 	switch (_TileType)
 	{
 	case TileType::WASTELAND:
-		if (RandomEngine.RandomFloat(0, 1.0) < 0.25)
+		if (RandomEngine.RandomFloat(0, 1.0) < 0.15)
 		{
 			MonsterSpawn(_Location, _MonsterType);
-			MonsterSpawn(_Location, _MonsterType);
+			//MonsterSpawn(_Location, _MonsterType);
 		}
 		break;
 	case TileType::CEMETERY:

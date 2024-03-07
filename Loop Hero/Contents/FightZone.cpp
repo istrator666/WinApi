@@ -99,6 +99,11 @@ void AFightZone::Battle(float _DeltaTime)
 
 		if (nullptr != TargetMonster)
 		{
+			if (!PlayerFight->IsDeath())
+			{
+				int PlayerAttackGauge = static_cast<int>((PlayerFight->GetAttackGauge() / 100) * 52);
+				PlayerFight->SetPlyerAttackGaugeBar(PlayerAttackGauge);
+			}
 			bool AttCheck = PlayerFight->AttackSpeed(*PlayerFight, _DeltaTime);
 
 			if (PlayerFight->GetCurrentAnimationName() != "ATTACK")
@@ -139,6 +144,11 @@ void AFightZone::Battle(float _DeltaTime)
 				continue;
 			}
 
+			if (!MonsterFight->IsDeath())
+			{
+				int MonsterAttackGauge = static_cast<int>((MonsterFight->GetAttackGauge() / 100) * 52);
+				MonsterFight->SetPlyerAttackGaugeBar(MonsterAttackGauge);
+			}
 			bool AttCheck = MonsterFight->AttackSpeed(*MonsterFight, _DeltaTime);
 
 			if (MonsterFight->GetCurrentAnimationName() != "ATTACK")
