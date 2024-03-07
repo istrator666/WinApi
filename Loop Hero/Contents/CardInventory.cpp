@@ -16,17 +16,17 @@ ACardInventory::~ACardInventory()
 	}
 }
 
-void ACardInventory::AddCard(int card)
+void ACardInventory::AddCard(int _Card)
 {
-    if (CardListSize() < 13)
+    if (CardListSize() < _Card)
     {
         Node* newNode = new Node();
         newNode->CardRander = CreateImageRenderer();
         newNode->CardRander->SetImage("Cards.png");
         newNode->CardRander->SetOrder(7);
         newNode->CardRander->SetTransform({ {75 * CardListSize(), 0}, {250,250} });
-        newNode->CardRander->CreateAnimation("Card" + std::to_string(card), "Cards.png", 3, 3, 0.3f, false);
-        newNode->CardRander->ChangeAnimation("Card" + std::to_string(card));
+        newNode->CardRander->CreateAnimation("Card", "Cards.png", 3, 3, 0.3f, false);
+        newNode->CardRander->ChangeAnimation("Card");
 
         if (head == nullptr) {
             head = tail = newNode;

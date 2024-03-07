@@ -186,7 +186,7 @@ void UTestStageLevel::Fight(float _DeltaTime)
 
 void UTestStageLevel::MonsterDrop()
 {
-	int card = RandomEngine.RandomInt(0, 3);
+	int card = RandomEngine.RandomInt(0, 2);
 
 	CardInventory->AddCard(card);
 }
