@@ -37,5 +37,7 @@ private:
 
 	void GamePause();
 
+	std::list<Node> CardList;
+
 };
 

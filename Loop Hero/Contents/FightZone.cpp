@@ -1,4 +1,5 @@
 #include "FightZone.h"
+#include "TestStageLevel.h"
 
 AFightZone::AFightZone()
 {
@@ -56,94 +57,113 @@ bool AFightZone::AllMonsterDeath()
 }
 
 void AFightZone::Battle(float _DeltaTime)
-{	
+{
 	if ("DEATH" == PlayerFight->GetCurrentAnimationName())
 	{
 		return;
 	}
 
-	for (auto& MonsterFight : MonsterFights)
+	// 플레이어 사망
 	{
-		if (MonsterFight->IsDeath())
+		if (PlayerFight->IsDeath() && PlayerFight->GetCurrentAnimationName() != "DEATH")
 		{
-			if (true == PlayerFight->IsAnimationEnd() && "DEATH" != PlayerFight->GetCurrentAnimationName())
-			{
-				PlayerFight->SetChangeAnimation(CharacterStatus::Idle);
-			}
-			continue;
+			PlayerFight->SetChangeAnimation(CharacterStatus::Death);
 		}
-		else
+	}
+
+	// 몬스터 사망
+	{
+		for (AMonsterFight* MonsterFight : MonsterFights)
 		{
-			if (true == PlayerFight->IsAnimationEnd() && "DEATH" != PlayerFight->GetCurrentAnimationName())
+			if (true == MonsterFight->IsDeath() && MonsterFight->GetCurrentAnimationName() != "DEATH")
 			{
-				PlayerFight->SetChangeAnimation(CharacterStatus::Idle);
-			}
-
-			if (true == MonsterFight->IsAnimationEnd() && "DEATH" != MonsterFight->GetCurrentAnimationName())
-			{
-				MonsterFight->SetChangeAnimation(CharacterStatus::Idle);
-			}
-		}
-
-		if (nullptr != PlayerFight && nullptr != MonsterFight)
-		{
-
-			if (!PlayerFight->IsDeath())
-			{
-				int PlayerAttackGauge = static_cast<int>((PlayerFight->GetAttackGauge() / 100) * 52);
-				PlayerFight->SetPlyerAttackGaugeBar(PlayerAttackGauge);
-			}
-
-			if (!MonsterFight->IsDeath())
-			{
-				int MonsterAttackGauge = static_cast<int>((MonsterFight->GetAttackGauge() / 100) * 52);
-				MonsterFight->SetPlyerAttackGaugeBar(MonsterAttackGauge);
-			}
-
-			if (true == PlayerFight->AttackSpeed(*PlayerFight, _DeltaTime))
-			{
-				PlayerFight->SetChangeAnimation(CharacterStatus::Attack);
-				PlayerFight->AttackDamege(*PlayerFight, *MonsterFight);
-
-				int CurrentHPBar = MonsterFight->GetHP();
-				int HPbar = static_cast<int>((static_cast<float>(CurrentHPBar) / MonsterFight->GetMaxHP()) * 52);
-				MonsterFight->SetMonsterHPbar(HPbar);
-
-				if ("ATTACK" != MonsterFight->GetCurrentAnimationName())
-				{
-					MonsterFight->SetChangeAnimation(CharacterStatus::Hurt);
-				}
-			}
-
-			if (true == MonsterFight->AttackSpeed(*MonsterFight, _DeltaTime))
-			{
-				MonsterFight->SetChangeAnimation(CharacterStatus::Attack);
-				MonsterFight->AttackDamege(*MonsterFight, *PlayerFight);
-
-				int CurrentHPBar = PlayerFight->GetHP();
-				int HPbar = static_cast<int>((static_cast<float>(CurrentHPBar) / PlayerFight->GetMaxHP()) * 52);
-				PlayerFight->SetPlayerHPbar(HPbar);
-
-				if ("ATTACK" != PlayerFight->GetCurrentAnimationName())
-				{
-					PlayerFight->SetChangeAnimation(CharacterStatus::Hurt);
-				}
-			}
-
-			if (MonsterFight->IsDeath())
-			{
+				UTestStageLevel* Level = dynamic_cast<UTestStageLevel*>(GetWorld());
+				Level->MonsterDrop();
 				MonsterFight->SetChangeAnimation(CharacterStatus::Death);
-				if (MonsterFight->IsAnimationEnd())
-				{
-					continue;
-				}
 			}
 		}
 	}
 
-	if (PlayerFight->IsDeath())
+	// 플레이어 공격
 	{
-		PlayerFight->SetChangeAnimation(CharacterStatus::Death);
+		AMonsterFight* TargetMonster = nullptr;
+
+		for (AMonsterFight* MonsterFight : MonsterFights)
+		{
+			if (false == MonsterFight->IsDeath())
+			{
+				TargetMonster = MonsterFight;
+				break;
+			}
+		}
+
+		if (nullptr != TargetMonster)
+		{
+			bool AttCheck = PlayerFight->AttackSpeed(*PlayerFight, _DeltaTime);
+
+			if (PlayerFight->GetCurrentAnimationName() != "ATTACK")
+			{
+				if (true == AttCheck)
+				{
+					PlayerFight->SetChangeAnimation(CharacterStatus::Attack);
+					PlayerFight->AttackDamege(*PlayerFight, *TargetMonster);
+
+					int CurrentHPBar = TargetMonster->GetHP();
+					int HPbar = static_cast<int>((static_cast<float>(CurrentHPBar) / TargetMonster->GetMaxHP()) * 52);
+					TargetMonster->SetMonsterHPbar(HPbar);
+
+					if ("ATTACK" != TargetMonster->GetCurrentAnimationName())
+					{
+						TargetMonster->SetChangeAnimation(CharacterStatus::Hurt);
+					}
+				}
+			}
+			else if (PlayerFight->GetCurrentAnimationName() == "ATTACK" && true == PlayerFight->IsAnimationEnd())
+			{
+				PlayerFight->SetChangeAnimation(CharacterStatus::Idle);
+			}
+
+		}
+	}
+
+	// 몬스터 공격
+	{
+		for (AMonsterFight* MonsterFight : MonsterFights)
+		{
+			if (true == MonsterFight->IsDeath())
+			{
+				if (true == PlayerFight->IsAnimationEnd() && "DEATH" != PlayerFight->GetCurrentAnimationName())
+				{
+					PlayerFight->SetChangeAnimation(CharacterStatus::Idle);
+				}
+				continue;
+			}
+
+			bool AttCheck = MonsterFight->AttackSpeed(*MonsterFight, _DeltaTime);
+
+			if (MonsterFight->GetCurrentAnimationName() != "ATTACK")
+			{
+				if (true == AttCheck)
+				{
+					MonsterFight->SetChangeAnimation(CharacterStatus::Attack);
+					MonsterFight->AttackDamege(*MonsterFight, *PlayerFight);
+
+					int CurrentHPBar = PlayerFight->GetHP();
+					int HPbar = static_cast<int>((static_cast<float>(CurrentHPBar) / PlayerFight->GetMaxHP()) * 52);
+					PlayerFight->SetPlayerHPbar(HPbar);
+
+					if ("ATTACK" != PlayerFight->GetCurrentAnimationName())
+					{
+						PlayerFight->SetChangeAnimation(CharacterStatus::Hurt);
+					}
+				}
+			}
+			else if (MonsterFight->GetCurrentAnimationName() == "ATTACK" && true == MonsterFight->IsAnimationEnd())
+			{
+				MonsterFight->SetChangeAnimation(CharacterStatus::Idle);
+			}
+
+		}
 	}
 }
 

@@ -150,18 +150,6 @@ void UTestStageLevel::Fight(float _DeltaTime)
 	MonsterSpawnTimeCheck(_DeltaTime / 5);
 	FightZone->Battle(_DeltaTime);
 
-	for (size_t i = 0; i < MonsterFights.size(); i++)
-	{
-		if (true == MonsterFights[i]->IsDeath())
-		{
-			MonsterDrop();
-		}
-		else
-		{
-			return;
-		}
-	}
-
 	if (true == FightZone->AllMonsterDeath())
 	{
 		FightZone->SetActive(false);

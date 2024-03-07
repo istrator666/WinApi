@@ -18,24 +18,17 @@ ACardInventory::~ACardInventory()
 
 void ACardInventory::AddCard(int _Card)
 {
-    if (CardListSize() < _Card)
+    for (size_t i = 0; i < _Card; i++)
     {
-        Node* newNode = new Node();
-        newNode->CardRander = CreateImageRenderer();
-        newNode->CardRander->SetImage("Cards.png");
-        newNode->CardRander->SetOrder(7);
-        newNode->CardRander->SetTransform({ {75 * CardListSize(), 0}, {250,250} });
-        newNode->CardRander->CreateAnimation("Card", "Cards.png", 3, 3, 0.3f, false);
-        newNode->CardRander->ChangeAnimation("Card");
 
-        if (head == nullptr) {
-            head = tail = newNode;
-        }
-        else {
-            tail->Next = newNode;
-            newNode->Prev = tail;
-            tail = newNode;
-        }
+        Node newNode;
+        newNode.CardRander = CreateImageRenderer();
+        newNode.CardRander->SetImage("Cards.png");
+        newNode.CardRander->SetOrder(7);
+        newNode.CardRander->SetTransform({ {75 * static_cast<int> (CardList.size()), 0}, {250,250} });
+        newNode.CardRander->CreateAnimation("Card", "Cards.png", 3, 3, 0.3f, false);
+        newNode.CardRander->ChangeAnimation("Card");
+        CardList.push_back(newNode);
     }
 }
 
