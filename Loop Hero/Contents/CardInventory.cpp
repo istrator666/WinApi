@@ -8,30 +8,38 @@ ACardInventory::ACardInventory()
 
 ACardInventory::~ACardInventory()
 {
-	while (head) 
-	{
-		Node* next = head->Next;
-		delete head;
-		head = next;
-	}
 }
 
 void ACardInventory::AddCard(int _Card)
 {
     for (size_t i = 0; i < _Card; i++)
     {
-        if (CardList.size() > 13) {
-            CardList.erase(CardList.begin());
-        }
+        Node CardNode;
+        CardNode.CardRander = CreateImageRenderer();
+        CardNode.CardRander->SetImage("Cards.png");
+        CardNode.CardRander->SetOrder(7);
+        CardNode.CardRander->CreateAnimation("Card", "Cards.png", 3, 3, 0.3f, false);
+        CardNode.CardRander->ChangeAnimation("Card");
+        CardList.push_back(CardNode);
+    }
 
-        Node newNode;
-        newNode.CardRander = CreateImageRenderer();
-        newNode.CardRander->SetImage("Cards.png");
-        newNode.CardRander->SetOrder(7);
-        newNode.CardRander->SetTransform({ {75 * static_cast<int> (CardList.size()), 0}, {250,250} });
-        newNode.CardRander->CreateAnimation("Card", "Cards.png", 3, 3, 0.3f, false);
-        newNode.CardRander->ChangeAnimation("Card");
-        CardList.push_back(newNode);
+    if (CardList.size() > 13)
+    {
+        size_t StartSize = CardList.size();
+        for (size_t i = 0; i < StartSize - 13; i++)
+        {
+            Node& Node = CardList.front();
+            Node.CardRander->Destroy();
+            CardList.erase(CardList.begin());
+
+        }
+    }
+
+    int Count = 0;
+    for (Node& CurNode : CardList)
+    {
+        CurNode.CardRander->SetTransform({ {75 * Count, 0}, {250,250} });
+        ++Count;
     }
 }
 
@@ -59,19 +67,11 @@ void ACardInventory::GamePause()
     {
         if (!IsPause)
         {
-            Node* currentNode = head;
-            double delay = 0.0;
-            while (currentNode != nullptr)
+            for (std::list<Node>::iterator CurrentNode = CardList.begin(); CurrentNode != CardList.end(); ++CurrentNode)
             {
-                int CurPosX = static_cast<int>(currentNode->CardRander->GetTransform().GetPosition().X);
-                int CurPosY = static_cast<int>(currentNode->CardRander->GetTransform().GetPosition().Y) - 30;
-                std::thread([currentNode, CurPosX, CurPosY, delay]() {
-                    std::this_thread::sleep_for(std::chrono::milliseconds(static_cast<int>(std::round(delay * 1000))));
-                    currentNode->CardRander->SetTransform({ {CurPosX, CurPosY}, {250,250} });
-                    }).detach();
-
-                    delay += 0.1;
-                    currentNode = currentNode->Next;
+                int CurPosX = static_cast<int>(CurrentNode->CardRander->GetTransform().GetPosition().X);
+                int CurPosY = -30; //static_cast<int>(CurrentNode->CardRander->GetTransform().GetPosition().Y) - 30;
+                CurrentNode->CardRander->SetTransform({ {CurPosX, CurPosY}, {250,250} });
             }
             IsPause = true;
         }
@@ -80,60 +80,13 @@ void ACardInventory::GamePause()
     {
         if (IsPause)
         {
-            Node* currentNode = head;
-            double delay = 0.0;
-            while (currentNode != nullptr)
+            for (std::list<Node>::iterator CurrentNode = CardList.begin(); CurrentNode != CardList.end(); ++CurrentNode)
             {
-                int CurPosX = static_cast<int>(currentNode->CardRander->GetTransform().GetPosition().X);
-                int CurPosY = static_cast<int>(currentNode->CardRander->GetTransform().GetPosition().Y) + 30;
-                std::thread([currentNode, CurPosX, CurPosY, delay]() {
-                    std::this_thread::sleep_for(std::chrono::milliseconds(static_cast<int>(std::round(delay * 1000))));
-                    currentNode->CardRander->SetTransform({ {CurPosX, CurPosY}, {250,250} });
-                    }).detach();
-
-                    delay += 0.1;
-                    currentNode = currentNode->Next;
+                int CurPosX = static_cast<int>(CurrentNode->CardRander->GetTransform().GetPosition().X);
+                int CurPosY = 0; //static_cast<int>(CurrentNode->CardRander->GetTransform().GetPosition().Y) + 30;
+                CurrentNode->CardRander->SetTransform({ {CurPosX, CurPosY}, {250,250} });
             }
             IsPause = false;
         }
     }
 }
-
-//void ACardInventory::GamePause()
-//{
-//	FVector PosCheck = UMouseFunction::GetMousePos();
-//
-//
-//
-//	if ((0 <= PosCheck.X && 975 >= PosCheck.X) && (650 <= PosCheck.Y && 800 >= PosCheck.Y))
-//	{
-//		if (!IsPause)
-//		{
-//			Node* currentNode = head;
-//			while (currentNode != nullptr)
-//			{
-//				int CurPosX = static_cast<int>(currentNode->CardRander->GetTransform().GetPosition().X);
-//				int CurPosY = static_cast<int>(currentNode->CardRander->GetTransform().GetPosition().Y) - 30;
-//				currentNode->CardRander->SetTransform({ {CurPosX, CurPosY}, {250,250} });
-//				currentNode = currentNode->Next;
-//			}
-//			IsPause = true;
-//		}
-//	}
-//	else
-//	{
-//		if (IsPause)
-//		{
-//			Node* currentNode = head;
-//			while (currentNode != nullptr)
-//			{
-//				int CurPosX = static_cast<int>(currentNode->CardRander->GetTransform().GetPosition().X);
-//				int CurPosY = static_cast<int>(currentNode->CardRander->GetTransform().GetPosition().Y) + 30;
-//				FVector CurPos = currentNode->CardRander->GetTransform().GetPosition();
-//				currentNode->CardRander->SetTransform({ {CurPosX, CurPosY}, {250,250} });
-//				currentNode = currentNode->Next;
-//			}
-//			IsPause = false;
-//		}
-//	}
-//}

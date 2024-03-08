@@ -6,8 +6,6 @@ class Node
 {
 public:
 	UImageRenderer* CardRander = nullptr;
-	Node* Next = nullptr;
-	Node* Prev = nullptr;
 };
 
 class ACardInventory : public AActor
@@ -31,11 +29,11 @@ protected:
 	void Tick(float _DeltaTime) override;
 
 private:
-	Node* head = nullptr;
-	Node* tail = nullptr;
 	bool IsPause = false;
+	float CardDeleteTime = 0.0f;
 
 	void GamePause();
+	
 
 	std::list<Node> CardList;
 

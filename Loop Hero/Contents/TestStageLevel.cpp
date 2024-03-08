@@ -34,6 +34,13 @@ void UTestStageLevel::BeginPlay()
 
 }
 
+void UTestStageLevel::Tick(float _DeltaTime)
+{
+	ULevel::Tick(_DeltaTime);
+
+	StateUpdate(_DeltaTime);
+}
+
 void UTestStageLevel::ChangeState(EStageState _State)
 {
 	switch (_State)
@@ -174,7 +181,7 @@ void UTestStageLevel::Fight(float _DeltaTime)
 
 void UTestStageLevel::MonsterDrop()
 {
-	int card = RandomEngine.RandomInt(0, 2);
+	int card = RandomEngine.RandomInt(10, 10);
 
 	CardInventory->AddCard(card);
 }
@@ -194,13 +201,6 @@ void UTestStageLevel::StateUpdate(float _DeltaTime)
 	default:
 		break;
 	}
-}
-
-void UTestStageLevel::Tick(float _DeltaTime)
-{
-	ULevel::Tick(_DeltaTime);
-
-	StateUpdate(_DeltaTime);
 }
 
 std::vector<FVector> UTestStageLevel::StagePoints(const std::string& _StageName)
