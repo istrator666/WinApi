@@ -31,8 +31,12 @@ void ACardInventory::AddCard(int _Card, FVector _MonsterPosition)
         for (size_t i = 0; i < StartSize - 13; i++)
         {
             Node& DeleteNode = CardList.front();
-            DeleteNode.CardRander->Destroy();
+            //DeleteNode.CardRander->Destroy();
 
+            DeleteNode.StartPosition = DeleteNode.CardRander->GetPosition();
+            DeleteNode.EndPosition = { DeleteNode.StartPosition.X, DeleteNode.StartPosition.Y -100};
+            DeleteNode.Movetime = 0.0f;
+            DeleteList.push_back(DeleteNode);
             CardList.erase(CardList.begin());
         }
     }
@@ -68,21 +72,28 @@ void ACardInventory::ACardInventory::Tick(float _DeltaTime)
         CurNode.CardRander->SetPosition(CurPos);
     }
 
-    //if (CardList.size() >= 13)
-    //{
-    //   for (Node& DeleteNode : CardList)
-    //   {
-    //   DeleteNode = CardList.front();
-    //   DeleteNode.Movetime += _DeltaTime * 2.0f;
-    //   DeleteNode.StartPosition = DeleteNode.CardRander->GetPosition();
-    //   DeleteNode.EndPosition = FVector(0, 500);
+    std::list<Node>::iterator StartIter = DeleteList.begin();
+    std::list<Node>::iterator EndIter = DeleteList.end();
 
-    //   FVector CurPos = FVector::LerpClamp(DeleteNode.StartPosition, DeleteNode.EndPosition, DeleteNode.Movetime);
+    for (; StartIter != EndIter; )
+    {
+        Node& CurNode = StartIter.operator*();
 
-    //   DeleteNode.CardRander->SetPosition(CurPos);
+        if (CurNode.Movetime < 1.0f)
+        {
+            CurNode.Movetime += _DeltaTime * 2.0f;
 
-    //   }
-    //}
+            FVector CurPos = FVector::LerpClamp(CurNode.StartPosition, CurNode.EndPosition, CurNode.Movetime);
+            CurNode.CardRander->SetPosition(CurPos);
+
+            ++StartIter;
+            continue;
+        }
+
+        CurNode.CardRander->Destroy();
+
+        StartIter = DeleteList.erase(StartIter);
+    }
 
 	//GamePause();
 }

@@ -40,6 +40,7 @@ private:
 	
 
 	std::list<Node> CardList;
+	std::list<Node> DeleteList;
 
 };
 

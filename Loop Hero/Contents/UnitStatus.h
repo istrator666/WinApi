@@ -179,7 +179,7 @@ private:
 	int LifeDrain = 0;
 	int Level = 0;
 
-	float MoveSpeed = 100;
+	float MoveSpeed = 250.0f;
 
 };
 

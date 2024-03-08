@@ -215,7 +215,7 @@ void UTestStageLevel::GamePause()
 
 void UTestStageLevel::MonsterDrop(FVector _MonsterPosition)
 {
-	int Card = RandomEngine.RandomInt(1, 2);
+	int Card = RandomEngine.RandomInt(10, 10);
 	CardInventory->AddCard(Card, _MonsterPosition);
 }
 
