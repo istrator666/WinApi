@@ -39,6 +39,12 @@ void UTestStageLevel::Tick(float _DeltaTime)
 	ULevel::Tick(_DeltaTime);
 
 	StateUpdate(_DeltaTime);
+
+	//if (UEngineInput::IsDown(VK_RBUTTON) && false ==IsPause)
+	//{
+	//	IsPause = true;
+	//	ChangeState(EStageState::Pause);
+	//}
 }
 
 void UTestStageLevel::ChangeState(EStageState _State)
@@ -50,6 +56,10 @@ void UTestStageLevel::ChangeState(EStageState _State)
 		break;
 	case EStageState::Fight:
 		FightStart();
+
+		break;
+	case EStageState::Pause:
+		//GamePause();
 		break;
 	default:
 		break;
@@ -179,6 +189,19 @@ void UTestStageLevel::Fight(float _DeltaTime)
 	}
 }
 
+bool UTestStageLevel::GamePause()
+{
+
+	if (UEngineInput::IsDown(VK_RBUTTON))
+	{
+		IsPause = false;
+		ChangeState(EStageState::Move);
+		return IsPause;
+	}
+
+	return IsPause;
+}
+
 void UTestStageLevel::MonsterDrop()
 {
 	int card = RandomEngine.RandomInt(10, 10);
@@ -197,6 +220,10 @@ void UTestStageLevel::StateUpdate(float _DeltaTime)
 	}
 	case EStageState::Fight:
 		Fight(_DeltaTime);
+		break;
+
+	case EStageState::Pause:
+		//GamePause();
 		break;
 	default:
 		break;
