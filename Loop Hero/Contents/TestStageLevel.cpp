@@ -71,9 +71,9 @@ void UTestStageLevel::MonsterSpawnTimeCheck(float _DeltaTime)
 	if (0 == StageprogressGauge->GetDailyGaugeUpdate())
 	{
 		mSpawn = SpawnTileLocation();
-		for (const SpawnTileData& Tile : mSpawn)
+		for (SpawnTileData& Tile : mSpawn)
 		{
-			SpawnTileType(Tile.TileLocation, Tile.Tile, Tile.Monster);
+			SpawnTileType(Tile);
 		}
 	}
 }
@@ -215,7 +215,7 @@ void UTestStageLevel::GamePause()
 
 void UTestStageLevel::MonsterDrop(FVector _MonsterPosition)
 {
-	int Card = RandomEngine.RandomInt(10, 10);
+	int Card = RandomEngine.RandomInt(1, 2);
 	CardInventory->AddCard(Card, _MonsterPosition);
 }
 
@@ -353,34 +353,34 @@ std::vector<SpawnTileData> UTestStageLevel::SpawnTileLocation()
 {
 	std::vector<SpawnTileData> SpawnTile =
 	{
-		{ RandomSpawnLocation({610, 210, 0, 0}), TileType::WASTELAND, MonsterType::Slime },
-		{ RandomSpawnLocation({610, 260, 0, 0}), TileType::WASTELAND, MonsterType::Slime },
-		{ RandomSpawnLocation({610, 310, 0, 0}), TileType::WASTELAND, MonsterType::Slime },
-		{ RandomSpawnLocation({610, 360, 0, 0}), TileType::WASTELAND, MonsterType::Slime },
-		{ RandomSpawnLocation({560, 360, 0, 0}), TileType::WASTELAND, MonsterType::Slime },
-		{ RandomSpawnLocation({560, 410, 0, 0}), TileType::WASTELAND, MonsterType::Slime },
-		{ RandomSpawnLocation({510, 410, 0, 0}), TileType::WASTELAND, MonsterType::Slime },
-		{ RandomSpawnLocation({460, 410, 0, 0}), TileType::WASTELAND, MonsterType::Slime },
-		{ RandomSpawnLocation({410, 410, 0, 0}), TileType::WASTELAND, MonsterType::Slime },
-		{ RandomSpawnLocation({410, 360, 0, 0}), TileType::WASTELAND, MonsterType::Slime },
-		{ RandomSpawnLocation({410, 310, 0, 0}), TileType::WASTELAND, MonsterType::Slime },
-		{ RandomSpawnLocation({410, 260, 0, 0}), TileType::WASTELAND, MonsterType::Slime },
-		{ RandomSpawnLocation({460, 260, 0, 0}), TileType::WASTELAND, MonsterType::Slime },
-		{ RandomSpawnLocation({460, 210, 0, 0}), TileType::WASTELAND, MonsterType::Slime },
-		{ RandomSpawnLocation({510, 210, 0, 0}), TileType::WASTELAND, MonsterType::Slime },
+		{ RandomSpawnLocation({610, 210, 0, 0}), TileType::WASTELAND, MonsterType::Slime, MonsterSpawnCount },
+		{ RandomSpawnLocation({610, 260, 0, 0}), TileType::WASTELAND, MonsterType::Slime, MonsterSpawnCount },
+		{ RandomSpawnLocation({610, 310, 0, 0}), TileType::WASTELAND, MonsterType::Slime, MonsterSpawnCount },
+		{ RandomSpawnLocation({610, 360, 0, 0}), TileType::WASTELAND, MonsterType::Slime ,MonsterSpawnCount },
+		{ RandomSpawnLocation({560, 360, 0, 0}), TileType::WASTELAND, MonsterType::Slime, MonsterSpawnCount },
+		{ RandomSpawnLocation({560, 410, 0, 0}), TileType::WASTELAND, MonsterType::Slime, MonsterSpawnCount },
+		{ RandomSpawnLocation({510, 410, 0, 0}), TileType::WASTELAND, MonsterType::Slime, MonsterSpawnCount },
+		{ RandomSpawnLocation({460, 410, 0, 0}), TileType::WASTELAND, MonsterType::Slime, MonsterSpawnCount },
+		{ RandomSpawnLocation({410, 410, 0, 0}), TileType::WASTELAND, MonsterType::Slime ,MonsterSpawnCount },
+		{ RandomSpawnLocation({410, 360, 0, 0}), TileType::WASTELAND, MonsterType::Slime, MonsterSpawnCount },
+		{ RandomSpawnLocation({410, 310, 0, 0}), TileType::WASTELAND, MonsterType::Slime, MonsterSpawnCount },
+		{ RandomSpawnLocation({410, 260, 0, 0}), TileType::WASTELAND, MonsterType::Slime, MonsterSpawnCount },
+		{ RandomSpawnLocation({460, 260, 0, 0}), TileType::WASTELAND, MonsterType::Slime, MonsterSpawnCount },
+		{ RandomSpawnLocation({460, 210, 0, 0}), TileType::WASTELAND, MonsterType::Slime, MonsterSpawnCount },
+		{ RandomSpawnLocation({510, 210, 0, 0}), TileType::WASTELAND, MonsterType::Slime, MonsterSpawnCount },
 	};
 
 	return SpawnTile;
 }
 
-void UTestStageLevel::SpawnTileType(FVector _Location, TileType _TileType, MonsterType _MonsterType)
+void UTestStageLevel::SpawnTileType(SpawnTileData& _TileData)
 {
-	switch (_TileType)
+	switch (_TileData.Tile)
 	{
 	case TileType::WASTELAND:
 		if (RandomEngine.RandomFloat(0, 1.0) < 0.25)
 		{
-			MonsterSpawn(_Location, _MonsterType);
+			MonsterSpawn(_TileData);
 		}
 		break;
 	case TileType::CEMETERY:
@@ -412,13 +412,20 @@ void UTestStageLevel::SpawnTileType(FVector _Location, TileType _TileType, Monst
 	}
 }
 
-void UTestStageLevel::MonsterSpawn(FVector _Location, MonsterType _MonsterType)
+void UTestStageLevel::MonsterSpawn(SpawnTileData& _TileData)
 {
+	//if (MonsterSpawnCount > 5)
+	//{
+	//	return;
+	//}
+
 	Monster = SpawnActor<AMonster>();
-	Monster->SetActorLocation(_Location);
+	Monster->SetActorLocation(_TileData.TileLocation);
 	Monster->SetMoveSpeed(50.0f);
-	StageMoveMonster(Monster, _Location);
+	StageMoveMonster(Monster, _TileData.TileLocation);
 	Monsters.push_back(Monster);
+
+	//++MonsterSpawnCount;
 }
 
 void UTestStageLevel::SetStageUI()

@@ -14,6 +14,7 @@ struct SpawnTileData {
 	FVector TileLocation;
 	TileType Tile;
 	MonsterType Monster;
+	int MonsterCountTile;
 };
 
 class UTestStageLevel : public ULevel
@@ -60,11 +61,16 @@ protected:
 	void Tick(float _DeltaTime) override;
 
 private:
+
+	UEngineRandom RandomEngine;
+
+	// 필드 플레이어, 몬스터
 	APlayer* Player = nullptr;
 	std::vector<AMonster*> Monsters;
 	std::vector<AMonster*> FightCheckMonsters;
 	AMonster* Monster = nullptr;
 
+	// UI
 	StageUI::AStageProgressGauge* StageprogressGauge = nullptr;
 	StageUI::ASpeedPanel* SppedPanel = nullptr;
 	StageUI::APlashka* APlashka = nullptr;
@@ -74,29 +80,32 @@ private:
 
 	EQInventory::AEQInventoryUI* EQInventory = nullptr;
 
+	// Fight
 	AFightZone* FightZone = nullptr;
 	APlayerFight* PlayerFight = nullptr;
-
 	std::vector<AMonsterFight*> MonsterFights;
-
-	bool TileSetup = false;
 	bool IsFight = false;
 
+	// 플레이어, 몬스터 이동
 	std::vector<FVector> StagePoints(const std::string& _StageName);
 	void StageMovePlayer(APlayer* _Player);
-
 	std::vector<FVector> MonsterMovePoints(FVector _Location);
 	void StageMoveMonster(AMonster* _Monster, FVector _Location);
 
-	std::vector<SpawnTileData> mSpawn;
-	FVector RandomSpawnLocation(FVector _Location);
-	std::vector<SpawnTileData> SpawnTileLocation();
-	void SpawnTileType(FVector _Location, TileType _TileType, MonsterType _MonsterType);
-	void MonsterSpawn(FVector _Location, MonsterType _MonsterType);
+
+	// 타일, 몬스터 생성
+	bool TileSetup = false;
 	float SpawnTimeCheck = 0.0f;
+	int MonsterSpawnCount = 0;
+	std::vector<SpawnTileData> mSpawn;
+	std::vector<SpawnTileData> SpawnTileLocation();
+	FVector RandomSpawnLocation(FVector _Location);
+	void SpawnTileType(SpawnTileData& _TileData);
+	void MonsterSpawn(SpawnTileData& _TileData);
 
-	UEngineRandom RandomEngine;
 
+	// 초기 플레이어 상태
 	EStageState CurState = EStageState::Move;
+
 	bool IsGamePause = false;
 };

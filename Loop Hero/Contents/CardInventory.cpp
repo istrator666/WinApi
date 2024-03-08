@@ -30,8 +30,9 @@ void ACardInventory::AddCard(int _Card, FVector _MonsterPosition)
         size_t StartSize = CardList.size();
         for (size_t i = 0; i < StartSize - 13; i++)
         {
-            Node& Node = CardList.front();
-            Node.CardRander->Destroy();
+            Node& DeleteNode = CardList.front();
+            DeleteNode.CardRander->GetTransform();
+            DeleteNode.CardRander->Destroy();
             CardList.erase(CardList.begin());
 
         }
@@ -40,7 +41,6 @@ void ACardInventory::AddCard(int _Card, FVector _MonsterPosition)
     int Count = 0;
     for (Node& CurNode : CardList)
     {
-        //CurNode.CardRander->SetTransform({ _MonsterPosition, {250,250} });
         CurNode.EndPosition = FVector(75 * Count, 700);
         ++Count;
     }
