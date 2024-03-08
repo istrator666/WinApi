@@ -31,10 +31,9 @@ void ACardInventory::AddCard(int _Card, FVector _MonsterPosition)
         for (size_t i = 0; i < StartSize - 13; i++)
         {
             Node& DeleteNode = CardList.front();
-            DeleteNode.CardRander->GetTransform();
             DeleteNode.CardRander->Destroy();
-            CardList.erase(CardList.begin());
 
+            CardList.erase(CardList.begin());
         }
     }
 
@@ -68,6 +67,22 @@ void ACardInventory::ACardInventory::Tick(float _DeltaTime)
 
         CurNode.CardRander->SetPosition(CurPos);
     }
+
+    //if (CardList.size() >= 13)
+    //{
+    //   for (Node& DeleteNode : CardList)
+    //   {
+    //   DeleteNode = CardList.front();
+    //   DeleteNode.Movetime += _DeltaTime * 2.0f;
+    //   DeleteNode.StartPosition = DeleteNode.CardRander->GetPosition();
+    //   DeleteNode.EndPosition = FVector(0, 500);
+
+    //   FVector CurPos = FVector::LerpClamp(DeleteNode.StartPosition, DeleteNode.EndPosition, DeleteNode.Movetime);
+
+    //   DeleteNode.CardRander->SetPosition(CurPos);
+
+    //   }
+    //}
 
 	//GamePause();
 }

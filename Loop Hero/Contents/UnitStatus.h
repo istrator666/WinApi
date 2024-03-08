@@ -169,7 +169,7 @@ private:
 	int MinAttck = 30; //4
 	int MaxAttck = 60; //6
 	int Defense = 0;
-	float AttackSpeed = 1.5f;
+	float AttackSpeed = 1.0f;
 	float AttackGauge = 0;
 	int Stamina = 100;
 	int HPRegen = 0;
