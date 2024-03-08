@@ -5,6 +5,10 @@ typedef int Card;
 class Node
 {
 public:
+	FVector StartPosition;
+	FVector EndPosition;
+	float Movetime = 0.0f;
+
 	UImageRenderer* CardRander = nullptr;
 };
 
@@ -21,7 +25,7 @@ public:
 	ACardInventory& operator=(const ACardInventory& _Other) = delete;
 	ACardInventory& operator=(ACardInventory&& _Other) noexcept = delete;
 
-	void AddCard(int card);
+	void AddCard(int _Card, FVector _MonsterPosition);
 	int CardListSize();
 
 protected:

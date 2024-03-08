@@ -10,16 +10,18 @@ ACardInventory::~ACardInventory()
 {
 }
 
-void ACardInventory::AddCard(int _Card)
+void ACardInventory::AddCard(int _Card, FVector _MonsterPosition)
 {
     for (size_t i = 0; i < _Card; i++)
     {
         Node CardNode;
         CardNode.CardRander = CreateImageRenderer();
         CardNode.CardRander->SetImage("Cards.png");
-        CardNode.CardRander->SetOrder(7);
+        CardNode.CardRander->SetOrder(9);
         CardNode.CardRander->CreateAnimation("Card", "Cards.png", 3, 3, 0.3f, false);
         CardNode.CardRander->ChangeAnimation("Card");
+        CardNode.CardRander->SetTransform({ _MonsterPosition, {250,250} });
+        CardNode.StartPosition = _MonsterPosition;
         CardList.push_back(CardNode);
     }
 
@@ -38,7 +40,8 @@ void ACardInventory::AddCard(int _Card)
     int Count = 0;
     for (Node& CurNode : CardList)
     {
-        CurNode.CardRander->SetTransform({ {75 * Count, 0}, {250,250} });
+        //CurNode.CardRander->SetTransform({ _MonsterPosition, {250,250} });
+        CurNode.EndPosition = FVector(75 * Count, 700);
         ++Count;
     }
 }
@@ -56,7 +59,17 @@ void ACardInventory::ACardInventory::BeginPlay()
 void ACardInventory::ACardInventory::Tick(float _DeltaTime)
 {
 	AActor::Tick(_DeltaTime);
-	GamePause();
+
+    for (Node& CurNode : CardList)
+    {
+        CurNode.Movetime += _DeltaTime * 2.0f;
+
+        FVector CurPos = FVector::LerpClamp(CurNode.StartPosition, CurNode.EndPosition, CurNode.Movetime);
+
+        CurNode.CardRander->SetPosition(CurPos);
+    }
+
+	//GamePause();
 }
 
 void ACardInventory::GamePause()

@@ -24,13 +24,13 @@ void UTestStageLevel::BeginPlay()
 	SetEQInventory();
 
 	FightZone = SpawnActor<AFightZone>();
-	FightZone->SetActive(false, 0.1f);
+	FightZone->SetActive(false);
 
 	PlayerFight = SpawnActor<APlayerFight>();
-	PlayerFight->SetActive(false, 0.1f);
+	PlayerFight->SetActive(false);
 
 	CardInventory = SpawnActor<ACardInventory>();
-	CardInventory->SetActorLocation({40, 700});
+	CardInventory->SetActorLocation({ 40, 0 });
 
 }
 
@@ -39,12 +39,8 @@ void UTestStageLevel::Tick(float _DeltaTime)
 	ULevel::Tick(_DeltaTime);
 
 	StateUpdate(_DeltaTime);
+	GamePause();
 
-	//if (UEngineInput::IsDown(VK_RBUTTON) && false ==IsPause)
-	//{
-	//	IsPause = true;
-	//	ChangeState(EStageState::Pause);
-	//}
 }
 
 void UTestStageLevel::ChangeState(EStageState _State)
@@ -59,7 +55,7 @@ void UTestStageLevel::ChangeState(EStageState _State)
 
 		break;
 	case EStageState::Pause:
-		//GamePause();
+
 		break;
 	default:
 		break;
@@ -102,7 +98,7 @@ void UTestStageLevel::MonsterFightCheck()
 
 		if (PlayerX == MonsterX && PlayerY == MonsterY)
 		{
-			if (fmod(PlayerLocation.X, 50.0f) == 25.0f && fmod(PlayerLocation.Y, 50.0f) == 25.0f && false == IsFight)
+			if (fmod(PlayerLocation.X, 50.0f) == 25.0f && fmod(PlayerLocation.Y, 50.0f) == 25.0f)
 			{
 				FightCheckMonsters.push_back(Monsters[i]);
 			}
@@ -145,12 +141,13 @@ void UTestStageLevel::FightStart()
 		MonsterFights.push_back(MonsterFight);
 	}
 
-	FVector MonsterPositions[5] = {
-	{ 600, 400 },
-	{ 600, 300 },
-	{ 700, 500 },
-	{ 700, 400 },
-	{ 700, 300 }
+	FVector MonsterPositions[5] = 
+	{
+		{ 600, 400 },
+		{ 600, 300 },
+		{ 700, 500 },
+		{ 700, 400 },
+		{ 700, 300 }
 	};
 
 	for (size_t i = 0; i < MonsterFights.size(); i++)
@@ -164,9 +161,14 @@ void UTestStageLevel::FightStart()
 
 void UTestStageLevel::Fight(float _DeltaTime)
 {
+	IsFight = true;
 	MonsterSpawnTimeCheck(_DeltaTime / 5);
 	FightZone->Battle(_DeltaTime);
+	FightEnd();
+}
 
+void UTestStageLevel::FightEnd()
+{
 	if (true == FightZone->AllMonsterDeath())
 	{
 		FightZone->SetActive(false);
@@ -185,28 +187,36 @@ void UTestStageLevel::Fight(float _DeltaTime)
 		FightCheckMonsters.clear();
 		MonsterFights.clear();
 
+		IsFight = false;
 		ChangeState(EStageState::Move);
 	}
 }
 
-bool UTestStageLevel::GamePause()
+void UTestStageLevel::GamePause()
 {
-
-	if (UEngineInput::IsDown(VK_RBUTTON))
+	if (UEngineInput::IsDown(VK_RBUTTON) && false == IsGamePause)
 	{
-		IsPause = false;
-		ChangeState(EStageState::Move);
-		return IsPause;
+		if (true == IsFight)
+		{
+			return;
+		}
+		else
+		{
+			IsGamePause = true;
+			ChangeState(EStageState::Pause);
+		}
 	}
-
-	return IsPause;
+	else if (UEngineInput::IsDown(VK_RBUTTON) && true == IsGamePause)
+	{
+		IsGamePause = false;
+		ChangeState(EStageState::Move);
+	}
 }
 
-void UTestStageLevel::MonsterDrop()
+void UTestStageLevel::MonsterDrop(FVector _MonsterPosition)
 {
-	int card = RandomEngine.RandomInt(10, 10);
-
-	CardInventory->AddCard(card);
+	int Card = RandomEngine.RandomInt(10, 10);
+	CardInventory->AddCard(Card, _MonsterPosition);
 }
 
 void UTestStageLevel::StateUpdate(float _DeltaTime)
@@ -223,7 +233,7 @@ void UTestStageLevel::StateUpdate(float _DeltaTime)
 		break;
 
 	case EStageState::Pause:
-		//GamePause();
+
 		break;
 	default:
 		break;
@@ -368,10 +378,9 @@ void UTestStageLevel::SpawnTileType(FVector _Location, TileType _TileType, Monst
 	switch (_TileType)
 	{
 	case TileType::WASTELAND:
-		if (RandomEngine.RandomFloat(0, 1.0) < 0.15)
+		if (RandomEngine.RandomFloat(0, 1.0) < 0.25)
 		{
 			MonsterSpawn(_Location, _MonsterType);
-			//MonsterSpawn(_Location, _MonsterType);
 		}
 		break;
 	case TileType::CEMETERY:

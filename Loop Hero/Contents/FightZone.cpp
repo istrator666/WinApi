@@ -78,7 +78,7 @@ void AFightZone::Battle(float _DeltaTime)
 			if (true == MonsterFight->IsDeath() && MonsterFight->GetCurrentAnimationName() != "DEATH")
 			{
 				UTestStageLevel* Level = dynamic_cast<UTestStageLevel*>(GetWorld());
-				Level->MonsterDrop();
+				Level->MonsterDrop(MonsterFight->GetActorLocation());
 				MonsterFight->SetChangeAnimation(CharacterStatus::Death);
 			}
 		}

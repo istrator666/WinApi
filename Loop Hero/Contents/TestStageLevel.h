@@ -47,12 +47,13 @@ public:
 	// Fight
 	void FightStart();
 	void Fight(float _DeltaTime);
+	void FightEnd();
 
 	//Pause
-	bool GamePause();
+	void GamePause();
 
 	// Drop
-	void MonsterDrop();
+	void MonsterDrop(FVector _MonsterPosition);
 
 protected:
 	void BeginPlay() override;
@@ -97,5 +98,5 @@ private:
 	UEngineRandom RandomEngine;
 
 	EStageState CurState = EStageState::Move;
-	bool IsPause = false;
+	bool IsGamePause = false;
 };
