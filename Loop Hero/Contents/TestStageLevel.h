@@ -10,11 +10,24 @@
 
 #include <EngineBase/EngineRandom.h>
 
+struct CoordinateKey
+{
+	union
+	{
+		struct
+		{
+			int X;
+			int Y;
+		};
+
+		__int64 Key;
+	};
+};
+
 struct SpawnTileData {
 	FVector TileLocation;
+	FVector SpawnLocation;
 	TileType Tile;
-	MonsterType Monster;
-	int MonsterCountTile;
 };
 
 class UTestStageLevel : public ULevel
@@ -49,6 +62,7 @@ public:
 	void FightStart();
 	void Fight(float _DeltaTime);
 	void FightEnd();
+	MonsterType GetMonsterType();
 
 	//Pause
 	void GamePause();
@@ -96,13 +110,14 @@ private:
 	// 타일, 몬스터 생성
 	bool TileSetup = false;
 	float SpawnTimeCheck = 0.0f;
-	int MonsterSpawnCount = 0;
 	std::vector<SpawnTileData> mSpawn;
 	std::vector<SpawnTileData> SpawnTileLocation();
+	std::vector<SpawnTileData> SpawnTile;
 	FVector RandomSpawnLocation(FVector _Location);
 	void SpawnTileType(SpawnTileData& _TileData);
-	void MonsterSpawn(SpawnTileData& _TileData);
+	void MonsterSpawn(SpawnTileData& _TileData, MonsterType _MonsterType);
 
+	std::map<__int64, int> MonsterCounts;
 
 	// 초기 플레이어 상태
 	EStageState CurState = EStageState::Move;

@@ -31,7 +31,6 @@ void ACardInventory::AddCard(int _Card, FVector _MonsterPosition)
         for (size_t i = 0; i < StartSize - 13; i++)
         {
             Node& DeleteNode = CardList.front();
-            //DeleteNode.CardRander->Destroy();
 
             DeleteNode.StartPosition = DeleteNode.CardRander->GetPosition();
             DeleteNode.EndPosition = { DeleteNode.StartPosition.X, DeleteNode.StartPosition.Y -100};

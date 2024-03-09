@@ -164,12 +164,12 @@ public:
 protected:
 
 private:
-	int HP = 250;
-	int MaxHP = 250;
+	int HP = 2500;
+	int MaxHP = 2500;
 	int MinAttck = 30; //4
 	int MaxAttck = 60; //6
 	int Defense = 0;
-	float AttackSpeed = 1.0f;
+	float AttackSpeed = 0.5f;
 	float AttackGauge = 0;
 	int Stamina = 100;
 	int HPRegen = 0;
@@ -179,7 +179,7 @@ private:
 	int LifeDrain = 0;
 	int Level = 0;
 
-	float MoveSpeed = 250.0f;
+	float MoveSpeed = 150.0f;
 
 };
 

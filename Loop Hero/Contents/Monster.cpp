@@ -11,7 +11,6 @@ AMonster::~AMonster()
 void AMonster::BeginPlay()
 {
 	AActor::BeginPlay();
-	SetMonsterImage();
 }
 
 void AMonster::Tick(float _DeltaTime)
@@ -21,14 +20,39 @@ void AMonster::Tick(float _DeltaTime)
 	WayPoints(_DeltaTime, IsMove);
 }
 
-void AMonster::SetMonsterImage()
+void AMonster::SetMonsterImage(MonsterType _MonsterType)
 {
-	MonsterRender = CreateImageRenderer();
-	MonsterRender->SetImage("Overworld Enemies.png");
-	MonsterRender->SetOrder(4);
-	MonsterRender->SetTransform({ {0,0}, {250,250} });
-	MonsterRender->CreateAnimation("Idle", "Overworld Enemies.png", 38, 39, 0.3f, true);
-	MonsterRender->ChangeAnimation("Idle");
+	switch (_MonsterType)
+	{
+	case MonsterType::Slime:
+		MonsterRender = CreateImageRenderer();
+		MonsterRender->SetImage("Overworld Enemies.png");
+		MonsterRender->SetOrder(4);
+		MonsterRender->SetTransform({ {0,0}, {250,250} });
+		MonsterRender->CreateAnimation("Idle", "Overworld Enemies.png", 38, 39, 0.3f, true);
+		MonsterRender->ChangeAnimation("Idle");
+		break;
+	case MonsterType::Ratwolf:
+		break;
+	case MonsterType::Spider:
+		break;
+	case MonsterType::Skeleton:
+		break;
+	case MonsterType::CrackedSkeleton:
+		break;
+	case MonsterType::SkeletonArcher:
+		break;
+	case MonsterType::CrackedSkeletonArcher:
+		break;
+	case MonsterType::Mimic:
+		break;
+	case MonsterType::BloodClot:
+		break;
+	case MonsterType::Harpy:
+		break;
+	default:
+		break;
+	}
 }
 
 void AMonster::SetWayPoint(FVector _WayPoint)
@@ -80,7 +104,7 @@ AMonsterFight::~AMonsterFight()
 void AMonsterFight::BeginPlay()
 {
 	AActor::BeginPlay();
-	SetMosnterFightImage();
+	//SetMosnterFightImage();
 	SetMonsterHealthBar();
 }
 
@@ -89,17 +113,42 @@ void AMonsterFight::Tick(float _DeltaTime)
 	AActor::Tick(_DeltaTime);
 }
 
-void AMonsterFight::SetMosnterFightImage()
+void AMonsterFight::SetMosnterFightImage(MonsterType _MonsterType)
 {
-	MonsterFightRender = CreateImageRenderer();
-	MonsterFightRender->SetImage("Slime.png");
-	MonsterFightRender->SetOrder(7);
-	MonsterFightRender->SetTransform({ {0,0}, {250,250} });
-	MonsterFightRender->CreateAnimation("Idle", "Slime.png", 0, 0, 0.1f, false);
-	MonsterFightRender->CreateAnimation("Attack", "Slime.png", 1, 5, 0.1f, false);
-	MonsterFightRender->CreateAnimation("Hurt", "Slime.png", 6, 9, 0.25f, false);
-	MonsterFightRender->CreateAnimation("Death", "Slime.png", 10, 14, 0.25f, false);
-	MonsterFightRender->ChangeAnimation("Idle");
+	switch (_MonsterType)
+	{
+	case MonsterType::Slime:
+		MonsterFightRender = CreateImageRenderer();
+		MonsterFightRender->SetImage("Slime.png");
+		MonsterFightRender->SetOrder(7);
+		MonsterFightRender->SetTransform({ {0,0}, {250,250} });
+		MonsterFightRender->CreateAnimation("Idle", "Slime.png", 0, 0, 0.1f, false);
+		MonsterFightRender->CreateAnimation("Attack", "Slime.png", 1, 5, 0.1f, false);
+		MonsterFightRender->CreateAnimation("Hurt", "Slime.png", 6, 9, 0.25f, false);
+		MonsterFightRender->CreateAnimation("Death", "Slime.png", 10, 14, 0.25f, false);
+		MonsterFightRender->ChangeAnimation("Idle");
+		break;
+	case MonsterType::Ratwolf:
+		break;
+	case MonsterType::Spider:
+		break;
+	case MonsterType::Skeleton:
+		break;
+	case MonsterType::CrackedSkeleton:
+		break;
+	case MonsterType::SkeletonArcher:
+		break;
+	case MonsterType::CrackedSkeletonArcher:
+		break;
+	case MonsterType::Mimic:
+		break;
+	case MonsterType::BloodClot:
+		break;
+	case MonsterType::Harpy:
+		break;
+	default:
+		break;
+	}
 }
 
 void AMonsterFight::SetMonsterHealthBar()

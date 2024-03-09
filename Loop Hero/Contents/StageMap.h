@@ -1,7 +1,6 @@
 #pragma once
 #include <EngineCore/Actor.h>
 
-
 class AStageMap : public AActor
 {
 public:

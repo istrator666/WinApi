@@ -16,7 +16,7 @@ public:
 	AMonster& operator=(const AMonster& _Other) = delete;
 	AMonster& operator=(AMonster&& _Other) noexcept = delete;
 
-	void SetMonsterImage();
+	void SetMonsterImage(MonsterType _MonsterType);
 	void SetWayPoint(FVector _WayPoint);
 	bool IsMove = true;
 
@@ -25,9 +25,9 @@ protected:
 	void Tick(float _DeltaTime) override;
 
 private:
-	void WayPoints(float _DeltaTime, bool _IsMove);
-
 	UImageRenderer* MonsterRender = nullptr;
+
+	void WayPoints(float _DeltaTime, bool _IsMove);
 
 	std::list<FVector> WayPoint;
 	std::list<FVector>::iterator CurrentWayPoint;
@@ -48,7 +48,7 @@ public:
 	AMonsterFight& operator=(const AMonsterFight& _Other) = delete;
 	AMonsterFight& operator=(AMonsterFight&& _Other) noexcept = delete;
 
-	void SetMosnterFightImage();
+	void SetMosnterFightImage(MonsterType _MonsterType);
 	void SetMonsterHealthBar();
 	void SetMonsterHPbar(int _Damage);
 	void SetPlyerAttackGaugeBar(int _AttackTime);
