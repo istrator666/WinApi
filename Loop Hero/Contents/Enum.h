@@ -13,6 +13,14 @@ enum class LoopHeroRenderOrder
 
 };
 
+enum class IntroState
+{
+	Idle,
+	Next,
+	Prev,
+	Skip
+};
+
 enum class EStageState
 {
 	Move,

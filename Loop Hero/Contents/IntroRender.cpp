@@ -1,4 +1,5 @@
 #include "IntroRender.h"
+#include <EnginePlatform/EngineInput.h>
 
 AIntroRender::AIntroRender()
 {
@@ -12,19 +13,30 @@ void AIntroRender::BeginPlay()
 {
 	AActor::BeginPlay();
 	GameStartIntro = CreateImageRenderer();
+
+	IntroBackButton = CreateImageRenderer();
+	IntroSkipButton = CreateImageRenderer();
+	IntroProgressIcon = CreateImageRenderer();
+
+	IntroBackButton->SetImage("s_dia_back_button_0.png");
+	IntroBackButton->SetTransform({ {115, 650}, {70, 30 } });
+	IntroBackButton->SetOrder(9);
+	IntroBackButton->SetActive(false);
+
+	IntroSkipButton->SetImage("s_dia_skip_button_0.png");
+	IntroSkipButton->SetTransform({ {230, 650}, {70, 30 } });
+	IntroSkipButton->SetOrder(9);
+	IntroSkipButton->SetActive(false);
+
+	IntroProgressIcon->SetImage("s_dia_back_button_0.png");
+	//IntroProgressIcon->SetActive(false);
+
 }
 
 void AIntroRender::Tick(float _DeltaTime)
 {
 	AActor::Tick(_DeltaTime);
-	if (false == GameIntroCheck)
-	{
-		GameIntro();
-	}
-}
 
-void AIntroRender::GameIntro()
-{
 	Sleep(100);
 	std::string ImageString = std::to_string(ImageNumber) + ".png";
 	std::string_view IntroImage = ImageString;
@@ -33,14 +45,20 @@ void AIntroRender::GameIntro()
 	FVector ImageScale = GameIntroImagae->GetScale();
 	GameStartIntro->SetTransform({ ImageScale.Half2D(), ImageScale });
 
-	if (115 >= ImageNumber)
-	{
-		++ImageNumber;
-		GameStartIntro->Destroy(3.0f);
-	}
+	PosCheck = UMouseFunction::GetMousePos();
 
-	if (116 == ImageNumber)
-	{
-		GameIntroCheck = true;
-	}
+}
+
+void AIntroRender::GameIntro()
+{
+	//if (115 >= ImageNumber)
+	//{
+	//	++ImageNumber;
+	//	GameStartIntro->Destroy(3.0f);
+	//}
+
+	//if (116 == ImageNumber)
+	//{
+	//	GameIntroEnd = true;
+	//}
 }
