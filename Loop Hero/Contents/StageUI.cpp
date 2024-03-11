@@ -149,6 +149,7 @@ void StageUI::ATravelitemPanel::TravelitemPanel()
 {
 	TravelitemPanelRender = CreateImageRenderer();
 	TravelitemPanelRender->SetImage("s_travelitempanel.png");
+	TravelitemPanelRender->SetActive(false);
 	TravelitemPanelRender->SetOrder(5);
 	TravelitemPanelRender->SetTransform({ {0, 0}, {365,50} });
 }

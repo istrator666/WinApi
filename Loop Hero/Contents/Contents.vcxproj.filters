@@ -47,6 +47,15 @@
     <ClCompile Include="UnitFight.cpp">
       <Filter>Actor\Unit</Filter>
     </ClCompile>
+    <ClCompile Include="DiaLog.cpp">
+      <Filter>Actor\UI</Filter>
+    </ClCompile>
+    <ClCompile Include="TutorialLevel.cpp">
+      <Filter>Level\Stage</Filter>
+    </ClCompile>
+    <ClCompile Include="TutorialRender.cpp">
+      <Filter>Actor\Render</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="LoopHero.h" />
@@ -100,6 +109,18 @@
     </ClInclude>
     <ClInclude Include="TestStageLevel.h">
       <Filter>Level\Stage</Filter>
+    </ClInclude>
+    <ClInclude Include="DiaLog.h">
+      <Filter>Actor\UI</Filter>
+    </ClInclude>
+    <ClInclude Include="TutorialLevel.h">
+      <Filter>Level\Stage</Filter>
+    </ClInclude>
+    <ClInclude Include="TutorialRender.h">
+      <Filter>Actor\Render</Filter>
+    </ClInclude>
+    <ClInclude Include="Struct.h">
+      <Filter>Config</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

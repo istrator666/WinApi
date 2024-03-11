@@ -38,6 +38,7 @@ void AStageMap::BackStage()
 
 void AStageMap::DrawTileMap()
 {
+	TileList.resize(TileInfo::Rows, std::vector<UImageRenderer*>(TileInfo::Cols, nullptr));
 
 	for (int y = 0; y < TileInfo::Rows; ++y)
 	{
@@ -48,6 +49,39 @@ void AStageMap::DrawTileMap()
 			int yPos = y * TileInfo::Size;
 
 			DrawTile(xPos, yPos, TileInfo::Size, TileInfo::Size);
+
+			TileList[y][x] = LastCreatedTile;
+
+			//TileList[4][10]->SetImage("DisableTile.png");
+			//TileList[4][11]->SetImage("DisableTile.png");
+			//TileList[5][9]->SetImage("DisableTile.png");
+			//TileList[5][11]->SetImage("DisableTile.png");
+			//TileList[6][9]->SetImage("DisableTile.png");
+			//TileList[6][10]->SetImage("DisableTile.png");
+
+			//TileList[2][9]->SetImage("DisableTile.png");
+			//TileList[2][10]->SetImage("DisableTile.png");
+			//TileList[2][11]->SetImage("DisableTile.png");
+			//TileList[2][12]->SetImage("DisableTile.png");
+
+			//TileList[3][8]->SetImage("DisableTile.png");
+			//TileList[3][13]->SetImage("DisableTile.png");
+
+			//TileList[4][7]->SetImage("DisableTile.png");
+			//TileList[4][13]->SetImage("DisableTile.png");
+
+			//TileList[5][7]->SetImage("DisableTile.png");
+			//TileList[5][13]->SetImage("DisableTile.png");
+
+			//TileList[6][7]->SetImage("DisableTile.png");
+			//TileList[6][13]->SetImage("DisableTile.png");
+
+			//TileList[7][7]->SetImage("DisableTile.png");
+			//TileList[7][12]->SetImage("DisableTile.png");
+
+			//TileList[8][8]->SetImage("DisableTile.png");
+			//TileList[8][9]->SetImage("DisableTile.png");
+			//TileList[8][10]->SetImage("DisableTile.png");
 		}
 	}
 }
@@ -59,80 +93,17 @@ void AStageMap::DrawTile(int xPos, int yPos, int tileWidth, int tileHeight)
 	Tile->SetOrder(1);
 	Tile->SetActive(true);
 	Tile->SetTransform({ {xPos, yPos}, {tileWidth, tileHeight} });
-}
 
-//void AStageMap::IsTileSet()
-//{
-//	TileList.resize(12, std::vector<UImageRenderer*>(21));
-//	for (int i = 0; i < 12; i++)
-//	{
-//		for (int j = 0; j < 21; j++)
-//		{
-//			IsTile = CreateImageRenderer();
-//			IsTile->SetImage("IsTile.png");
-//			IsTile->SetOrder(1);
-//			IsTile->SetActive(false);
-//			TileList[i][j] = IsTile;
-//		}
-//	}
-//
-//	int y = 75;
-//
-//	for (int i = 0; i < 12; i++)
-//	{
-//		int x = 25;
-//
-//		for (int j = 0; j < 21; j++)
-//		{
-//			TileList[i][j]->SetTransform({ {x, y}, {50, 50} });
-//			x += 50;
-//		}
-//
-//		y += 50;
-//	}
-//
-//	{
-//		TileList[4][10]->SetImage("DisableTile.png");
-//		TileList[4][11]->SetImage("DisableTile.png");
-//		TileList[5][9]->SetImage("DisableTile.png");
-//		TileList[5][11]->SetImage("DisableTile.png");
-//		TileList[6][9]->SetImage("DisableTile.png");
-//		TileList[6][10]->SetImage("DisableTile.png");
-//
-//		TileList[2][9]->SetImage("DisableTile.png");
-//		TileList[2][10]->SetImage("DisableTile.png");
-//		TileList[2][11]->SetImage("DisableTile.png");
-//		TileList[2][12]->SetImage("DisableTile.png");
-//
-//		TileList[3][8]->SetImage("DisableTile.png");
-//		TileList[3][13]->SetImage("DisableTile.png");
-//
-//		TileList[4][7]->SetImage("DisableTile.png");
-//		TileList[4][13]->SetImage("DisableTile.png");
-//
-//		TileList[5][7]->SetImage("DisableTile.png");
-//		TileList[5][13]->SetImage("DisableTile.png");
-//
-//		TileList[6][7]->SetImage("DisableTile.png");
-//		TileList[6][13]->SetImage("DisableTile.png");
-//
-//		TileList[7][7]->SetImage("DisableTile.png");
-//		TileList[7][12]->SetImage("DisableTile.png");
-//
-//		TileList[8][8]->SetImage("DisableTile.png");
-//		TileList[8][9]->SetImage("DisableTile.png");
-//		TileList[8][10]->SetImage("DisableTile.png");
-//		TileList[8][11]->SetImage("DisableTile.png");
-//	}
-//}
+	LastCreatedTile = Tile;
+}
 
 void AStageMap::ShowAvailableTiles()
 {
 	if (UEngineInput::IsDown('O'))
 	{
-		for (int i = 0; i < 12; i++)
+		for (int i = 0; i < TileInfo::Rows; i++)
 		{
-			for (int j = 0; j < 21; j++)
+			for (int j = 0; j < TileInfo::Cols; j++)
 			{
 				Tile = TileList[i][j];
 				Tile->SetActive(false);
@@ -141,9 +112,9 @@ void AStageMap::ShowAvailableTiles()
 	}
 	else if (UEngineInput::IsDown('T'))
 	{
-		for (int i = 0; i < 12; i++)
+		for (int i = 0; i < TileInfo::Rows; i++)
 		{
-			for (int j = 0; j < 21; j++)
+			for (int j = 0; j < TileInfo::Cols; j++)
 			{
 				Tile = TileList[i][j];
 				Tile->SetActive(true);

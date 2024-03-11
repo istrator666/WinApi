@@ -164,6 +164,10 @@
       <SubType>
       </SubType>
     </ClCompile>
+    <ClCompile Include="DiaLog.cpp">
+      <SubType>
+      </SubType>
+    </ClCompile>
     <ClCompile Include="FightZone.cpp">
       <SubType>
       </SubType>
@@ -220,6 +224,14 @@
       <SubType>
       </SubType>
     </ClCompile>
+    <ClCompile Include="TutorialLevel.cpp">
+      <SubType>
+      </SubType>
+    </ClCompile>
+    <ClCompile Include="TutorialRender.cpp">
+      <SubType>
+      </SubType>
+    </ClCompile>
     <ClCompile Include="UnitFight.cpp">
       <SubType>
       </SubType>
@@ -231,6 +243,10 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="CardInventory.h">
+      <SubType>
+      </SubType>
+    </ClInclude>
+    <ClInclude Include="DiaLog.h">
       <SubType>
       </SubType>
     </ClInclude>
@@ -283,6 +299,7 @@
       <SubType>
       </SubType>
     </ClInclude>
+    <ClInclude Include="Struct.h" />
     <ClInclude Include="TitleLevel.h">
       <SubType>
       </SubType>
@@ -292,6 +309,14 @@
       </SubType>
     </ClInclude>
     <ClInclude Include="TestStageLevel.h">
+      <SubType>
+      </SubType>
+    </ClInclude>
+    <ClInclude Include="TutorialLevel.h">
+      <SubType>
+      </SubType>
+    </ClInclude>
+    <ClInclude Include="TutorialRender.h">
       <SubType>
       </SubType>
     </ClInclude>

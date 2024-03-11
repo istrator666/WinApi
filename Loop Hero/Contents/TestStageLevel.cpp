@@ -180,11 +180,6 @@ void UTestStageLevel::FightEnd()
 
 		for (size_t i = 0; i < FightCheckMonsters.size(); i++)
 		{
-			//CoordinateKey MonsterLocation;
-			//MonsterLocation.X = static_cast<int> (FightCheckMonsters[i]->GetActorLocation().X / 50);
-			//MonsterLocation.Y = static_cast<int> (FightCheckMonsters[i]->GetActorLocation().Y / 50);
-			//--MonsterCounts[MonsterLocation.Key];
-
 			FightCheckMonsters[i]->Destroy();
 		}
 
@@ -439,24 +434,12 @@ void UTestStageLevel::SpawnTileType(SpawnTileData& _TileData)
 
 void UTestStageLevel::MonsterSpawn(SpawnTileData& _TileData, MonsterType _MonsterType)
 {
-	//CoordinateKey mMonsterCount;
-	//mMonsterCount.X = static_cast<int> (_TileData.TileLocation.X / 50);
-	//mMonsterCount.Y = static_cast<int> (_TileData.TileLocation.Y / 50);
-	//MonsterCounts[mMonsterCount.Key];
-
-	//if (MonsterCounts[mMonsterCount.Key] > 5)
-	//{
-	//	return;
-	//}
-
 	Monster = SpawnActor<AMonster>();
 	Monster->SetMonsterImage(_MonsterType);
 	Monster->SetActorLocation(_TileData.SpawnLocation);
 	Monster->SetMoveSpeed(50.0f);
 	StageMoveMonster(Monster, _TileData.SpawnLocation);
 	Monsters.push_back(Monster);
-
-	//++MonsterCounts[mMonsterCount.Key];
 }
 
 void UTestStageLevel::SetStageUI()

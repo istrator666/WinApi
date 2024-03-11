@@ -14,12 +14,10 @@ public:
 	AStageMap& operator=(const AStageMap& _Other) = delete;
 	AStageMap& operator=(AStageMap&& _Other) noexcept = delete;
 
-	void IsTileSet();
 	void ShowAvailableTiles();
 
 	UImageRenderer* Tile = nullptr;
-
-	UImageRenderer* IsTile = nullptr;
+	UImageRenderer* LastCreatedTile = nullptr;
 	std::vector<std::vector<UImageRenderer*>> TileList;
 	bool IsTileCheck = false;
 
