@@ -11,6 +11,7 @@
 #include "DiaLog.h"
 
 #include <EngineBase/EngineRandom.h>
+#include "Struct.h"
 
 
 class UTutorialLevel : public ULevel
@@ -25,6 +26,15 @@ public:
 	UTutorialLevel(UTutorialLevel&& _Other) noexcept = delete;
 	UTutorialLevel& operator=(const UTutorialLevel& _Other) = delete;
 	UTutorialLevel& operator=(UTutorialLevel&& _Other) noexcept = delete;
+
+	void ChangeState(EStageState _State);
+	void StateUpdate(float _DeltaTime);
+
+	// Move
+	void Move(float _DeltaTime);
+
+	//Pause
+	void GamePause();
 
 protected:
 	void BeginPlay() override;
@@ -50,8 +60,17 @@ private:
 	// 플레이어
 	APlayer* Player = nullptr;
 
+	// 플레이어 이동
+	std::vector<FVector> StagePoints(const std::string& _StageName);
+	void StageMovePlayer(APlayer* _Player);
+
 	// 대화
 	ADiaLog* DiaLog = nullptr;
+
+	// 초기 플레이어 상태
+	EStageState CurState = EStageState::Pause;
+
+	bool IsGamePause = false;
 
 };
 

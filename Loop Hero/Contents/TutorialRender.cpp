@@ -10,6 +10,41 @@ ATutorialRender::~ATutorialRender()
 {
 }
 
+void ATutorialRender::TutorialGuideArrow01()
+{
+	UPArrow->SetActive(true);
+	TutorialText->SetActive(true);
+	TutorialText->SetText("모험 (지도위를 여행) 모드와 계획 (멈춤) 모드 사이를 전환하려면 스위치를 누르거나, 우클릭이나 스페이스바를 누르십시오. \n - 게임 모드를 바꿔 여정을 이어가십시오.");
+}
+
+void ATutorialRender::TutorialGuideArrow02()
+{
+
+}
+
+void ATutorialRender::TutorialGuideArrow03()
+{
+
+}
+
+void ATutorialRender::TutorialGuideArrow04()
+{
+
+}
+
+void ATutorialRender::TutorialGuideArrow05()
+{
+
+}
+
+
+void ATutorialRender::TutorialGuideArrowEnd()
+{
+	UPArrow->SetActive(false);
+	TutorialText->SetActive(false);
+	//RightArrow->SetActive(false);
+}
+
 void ATutorialRender::BeginPlay()
 {
 	AActor::BeginPlay();
@@ -19,6 +54,29 @@ void ATutorialRender::BeginPlay()
 
 	MainStage();
 	//BaseCamp();
+
+	UPArrow = CreateImageRenderer();
+	UPArrow->SetImage("Up.png");
+	UPArrow->SetOrder(15);
+	UPArrow->SetTransform({ {500, 50}, {250,250} });
+	UPArrow->CreateAnimation("Idle", "Up.png", 0, 36, 0.25f, true);
+	UPArrow->ChangeAnimation("Idle");
+	UPArrow->SetActive(false);
+
+	RightArrow = CreateImageRenderer();
+	RightArrow->SetImage("Right.png");
+	RightArrow->SetOrder(15);
+	RightArrow->SetTransform({ {1000, 250}, {250,250} });
+	RightArrow->CreateAnimation("Idle", "Right.png", 0, 36, 0.25f, true);
+	RightArrow->ChangeAnimation("Idle");
+	RightArrow->SetActive(false);
+
+	TutorialText = CreateImageRenderer();
+	TutorialText->SetTextColor(Color8Bit::White);
+	TutorialText->SetTextSize(18);
+	TutorialText->SetOrder(15);
+	TutorialText->SetTransform({ {500, 500}, {200,200} });
+	TutorialText->SetActive(false);
 }
 
 void ATutorialRender::Tick(float _DeltaTime)
@@ -29,7 +87,7 @@ void ATutorialRender::Tick(float _DeltaTime)
 void ATutorialRender::BackStage()
 {
 	BackStageRender = CreateImageRenderer();
-	BackStageRender->SetImage("TutorialStartBackGround.png");
+	BackStageRender->SetImage("StageBackGround.png");
 	BackStageRender->SetOrder(0);
 	BackStageRender->SetTransform({ {615, 335}, {1280, 720} });
 }
