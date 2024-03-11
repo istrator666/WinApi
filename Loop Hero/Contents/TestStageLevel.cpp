@@ -1,5 +1,4 @@
 #include "TestStageLevel.h"
-#include "StageMap.h"
 #include "EngineCore/EngineCore.h"
 
 UTestStageLevel::UTestStageLevel()
@@ -14,7 +13,10 @@ void UTestStageLevel::BeginPlay()
 {
 	ULevel::BeginPlay();
 
-	AStageMap* Stage = SpawnActor<AStageMap>();
+	InitTileMap();
+
+	Stage = SpawnActor<AStageMap>();
+	Stage->SetActorLocation({25, 25});
 
 	Player = SpawnActor<APlayer>();
 	Player->SetActorLocation({ 575, 225 });
@@ -107,7 +109,7 @@ void UTestStageLevel::MonsterFightCheck()
 
 	if (0 != FightCheckMonsters.size())
 	{
-		ChangeState(EStageState::Fight);
+		//ChangeState(EStageState::Fight);
 	}
 }
 
@@ -178,10 +180,10 @@ void UTestStageLevel::FightEnd()
 
 		for (size_t i = 0; i < FightCheckMonsters.size(); i++)
 		{
-			CoordinateKey MonsterLocation;
-			MonsterLocation.X = static_cast<int> (FightCheckMonsters[i]->GetActorLocation().X / 50);
-			MonsterLocation.Y = static_cast<int> (FightCheckMonsters[i]->GetActorLocation().Y / 50);
-			--MonsterCounts[MonsterLocation.Key];
+			//CoordinateKey MonsterLocation;
+			//MonsterLocation.X = static_cast<int> (FightCheckMonsters[i]->GetActorLocation().X / 50);
+			//MonsterLocation.Y = static_cast<int> (FightCheckMonsters[i]->GetActorLocation().Y / 50);
+			//--MonsterCounts[MonsterLocation.Key];
 
 			FightCheckMonsters[i]->Destroy();
 		}
@@ -227,8 +229,19 @@ void UTestStageLevel::GamePause()
 
 void UTestStageLevel::MonsterDrop(FVector _MonsterPosition)
 {
-	int Card = RandomEngine.RandomInt(10, 10);
+	int Card = RandomEngine.RandomInt(0, 2);
 	CardInventory->AddCard(Card, _MonsterPosition);
+}
+
+void UTestStageLevel::InitTileMap()
+{
+	for (int y = 0; y < TileInfo::Rows; ++y)
+	{
+		for (int x = 0; x < TileInfo::Cols; ++x)
+		{
+			TileMap[CoordinateKey(x, y).Key] = 0;
+		}
+	}
 }
 
 void UTestStageLevel::StateUpdate(float _DeltaTime)
@@ -426,15 +439,15 @@ void UTestStageLevel::SpawnTileType(SpawnTileData& _TileData)
 
 void UTestStageLevel::MonsterSpawn(SpawnTileData& _TileData, MonsterType _MonsterType)
 {
-	CoordinateKey mMonsterCount;
-	mMonsterCount.X = static_cast<int> (_TileData.TileLocation.X / 50);
-	mMonsterCount.Y = static_cast<int> (_TileData.TileLocation.Y / 50);
-	MonsterCounts[mMonsterCount.Key];
+	//CoordinateKey mMonsterCount;
+	//mMonsterCount.X = static_cast<int> (_TileData.TileLocation.X / 50);
+	//mMonsterCount.Y = static_cast<int> (_TileData.TileLocation.Y / 50);
+	//MonsterCounts[mMonsterCount.Key];
 
-	if (MonsterCounts[mMonsterCount.Key] > 5)
-	{
-		return;
-	}
+	//if (MonsterCounts[mMonsterCount.Key] > 5)
+	//{
+	//	return;
+	//}
 
 	Monster = SpawnActor<AMonster>();
 	Monster->SetMonsterImage(_MonsterType);
@@ -443,7 +456,7 @@ void UTestStageLevel::MonsterSpawn(SpawnTileData& _TileData, MonsterType _Monste
 	StageMoveMonster(Monster, _TileData.SpawnLocation);
 	Monsters.push_back(Monster);
 
-	++MonsterCounts[mMonsterCount.Key];
+	//++MonsterCounts[mMonsterCount.Key];
 }
 
 void UTestStageLevel::SetStageUI()

@@ -16,16 +16,21 @@ public:
 
 	void IsTileSet();
 	void ShowAvailableTiles();
-	
+
+	UImageRenderer* Tile = nullptr;
+
+	UImageRenderer* IsTile = nullptr;
+	std::vector<std::vector<UImageRenderer*>> TileList;
+	bool IsTileCheck = false;
+
+	void DrawTileMap();
+	void DrawTile(int xPos, int yPos, int tileWidth, int tileHeight);
 
 protected:
 	void BeginPlay() override;
 	void Tick(float _DeltaTime) override;
 
 private:
-	UImageRenderer* IsTile = nullptr;
-	std::vector<std::vector<UImageRenderer*>> IsTileList;
-	bool IsTileCheck = false;
 
 	void BackStage();
 	void MainStage();

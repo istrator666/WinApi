@@ -3,16 +3,6 @@
 #include <EngineCore\EngineCore.h>
 #include <EngineCore\ImageRenderer.h>
 
-
-enum class LoopHeroRenderOrder
-{
-	MAP,
-	PLAYER,
-	MONSTER,
-	TEXT,
-
-};
-
 enum class IntroState
 {
 	Idle,

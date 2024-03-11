@@ -1,5 +1,6 @@
 #pragma once
 #include <EngineCore/Level.h>
+#include "StageMap.h"
 #include "Player.h"
 #include "Monster.h"
 #include "EQInventory.h"
@@ -12,16 +13,24 @@
 
 struct CoordinateKey
 {
-	union
-	{
-		struct
-		{
-			int X;
-			int Y;
-		};
+	__int64 Key;
 
-		__int64 Key;
-	};
+	CoordinateKey(int x, int y)
+	{
+		Key = MakeKey(x, y);
+	}
+
+	static __int64 MakeKey(int x, int y)
+	{
+		return ((__int64)x << 32) | ((unsigned int)y & 0xFFFFFFFF);
+	}
+};
+
+struct TileInfo
+{
+	static const int Rows = 13;
+	static const int Cols = 21;
+	static const int Size = 50;
 };
 
 struct SpawnTileData {
@@ -70,6 +79,10 @@ public:
 	// Drop
 	void MonsterDrop(FVector _MonsterPosition);
 
+	// 타일맵 생성
+	void InitTileMap();
+	std::map<__int64, int> TileMap;
+
 protected:
 	void BeginPlay() override;
 	void Tick(float _DeltaTime) override;
@@ -106,8 +119,8 @@ private:
 	std::vector<FVector> MonsterMovePoints(FVector _Location);
 	void StageMoveMonster(AMonster* _Monster, FVector _Location);
 
-
 	// 타일, 몬스터 생성
+	AStageMap* Stage = nullptr;
 	bool TileSetup = false;
 	float SpawnTimeCheck = 0.0f;
 	std::vector<SpawnTileData> mSpawn;
@@ -116,8 +129,6 @@ private:
 	FVector RandomSpawnLocation(FVector _Location);
 	void SpawnTileType(SpawnTileData& _TileData);
 	void MonsterSpawn(SpawnTileData& _TileData, MonsterType _MonsterType);
-
-	std::map<__int64, int> MonsterCounts;
 
 	// 초기 플레이어 상태
 	EStageState CurState = EStageState::Move;
