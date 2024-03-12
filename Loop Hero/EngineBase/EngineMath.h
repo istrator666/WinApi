@@ -345,6 +345,7 @@ public:
 	static const Color8Bit WhiteA;
 	static const Color8Bit MagentaA;
 	static const Color8Bit OrangeA;
+	static const Color8Bit CyanA;
 
 
 	union
