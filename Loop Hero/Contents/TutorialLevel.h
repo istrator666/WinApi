@@ -30,6 +30,9 @@ public:
 	void ChangeState(EStageState _State);
 	void StateUpdate(float _DeltaTime);
 
+	//공통 함수
+	void MonsterSpawnTimeCheck(float _DeltaTime);
+
 	// Move
 	void Move(float _DeltaTime);
 
@@ -69,6 +72,24 @@ private:
 
 	// 초기 플레이어 상태
 	EStageState CurState = EStageState::Pause;
+
+	// 몬스터
+	std::vector<AMonster*> Monsters;
+	std::vector<AMonster*> FightCheckMonsters;
+	AMonster* Monster = nullptr;
+
+	//몬스터 이동
+	std::vector<FVector> MonsterMovePoints(FVector _Location);
+	void StageMoveMonster(AMonster* _Monster, FVector _Location);
+
+	//몬스터 생성
+	float SpawnTimeCheck = 0.0f;
+	std::vector<SpawnTileData> mSpawn;
+	std::vector<SpawnTileData> SpawnTileLocation();
+	std::vector<SpawnTileData> SpawnTile;
+	FVector RandomSpawnLocation(FVector _Location);
+	void SpawnTileType(SpawnTileData& _TileData);
+	void MonsterSpawn(SpawnTileData& _TileData, MonsterType _MonsterType);
 
 	bool IsGamePause = false;
 

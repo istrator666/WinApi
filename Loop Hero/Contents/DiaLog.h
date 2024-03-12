@@ -17,6 +17,7 @@ public:
 	void DialogAnimation(float _DeltaTime);
 	void StartNextText(int _DialogCount);
 	void Text01();
+	void Text02();
 
 	int DialogCount = 0;
 

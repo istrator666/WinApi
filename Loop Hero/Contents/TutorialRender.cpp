@@ -19,7 +19,8 @@ void ATutorialRender::TutorialGuideArrow01()
 
 void ATutorialRender::TutorialGuideArrow02()
 {
-
+	TutorialText->SetActive(true);
+	TutorialText->SetText("화면 위쪽의 하루 진행도를 눈여겨 보십시오. 하루가 끝나면 새로운 적이 나타날 수 있습니다. \n\n- 게임 모드를 전환해 여정을 이어가십시오.(스페이스 바, 마우스 우클릭, 모드변경)");
 }
 
 void ATutorialRender::TutorialGuideArrow03()

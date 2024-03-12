@@ -51,13 +51,24 @@ void UTutorialLevel::Tick(float _DeltaTime)
 		TutorialRender->TutorialGuideArrowEnd();
 	}
 
-	if (625 == PlayerLocation.X && 275 == PlayerLocation.Y)
+	if (625 == PlayerLocation.X && 225 == PlayerLocation.Y)
 	{
 		if (IsGamePause)
 		{
 			DiaLog->Text01();
 			IsGamePause = true;
 			ChangeState(EStageState::Pause);
+		}
+	}
+
+	if (625 == PlayerLocation.X && 325 == PlayerLocation.Y)
+	{
+		if (IsGamePause)
+		{
+			TutorialRender->TutorialGuideArrow02();
+			IsGamePause = true;
+			ChangeState(EStageState::Pause);
+			MonsterSpawnTimeCheck(_DeltaTime);
 		}
 	}
 
@@ -129,6 +140,8 @@ void UTutorialLevel::Move(float _DeltaTime)
 {
 	DiaLog->AllRenderersActiveOff();
 	Player->WayPoints(_DeltaTime);
+
+	//MonsterFightCheck();
 }
 
 std::vector<FVector> UTutorialLevel::StagePoints(const std::string& _StageName)
@@ -166,6 +179,164 @@ void UTutorialLevel::StageMovePlayer(APlayer* _Player)
 		_Player->SetWayPoint(MovePoints);
 	}
 }
+
+std::vector<SpawnTileData> UTutorialLevel::SpawnTileLocation()
+{
+	SpawnTile =
+	{ 
+		{ {625, 325}, RandomSpawnLocation({610, 360, 0, 0}), TileType::WASTELAND },
+		//{ {625, 375}, RandomSpawnLocation({560, 360, 0, 0}), TileType::WASTELAND },
+		//{ {575, 375}, RandomSpawnLocation({560, 410, 0, 0}), TileType::WASTELAND },
+		//{ {575, 425}, RandomSpawnLocation({510, 410, 0, 0}), TileType::WASTELAND },
+		//{ {525, 425}, RandomSpawnLocation({460, 410, 0, 0}), TileType::WASTELAND },
+		//{ {475, 425}, RandomSpawnLocation({410, 410, 0, 0}), TileType::WASTELAND },
+		//{ {425, 425}, RandomSpawnLocation({410, 360, 0, 0}), TileType::WASTELAND },
+		//{ {425, 375}, RandomSpawnLocation({410, 310, 0, 0}), TileType::WASTELAND },
+		//{ {425, 325}, RandomSpawnLocation({410, 260, 0, 0}), TileType::WASTELAND },
+		//{ {425, 275}, RandomSpawnLocation({460, 260, 0, 0}), TileType::WASTELAND },
+		//{ {475, 275}, RandomSpawnLocation({460, 210, 0, 0}), TileType::WASTELAND },
+		//{ {525, 225}, RandomSpawnLocation({510, 210, 0, 0}), TileType::WASTELAND },
+	};
+
+	return SpawnTile;
+}
+
+FVector UTutorialLevel::RandomSpawnLocation(FVector _Location)
+{
+	int selectedIndex = RandomEngine.RandomInt(0, 3);
+
+	switch (selectedIndex)
+	{
+	case 0: return _Location;
+	case 1: return { _Location.X + 30, _Location.Y };
+	case 2: return { _Location.X + 30, _Location.Y + 30 };
+	case 3: return { _Location.X, _Location.Y + 30 };
+	default: return _Location;
+	}
+}
+
+void UTutorialLevel::SpawnTileType(SpawnTileData& _TileData)
+{
+	switch (_TileData.Tile)
+	{
+	case TileType::WASTELAND:
+		if (RandomEngine.RandomFloat(0, 1.0) < 1.0)
+		{
+			MonsterSpawn(_TileData, MonsterType::Slime);
+		}
+		break;
+	case TileType::CEMETERY:
+		break;
+	case TileType::GROVE:
+		break;
+	case TileType::BLOODPATH:
+		break;
+	case TileType::VILLAGE:
+		break;
+	case TileType::RANSACKEDVILLAGE:
+		break;
+	case TileType::COUNTSLAND:
+		break;
+	case TileType::WHEATFIELDS:
+		break;
+	case TileType::OVERGROWNFIELD:
+		break;
+	case TileType::RUINS:
+		break;
+	case TileType::SWAMP:
+		break;
+	case TileType::AVILLAGE:
+		break;
+	case TileType::BRIDGE:
+		break;
+	default:
+		break;
+	}
+}
+
+void UTutorialLevel::MonsterSpawn(SpawnTileData& _TileData, MonsterType _MonsterType)
+{
+	Monster = SpawnActor<AMonster>();
+	Monster->SetMonsterImage(_MonsterType);
+	Monster->SetActorLocation(_TileData.SpawnLocation);
+	Monster->SetMoveSpeed(50.0f);
+	StageMoveMonster(Monster, _TileData.SpawnLocation);
+	Monsters.push_back(Monster);
+}
+
+void UTutorialLevel::MonsterSpawnTimeCheck(float _DeltaTime)
+{
+	StageprogressGauge->StageProgressGaugeUpdate(_DeltaTime);
+
+	if (0 == StageprogressGauge->GetDailyGaugeUpdate())
+	{
+		mSpawn = SpawnTileLocation();
+		for (SpawnTileData& Tile : mSpawn)
+		{
+			SpawnTileType(Tile);
+		}
+	}
+}
+
+std::vector<FVector> UTutorialLevel::MonsterMovePoints(FVector _Location)
+{
+	FVector CenterLocation = { (int)(_Location.X / 50) * 50, (int)(_Location.Y / 50) * 50 };
+
+	if (_Location.X == CenterLocation.X + 10 && _Location.Y == CenterLocation.Y + 10)
+	{
+		return {
+			{_Location.X, _Location.Y},
+			{_Location.X + 30, _Location.Y},
+			{_Location.X + 30, _Location.Y + 30},
+			{_Location.X, _Location.Y + 30},
+		};
+	}
+
+	else if (_Location.X == CenterLocation.X + 40 && _Location.Y == CenterLocation.Y + 10)
+	{
+		return {
+			{_Location.X, _Location.Y},
+			{_Location.X, _Location.Y + 30},
+			{_Location.X - 30, _Location.Y + 30},
+			{_Location.X - 30, _Location.Y},
+		};
+	}
+	else if (_Location.X == CenterLocation.X + 10 && _Location.Y == CenterLocation.Y + 40)
+	{
+		return {
+			{_Location.X, _Location.Y},
+			{_Location.X, _Location.Y - 30},
+			{_Location.X + 30, _Location.Y - 30},
+			{_Location.X + 30, _Location.Y},
+		};
+	}
+	else if (_Location.X == CenterLocation.X + 40 && _Location.Y == CenterLocation.Y + 40)
+	{
+		return {
+			{_Location.X, _Location.Y},
+			{_Location.X - 30, _Location.Y },
+			{_Location.X - 30, _Location.Y - 30},
+			{_Location.X, _Location.Y - 30},
+		};
+	}
+	else
+	{
+		return {
+			{_Location.X, _Location.Y}
+		};
+	}
+}
+
+void UTutorialLevel::StageMoveMonster(AMonster* _Monster, FVector _Location)
+{
+	std::vector<FVector> MovePoint = MonsterMovePoints(_Location);
+
+	for (const FVector& MovePoints : MovePoint)
+	{
+		_Monster->SetWayPoint(MovePoints);
+	}
+}
+
 
 void UTutorialLevel::SetStageUI()
 {

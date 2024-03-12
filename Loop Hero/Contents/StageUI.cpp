@@ -36,7 +36,7 @@ void StageUI::AStageProgressGauge::StageProgressGaugeUpdate(float _DeltaTime)
 
 	if (true) // 타일 수에 따라 게이지 상승
 	{
-		StageProgressGaugeBarBoss->SetTransform({ {-86, 15}, {100, 20} });
+		StageProgressGaugeBarBoss->SetTransform({ {-86, 15}, {0, 20} });
 	}
 }
 
