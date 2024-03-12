@@ -113,6 +113,13 @@ void StageUI::ASpeedPanel::SpeedPanel()
 	SpeedPanelRender->SetImage("s_speedpanel_1.png");
 	SpeedPanelRender->SetOrder(5);
 	SpeedPanelRender->SetTransform({ {0, 0}, {150,50} });
+
+	SpeedPanelText = CreateImageRenderer();
+	SpeedPanelText->SetText("1.0 \n 1.0");
+	SpeedPanelText->SetTextSize(18);
+	SpeedPanelText->SetTransColor(Color8Bit::White);
+	SpeedPanelText->SetOrder(6);
+	SpeedPanelText->SetTransform({ { 50, 0 }, {0, 0} });
 }
 
 void StageUI::APlashka::BeginPlay()

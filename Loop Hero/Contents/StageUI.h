@@ -51,6 +51,7 @@ public:
 		
 	private:
 		UImageRenderer* SpeedPanelRender = nullptr;
+		UImageRenderer* SpeedPanelText = nullptr;
 		void Mousehover();
 	};
 
