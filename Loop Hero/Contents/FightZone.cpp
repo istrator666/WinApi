@@ -1,4 +1,5 @@
 #include "FightZone.h"
+#include "TutorialLevel.h"
 #include "TestStageLevel.h"
 
 AFightZone::AFightZone()
@@ -77,7 +78,7 @@ void AFightZone::Battle(float _DeltaTime)
 		{
 			if (true == MonsterFight->IsDeath() && MonsterFight->GetCurrentAnimationName() != "DEATH")
 			{
-				UTestStageLevel* Level = dynamic_cast<UTestStageLevel*>(GetWorld());
+				UTutorialLevel* Level = dynamic_cast<UTutorialLevel*>(GetWorld());
 				Level->MonsterDrop(MonsterFight->GetActorLocation());
 				MonsterFight->SetChangeAnimation(CharacterStatus::Death);
 			}

@@ -26,6 +26,7 @@ public:
 	ACardInventory& operator=(ACardInventory&& _Other) noexcept = delete;
 
 	void AddCard(int _Card, FVector _MonsterPosition);
+	void TutorialAddCard(int _Card, FVector _MonsterPosition);
 	int CardListSize();
 
 protected:
@@ -41,6 +42,5 @@ private:
 
 	std::list<Node> CardList;
 	std::list<Node> DeleteList;
-
 };
 

@@ -49,6 +49,23 @@ void ADiaLog::Text01()
 	DialogText->SetTransform({ { 280, 540 }, { 0, 0} });
 }
 
+void ADiaLog::Text02()
+{
+	DialogCharacter->SetActive(true);
+	DialogBox->SetActive(true);
+	DialogText->SetActive(true);
+	DialogText->SetTransform({ { 280, 540 }, { 0, 0} });
+
+	if (0 == TextCount)
+	{
+		DialogText->SetText("살아있는 슬라임 한 마리군. 꽤나 골칫거리인걸. 이놈들은 뭐든지 소화시켜버리니까.");
+	}
+	if (1 == TextCount)
+	{
+		DialogText->SetText("어! 이 생물이 기억났어! 어쩌면 내 기억을 되살리면 모든 게 정상으로 돌아갈지도 몰라");
+	}
+}
+
 void ADiaLog::ADiaLog::BeginPlay()
 {
 	AActor::BeginPlay();

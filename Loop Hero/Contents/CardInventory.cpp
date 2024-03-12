@@ -48,6 +48,42 @@ void ACardInventory::AddCard(int _Card, FVector _MonsterPosition)
     }
 }
 
+void ACardInventory::TutorialAddCard(int _Card, FVector _MonsterPosition)
+{
+    for (size_t i = 0; i < _Card; i++)
+    {
+        Node CardNode;
+        CardNode.CardRander = CreateImageRenderer();
+        CardNode.CardRander->SetImage("TutorialCard01.png");
+        CardNode.CardRander->SetOrder(9);
+        CardNode.CardRander->SetTransform({ _MonsterPosition, {175,175} });
+        CardNode.StartPosition = _MonsterPosition;
+        CardList.push_back(CardNode);
+    }
+
+    if (CardList.size() > 13)
+    {
+        size_t StartSize = CardList.size();
+        for (size_t i = 0; i < StartSize - 13; i++)
+        {
+            Node& DeleteNode = CardList.front();
+
+            DeleteNode.StartPosition = DeleteNode.CardRander->GetPosition();
+            DeleteNode.EndPosition = { DeleteNode.StartPosition.X, DeleteNode.StartPosition.Y - 100 };
+            DeleteNode.Movetime = 0.0f;
+            DeleteList.push_back(DeleteNode);
+            CardList.erase(CardList.begin());
+        }
+    }
+
+    int Count = 0;
+    for (Node& CurNode : CardList)
+    {
+        CurNode.EndPosition = FVector(75 * Count, 700);
+        ++Count;
+    }
+}
+
 int ACardInventory::CardListSize()
 {
     return static_cast<int>(CardList.size());
@@ -108,8 +144,8 @@ void ACardInventory::GamePause()
             for (std::list<Node>::iterator CurrentNode = CardList.begin(); CurrentNode != CardList.end(); ++CurrentNode)
             {
                 int CurPosX = static_cast<int>(CurrentNode->CardRander->GetTransform().GetPosition().X);
-                int CurPosY = -30; //static_cast<int>(CurrentNode->CardRander->GetTransform().GetPosition().Y) - 30;
-                CurrentNode->CardRander->SetTransform({ {CurPosX, CurPosY}, {250,250} });
+                int CurPosY = -30;
+                CurrentNode->CardRander->SetTransform({ {CurPosX, CurPosY}, {175,175} });
             }
             IsPause = true;
         }
@@ -121,8 +157,8 @@ void ACardInventory::GamePause()
             for (std::list<Node>::iterator CurrentNode = CardList.begin(); CurrentNode != CardList.end(); ++CurrentNode)
             {
                 int CurPosX = static_cast<int>(CurrentNode->CardRander->GetTransform().GetPosition().X);
-                int CurPosY = 0; //static_cast<int>(CurrentNode->CardRander->GetTransform().GetPosition().Y) + 30;
-                CurrentNode->CardRander->SetTransform({ {CurPosX, CurPosY}, {250,250} });
+                int CurPosY = 0;
+                CurrentNode->CardRander->SetTransform({ {CurPosX, CurPosY}, {175,175} });
             }
             IsPause = false;
         }

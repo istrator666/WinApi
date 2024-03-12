@@ -26,6 +26,12 @@ void UTutorialLevel::BeginPlay()
 	StageMovePlayer(Player);
 
 	DiaLog = SpawnActor<ADiaLog>();
+
+	FightZone = SpawnActor<AFightZone>();
+	FightZone->SetActive(false);
+
+	PlayerFight = SpawnActor<APlayerFight>();
+	PlayerFight->SetActive(false);
 }
 
 void UTutorialLevel::Tick(float _DeltaTime)
@@ -72,6 +78,40 @@ void UTutorialLevel::Tick(float _DeltaTime)
 		}
 	}
 
+	if (true == IsFight && MonsterType::Slime == GetMonsterType())
+	{
+		if (0 == DiaLog->TextCount)
+		{
+			DiaLog->Text02();
+			APlashka->ChangePlashka(1);
+			++DiaLog->TextCount;
+		}
+		else if (UEngineInput::IsDown(VK_LBUTTON) && 1 == DiaLog->TextCount)
+		{
+			DiaLog->Text02();
+			++DiaLog->TextCount;
+		}
+		else if (UEngineInput::IsDown(VK_LBUTTON) && 2 == DiaLog->TextCount)
+		{
+			DiaLog->AllRenderersActiveOff();
+			++DiaLog->TextCount;
+			TutorialRender->TutorialGuideArrow03();
+		}
+		else if (UEngineInput::IsDown(VK_LBUTTON) && 3 == DiaLog->TextCount)
+		{
+			TutorialRender->TutorialGuideArrowEnd();
+			++DiaLog->TextCount;
+		}
+		else if (4 == DiaLog->TextCount)
+		{
+			IsDialog = false;
+		}
+	}
+
+	if (625 == PlayerLocation.X && 325 == PlayerLocation.Y && false == IsFight)
+	{
+		int a = 0;
+	}
 }
 
 void UTutorialLevel::ChangeState(EStageState _State)
@@ -81,6 +121,7 @@ void UTutorialLevel::ChangeState(EStageState _State)
 	case EStageState::Move:
 		break;
 	case EStageState::Fight:
+		FightStart();
 		break;
 	case EStageState::Pause:
 		break;
@@ -102,6 +143,7 @@ void UTutorialLevel::StateUpdate(float _DeltaTime)
 		break;
 	}
 	case EStageState::Fight:
+		Fight(_DeltaTime);
 		break;
 
 	case EStageState::Pause:
@@ -141,7 +183,7 @@ void UTutorialLevel::Move(float _DeltaTime)
 	DiaLog->AllRenderersActiveOff();
 	Player->WayPoints(_DeltaTime);
 
-	//MonsterFightCheck();
+	MonsterFightCheck();
 }
 
 std::vector<FVector> UTutorialLevel::StagePoints(const std::string& _StageName)
@@ -178,6 +220,131 @@ void UTutorialLevel::StageMovePlayer(APlayer* _Player)
 	{
 		_Player->SetWayPoint(MovePoints);
 	}
+}
+
+void UTutorialLevel::MonsterFightCheck()
+{
+	FVector PlayerLocation = Player->GetActorLocation();
+	int PlayerX = static_cast<int>(PlayerLocation.X / 50);
+	int PlayerY = static_cast<int>(PlayerLocation.Y / 50);
+
+	for (int i = 0; i < Monsters.size(); ++i)
+	{
+		if (nullptr == Monsters[i])
+		{
+			continue;
+		}
+
+		Monster = Monsters[i];
+
+		FVector MonsterLocation = Monster->GetActorLocation();
+		int MonsterX = static_cast<int>(MonsterLocation.X / 50);
+		int MonsterY = static_cast<int>(MonsterLocation.Y / 50);
+
+		if (PlayerX == MonsterX && PlayerY == MonsterY)
+		{
+			if (fmod(PlayerLocation.X, 50.0f) == 25.0f && fmod(PlayerLocation.Y, 50.0f) == 25.0f)
+			{
+				FightCheckMonsters.push_back(Monsters[i]);
+			}
+		}
+	}
+
+	if (0 != FightCheckMonsters.size())
+	{
+		ChangeState(EStageState::Fight);
+	}
+}
+
+void UTutorialLevel::FightStart()
+{
+	if (0 >= FightCheckMonsters.size())
+	{
+		MsgBoxAssert("싸울몬스터가 존재하지 않는데 싸움상태로 들어왔습니다");
+		MonsterFights.clear();
+	}
+
+	FightZone->SetActorLocation({ 530, 340 });
+	FightZone->SetActive(true);
+
+	PlayerFight->SetActorLocation({ 380, 400 });
+	PlayerFight->SetActive(true);
+
+	for (size_t i = 0; i < FightCheckMonsters.size(); i++)
+	{
+		AMonsterFight* MonsterFight = SpawnActor<AMonsterFight>();
+		MonsterFight->StatusInit(26, 26, 1, 3, 1, 1.5f, 0, 25, 25, 25, 25);
+		MonsterFights.push_back(MonsterFight);
+	}
+
+	FVector MonsterPositions[5] =
+	{
+		{ 600, 400 },
+		{ 600, 300 },
+		{ 700, 500 },
+		{ 700, 400 },
+		{ 700, 300 }
+	};
+
+	for (size_t i = 0; i < MonsterFights.size(); i++)
+	{
+		AMonsterFight* MonsterFight = MonsterFights[i];
+		MonsterFight->SetMosnterFightImage(GetMonsterType());
+		MonsterFight->SetActorLocation(MonsterPositions[i]);
+	}
+
+	FightZone->FightZoneInit(PlayerFight, MonsterFights);
+}
+
+void UTutorialLevel::Fight(float _DeltaTime)
+{
+	IsFight = true;
+
+	if (false == IsDialog)
+	{
+		StageprogressGauge->StageProgressGaugeUpdate(_DeltaTime / 5);
+		FightZone->Battle(_DeltaTime);
+		FightEnd();
+	}
+}
+
+void UTutorialLevel::FightEnd()
+{
+	if (true == FightZone->AllMonsterDeath())
+	{
+		FightZone->SetActive(false);
+		PlayerFight->SetActive(false);
+
+
+		for (size_t i = 0; i < FightCheckMonsters.size(); i++)
+		{
+			FightCheckMonsters[i]->Destroy();
+		}
+
+		for (size_t i = 0; i < MonsterFights.size(); i++)
+		{
+			MonsterFights[i]->Destroy();
+		}
+
+		FightCheckMonsters.clear();
+		MonsterFights.clear();
+
+		IsFight = false;
+		ChangeState(EStageState::Move);
+	}
+}
+
+MonsterType UTutorialLevel::GetMonsterType()
+{
+	return MonsterType();
+}
+
+void UTutorialLevel::MonsterDrop(FVector _MonsterPosition)
+{
+	//int Card = RandomEngine.RandomInt(0, 2);
+
+	CardInventory->TutorialAddCard(1, _MonsterPosition);
+
 }
 
 std::vector<SpawnTileData> UTutorialLevel::SpawnTileLocation()
@@ -266,8 +433,6 @@ void UTutorialLevel::MonsterSpawn(SpawnTileData& _TileData, MonsterType _Monster
 
 void UTutorialLevel::MonsterSpawnTimeCheck(float _DeltaTime)
 {
-	StageprogressGauge->StageProgressGaugeUpdate(_DeltaTime);
-
 	if (0 == StageprogressGauge->GetDailyGaugeUpdate())
 	{
 		mSpawn = SpawnTileLocation();
@@ -276,6 +441,8 @@ void UTutorialLevel::MonsterSpawnTimeCheck(float _DeltaTime)
 			SpawnTileType(Tile);
 		}
 	}
+
+	int a = 0;
 }
 
 std::vector<FVector> UTutorialLevel::MonsterMovePoints(FVector _Location)

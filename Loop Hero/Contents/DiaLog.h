@@ -18,8 +18,11 @@ public:
 	void StartNextText(int _DialogCount);
 	void Text01();
 	void Text02();
+	void Text03();
 
 	int DialogCount = 0;
+	int TextCount = 0;
+	UImageRenderer* DialogText = nullptr;
 
 protected:
 	void BeginPlay() override;
@@ -30,7 +33,6 @@ private:
 	UImageRenderer* DialogBox = nullptr;
 	UImageRenderer* DiaProgressbar = nullptr;
 	UImageRenderer* DialogBackground = nullptr;
-	UImageRenderer* DialogText = nullptr;
 
 	float DiaLogMove = 0.0f;
 	float DiaProgressbarTime = 1.0f;

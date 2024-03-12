@@ -33,9 +33,9 @@ void UnitFight::AttackDamege(UnitFight& _AttUnit, UnitFight& _DefUnit)
 
 bool UnitFight::AttackSpeed(UnitFight& _Unit, float _DeltaTime)
 {
-    float AttackSpeed = GetAttackGauge();
-    AttackSpeed += 100 * (_DeltaTime / GetAttackSpeed());
-    SetAttackGauge(AttackSpeed);
+    float AttackGauge = GetAttackGauge();
+    AttackGauge += 100 * (_DeltaTime / GetAttackSpeed());
+    SetAttackGauge(AttackGauge);
 
     if (100 <= GetAttackGauge())
     {

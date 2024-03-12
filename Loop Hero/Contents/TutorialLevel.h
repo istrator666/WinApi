@@ -35,9 +35,19 @@ public:
 
 	// Move
 	void Move(float _DeltaTime);
+	void MonsterFightCheck();
+
+	// Fight 함수
+	void FightStart();
+	void Fight(float _DeltaTime);
+	void FightEnd();
+	MonsterType GetMonsterType();
 
 	//Pause
 	void GamePause();
+
+	// Drop
+	void MonsterDrop(FVector _MonsterPosition);
 
 protected:
 	void BeginPlay() override;
@@ -72,6 +82,13 @@ private:
 
 	// 초기 플레이어 상태
 	EStageState CurState = EStageState::Pause;
+
+	// Fight
+	AFightZone* FightZone = nullptr;
+	APlayerFight* PlayerFight = nullptr;
+	std::vector<AMonsterFight*> MonsterFights;
+	bool IsFight = false;
+	bool IsDialog = true;
 
 	// 몬스터
 	std::vector<AMonster*> Monsters;

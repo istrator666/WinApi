@@ -27,7 +27,7 @@ void LoopHeroContentsCore::BeginPlay()
 	CreateLevel<UTitleLevel>("TitleLevel");
 	CreateLevel<UIntroLevel>("IntroLevel");
 	CreateLevel<UTutorialLevel>("Tutorial");
-	CreateLevel<UTestStageLevel>("StageLevel");
+	//CreateLevel<UTestStageLevel>("StageLevel");
 	ChangeLevel("Tutorial");
 }
 

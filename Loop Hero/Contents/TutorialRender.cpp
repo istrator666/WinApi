@@ -25,7 +25,8 @@ void ATutorialRender::TutorialGuideArrow02()
 
 void ATutorialRender::TutorialGuideArrow03()
 {
-
+	TutorialText->SetActive(true);
+	TutorialText->SetText("여행, 전투, 그리고 대부분의 다른 행동은 자동으로 이루어집니다. 플레이어는 직접적으로 영향을 끼치지 않습니다. \n- 아무곳이나 눌러 계속 이어가십시오.");
 }
 
 void ATutorialRender::TutorialGuideArrow04()
