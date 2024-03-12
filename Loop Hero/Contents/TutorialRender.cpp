@@ -14,7 +14,7 @@ void ATutorialRender::TutorialGuideArrow01()
 {
 	UPArrow->SetActive(true);
 	TutorialText->SetActive(true);
-	TutorialText->SetText("모험 (지도위를 여행) 모드와 계획 (멈춤) 모드 사이를 전환하려면 스위치를 누르거나, 우클릭이나 스페이스바를 누르십시오. \n - 게임 모드를 바꿔 여정을 이어가십시오.");
+	TutorialText->SetText("모험 (지도위를 여행) 모드와 계획 (멈춤) 모드 사이를 전환하려면 스위치를 누르거나, 우클릭이나 스페이스바를 누르십시오. \n- 게임 모드를 바꿔 여정을 이어가십시오.");
 }
 
 void ATutorialRender::TutorialGuideArrow02()
@@ -73,9 +73,10 @@ void ATutorialRender::BeginPlay()
 
 	TutorialText = CreateImageRenderer();
 	TutorialText->SetTextColor(Color8Bit::White);
-	TutorialText->SetTextSize(18);
+	TutorialText->SetTextSize(17);
+	TutorialText->SetTextSortOption(Gdiplus::StringAlignmentNear, Gdiplus::StringAlignmentNear);
 	TutorialText->SetOrder(15);
-	TutorialText->SetTransform({ {500, 500}, {200,200} });
+	TutorialText->SetTransform({ {25, 500}, {200,200} });
 	TutorialText->SetActive(false);
 }
 

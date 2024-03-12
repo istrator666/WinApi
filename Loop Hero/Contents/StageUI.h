@@ -51,7 +51,8 @@ public:
 		
 	private:
 		UImageRenderer* SpeedPanelRender = nullptr;
-		UImageRenderer* SpeedPanelText = nullptr;
+		UImageRenderer* SpeedPanelText01 = nullptr;
+		UImageRenderer* SpeedPanelText02 = nullptr;
 		void Mousehover();
 	};
 
@@ -59,6 +60,7 @@ public:
 	{
 	public:
 		void Plashka();
+		void ChangePlashka(int _Number);
 
 	protected:
 		void BeginPlay() override;
@@ -66,6 +68,9 @@ public:
 
 	private:
 		UImageRenderer* PlashkaRender = nullptr;
+		UImageRenderer* PlashkaText = nullptr;
+		UImageRenderer* PlashkaPause = nullptr;
+		UImageRenderer* PlashkaMove = nullptr;
 		void Mousehover();
 	};
 

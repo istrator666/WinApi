@@ -54,11 +54,23 @@ void LoopHeroContentsCore::RecourceLoad()
 		UEngineResourcesManager::GetInst().LoadImg(File.GetFullPath());
 	}
 
+
+	// 플레이어
 	UEngineResourcesManager::GetInst().CuttingImage("Warrior.png", 5, 8);
+
+	// 몬스터
 	UEngineResourcesManager::GetInst().CuttingImage("Overworld Enemies.png", 4, 12);
 	UEngineResourcesManager::GetInst().CuttingImage("Slime.png", 5, 3);
+
+	// 카드
 	UEngineResourcesManager::GetInst().CuttingImage("Cards.png", 5, 2);
+
+	// 튜토리얼
 	UEngineResourcesManager::GetInst().CuttingImage("Up.png", 5, 8);
 	UEngineResourcesManager::GetInst().CuttingImage("Right.png", 5, 8);
+
+	// UI
+	UEngineResourcesManager::GetInst().CuttingImage("PlashkaMove.png", 5, 4);
+	UEngineResourcesManager::GetInst().CuttingImage("PlashkaPause.png", 5, 1);
 }
 

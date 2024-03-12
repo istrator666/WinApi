@@ -114,12 +114,21 @@ void StageUI::ASpeedPanel::SpeedPanel()
 	SpeedPanelRender->SetOrder(5);
 	SpeedPanelRender->SetTransform({ {0, 0}, {150,50} });
 
-	SpeedPanelText = CreateImageRenderer();
-	SpeedPanelText->SetText("1.0 \n 1.0");
-	SpeedPanelText->SetTextSize(18);
-	SpeedPanelText->SetTransColor(Color8Bit::White);
-	SpeedPanelText->SetOrder(6);
-	SpeedPanelText->SetTransform({ { 50, 0 }, {0, 0} });
+	SpeedPanelText01 = CreateImageRenderer();
+	SpeedPanelText01->SetText("1.0x");
+	SpeedPanelText01->SetTextSortOption(Gdiplus::StringAlignmentNear, Gdiplus::StringAlignmentNear);
+	SpeedPanelText01->SetTextSize(17);
+	SpeedPanelText01->SetTextColor(Color8Bit::White);
+	SpeedPanelText01->SetOrder(6);
+	SpeedPanelText01->SetTransform({ { 35, -20 }, {0, 0} });
+
+	SpeedPanelText02 = CreateImageRenderer();
+	SpeedPanelText02->SetText("1.0x");
+	SpeedPanelText02->SetTextSortOption(Gdiplus::StringAlignmentNear, Gdiplus::StringAlignmentNear);
+	SpeedPanelText02->SetTextSize(17);
+	SpeedPanelText02->SetTextColor(Color8Bit::White);
+	SpeedPanelText02->SetOrder(6);
+	SpeedPanelText02->SetTransform({ { 35, 5 }, {0, 0} });
 }
 
 void StageUI::APlashka::BeginPlay()
@@ -139,6 +148,52 @@ void StageUI::APlashka::Plashka()
 	PlashkaRender->SetImage("s_plashka.png");
 	PlashkaRender->SetOrder(5);
 	PlashkaRender->SetTransform({ {0, 0}, {300,50} });
+
+	PlashkaText = CreateImageRenderer();
+	PlashkaText->SetText("°èÈ¹");
+	PlashkaText->SetTextSortOption(Gdiplus::StringAlignmentNear, Gdiplus::StringAlignmentNear);
+	PlashkaText->SetTextSize(25);
+	PlashkaText->SetTextColor(Color8Bit::White);
+	PlashkaText->SetOrder(6);
+	PlashkaText->SetTransform({ { 0, -10}, {0, 0} });
+
+	PlashkaPause = CreateImageRenderer();
+	PlashkaPause->SetImage("PlashkaPause.png");
+	PlashkaPause->SetOrder(6);
+	PlashkaPause->SetTransform({ {-118, 0}, {250,250} });
+	PlashkaPause->CreateAnimation("Idle", "PlashkaPause.png", 4, 4, 0.3f, false);
+	PlashkaPause->ChangeAnimation("Idle");
+	PlashkaPause->SetActive(true);
+
+
+	PlashkaMove = CreateImageRenderer();
+	PlashkaMove->SetImage("PlashkaMove.png");
+	PlashkaMove->SetOrder(6);
+	PlashkaMove->SetTransform({ {-118, 0}, {250,250} });
+	PlashkaMove->CreateAnimation("Idle", "PlashkaMove.png", 0, 15, 0.25f, true);
+	PlashkaMove->ChangeAnimation("Idle");
+	PlashkaMove->SetActive(false);
+}
+
+void StageUI::APlashka::ChangePlashka(int _Number)
+{
+	switch (_Number)
+	{
+	case 0:
+		PlashkaText->SetText("°èÈ¹");
+		PlashkaMove->SetActive(false);
+		PlashkaPause->SetActive(true);
+		PlashkaPause->ChangeAnimation("Idle");
+		break;
+	case 1:
+		PlashkaText->SetText("¸ðÇè");
+		PlashkaPause->SetActive(false);
+		PlashkaMove->SetActive(true);
+		PlashkaMove->ChangeAnimation("Idle");
+		break;
+	default:
+		break;
+	}
 }
 
 void StageUI::ATravelitemPanel::BeginPlay()

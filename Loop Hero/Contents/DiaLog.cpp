@@ -28,23 +28,12 @@ void ADiaLog::StartNextText(int _DialogCount)
 
 	if (1 == _DialogCount)
 	{
-		DialogText2->SetActive(true);
-		DialogText3->SetActive(true);
+		DialogText->SetText("머리가 아파 죽을 것 같아. 기억나는건 오직... \n하늘 위를 날아다니는 지팡이 든 해골뿐이야! 이 어둠은 그놈으로부터 생긴거야. 그놈이 주변의 \n모든 것을 파괴한 건가?");
 
-		DialogText->SetText("머리가 아파 죽을 것 같아. 기억나는건 오직...");
-
-		DialogText2->SetText("하늘 위를 날아다니는 지팡이 든 해골뿐이야!이 어둠은 그놈으로부터 생긴거야.그놈이 주변의");
-		DialogText2->SetPosition({ 655, 570 });
-
-		DialogText3->SetText("모든 것을 파괴한 건가 ?");
-		DialogText3->SetPosition({ 375, 590 });
 	}
 	else if (2 == _DialogCount)
 	{
-		DialogText2->SetActive(false);
-		DialogText3->SetActive(false);
 		DialogText->SetText("가만히 있기만 해선 아무런 해답을 얻을 수 없겠군...");
-		DialogText->SetPosition({500,550});
 		DiaProgressbar->SetImage("s_dia_lastworddark_1.png");
 	}
 
@@ -57,7 +46,7 @@ void ADiaLog::Text01()
 	DialogBox->SetActive(true);
 	DialogText->SetActive(true);
 	DialogText->SetText("해가 지기 전에 쉴 곳을 찾을 수 있으면 좋겠어... 물론 밤 같은게 아직 존재한다면 말이지.");
-	DialogText->SetTransform({ { 635, 550 }, { 0, 0} });
+	DialogText->SetTransform({ { 280, 540 }, { 0, 0} });
 }
 
 void ADiaLog::ADiaLog::BeginPlay()
@@ -79,23 +68,10 @@ void ADiaLog::ADiaLog::BeginPlay()
 	DialogText->SetOrder(15);
 	DialogText->SetText("여긴 어디지? 이 길 말고는 아무것도 안 보여.");
 	DialogText->SetTextColor(Color8Bit::White);
-	DialogText->SetTextSize(18);
+	DialogText->SetTextSortOption(Gdiplus::StringAlignmentNear, Gdiplus::StringAlignmentNear);
+	DialogText->SetTextSize(17);
 	DialogText->SetActive(false);
-	DialogText->SetTransform({ { 460, 550 }, { 0, 0} });
-
-	DialogText2 = CreateImageRenderer();
-	DialogText2->SetText("");
-	DialogText2->SetOrder(15);
-	DialogText2->SetTextColor(Color8Bit::White);
-	DialogText2->SetTextSize(18);
-	DialogText2->SetActive(false);
-
-	DialogText3 = CreateImageRenderer();
-	DialogText3->SetText("");
-	DialogText3->SetOrder(15);
-	DialogText3->SetTextColor(Color8Bit::White);
-	DialogText3->SetTextSize(18);
-	DialogText3->SetActive(false);
+	DialogText->SetTransform({ { 280, 540 }, { 0, 0} });
 
 	DiaProgressbar = CreateImageRenderer();
 	DiaProgressbar->SetImage("s_dia_lastworddark_0.png");

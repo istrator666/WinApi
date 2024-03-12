@@ -87,12 +87,14 @@ void UTutorialLevel::StateUpdate(float _DeltaTime)
 	case EStageState::Move:
 	{
 		Move(_DeltaTime);
+		APlashka->ChangePlashka(1);
 		break;
 	}
 	case EStageState::Fight:
 		break;
 
 	case EStageState::Pause:
+		APlashka->ChangePlashka(0);
 		break;
 	default:
 		break;

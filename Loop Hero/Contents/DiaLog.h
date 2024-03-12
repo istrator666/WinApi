@@ -30,8 +30,6 @@ private:
 	UImageRenderer* DiaProgressbar = nullptr;
 	UImageRenderer* DialogBackground = nullptr;
 	UImageRenderer* DialogText = nullptr;
-	UImageRenderer* DialogText2 = nullptr;
-	UImageRenderer* DialogText3 = nullptr;
 
 	float DiaLogMove = 0.0f;
 	float DiaProgressbarTime = 1.0f;
