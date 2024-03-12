@@ -105,12 +105,24 @@ void UTutorialLevel::Tick(float _DeltaTime)
 		else if (4 == DiaLog->TextCount)
 		{
 			IsDialog = false;
+			++DiaLog->TextCount;
 		}
 	}
 
-	if (625 == PlayerLocation.X && 325 == PlayerLocation.Y && false == IsFight)
+	if (625 == PlayerLocation.X && 375 == PlayerLocation.Y && false == IsFight)
 	{
-		int a = 0;
+		ChangeState(EStageState::Pause);
+
+		if (5 == DiaLog->TextCount)
+		{
+			DiaLog->Text03();
+			++DiaLog->TextCount;
+		}
+		if (UEngineInput::IsDown(VK_LBUTTON))
+		{
+			DiaLog->AllRenderersActiveOff();
+			TutorialRender->TutorialGuideArrow04();
+		}
 	}
 }
 
@@ -315,7 +327,6 @@ void UTutorialLevel::FightEnd()
 		FightZone->SetActive(false);
 		PlayerFight->SetActive(false);
 
-
 		for (size_t i = 0; i < FightCheckMonsters.size(); i++)
 		{
 			FightCheckMonsters[i]->Destroy();
@@ -329,8 +340,8 @@ void UTutorialLevel::FightEnd()
 		FightCheckMonsters.clear();
 		MonsterFights.clear();
 
-		IsFight = false;
 		ChangeState(EStageState::Move);
+		IsFight = false;
 	}
 }
 

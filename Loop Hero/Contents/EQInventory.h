@@ -25,11 +25,14 @@ public:
 
 	private:
 		UImageRenderer* EQInventoryRender = nullptr;
+		UImageRenderer* EQInventoryIcon = nullptr;
+		UImageRenderer* EQIcon = nullptr;
 	};
 
 protected:
 
 private:
+
 
 };
 

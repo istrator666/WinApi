@@ -31,7 +31,10 @@ void ATutorialRender::TutorialGuideArrow03()
 
 void ATutorialRender::TutorialGuideArrow04()
 {
-
+	TutorialText->SetActive(true);
+	RightArrow->SetActive(true);
+	RightArrow2->SetActive(true);
+	TutorialText->SetText("당신에겐 소지품과 아이템 슬롯이 있습니다. 어떻게 해야 할 지는 알 것입니다. \n- 물품을 장비한 후 계속 이어가십시오.");
 }
 
 void ATutorialRender::TutorialGuideArrow05()
@@ -44,7 +47,8 @@ void ATutorialRender::TutorialGuideArrowEnd()
 {
 	UPArrow->SetActive(false);
 	TutorialText->SetActive(false);
-	//RightArrow->SetActive(false);
+	RightArrow->SetActive(false);
+	RightArrow2->SetActive(false);
 }
 
 void ATutorialRender::BeginPlay()
@@ -72,6 +76,14 @@ void ATutorialRender::BeginPlay()
 	RightArrow->CreateAnimation("Idle", "Right.png", 0, 36, 0.25f, true);
 	RightArrow->ChangeAnimation("Idle");
 	RightArrow->SetActive(false);
+
+	RightArrow2 = CreateImageRenderer();
+	RightArrow2->SetImage("Right.png");
+	RightArrow2->SetOrder(15);
+	RightArrow2->SetTransform({ {1000, 50}, {250,250} });
+	RightArrow2->CreateAnimation("Idle", "Right.png", 0, 36, 0.25f, true);
+	RightArrow2->ChangeAnimation("Idle");
+	RightArrow2->SetActive(false);
 
 	TutorialText = CreateImageRenderer();
 	TutorialText->SetTextColor(Color8Bit::White);

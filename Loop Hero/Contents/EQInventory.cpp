@@ -26,4 +26,10 @@ void EQInventory::AEQInventoryUI::EQInventoryUI()
 	EQInventoryRender->SetImage("Equipment.png");
 	EQInventoryRender->SetOrder(5);
 	EQInventoryRender->SetTransform({ {0, 0}, {295,730} });
+
+
+	EQInventoryIcon = CreateImageRenderer();
+	EQInventoryIcon->SetImage("Equipment.png");
+	EQInventoryIcon->SetOrder(5);
+	EQInventoryIcon->SetTransform({ {0, 0}, {295,730} });
 }

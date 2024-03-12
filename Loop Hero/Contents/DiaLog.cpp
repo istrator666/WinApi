@@ -66,6 +66,16 @@ void ADiaLog::Text02()
 	}
 }
 
+void ADiaLog::Text03()
+{
+	DialogCharacter->SetActive(true);
+	DialogBox->SetActive(true);
+	DialogText->SetActive(true);
+	DialogText->SetTransform({ { 280, 540 }, { 0, 0} });
+	DialogText->SetText("맨손으로 싸우는 게 이렇게 힘들 줄이야. 아직 완전히 소화되지 않은 무기가 있었던 거 같은데...");
+
+}
+
 void ADiaLog::ADiaLog::BeginPlay()
 {
 	AActor::BeginPlay();

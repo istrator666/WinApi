@@ -72,5 +72,8 @@ void LoopHeroContentsCore::RecourceLoad()
 	// UI
 	UEngineResourcesManager::GetInst().CuttingImage("PlashkaMove.png", 5, 4);
 	UEngineResourcesManager::GetInst().CuttingImage("PlashkaPause.png", 5, 1);
+
+	//¹«±â
+	UEngineResourcesManager::GetInst().CuttingImage("Weapons.png", 5, 3);
 }
 

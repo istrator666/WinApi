@@ -38,6 +38,7 @@ private:
 	UImageRenderer* BackStageRender = nullptr;
 	UImageRenderer* UPArrow = nullptr;
 	UImageRenderer* RightArrow = nullptr;
+	UImageRenderer* RightArrow2 = nullptr;
 	UImageRenderer* TutorialText = nullptr;
 
 	void BackStage();
