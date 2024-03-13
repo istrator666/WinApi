@@ -34,7 +34,6 @@ void ADiaLog::StartNextText(int _DialogCount)
 	else if (2 == _DialogCount)
 	{
 		DialogText->SetText("가만히 있기만 해선 아무런 해답을 얻을 수 없겠군...");
-		DiaProgressbar->SetImage("s_dia_lastworddark_1.png");
 	}
 
 	return;
@@ -138,12 +137,6 @@ void ADiaLog::ADiaLog::BeginPlay()
 	DialogText->SetActive(false);
 	DialogText->SetTransform({ { 280, 540 }, { 0, 0} });
 
-	DiaProgressbar = CreateImageRenderer();
-	DiaProgressbar->SetImage("s_dia_lastworddark_0.png");
-	DiaProgressbar->SetOrder(15);
-	DiaProgressbar->SetActive(false);
-	DiaProgressbar->SetTransform({ { 650, 500 }, { 30, 30} });
-
 	DialogBackground = CreateImageRenderer();
 	DialogBackground->SetImage("TutorialStartBackGround.png");
 	DialogBackground->SetOrder(13);
@@ -160,7 +153,6 @@ void ADiaLog::ADiaLog::Tick(float _DeltaTime)
 	DiaProgressbarTime -= _DeltaTime;
 	if (0 > DiaProgressbarTime && 3 > DialogCount)
 	{
-		DiaProgressbar->SetActive(true);
 		DialogText->SetActive(true);
 	}
 

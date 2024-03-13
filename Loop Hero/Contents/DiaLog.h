@@ -35,7 +35,6 @@ protected:
 private:
 	UImageRenderer* DialogCharacter = nullptr;
 	UImageRenderer* DialogBox = nullptr;
-	UImageRenderer* DiaProgressbar = nullptr;
 	UImageRenderer* DialogBackground = nullptr;
 
 	float DiaLogMove = 0.0f;
