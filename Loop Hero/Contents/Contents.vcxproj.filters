@@ -56,6 +56,9 @@
     <ClCompile Include="TutorialRender.cpp">
       <Filter>Actor\Render</Filter>
     </ClCompile>
+    <ClCompile Include="Mouse.cpp">
+      <Filter>Actor\Unit</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="LoopHero.h" />
@@ -121,6 +124,9 @@
     </ClInclude>
     <ClInclude Include="Struct.h">
       <Filter>Config</Filter>
+    </ClInclude>
+    <ClInclude Include="Mouse.h">
+      <Filter>Actor\Unit</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

@@ -96,6 +96,10 @@ void UTutorialLevel::ChangeState(EStageState _State)
 		Talk5Start();
 		break;
 	}
+	case EStageState::Talk6:
+	{
+		break;
+	}
 	case EStageState::Move:
 	{
 		break;
@@ -141,6 +145,10 @@ void UTutorialLevel::StateUpdate(float _DeltaTime)
 	case EStageState::Talk5:
 	{
 		Talk5(_DeltaTime);
+		break;
+	}
+	case EStageState::Talk6:
+	{
 		break;
 	}
 	case EStageState::Move:
@@ -193,6 +201,14 @@ void UTutorialLevel::Move(float _DeltaTime)
 	else if (625 == PlayerLocation.X && 325 == PlayerLocation.Y)
 	{
 		ChangeState(EStageState::Talk3);
+	}
+	else if (425 == PlayerLocation.X && 425 == PlayerLocation.Y)
+	{
+		mSpawn = TutorialSpawnTileLocation();
+		for (SpawnTileData& Tile : mSpawn)
+		{
+			SpawnTileType(Tile);
+		}
 	}
 
 	Player->WayPoints(_DeltaTime);
@@ -469,10 +485,13 @@ void UTutorialLevel::Talk4(float _DeltaTime)
 
 		ChangeState(EStageState::Fight);
 	}
+
 }
 
 void UTutorialLevel::Talk5(float _DeltaTime)
 {
+	FightStartCheckTest = true;
+
 	if (UEngineInput::IsDown(VK_LBUTTON) && 0 == TalkCount)
 	{
 		DiaLog->TextEnd();
@@ -500,7 +519,8 @@ void UTutorialLevel::Talk5(float _DeltaTime)
 	{
 		DiaLog->TutorialGuideArrowEnd();
 		TalkCount = 0;
-		ChangeState(EStageState::Move);
+		//ChangeState(EStageState::Move);
+		ChangeState(EStageState::Talk6);
 	}
 }
 
@@ -588,6 +608,27 @@ void UTutorialLevel::MonsterSpawn(SpawnTileData& _TileData, MonsterType _Monster
 	Monsters.push_back(Monster);
 }
 
+std::vector<SpawnTileData> UTutorialLevel::TutorialSpawnTileLocation()
+{
+	SpawnTile =
+	{
+		//{ {625, 325}, RandomSpawnLocation({610, 360, 0, 0}), TileType::WASTELAND },
+		//{ {625, 375}, RandomSpawnLocation({560, 360, 0, 0}), TileType::WASTELAND },
+		//{ {575, 375}, RandomSpawnLocation({560, 410, 0, 0}), TileType::WASTELAND },
+		//{ {575, 425}, RandomSpawnLocation({510, 410, 0, 0}), TileType::WASTELAND },
+		//{ {525, 425}, RandomSpawnLocation({460, 410, 0, 0}), TileType::WASTELAND },
+		//{ {475, 425}, RandomSpawnLocation({410, 410, 0, 0}), TileType::WASTELAND },
+		//{ {425, 425}, RandomSpawnLocation({410, 360, 0, 0}), TileType::WASTELAND },
+		{ {425, 375}, RandomSpawnLocation({410, 310, 0, 0}), TileType::WASTELAND },
+		//{ {425, 325}, RandomSpawnLocation({410, 260, 0, 0}), TileType::WASTELAND },
+		//{ {425, 275}, RandomSpawnLocation({460, 260, 0, 0}), TileType::WASTELAND },
+		//{ {475, 275}, RandomSpawnLocation({460, 210, 0, 0}), TileType::WASTELAND },
+		//{ {525, 225}, RandomSpawnLocation({510, 210, 0, 0}), TileType::WASTELAND },
+	};
+
+	return SpawnTile;
+}
+
 void UTutorialLevel::MonsterSpawnTimeCheck(float _DeltaTime)
 {
 	if (0 == StageprogressGauge->GetDailyGaugeUpdate())
@@ -598,8 +639,6 @@ void UTutorialLevel::MonsterSpawnTimeCheck(float _DeltaTime)
 			SpawnTileType(Tile);
 		}
 	}
-
-	int a = 0;
 }
 
 std::vector<FVector> UTutorialLevel::MonsterMovePoints(FVector _Location)

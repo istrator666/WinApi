@@ -11,6 +11,14 @@ enum class IntroState
 	Skip
 };
 
+enum class ECollision
+{
+	Map,
+	Card,
+	Equipment,
+	ItemInventory,
+};
+
 enum class EStageState
 {
 	Talk1,

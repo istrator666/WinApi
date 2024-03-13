@@ -53,11 +53,13 @@ public:
 	void Talk3(float _DeltaTime);
 	void Talk4(float _DeltaTime);
 	void Talk5(float _DeltaTime);
+	void Talk6(float _DeltaTime);
 
 	void Talk2Start();
 	void Talk3Start();
 	void Talk4Start();
 	void Talk5Start();
+	void Talk6Start();
 
 protected:
 	void BeginPlay() override;
@@ -79,6 +81,9 @@ private:
 
 	void SetStageUI();
 	void SetEQInventory();
+
+	//마우스 오브젝트
+	
 
 	// 플레이어
 	APlayer* Player = nullptr;
@@ -117,6 +122,8 @@ private:
 	FVector RandomSpawnLocation(FVector _Location);
 	void SpawnTileType(SpawnTileData& _TileData);
 	void MonsterSpawn(SpawnTileData& _TileData, MonsterType _MonsterType);
+
+	std::vector<SpawnTileData> TutorialSpawnTileLocation();
 
 	bool IsGamePause = false;
 	int TalkCount = 0;

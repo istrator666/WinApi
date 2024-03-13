@@ -10,6 +10,7 @@ public:
 	float Movetime = 0.0f;
 
 	UImageRenderer* CardRander = nullptr;
+	UCollision* CardCollision = nullptr;
 };
 
 class ACardInventory : public AActor

@@ -1,6 +1,7 @@
 #include "CardInventory.h"
 #include "MouseFunction.h"
 #include <thread>
+#include "Enum.h"
 
 ACardInventory::ACardInventory()
 {
@@ -54,6 +55,9 @@ void ACardInventory::TutorialAddCard(int _Card, FVector _MonsterPosition)
     {
         Node CardNode;
         CardNode.CardRander = CreateImageRenderer();
+        CardNode.CardCollision = CreateCollision(ECollision::Card);
+        CardNode.CardCollision->SetScale({80, 120});
+        CardNode.CardCollision->SetColType(ECollisionType::Rect);
         CardNode.CardRander->SetImage("TutorialCard01.png");
         CardNode.CardRander->SetOrder(9);
         CardNode.CardRander->SetTransform({ _MonsterPosition, {175,175} });
@@ -105,6 +109,7 @@ void ACardInventory::ACardInventory::Tick(float _DeltaTime)
         FVector CurPos = FVector::LerpClamp(CurNode.StartPosition, CurNode.EndPosition, CurNode.Movetime);
 
         CurNode.CardRander->SetPosition(CurPos);
+        CurNode.CardCollision->SetPosition(CurPos);
     }
 
     std::list<Node>::iterator StartIter = DeleteList.begin();
