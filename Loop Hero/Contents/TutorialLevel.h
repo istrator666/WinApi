@@ -49,7 +49,15 @@ public:
 	void MonsterDrop(FVector _MonsterPosition);
 
 	void Talk1(float _DeltaTime);
-	void Talk1Start();
+	void Talk2(float _DeltaTime);
+	void Talk3(float _DeltaTime);
+	void Talk4(float _DeltaTime);
+	void Talk5(float _DeltaTime);
+
+	void Talk2Start();
+	void Talk3Start();
+	void Talk4Start();
+	void Talk5Start();
 
 protected:
 	void BeginPlay() override;
@@ -111,6 +119,9 @@ private:
 	void MonsterSpawn(SpawnTileData& _TileData, MonsterType _MonsterType);
 
 	bool IsGamePause = false;
+	int TalkCount = 0;
+	float TimeCheck = 1.0f;
+	FVector PlayerLocation;
 
 };
 

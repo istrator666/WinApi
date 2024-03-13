@@ -22,28 +22,14 @@ public:
 	UImageRenderer* LastCreatedTile = nullptr;
 	std::vector<std::vector<UImageRenderer*>> TileList;
 
-	void TutorialGuideArrow01();
-	void TutorialGuideArrow02();
-	void TutorialGuideArrow03();
-	void TutorialGuideArrow04();
-	void TutorialGuideArrow05();
-	void TutorialGuideArrow06();
-	void TutorialGuideArrow07();
-	void TutorialGuideArrow08();
-	void TutorialGuideArrow09();
-
-	void TutorialGuideArrowEnd();
-
 protected:
 	void BeginPlay() override;
 	void Tick(float _DeltaTime) override;
 
 private:
 	UImageRenderer* BackStageRender = nullptr;
-	UImageRenderer* UPArrow = nullptr;
-	UImageRenderer* RightArrow = nullptr;
-	UImageRenderer* RightArrow2 = nullptr;
-	UImageRenderer* TutorialText = nullptr;
+
+
 
 	void BackStage();
 	void MainStage();

@@ -14,6 +14,14 @@ enum class IntroState
 enum class EStageState
 {
 	Talk1,
+	Talk2,
+	Talk3,
+	Talk4,
+	Talk5,
+	Talk6,
+	Talk7,
+	Talk8,
+	Talk9,
 	Move,
 	Fight,
 	Pause,
