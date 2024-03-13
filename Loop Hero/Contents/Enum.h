@@ -17,6 +17,7 @@ enum class ECollision
 	Card,
 	Equipment,
 	ItemInventory,
+	Mouse,
 };
 
 enum class EStageState

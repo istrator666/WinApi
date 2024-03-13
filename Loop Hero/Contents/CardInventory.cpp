@@ -110,6 +110,19 @@ void ACardInventory::ACardInventory::Tick(float _DeltaTime)
 
         CurNode.CardRander->SetPosition(CurPos);
         CurNode.CardCollision->SetPosition(CurPos);
+
+        if (1.0f <= CurNode.Movetime)
+        {
+            std::vector<UCollision*> Result;
+            FVector NextPos;
+            if (true == CurNode.CardCollision->CollisionCheck(ECollision::Mouse, Result) && UEngineInput::IsDown(VK_LBUTTON))
+            {
+                CurNode.CardRander->SetPosition(GEngine->MainWindow.GetMousePosition());
+                CurNode.CardCollision->SetPosition(GEngine->MainWindow.GetMousePosition());
+
+                int a = 0;
+            }
+        }
     }
 
     std::list<Node>::iterator StartIter = DeleteList.begin();

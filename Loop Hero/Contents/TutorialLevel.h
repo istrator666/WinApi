@@ -9,6 +9,7 @@
 #include "FightZone.h"
 #include "Enum.h"
 #include "DiaLog.h"
+#include "Mouse.h"
 
 #include <EngineBase/EngineRandom.h>
 #include "Struct.h"
@@ -83,7 +84,7 @@ private:
 	void SetEQInventory();
 
 	//마우스 오브젝트
-	
+	AMouse* Mouse = nullptr;
 
 	// 플레이어
 	APlayer* Player = nullptr;

@@ -1,22 +1,27 @@
 #pragma once
 #include "EngineCore/Actor.h"
 
-class Mouse
+class AMouse : public AActor
 {
 public:
 	// constrcuter destructer
-	Mouse();
-	~Mouse();
+	AMouse();
+	~AMouse();
+
+
 
 	// delete Function
-	Mouse(const Mouse& _Other) = delete;
-	Mouse(Mouse&& _Other) noexcept = delete;
-	Mouse& operator=(const Mouse& _Other) = delete;
-	Mouse& operator=(Mouse&& _Other) noexcept = delete;
+	AMouse(const AMouse& _Other) = delete;
+	AMouse(AMouse&& _Other) noexcept = delete;
+	AMouse& operator=(const AMouse& _Other) = delete;
+	AMouse& operator=(AMouse&& _Other) noexcept = delete;
 
 protected:
+	void BeginPlay() override;
+	void Tick(float _DeltaTime) override;
 
 private:
+	UCollision* MouseCollision = nullptr;
 
 };
 

@@ -36,6 +36,8 @@ void UTutorialLevel::BeginPlay()
 	TutorialRender = SpawnActor<ATutorialRender>();
 	TutorialRender->SetActorLocation({ 25, 25 });
 
+	Mouse = SpawnActor<AMouse>();
+
 	SetStageUI();
 	SetEQInventory();
 
@@ -63,6 +65,7 @@ void UTutorialLevel::Tick(float _DeltaTime)
 {
 	ULevel::Tick(_DeltaTime);
 	PlayerLocation = Player->GetActorLocation();
+
 
 	StateUpdate(_DeltaTime);
 	//GamePause();
