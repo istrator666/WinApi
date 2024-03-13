@@ -221,6 +221,11 @@ std::vector<FVector> UTutorialLevel::StagePoints(const std::string& _StageName)
 		{475, 275, 0, 0},
 		{475, 225, 0, 0},
 		{525, 225, 0, 0},
+
+		{575, 225, 0, 0},
+		{625, 225, 0, 0},
+		{625, 275, 0, 0},
+		{625, 325, 0, 0},
 	};
 
 	return Tutorial;
