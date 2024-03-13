@@ -122,6 +122,8 @@ private:
 	int TalkCount = 0;
 	float TimeCheck = 1.0f;
 	FVector PlayerLocation;
+	bool FightStartCheckTest = true;
+	bool IsTalk5 = false;
 
 };
 

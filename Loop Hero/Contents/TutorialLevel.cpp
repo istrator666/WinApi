@@ -18,6 +18,17 @@ void UTutorialLevel::Talk3Start()
 	DiaLog->TutorialGuideArrow02();
 }
 
+void UTutorialLevel::Talk4Start()
+{
+	DiaLog->Text02();
+	APlashka->ChangePlashka(1);
+}
+
+void UTutorialLevel::Talk5Start()
+{
+	DiaLog->Text03();
+}
+
 void UTutorialLevel::BeginPlay()
 {
 	ULevel::BeginPlay();
@@ -76,10 +87,12 @@ void UTutorialLevel::ChangeState(EStageState _State)
 	}
 	case EStageState::Talk4:
 	{
+		Talk4Start();
 		break;
 	}
 	case EStageState::Talk5:
 	{
+		Talk5Start();
 		break;
 	}
 	case EStageState::Move:
@@ -258,6 +271,11 @@ void UTutorialLevel::MonsterFightCheck()
 
 void UTutorialLevel::FightStart()
 {
+	if (false == FightStartCheckTest)
+	{
+		return;
+	}
+
 	if (0 >= FightCheckMonsters.size())
 	{
 		MsgBoxAssert("싸울몬스터가 존재하지 않는데 싸움상태로 들어왔습니다");
@@ -298,6 +316,11 @@ void UTutorialLevel::FightStart()
 
 void UTutorialLevel::Fight(float _DeltaTime)
 {
+	if (625 == PlayerLocation.X && 375 == PlayerLocation.Y && false == IsFight)
+	{
+		ChangeState(EStageState::Talk4);
+	}
+
 	IsFight = true;
 	StageprogressGauge->StageProgressGaugeUpdate(_DeltaTime / 5);
 	FightZone->Battle(_DeltaTime);
@@ -324,7 +347,15 @@ void UTutorialLevel::FightEnd()
 		FightCheckMonsters.clear();
 		MonsterFights.clear();
 
-		ChangeState(EStageState::Move);
+		if (true == IsTalk5)
+		{
+			ChangeState(EStageState::Move);
+		}
+		else
+		{
+			ChangeState(EStageState::Talk5);
+		}
+
 		IsFight = false;
 	}
 }
@@ -404,10 +435,48 @@ void UTutorialLevel::Talk3(float _DeltaTime)
 
 void UTutorialLevel::Talk4(float _DeltaTime)
 {
+	if (UEngineInput::IsDown(VK_LBUTTON) && 0 == TalkCount)
+	{
+		DiaLog->Text02();
+		DiaLog->DialogText->SetText("살아있는 슬라임 한 마리군. 꽤나 골칫거리인걸. 이놈들은 뭐든지 소화시켜버리니까.");
+		++TalkCount;
+	}
+	else if (UEngineInput::IsDown(VK_LBUTTON) && 1 == TalkCount)
+	{
+		DiaLog->DialogText->SetText("어! 이 생물이 기억났어! 어쩌면 내 기억을 되살리면 모든 게 정상으로 돌아갈지도 몰라");
+		++TalkCount;
+	}
+	else if (UEngineInput::IsDown(VK_LBUTTON) && 2 == TalkCount)
+	{
+		DiaLog->TextEnd();
+		DiaLog->TutorialGuideArrow03();
+		++TalkCount;
+	}
+	else if (UEngineInput::IsDown(VK_LBUTTON) && 3 == TalkCount)
+	{
+		DiaLog->TutorialGuideArrowEnd();
+		++TalkCount;
+		TalkCount = 0;
+		IsFight = true;
+
+		FightStartCheckTest = false;
+
+		ChangeState(EStageState::Fight);
+	}
 }
 
 void UTutorialLevel::Talk5(float _DeltaTime)
 {
+	if (UEngineInput::IsDown(VK_LBUTTON) && 0 == TalkCount)
+	{
+		DiaLog->TextEnd();
+		DiaLog->TutorialGuideArrow04();
+		++TalkCount;
+	}
+	else if (1 == TalkCount)
+	{
+		
+	}
 }
 
 std::vector<SpawnTileData> UTutorialLevel::SpawnTileLocation()
