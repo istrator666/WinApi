@@ -33,7 +33,7 @@ void EQInventory::AEQInventoryUI::EQInventoryUI()
 	EQInventoryIcon->CreateAnimation("Weapons", "Weapons.png", 0, 0, 0.3f, false);
 	EQInventoryIcon->ChangeAnimation("Weapons");
 	EQInventoryIcon->SetOrder(6);
-	//EQInventoryIcon->SetTransform({ {-42, -80}, {200,200} });
-	EQInventoryIcon->SetTransform({ {-42, -284}, {200,200} });
+	EQInventoryIcon->SetTransform({ {-42, -80}, {200,200} });
+	//EQInventoryIcon->SetTransform({ {-42, -284}, {200,200} });
 
 }

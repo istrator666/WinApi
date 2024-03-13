@@ -39,7 +39,38 @@ void ATutorialRender::TutorialGuideArrow04()
 
 void ATutorialRender::TutorialGuideArrow05()
 {
+	TutorialText->SetActive(true);
+	RightArrow->SetActive(true);
+	RightArrow2->SetActive(true);
+	TutorialText->SetText("적을 쓰러트리고 나온 카드를 사용해 지도에 다양한 사물을 배치할 수 있습니다. 계획 모드는 이 때 사용됩니다. \n- 카드를 적당한 장소에 둬서 땅을 기억 하십시오.");
+}
 
+void ATutorialRender::TutorialGuideArrow06()
+{
+	TutorialText->SetActive(true);
+	RightArrow->SetActive(true);
+	RightArrow2->SetActive(true);
+	TutorialText->SetText("잘 했습니다. \n- 이제 여정을 이어가십시오.");
+}
+
+void ATutorialRender::TutorialGuideArrow07()
+{
+	TutorialText->SetActive(true);
+	RightArrow->SetActive(true);
+	RightArrow2->SetActive(true);
+	TutorialText->SetText("이미 알아차리셨듯, 전투 중에 새로운 물품이나 카드를 얻을 수 있습니다. \n어떤 물품은 대부분의 카드처럼 특별한 능력을 가지고 있습니다. 물품이나 카드에 마우스를 올려놓으면 그 정보를 알 수 \n있습니다. \n\n- 새로운 무기를 장비한 후 새 카드를 지도 위에 배치하여 계속 이어 가십시오.");
+}
+
+void ATutorialRender::TutorialGuideArrow08()
+{
+	TutorialText->SetActive(true);
+	TutorialText->SetText("특정 행동을 하게 되면 당장은 아니지만 나중에 필요할 자원을 얻을 수 있습니다. 지금 당장 설명하진 않을 것 입니다. \n- 게임 모드를 바꿔 여정을 이어가십시오. (스페이 바, 마우스 우클릭, 모드 변경");
+}
+
+void ATutorialRender::TutorialGuideArrow09()
+{
+	TutorialText->SetActive(true);
+	TutorialText->SetText("이 게임은 길을 따라 여정을 반복하는 게임입니다. 언제 영웅이 야영지로 돌아갈지는 당신이 결정해야 합니다... \n물론 적들의 이빨과 발톱이 결정을 내려줄 수도 있지만요. \n거의 언제든 후퇴할 수 있지만, 특별한 애니메이션이 나오면 안전하게 후퇴할 수 있습니다. \n\n- 버튼을 눌러 야영지로 퇴각하십시오.");
 }
 
 

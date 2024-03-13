@@ -76,6 +76,44 @@ void ADiaLog::Text03()
 
 }
 
+void ADiaLog::Text04()
+{
+	DialogCharacter->SetActive(true);
+	DialogBox->SetActive(true);
+	DialogText->SetActive(true);
+	DialogText->SetTransform({ { 280, 540 }, { 0, 0} });
+	DialogText->SetText("분명 저기에 수풀이 있었던 기억이 있는데... 내 기억이 맞긴 하는 건가? 아니면 그 슬라임의 기억인 건가?");
+}
+
+void ADiaLog::Text05()
+{
+	DialogCharacter->SetActive(true);
+	DialogBox->SetActive(true);
+	DialogText->SetActive(true);
+	DialogText->SetTransform({ { 280, 540 }, { 0, 0} });
+	DialogText->SetText("숲의 랫울프군.");
+	//DialogText->SetText("역시 기억에 문제가 있군. 스트레스도 받은데다가 화려한 것도 보고 흥분한 상태가 되니 \n악몽마냥 다 잊어버린 것 같아...");
+	//DialogText->SetText("아니면 그냥 나쁜... 망할! 아무도 안 듣고 있어서 다행이군.");
+}
+
+void ADiaLog::Text06()
+{
+	DialogCharacter->SetActive(true);
+	DialogBox->SetActive(true);
+	DialogText->SetActive(true);
+	DialogText->SetTransform({ { 280, 540 }, { 0, 0} });
+	DialogText->SetText("좋아.저기엔 산이 있었고, 여기엔 숲이 있군. 세상이 완전히 달라졌어. 배낭에 있는 나뭇가지와 \n돌멩이가 확실한 그 증거야.");
+}
+
+void ADiaLog::Text07()
+{
+	DialogCharacter->SetActive(true);
+	DialogBox->SetActive(true);
+	DialogText->SetActive(true);
+	DialogText->SetTransform({ { 280, 540 }, { 0, 0} });
+	DialogText->SetText("좀 쉬어야 할 것 같은데.");
+}
+
 void ADiaLog::ADiaLog::BeginPlay()
 {
 	AActor::BeginPlay();

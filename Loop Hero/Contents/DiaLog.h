@@ -19,6 +19,10 @@ public:
 	void Text01();
 	void Text02();
 	void Text03();
+	void Text04();
+	void Text05();
+	void Text06();
+	void Text07();
 
 	int DialogCount = 0;
 	int TextCount = 0;

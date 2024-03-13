@@ -27,6 +27,10 @@ public:
 	void TutorialGuideArrow03();
 	void TutorialGuideArrow04();
 	void TutorialGuideArrow05();
+	void TutorialGuideArrow06();
+	void TutorialGuideArrow07();
+	void TutorialGuideArrow08();
+	void TutorialGuideArrow09();
 
 	void TutorialGuideArrowEnd();
 

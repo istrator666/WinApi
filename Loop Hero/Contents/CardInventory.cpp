@@ -79,7 +79,7 @@ void ACardInventory::TutorialAddCard(int _Card, FVector _MonsterPosition)
     int Count = 0;
     for (Node& CurNode : CardList)
     {
-        CurNode.EndPosition = FVector(75 * Count, 700);
+        CurNode.EndPosition = FVector(75 * Count, 670);
         ++Count;
     }
 }
