@@ -47,13 +47,21 @@ void UEngineCore::CoreTick()
 		std::string UpperName = UEngineString::ToUpper(DestroyLevelName[i]);
 
 		ULevel* Level = AllLevel[UpperName];
+
+		AllLevel.erase(DestroyLevelName[i]);
+
+		if (Level == CurLevel)
+		{
+			CurLevel = nullptr;
+		}
+
+		Level->End();
+
 		if (nullptr != Level)
 		{
 			delete Level;
 			Level = nullptr;
 		}
-
-		AllLevel.erase(DestroyLevelName[i]);
 	}
 	DestroyLevelName.clear();
 
