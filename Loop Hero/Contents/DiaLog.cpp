@@ -84,7 +84,7 @@ void ADiaLog::Text04()
 	DialogBox->SetActive(true);
 	DialogText->SetActive(true);
 	DialogText->SetTransform({ { 280, 540 }, { 0, 0} });
-	DialogText->SetText("분명 저기에 수풀이 있었던 기억이 있는데... 내 기억이 맞긴 하는 건가? 아니면 그 슬라임의 기억인 건가?");
+	DialogText->SetText("분명 저기에 수풀이 있었던 기억이 있는데...\n내 기억이 맞긴 하는 건가? 아니면 그 슬라임의 기억인 건가?");
 }
 
 void ADiaLog::Text05()
@@ -230,7 +230,7 @@ void ADiaLog::ADiaLog::BeginPlay()
 	UPArrow = CreateImageRenderer();
 	UPArrow->SetImage("Up.png");
 	UPArrow->SetOrder(15);
-	UPArrow->SetTransform({ {500, 50}, {250,250} });
+	UPArrow->SetTransform({ {565, 90}, {250,250} });
 	UPArrow->CreateAnimation("Idle", "Up.png", 0, 36, 0.25f, true);
 	UPArrow->ChangeAnimation("Idle");
 	UPArrow->SetActive(false);
@@ -238,7 +238,7 @@ void ADiaLog::ADiaLog::BeginPlay()
 	RightArrow = CreateImageRenderer();
 	RightArrow->SetImage("Right.png");
 	RightArrow->SetOrder(15);
-	RightArrow->SetTransform({ {1000, 250}, {250,250} });
+	RightArrow->SetTransform({ {1010, 280}, {250,250} });
 	RightArrow->CreateAnimation("Idle", "Right.png", 0, 36, 0.25f, true);
 	RightArrow->ChangeAnimation("Idle");
 	RightArrow->SetActive(false);
@@ -246,7 +246,7 @@ void ADiaLog::ADiaLog::BeginPlay()
 	RightArrow2 = CreateImageRenderer();
 	RightArrow2->SetImage("Right.png");
 	RightArrow2->SetOrder(15);
-	RightArrow2->SetTransform({ {1000, 50}, {250,250} });
+	RightArrow2->SetTransform({ {1010, 80}, {250,250} });
 	RightArrow2->CreateAnimation("Idle", "Right.png", 0, 36, 0.25f, true);
 	RightArrow2->ChangeAnimation("Idle");
 	RightArrow2->SetActive(false);

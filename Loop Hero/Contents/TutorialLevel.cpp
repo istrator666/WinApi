@@ -473,9 +473,28 @@ void UTutorialLevel::Talk5(float _DeltaTime)
 		DiaLog->TutorialGuideArrow04();
 		++TalkCount;
 	}
-	else if (1 == TalkCount)
+	else if (UEngineInput::IsDown(VK_LBUTTON) && 1 == TalkCount)
 	{
-		
+		DiaLog->TutorialGuideArrowEnd();
+		DiaLog->Text04();
+		++TalkCount;
+	}
+	else if (UEngineInput::IsDown(VK_LBUTTON) && 2 == TalkCount)
+	{
+		DiaLog->TextEnd();
+		DiaLog->TutorialGuideArrow05();
+		++TalkCount;
+	}
+	else if (UEngineInput::IsDown(VK_LBUTTON) && 3 == TalkCount)
+	{
+		DiaLog->TutorialGuideArrow06();
+		++TalkCount;
+	}
+	else if (UEngineInput::IsDown(VK_LBUTTON) && 4 == TalkCount)
+	{
+		DiaLog->TutorialGuideArrowEnd();
+		TalkCount = 0;
+		ChangeState(EStageState::Move);
 	}
 }
 
