@@ -43,7 +43,8 @@ void UTutorialLevel::BeginPlay()
 	CardInventory->SetActorLocation({ 40, 0 });
 
 	Player = SpawnActor<APlayer>();
-	Player->SetActorLocation({ 575, 225 });
+	//Player->SetActorLocation({ 575, 225 });
+	Player->SetActorLocation({ 625, 325 });
 	StageMovePlayer(Player);
 
 	DiaLog = SpawnActor<ADiaLog>();
@@ -204,10 +205,10 @@ std::vector<FVector> UTutorialLevel::StagePoints(const std::string& _StageName)
 
 	std::vector<FVector> Tutorial =
 	{
-		{575, 225, 0, 0},
-		{625, 225, 0, 0},
-		{625, 275, 0, 0},
-		{625, 325, 0, 0},
+		//{575, 225, 0, 0},
+		//{625, 225, 0, 0},
+		//{625, 275, 0, 0},
+		//{625, 325, 0, 0},
 		{625, 375, 0, 0},
 		{575, 375, 0, 0},
 		{575, 425, 0, 0},

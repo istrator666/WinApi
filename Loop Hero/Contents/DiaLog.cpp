@@ -156,7 +156,11 @@ void ADiaLog::TutorialGuideArrow05()
 {
 	TutorialText->SetActive(true);
 	RightArrow->SetActive(true);
+	RightArrow->SetPosition({370, 320});
 	RightArrow2->SetActive(true);
+	RightArrow2->SetPosition({ 120, 670 });
+	RightArrow2->SetImage("Left.png");
+	RightArrow2->ChangeAnimation("Idle1");
 	TutorialText->SetText("적을 쓰러트리고 나온 카드를 사용해 지도에 다양한 사물을 배치할 수 있습니다. 계획 모드는 이 때 사용됩니다. \n- 카드를 적당한 장소에 둬서 땅을 기억 하십시오.");
 }
 
@@ -248,6 +252,7 @@ void ADiaLog::ADiaLog::BeginPlay()
 	RightArrow2->SetOrder(15);
 	RightArrow2->SetTransform({ {1010, 80}, {250,250} });
 	RightArrow2->CreateAnimation("Idle", "Right.png", 0, 36, 0.25f, true);
+	RightArrow2->CreateAnimation("Idle1", "Left.png", 0, 0, 0.25f, true);
 	RightArrow2->ChangeAnimation("Idle");
 	RightArrow2->SetActive(false);
 
