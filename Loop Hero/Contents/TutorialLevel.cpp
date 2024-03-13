@@ -26,12 +26,15 @@ void UTutorialLevel::BeginPlay()
 	StageMovePlayer(Player);
 
 	DiaLog = SpawnActor<ADiaLog>();
+	DiaLog->SetActive(false);
 
 	FightZone = SpawnActor<AFightZone>();
 	FightZone->SetActive(false);
 
 	PlayerFight = SpawnActor<APlayerFight>();
 	PlayerFight->SetActive(false);
+
+	ChangeState(EStageState::Talk1);
 }
 
 void UTutorialLevel::Tick(float _DeltaTime)
@@ -43,93 +46,96 @@ void UTutorialLevel::Tick(float _DeltaTime)
 	StateUpdate(_DeltaTime);
 	GamePause();
 
-	if (3 == DiaLog->DialogCount)
-	{
-		DiaLog->AllRenderersActiveOff();
-		TutorialRender->TutorialGuideArrow01();
-		++DiaLog->DialogCount;
-	}
+	//if (3 == DiaLog->DialogCount)
+	//{
+	//	DiaLog->AllRenderersActiveOff();
+	//	TutorialRender->TutorialGuideArrow01();
+	//	++DiaLog->DialogCount;
+	//}
 
-	if (UEngineInput::IsDown(VK_RBUTTON) || UEngineInput::IsDown(VK_SPACE) && IsGamePause)
-	{
-		IsGamePause = true;
-		ChangeState(EStageState::Move);
-		TutorialRender->TutorialGuideArrowEnd();
-	}
+	//if (UEngineInput::IsDown(VK_RBUTTON) || UEngineInput::IsDown(VK_SPACE) && IsGamePause)
+	//{
+	//	IsGamePause = true;
+	//	ChangeState(EStageState::Move);
+	//	TutorialRender->TutorialGuideArrowEnd();
+	//}
 
-	if (625 == PlayerLocation.X && 225 == PlayerLocation.Y)
-	{
-		if (IsGamePause)
-		{
-			DiaLog->Text01();
-			IsGamePause = true;
-			ChangeState(EStageState::Pause);
-		}
-	}
+	//if (625 == PlayerLocation.X && 225 == PlayerLocation.Y)
+	//{
+	//	if (IsGamePause)
+	//	{
+	//		DiaLog->Text01();
+	//		IsGamePause = true;
+	//		ChangeState(EStageState::Pause);
+	//	}
+	//}
 
-	if (625 == PlayerLocation.X && 325 == PlayerLocation.Y)
-	{
-		if (IsGamePause)
-		{
-			TutorialRender->TutorialGuideArrow02();
-			IsGamePause = true;
-			ChangeState(EStageState::Pause);
-			MonsterSpawnTimeCheck(_DeltaTime);
-		}
-	}
+	//if (625 == PlayerLocation.X && 325 == PlayerLocation.Y)
+	//{
+	//	if (IsGamePause)
+	//	{
+	//		TutorialRender->TutorialGuideArrow02();
+	//		IsGamePause = true;
+	//		ChangeState(EStageState::Pause);
+	//		MonsterSpawnTimeCheck(_DeltaTime);
+	//	}
+	//}
 
-	if (true == IsFight && MonsterType::Slime == GetMonsterType())
-	{
-		if (0 == DiaLog->TextCount)
-		{
-			DiaLog->Text02();
-			APlashka->ChangePlashka(1);
-			++DiaLog->TextCount;
-		}
-		else if (UEngineInput::IsDown(VK_LBUTTON) && 1 == DiaLog->TextCount)
-		{
-			DiaLog->Text02();
-			++DiaLog->TextCount;
-		}
-		else if (UEngineInput::IsDown(VK_LBUTTON) && 2 == DiaLog->TextCount)
-		{
-			DiaLog->AllRenderersActiveOff();
-			++DiaLog->TextCount;
-			TutorialRender->TutorialGuideArrow03();
-		}
-		else if (UEngineInput::IsDown(VK_LBUTTON) && 3 == DiaLog->TextCount)
-		{
-			TutorialRender->TutorialGuideArrowEnd();
-			++DiaLog->TextCount;
-		}
-		else if (4 == DiaLog->TextCount)
-		{
-			IsDialog = false;
-			++DiaLog->TextCount;
-		}
-	}
+	//if (true == IsFight && MonsterType::Slime == GetMonsterType())
+	//{
+	//	if (0 == DiaLog->TextCount)
+	//	{
+	//		DiaLog->Text02();
+	//		APlashka->ChangePlashka(1);
+	//		++DiaLog->TextCount;
+	//	}
+	//	else if (UEngineInput::IsDown(VK_LBUTTON) && 1 == DiaLog->TextCount)
+	//	{
+	//		DiaLog->Text02();
+	//		++DiaLog->TextCount;
+	//	}
+	//	else if (UEngineInput::IsDown(VK_LBUTTON) && 2 == DiaLog->TextCount)
+	//	{
+	//		DiaLog->AllRenderersActiveOff();
+	//		++DiaLog->TextCount;
+	//		TutorialRender->TutorialGuideArrow03();
+	//	}
+	//	else if (UEngineInput::IsDown(VK_LBUTTON) && 3 == DiaLog->TextCount)
+	//	{
+	//		TutorialRender->TutorialGuideArrowEnd();
+	//		++DiaLog->TextCount;
+	//	}
+	//	else if (4 == DiaLog->TextCount)
+	//	{
+	//		IsDialog = false;
+	//		++DiaLog->TextCount;
+	//	}
+	//}
 
-	if (625 == PlayerLocation.X && 375 == PlayerLocation.Y && false == IsFight)
-	{
-		ChangeState(EStageState::Pause);
+	//if (625 == PlayerLocation.X && 375 == PlayerLocation.Y && false == IsFight)
+	//{
+	//	ChangeState(EStageState::Pause);
 
-		if (5 == DiaLog->TextCount)
-		{
-			DiaLog->Text03();
-			++DiaLog->TextCount;
-		}
-		if (UEngineInput::IsDown(VK_LBUTTON))
-		{
-			DiaLog->AllRenderersActiveOff();
-			TutorialRender->TutorialGuideArrow04();
-		}
-	}
+	//	if (5 == DiaLog->TextCount)
+	//	{
+	//		DiaLog->Text03();
+	//		++DiaLog->TextCount;
+	//	}
+	//	if (UEngineInput::IsDown(VK_LBUTTON))
+	//	{
+	//		DiaLog->AllRenderersActiveOff();
+	//		TutorialRender->TutorialGuideArrow04();
+	//	}
+	//}
 }
 
 void UTutorialLevel::ChangeState(EStageState _State)
 {
 	switch (_State)
 	{
+	case EStageState::Talk1:
+		Talk1Start();
+		break;
 	case EStageState::Move:
 		break;
 	case EStageState::Fight:
@@ -148,10 +154,14 @@ void UTutorialLevel::StateUpdate(float _DeltaTime)
 {
 	switch (CurState)
 	{
+	case EStageState::Talk1:
+	{
+		Talk1(_DeltaTime);
+		break;
+	}
 	case EStageState::Move:
 	{
 		Move(_DeltaTime);
-		APlashka->ChangePlashka(1);
 		break;
 	}
 	case EStageState::Fight:
@@ -196,6 +206,7 @@ void UTutorialLevel::Move(float _DeltaTime)
 	Player->WayPoints(_DeltaTime);
 
 	MonsterFightCheck();
+	APlashka->ChangePlashka(1);
 }
 
 std::vector<FVector> UTutorialLevel::StagePoints(const std::string& _StageName)
@@ -356,6 +367,15 @@ void UTutorialLevel::MonsterDrop(FVector _MonsterPosition)
 
 	CardInventory->TutorialAddCard(1, _MonsterPosition);
 
+}
+
+void UTutorialLevel::Talk1(float _DeltaTime)
+{
+}
+
+void UTutorialLevel::Talk1Start()
+{
+	DiaLog->SetActive(true);
 }
 
 std::vector<SpawnTileData> UTutorialLevel::SpawnTileLocation()

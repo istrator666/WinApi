@@ -13,7 +13,6 @@
 #include <EngineBase/EngineRandom.h>
 #include "Struct.h"
 
-
 class UTutorialLevel : public ULevel
 {
 public:
@@ -49,6 +48,9 @@ public:
 	// Drop
 	void MonsterDrop(FVector _MonsterPosition);
 
+	void Talk1(float _DeltaTime);
+	void Talk1Start();
+
 protected:
 	void BeginPlay() override;
 	void Tick(float _DeltaTime) override;
@@ -81,7 +83,7 @@ private:
 	ADiaLog* DiaLog = nullptr;
 
 	// 초기 플레이어 상태
-	EStageState CurState = EStageState::Pause;
+	EStageState CurState = EStageState::Talk1;
 
 	// Fight
 	AFightZone* FightZone = nullptr;
