@@ -116,7 +116,7 @@ void UIntroLevel::Next()
 	{
 		Intro->IntroBackButton->SetActive(false);
 		Intro->IntroSkipButton->SetActive(false);
-		GEngine->ChangeLevel("StageLevel");
+		GEngine->ChangeLevel("Tutorial");
 	}
 	else
 	{
@@ -147,7 +147,7 @@ void UIntroLevel::Skip()
 
 	if (114 < Intro->ImageNumber)
 	{
-		GEngine->ChangeLevel("StageLevel");
+		GEngine->ChangeLevel("Tutorial");
 	}
 	else
 	{

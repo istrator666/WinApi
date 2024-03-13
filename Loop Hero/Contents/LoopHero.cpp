@@ -28,7 +28,7 @@ void LoopHeroContentsCore::BeginPlay()
 	CreateLevel<UIntroLevel>("IntroLevel");
 	CreateLevel<UTutorialLevel>("Tutorial");
 	//CreateLevel<UTestStageLevel>("StageLevel");
-	ChangeLevel("Tutorial");
+	ChangeLevel("TitleLevel");
 }
 
 void LoopHeroContentsCore::Tick(float _DeltaTime)
