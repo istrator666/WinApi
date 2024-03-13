@@ -33,9 +33,4 @@ void UTitleLevel::Tick(float _DeltaTime)
 		}
 
 	}
-
-	if (UEngineInput::IsDown('P'))
-	{
-		GEngine->ChangeLevel("StageLevel");
-	}
 }

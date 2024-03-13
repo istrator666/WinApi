@@ -70,6 +70,8 @@ void UIntroLevel::StateUpdate(float _DeltaTime)
 
 void UIntroLevel::Idle()
 {
+	ChangeState(IntroState::Skip);
+
 	if (7 < Intro->ImageNumber && 105 >Intro->ImageNumber)
 	{
 		Intro->IntroBackButton->SetActive(true);
@@ -80,8 +82,6 @@ void UIntroLevel::Idle()
 		Intro->IntroBackButton->SetActive(false);
 		Intro->IntroSkipButton->SetActive(false);
 	}
-
-	ChangeState(IntroState::Skip);
 
 	if ((70 <= Intro->PosCheck.X && 150 >= Intro->PosCheck.X) && (620 <= Intro->PosCheck.Y && 680 >= Intro->PosCheck.Y))
 	{
