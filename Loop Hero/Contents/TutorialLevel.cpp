@@ -43,6 +43,7 @@ void UTutorialLevel::BeginPlay()
 
 	CardInventory = SpawnActor<ACardInventory>();
 	CardInventory->SetActorLocation({ 40, 0 });
+	CardInventory->SetTutorialRender(TutorialRender);
 
 	Player = SpawnActor<APlayer>();
 	//Player->SetActorLocation({ 575, 225 });

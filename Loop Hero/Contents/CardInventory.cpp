@@ -103,6 +103,18 @@ void ACardInventory::ACardInventory::Tick(float _DeltaTime)
 {
 	AActor::Tick(_DeltaTime);
 
+	//들고 있는 카드를 
+	// 놓았을 때, 
+	// 그 자리 타일 이미지 변경
+	if (nullptr != Map && nullptr != SelectNode && UEngineInput::IsUp(VK_LBUTTON))
+	{
+		// 마우스 좌표를 얻어서 50으로 나눈 후 타일에 들어가는지 확인
+		int X = static_cast<int>(GEngine->MainWindow.GetMousePosition().X / 50);
+		int Y = static_cast<int>(GEngine->MainWindow.GetMousePosition().Y / 50);
+
+		Map->TileList[Y][X]->SetImage("Tiles", 1);
+	}
+
 	for (Node& CurNode : CardList)
 	{
 		CurNode.Movetime += _DeltaTime * 2.0f;

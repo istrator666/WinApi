@@ -59,7 +59,6 @@ void LoopHeroContentsCore::RecourceLoad()
 		UEngineResourcesManager::GetInst().LoadImg(File.GetFullPath());
 	}
 
-
 	// 플레이어
 	UEngineResourcesManager::GetInst().CuttingImage("Warrior.png", 5, 8);
 
@@ -81,5 +80,8 @@ void LoopHeroContentsCore::RecourceLoad()
 
 	//무기
 	UEngineResourcesManager::GetInst().CuttingImage("Weapons.png", 5, 3);
+
+	//타일
+	UEngineResourcesManager::GetInst().LoadFolder(RecourceDir.AppendPath("Tiles"));
 }
 

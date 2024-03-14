@@ -1,6 +1,7 @@
 #pragma once
 #include <EngineCore/Actor.h>
 
+
 typedef int Card;
 class Node
 {
@@ -13,6 +14,7 @@ public:
 	UCollision* CardCollision = nullptr;
 };
 
+class ATutorialRender;
 class ACardInventory : public AActor
 {
 public:
@@ -30,6 +32,16 @@ public:
 	void TutorialAddCard(int _Card, FVector _MonsterPosition);
 	int CardListSize();
 
+	void SetTutorialRender(ATutorialRender* _Map)
+	{
+		Map = _Map;
+	}
+	ATutorialRender* GetTutorialRender()
+	{
+		return Map;
+	}
+	
+
 protected:
 	void BeginPlay() override;
 	void Tick(float _DeltaTime) override;
@@ -43,5 +55,7 @@ private:
 	std::list<Node> CardList;
 	std::list<Node> DeleteList;
 	Node* SelectNode = nullptr;
+
+	ATutorialRender* Map = nullptr;
 };
 
