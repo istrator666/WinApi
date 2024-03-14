@@ -18,7 +18,7 @@ public:
 	UEngineWindow& operator=(const UEngineWindow& _Other) = delete;
 	UEngineWindow& operator=(UEngineWindow&& _Other) noexcept = delete;
 
-	void Open(std::string_view _Title = "LOOP HERO");
+	void Open(std::string_view _Title = "LOOP HERO", std::string_view _IconPath = "");
 
 	static void Init(HINSTANCE _hInst);
 	static unsigned __int64 WindowMessageLoop(void(*_Update)(), void(*_End)());
@@ -54,6 +54,7 @@ public:
 	{
 		SetWindowTextA(hWnd, _Text.data());
 	}
+	void SetWindowSmallIcon();
 
 	FVector GetMousePosition();
 
