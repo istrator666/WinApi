@@ -50,6 +50,10 @@ public:
 		ClearColor = _Color;
 	}
 
+	void SetWindowTitle(std::string_view _Text)
+	{
+		SetWindowTextA(hWnd, _Text.data());
+	}
 
 	FVector GetMousePosition();
 
