@@ -39,8 +39,6 @@ private:
 	float CardDeleteTime = 0.0f;
 
 	void GamePause();
-	
-	bool IsMouseDown = false;
 
 	std::list<Node> CardList;
 	std::list<Node> DeleteList;

@@ -2,6 +2,7 @@
 #include "MouseFunction.h"
 #include <thread>
 #include "Enum.h"
+#include "TutorialRender.h"
 
 ACardInventory::ACardInventory()
 {
@@ -102,8 +103,6 @@ void ACardInventory::ACardInventory::Tick(float _DeltaTime)
 {
 	AActor::Tick(_DeltaTime);
 
-
-
 	for (Node& CurNode : CardList)
 	{
 		CurNode.Movetime += _DeltaTime * 2.0f;
@@ -134,8 +133,24 @@ void ACardInventory::ACardInventory::Tick(float _DeltaTime)
 		SelectNode->CardRander->SetPosition(GEngine->MainWindow.GetMousePosition());
 		SelectNode->CardCollision->SetPosition(GEngine->MainWindow.GetMousePosition());
 
+		if (25 < SelectNode->CardRander->GetPosition().X && 600 > SelectNode->CardCollision->GetPosition().Y)
+		{
+			SelectNode->CardRander->SetImage("s_roshyaroad_1.png");
+			SelectNode->CardRander->SetScale({ 50, 50 });
+			SelectNode->CardCollision->SetScale({ 50, 50 });
+		}
+		else
+		{
+			SelectNode->CardRander->SetImage("TutorialCard01.png");
+			SelectNode->CardRander->SetScale({ 175,175 });
+			SelectNode->CardCollision->SetScale({ 80, 120 });
+		}
+
 		if (UEngineInput::IsUp(VK_LBUTTON))
 		{
+			SelectNode->CardRander->SetImage("TutorialCard01.png");
+			SelectNode->CardRander->SetScale({ 175,175 });
+			SelectNode->CardCollision->SetScale({ 80, 120 });
 			SelectNode = nullptr;
 		}
 	}
