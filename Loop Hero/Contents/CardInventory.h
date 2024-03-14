@@ -9,6 +9,7 @@ public:
 	FVector StartPosition;
 	FVector EndPosition;
 	float Movetime = 0.0f;
+	int CardTileNumber = 0;
 
 	UImageRenderer* CardRander = nullptr;
 	UCollision* CardCollision = nullptr;
@@ -41,6 +42,7 @@ public:
 		return Map;
 	}
 	
+	int TutorialCardNumber = 0;
 
 protected:
 	void BeginPlay() override;
@@ -57,5 +59,8 @@ private:
 	Node* SelectNode = nullptr;
 
 	ATutorialRender* Map = nullptr;
+
+	// 13개 초과시 카드 삭제
+	void DeleteCardList();
 };
 

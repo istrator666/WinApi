@@ -394,9 +394,8 @@ MonsterType UTutorialLevel::GetMonsterType()
 void UTutorialLevel::MonsterDrop(FVector _MonsterPosition)
 {
 	//int Card = RandomEngine.RandomInt(0, 2);
-
-	CardInventory->TutorialAddCard(1, _MonsterPosition);
-
+	CardInventory->TutorialAddCard(TutorialDrop, _MonsterPosition);
+	TutorialDrop++;
 }
 
 void UTutorialLevel::Talk1(float _DeltaTime)

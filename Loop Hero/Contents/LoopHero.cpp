@@ -68,6 +68,7 @@ void LoopHeroContentsCore::RecourceLoad()
 
 	// 카드
 	UEngineResourcesManager::GetInst().CuttingImage("Cards.png", 5, 2);
+	UEngineResourcesManager::GetInst().LoadFolder(RecourceDir.AppendPath("TutorialCard"));
 
 	// 튜토리얼
 	UEngineResourcesManager::GetInst().CuttingImage("Up.png", 5, 8);
@@ -83,5 +84,6 @@ void LoopHeroContentsCore::RecourceLoad()
 
 	//타일
 	UEngineResourcesManager::GetInst().LoadFolder(RecourceDir.AppendPath("Tiles"));
+
 }
 

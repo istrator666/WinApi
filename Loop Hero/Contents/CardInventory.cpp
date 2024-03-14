@@ -59,16 +59,18 @@ void ACardInventory::TutorialAddCard(int _Card, FVector _MonsterPosition)
 		CardNode.CardCollision = CreateCollision(ECollision::Card);
 		CardNode.CardCollision->SetScale({ 80, 120 });
 		CardNode.CardCollision->SetColType(ECollisionType::Rect);
-		CardNode.CardRander->SetImage("TutorialCard01.png");
+		CardNode.CardTileNumber = TutorialCardNumber;
+		CardNode.CardRander->SetImage("TutorialCard", TutorialCardNumber++);
 		CardNode.CardRander->SetOrder(9);
 		CardNode.CardRander->SetTransform({ _MonsterPosition, {175,175} });
 		CardNode.StartPosition = _MonsterPosition;
 		CardList.push_back(CardNode);
 	}
 
-	if (CardList.size() > 13)
+	size_t StartSize = CardList.size();
+
+	if (StartSize > 13)
 	{
-		size_t StartSize = CardList.size();
 		for (size_t i = 0; i < StartSize - 13; i++)
 		{
 			Node& DeleteNode = CardList.front();
@@ -80,6 +82,7 @@ void ACardInventory::TutorialAddCard(int _Card, FVector _MonsterPosition)
 			CardList.erase(CardList.begin());
 		}
 	}
+
 
 	int Count = 0;
 	for (Node& CurNode : CardList)
@@ -106,13 +109,19 @@ void ACardInventory::ACardInventory::Tick(float _DeltaTime)
 	//들고 있는 카드를 
 	// 놓았을 때, 
 	// 그 자리 타일 이미지 변경
-	if (nullptr != Map && nullptr != SelectNode && UEngineInput::IsUp(VK_LBUTTON))
+	if (nullptr != Map && nullptr != SelectNode && UEngineInput::IsUp(VK_LBUTTON) && 25 < SelectNode->CardRander->GetPosition().X && 600 > SelectNode->CardCollision->GetPosition().Y)
 	{
 		// 마우스 좌표를 얻어서 50으로 나눈 후 타일에 들어가는지 확인
 		int X = static_cast<int>(GEngine->MainWindow.GetMousePosition().X / 50);
 		int Y = static_cast<int>(GEngine->MainWindow.GetMousePosition().Y / 50);
 
-		Map->TileList[Y][X]->SetImage("Tiles", 1);
+		if (6 == Y && 8 == X)
+		{
+			Map->TileList[Y][X]->SetImage("Tiles", SelectNode->CardTileNumber);
+			SelectNode->CardRander->Destroy();
+			SelectNode->CardCollision->Destroy();
+			SelectNode = nullptr;
+		}
 	}
 
 	for (Node& CurNode : CardList)
@@ -147,20 +156,20 @@ void ACardInventory::ACardInventory::Tick(float _DeltaTime)
 
 		if (25 < SelectNode->CardRander->GetPosition().X && 600 > SelectNode->CardCollision->GetPosition().Y)
 		{
-			SelectNode->CardRander->SetImage("s_roshyaroad_1.png");
+			SelectNode->CardRander->SetImage("Tiles", SelectNode->CardTileNumber);
 			SelectNode->CardRander->SetScale({ 50, 50 });
 			SelectNode->CardCollision->SetScale({ 50, 50 });
 		}
 		else
 		{
-			SelectNode->CardRander->SetImage("TutorialCard01.png");
+			SelectNode->CardRander->SetImage("TutorialCard", SelectNode->CardTileNumber);
 			SelectNode->CardRander->SetScale({ 175,175 });
 			SelectNode->CardCollision->SetScale({ 80, 120 });
 		}
 
 		if (UEngineInput::IsUp(VK_LBUTTON))
 		{
-			SelectNode->CardRander->SetImage("TutorialCard01.png");
+			SelectNode->CardRander->SetImage("TutorialCard", SelectNode->CardTileNumber);
 			SelectNode->CardRander->SetScale({ 175,175 });
 			SelectNode->CardCollision->SetScale({ 80, 120 });
 			SelectNode = nullptr;

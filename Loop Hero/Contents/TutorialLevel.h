@@ -133,5 +133,7 @@ private:
 	bool FightStartCheckTest = true;
 	bool IsTalk5 = false;
 
+
+	int TutorialDrop = 1;
 };
 
