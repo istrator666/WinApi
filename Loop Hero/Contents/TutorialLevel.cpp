@@ -395,6 +395,7 @@ void UTutorialLevel::MonsterDrop(FVector _MonsterPosition)
 {
 	//int Card = RandomEngine.RandomInt(0, 2);
 	CardInventory->TutorialAddCard(TutorialDrop, _MonsterPosition);
+	EQInventory->TutorialAddEQ(_MonsterPosition);
 	TutorialDrop++;
 }
 
@@ -722,5 +723,5 @@ void UTutorialLevel::SetStageUI()
 void UTutorialLevel::SetEQInventory()
 {
 	EQInventory = SpawnActor<EQInventory::AEQInventoryUI>();
-	EQInventory->SetActorLocation({ 1130, 360 });
+	EQInventory->SetActorLocation({ 0, 0 });
 }

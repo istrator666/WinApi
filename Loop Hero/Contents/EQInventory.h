@@ -19,27 +19,27 @@ public:
 	public:
 		void EQInventoryUI();
 
-		// EQ List
-		void SetupEQ();
-		void DrawEQ(int xPos, int yPos, int tileWidth, int tileHeight);
-		UImageRenderer* EQIcon = nullptr;
-		UImageRenderer* LastCreatedTile = nullptr;
-		std::vector<std::vector<UImageRenderer*>> EQList;
-
-		//Inventory List
-		void SetupInventory();
-		void DrawInventory(int xPos, int yPos, int tileWidth, int tileHeight);
-		UImageRenderer* EQInventoryIcon = nullptr;
-		UImageRenderer* LastCreatedTile = nullptr;
-		std::vector<std::vector<UImageRenderer*>> InventoryList;
+		void TutorialAddEQ(FVector _MonsterPosition);
 		
-
 	protected:
 		void BeginPlay() override;
 		void Tick(float _DeltaTime) override;
 
 	private:
 		UImageRenderer* EQInventoryRender = nullptr;
+
+		UImageRenderer* EQIcon = nullptr;
+		UCollision* EQIconCollision = nullptr;
+
+		UImageRenderer* EQInventoryIcon = nullptr;
+		UCollision* EQInventoryIconCollision = nullptr;
+		FVector StartPosition;
+		FVector EndPosition;
+
+		UImageRenderer* SelectEQInventoryIcon = nullptr;
+		UCollision* SelectEQInventoryIconCollision = nullptr;
+
+		float Movetime = 0.0f;
 		
 	};
 
