@@ -40,8 +40,10 @@ private:
 
 	void GamePause();
 	
+	bool IsMouseDown = false;
 
 	std::list<Node> CardList;
 	std::list<Node> DeleteList;
+	Node* SelectNode = nullptr;
 };
 
