@@ -18,6 +18,7 @@ public:
 	// ¸Ê »ý¼º
 	void DrawTileMap();
 	void DrawTile(int xPos, int yPos, int tileWidth, int tileHeight);
+	void ToggleTilesActiveState(bool newState);
 	UImageRenderer* Tile = nullptr;
 	UImageRenderer* LastCreatedTile = nullptr;
 	std::vector<std::vector<UImageRenderer*>> TileList;

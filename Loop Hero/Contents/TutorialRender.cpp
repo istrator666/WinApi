@@ -112,8 +112,22 @@ void ATutorialRender::DrawTile(int xPos, int yPos, int tileWidth, int tileHeight
 	Tile = CreateImageRenderer();
 	Tile->SetImage("tile08.png");
 	Tile->SetOrder(1);
-	Tile->SetActive(true);
+	Tile->SetActive(false);
 	Tile->SetTransform({ {xPos, yPos}, {tileWidth, tileHeight} });
 
 	LastCreatedTile = Tile;
+}
+
+void ATutorialRender::ToggleTilesActiveState(bool newState)
+{
+	for (int y = 0; y < TileInfo::Rows; ++y)
+	{
+		for (int x = 0; x < TileInfo::Cols; ++x)
+		{
+			if (TileList[y][x] != nullptr)
+			{
+				TileList[y][x]->SetActive(newState);
+			}
+		}
+	}
 }

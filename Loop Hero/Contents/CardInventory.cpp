@@ -188,7 +188,16 @@ void ACardInventory::ACardInventory::Tick(float _DeltaTime)
 		SelectNode->CardRander->SetPosition(GEngine->MainWindow.GetMousePosition());
 		SelectNode->CardCollision->SetPosition(GEngine->MainWindow.GetMousePosition());
 
-		if (25 < SelectNode->CardRander->GetPosition().X && 600 > SelectNode->CardCollision->GetPosition().Y)
+		if (0 == SelectNode->CardTileNumber)
+		{
+			Map->TileList[6][8]->SetImage("Tiles", 10);
+		}
+		else
+		{
+			Map->ToggleTilesActiveState(true);
+		}
+
+		if (25 < SelectNode->CardRander->GetPosition().X && 650 > SelectNode->CardCollision->GetPosition().Y)
 		{
 			SelectNode->CardRander->SetImage("Tiles", SelectNode->CardTileNumber);
 			SelectNode->CardRander->SetScale({ 50, 50 });
@@ -203,6 +212,7 @@ void ACardInventory::ACardInventory::Tick(float _DeltaTime)
 
 		if (UEngineInput::IsUp(VK_LBUTTON))
 		{
+			Map->ToggleTilesActiveState(false);
 			SelectNode->CardRander->SetImage("TutorialCard", SelectNode->CardTileNumber);
 			SelectNode->CardRander->SetScale({ 175,175 });
 			SelectNode->CardCollision->SetScale({ 80, 120 });
