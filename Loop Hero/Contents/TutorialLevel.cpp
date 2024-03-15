@@ -30,8 +30,8 @@ void UTutorialLevel::TutorialEQGuide()
 	if (true == EQInventory->TutorialEQSetUPComplete())
 	{
 		DiaLog->TutorialGuideArrowEnd();
-		ChangeState(EStageState::Talk5);
 		++TalkCount;
+		ChangeState(EStageState::Talk5);
 	}
 
 	if (true == EQInventory->TutorialEQSetup())
@@ -40,11 +40,17 @@ void UTutorialLevel::TutorialEQGuide()
 	}
 }
 
-void UTutorialLevel::TutorialCardSetup()
+void UTutorialLevel::TutorialCardGuide()
 {
-	if (true)
+	if (true == CardInventory->TutorialCardComplete())
 	{
+		++TalkCount;
+		ChangeState(EStageState::Talk5);
+	}
 
+	if (true == CardInventory->TutorialCardSetUp(true))
+	{
+		DiaLog->RightArrow2->SetActive(false);
 	}
 }
 
@@ -122,11 +128,11 @@ void UTutorialLevel::ChangeState(EStageState _State)
 	{
 		break;
 	}
-	case EStageState::TutorialEQSetUP:
+	case EStageState::TutorialEQGuide:
 	{
 		break;
 	}
-	case EStageState::TutorialCardSetup:
+	case EStageState::TutorialCardGuide:
 	{
 		break;
 	}
@@ -181,13 +187,14 @@ void UTutorialLevel::StateUpdate(float _DeltaTime)
 	{
 		break;
 	}
-	case EStageState::TutorialEQSetUP:
+	case EStageState::TutorialEQGuide:
 	{	
 		TutorialEQGuide();
 		break;
 	}
-	case EStageState::TutorialCardSetup:
+	case EStageState::TutorialCardGuide:
 	{
+		TutorialCardGuide();
 		break;
 	}
 	case EStageState::Move:
@@ -544,7 +551,7 @@ void UTutorialLevel::Talk5(float _DeltaTime)
 	{
 		DiaLog->TextEnd();
 		DiaLog->TutorialGuideArrow04();
-		ChangeState(EStageState::TutorialEQSetUP);
+		ChangeState(EStageState::TutorialEQGuide);
 	}
 	else if (2 == TalkCount)
 	{
@@ -555,10 +562,9 @@ void UTutorialLevel::Talk5(float _DeltaTime)
 	{
 		DiaLog->TextEnd();
 		DiaLog->TutorialGuideArrow05();
-		ChangeState(EStageState::TutorialCardSetup);
-		++TalkCount;
+		ChangeState(EStageState::TutorialCardGuide);
 	}
-	else if (UEngineInput::IsDown(VK_LBUTTON) && 4 == TalkCount)
+	else if (4 == TalkCount)
 	{
 		DiaLog->TutorialGuideArrow06();
 		++TalkCount;
@@ -567,8 +573,8 @@ void UTutorialLevel::Talk5(float _DeltaTime)
 	{
 		DiaLog->TutorialGuideArrowEnd();
 		TalkCount = 0;
-		//ChangeState(EStageState::Move);
-		ChangeState(EStageState::Talk6);
+		ChangeState(EStageState::Move);
+		//ChangeState(EStageState::Talk6);
 	}
 }
 

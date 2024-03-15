@@ -33,6 +33,9 @@ public:
 	void TutorialAddCard(int _Card, FVector _MonsterPosition);
 	int CardListSize();
 
+	bool TutorialCardSetUp(bool _Check);
+	bool TutorialCardComplete();
+
 	void SetTutorialRender(ATutorialRender* _Map)
 	{
 		Map = _Map;
@@ -50,6 +53,7 @@ protected:
 
 private:
 	bool IsPause = false;
+	bool IsTutorialCardSetUp = false;
 	float CardDeleteTime = 0.0f;
 
 	void GamePause();
@@ -60,7 +64,5 @@ private:
 
 	ATutorialRender* Map = nullptr;
 
-	// 13개 초과시 카드 삭제
-	void DeleteCardList();
 };
 

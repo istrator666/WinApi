@@ -54,6 +54,11 @@ void ACardInventory::TutorialAddCard(int _Card, FVector _MonsterPosition)
 {
 	for (size_t i = 0; i < _Card; i++)
 	{
+		if (2 < TutorialCardNumber)
+		{
+			TutorialCardNumber = 2;
+		}
+
 		Node CardNode;
 		CardNode.CardRander = CreateImageRenderer();
 		CardNode.CardCollision = CreateCollision(ECollision::Card);
@@ -97,15 +102,21 @@ int ACardInventory::CardListSize()
 	return static_cast<int>(CardList.size());
 }
 
-void ACardInventory::ACardInventory::BeginPlay()
+bool ACardInventory::TutorialCardSetUp(bool _Check)
 {
-	AActor::BeginPlay();
+
+	IsTutorialCardSetUp = _Check;
+
+	if (nullptr != SelectNode)
+	{
+		return true;
+	}
+
+	return false;
 }
 
-void ACardInventory::ACardInventory::Tick(float _DeltaTime)
+bool ACardInventory::TutorialCardComplete()
 {
-	AActor::Tick(_DeltaTime);
-
 	//들고 있는 카드를 
 	// 놓았을 때, 
 	// 그 자리 타일 이미지 변경
@@ -120,9 +131,32 @@ void ACardInventory::ACardInventory::Tick(float _DeltaTime)
 			Map->TileList[Y][X]->SetImage("Tiles", SelectNode->CardTileNumber);
 			SelectNode->CardRander->Destroy();
 			SelectNode->CardCollision->Destroy();
+
+			std::_List_iterator<std::_List_val<std::_List_simple_types<Node>>> it = std::find_if(CardList.begin(), CardList.end(), [this](const Node& node) {
+				return &node == SelectNode;
+				});
+			if (it != CardList.end())
+			{
+				CardList.erase(it);
+			}
+
 			SelectNode = nullptr;
+
+			return true;
 		}
 	}
+
+	return false;
+}
+
+void ACardInventory::ACardInventory::BeginPlay()
+{
+	AActor::BeginPlay();
+}
+
+void ACardInventory::ACardInventory::Tick(float _DeltaTime)
+{
+	AActor::Tick(_DeltaTime);
 
 	for (Node& CurNode : CardList)
 	{
@@ -142,7 +176,7 @@ void ACardInventory::ACardInventory::Tick(float _DeltaTime)
 		{
 			std::vector<UCollision*> Result;
 			FVector NextPos;
-			if (true == CurNode.CardCollision->CollisionCheck(ECollision::Mouse, Result) && UEngineInput::IsDown(VK_LBUTTON))
+			if (true == CurNode.CardCollision->CollisionCheck(ECollision::Mouse, Result) && UEngineInput::IsDown(VK_LBUTTON) && true == IsTutorialCardSetUp)
 			{
 				SelectNode = &CurNode;
 			}

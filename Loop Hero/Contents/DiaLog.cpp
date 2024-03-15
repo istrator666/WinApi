@@ -167,8 +167,8 @@ void ADiaLog::TutorialGuideArrow05()
 void ADiaLog::TutorialGuideArrow06()
 {
 	TutorialText->SetActive(true);
-	RightArrow->SetActive(true);
-	RightArrow2->SetActive(true);
+	RightArrow->SetActive(false);
+	RightArrow2->SetActive(false);
 	TutorialText->SetText("잘 했습니다. \n- 이제 여정을 이어가십시오.");
 }
 

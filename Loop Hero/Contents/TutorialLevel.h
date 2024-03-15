@@ -65,7 +65,7 @@ public:
 	void TutorialEQGuide();
 
 	//카드 설치
-	void TutorialCardSetup();
+	void TutorialCardGuide();
 
 protected:
 	void BeginPlay() override;
