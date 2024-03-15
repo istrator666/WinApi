@@ -65,6 +65,7 @@ void LoopHeroContentsCore::RecourceLoad()
 	// 몬스터
 	UEngineResourcesManager::GetInst().CuttingImage("Overworld Enemies.png", 4, 12);
 	UEngineResourcesManager::GetInst().CuttingImage("Slime.png", 5, 3);
+	UEngineResourcesManager::GetInst().CuttingImage("Ratwolf.png", 5, 3);
 
 	// 카드
 	UEngineResourcesManager::GetInst().CuttingImage("Cards.png", 5, 2);

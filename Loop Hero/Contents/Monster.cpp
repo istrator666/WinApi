@@ -33,6 +33,12 @@ void AMonster::SetMonsterImage(MonsterType _MonsterType)
 		MonsterRender->ChangeAnimation("Idle");
 		break;
 	case MonsterType::Ratwolf:
+		MonsterRender = CreateImageRenderer();
+		MonsterRender->SetImage("Overworld Enemies.png");
+		MonsterRender->SetOrder(4);
+		MonsterRender->SetTransform({ {0,0}, {250,250} });
+		MonsterRender->CreateAnimation("Idle", "Overworld Enemies.png", 42, 43, 0.3f, true);
+		MonsterRender->ChangeAnimation("Idle");
 		break;
 	case MonsterType::Spider:
 		break;
@@ -106,6 +112,8 @@ void AMonsterFight::BeginPlay()
 	AActor::BeginPlay();
 	//SetMosnterFightImage();
 	SetMonsterHealthBar();
+
+
 }
 
 void AMonsterFight::Tick(float _DeltaTime)
@@ -129,6 +137,15 @@ void AMonsterFight::SetMosnterFightImage(MonsterType _MonsterType)
 		MonsterFightRender->ChangeAnimation("Idle");
 		break;
 	case MonsterType::Ratwolf:
+		MonsterFightRender = CreateImageRenderer();
+		MonsterFightRender->SetImage("Ratwolf.png");
+		MonsterFightRender->SetOrder(7);
+		MonsterFightRender->SetTransform({ {0,0}, {250,250} });
+		MonsterFightRender->CreateAnimation("Idle", "Ratwolf.png", 0, 0, 0.1f, false);
+		MonsterFightRender->CreateAnimation("Attack", "Ratwolf.png", 1, 5, 0.1f, false);
+		MonsterFightRender->CreateAnimation("Hurt", "Ratwolf.png", 6, 9, 0.25f, false);
+		MonsterFightRender->CreateAnimation("Death", "Ratwolf.png", 10, 14, 0.25f, false);
+		MonsterFightRender->ChangeAnimation("Idle");
 		break;
 	case MonsterType::Spider:
 		break;

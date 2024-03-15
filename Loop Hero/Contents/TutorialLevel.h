@@ -41,6 +41,7 @@ public:
 	void FightStart();
 	void Fight(float _DeltaTime);
 	void FightEnd();
+	void SetMonsterType(MonsterType _FightMonsterType);
 	MonsterType GetMonsterType();
 
 	//Pause
@@ -121,6 +122,7 @@ private:
 	void StageMoveMonster(AMonster* _Monster, FVector _Location);
 
 	//몬스터 생성
+	MonsterType FightMonsterType;
 	float SpawnTimeCheck = 0.0f;
 	std::vector<SpawnTileData> mSpawn;
 	std::vector<SpawnTileData> SpawnTileLocation();

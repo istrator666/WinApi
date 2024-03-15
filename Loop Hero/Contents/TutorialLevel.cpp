@@ -216,26 +216,18 @@ void UTutorialLevel::StateUpdate(float _DeltaTime)
 
 void UTutorialLevel::GamePause()
 {
-	if (UEngineInput::IsDown(VK_RBUTTON) || UEngineInput::IsDown(VK_SPACE) && true == IsGamePause)
-	{
+	//if (UEngineInput::IsDown(VK_RBUTTON) || UEngineInput::IsDown(VK_SPACE) && true == IsGamePause)
+	//{
 
-		IsGamePause = false;
-		ChangeState(EStageState::Pause);
+	//	IsGamePause = false;
+	//	ChangeState(EStageState::Pause);
 
-		//if (true == IsFight)
-		//{
-		//	return;
-		//}
-		//else
-		//{
-
-		//}
-	}
-	else if (UEngineInput::IsDown(VK_RBUTTON) || UEngineInput::IsDown(VK_SPACE) && false == IsGamePause)
-	{
-		IsGamePause = true;
-		ChangeState(EStageState::Move);
-	}
+	//}
+	//else if (UEngineInput::IsDown(VK_RBUTTON) || UEngineInput::IsDown(VK_SPACE) && false == IsGamePause)
+	//{
+	//	IsGamePause = true;
+	//	ChangeState(EStageState::Move);
+	//}
 }
 
 void UTutorialLevel::Move(float _DeltaTime)
@@ -329,6 +321,7 @@ void UTutorialLevel::MonsterFightCheck()
 				FightCheckMonsters.push_back(Monsters[i]);
 			}
 		}
+
 	}
 
 	if (0 != FightCheckMonsters.size())
@@ -414,6 +407,7 @@ void UTutorialLevel::FightEnd()
 
 		FightCheckMonsters.clear();
 		MonsterFights.clear();
+		Monsters.clear();
 
 		if (true == IsTalk5)
 		{
@@ -428,9 +422,14 @@ void UTutorialLevel::FightEnd()
 	}
 }
 
+void UTutorialLevel::SetMonsterType(MonsterType _FightMonsterType)
+{
+	FightMonsterType = _FightMonsterType;
+}
+
 MonsterType UTutorialLevel::GetMonsterType()
 {
-	return MonsterType();
+	return FightMonsterType;
 }
 
 void UTutorialLevel::MonsterDrop(FVector _MonsterPosition)
@@ -523,10 +522,9 @@ void UTutorialLevel::Talk4(float _DeltaTime)
 	else if (UEngineInput::IsDown(VK_LBUTTON) && 3 == TalkCount)
 	{
 		DiaLog->TutorialGuideArrowEnd();
-		++TalkCount;
 		TalkCount = 0;
-		IsFight = true;
 
+		//IsFight = true;
 		FightStartCheckTest = false;
 
 		ChangeState(EStageState::Fight);
@@ -583,17 +581,6 @@ std::vector<SpawnTileData> UTutorialLevel::SpawnTileLocation()
 	SpawnTile =
 	{ 
 		{ {625, 325}, RandomSpawnLocation({610, 360, 0, 0}), TileType::WASTELAND },
-		//{ {625, 375}, RandomSpawnLocation({560, 360, 0, 0}), TileType::WASTELAND },
-		//{ {575, 375}, RandomSpawnLocation({560, 410, 0, 0}), TileType::WASTELAND },
-		//{ {575, 425}, RandomSpawnLocation({510, 410, 0, 0}), TileType::WASTELAND },
-		//{ {525, 425}, RandomSpawnLocation({460, 410, 0, 0}), TileType::WASTELAND },
-		//{ {475, 425}, RandomSpawnLocation({410, 410, 0, 0}), TileType::WASTELAND },
-		//{ {425, 425}, RandomSpawnLocation({410, 360, 0, 0}), TileType::WASTELAND },
-		//{ {425, 375}, RandomSpawnLocation({410, 310, 0, 0}), TileType::WASTELAND },
-		//{ {425, 325}, RandomSpawnLocation({410, 260, 0, 0}), TileType::WASTELAND },
-		//{ {425, 275}, RandomSpawnLocation({460, 260, 0, 0}), TileType::WASTELAND },
-		//{ {475, 275}, RandomSpawnLocation({460, 210, 0, 0}), TileType::WASTELAND },
-		//{ {525, 225}, RandomSpawnLocation({510, 210, 0, 0}), TileType::WASTELAND },
 	};
 
 	return SpawnTile;
@@ -626,6 +613,10 @@ void UTutorialLevel::SpawnTileType(SpawnTileData& _TileData)
 	case TileType::CEMETERY:
 		break;
 	case TileType::GROVE:
+		if (RandomEngine.RandomFloat(0, 1.0) < 1.0)
+		{
+			MonsterSpawn(_TileData, MonsterType::Ratwolf);
+		}
 		break;
 	case TileType::BLOODPATH:
 		break;
@@ -657,6 +648,7 @@ void UTutorialLevel::MonsterSpawn(SpawnTileData& _TileData, MonsterType _Monster
 	Monster = SpawnActor<AMonster>();
 	Monster->SetMonsterImage(_MonsterType);
 	Monster->SetActorLocation(_TileData.SpawnLocation);
+	SetMonsterType(_MonsterType);
 	Monster->SetMoveSpeed(50.0f);
 	StageMoveMonster(Monster, _TileData.SpawnLocation);
 	Monsters.push_back(Monster);
@@ -666,18 +658,7 @@ std::vector<SpawnTileData> UTutorialLevel::TutorialSpawnTileLocation()
 {
 	SpawnTile =
 	{
-		//{ {625, 325}, RandomSpawnLocation({610, 360, 0, 0}), TileType::WASTELAND },
-		//{ {625, 375}, RandomSpawnLocation({560, 360, 0, 0}), TileType::WASTELAND },
-		//{ {575, 375}, RandomSpawnLocation({560, 410, 0, 0}), TileType::WASTELAND },
-		//{ {575, 425}, RandomSpawnLocation({510, 410, 0, 0}), TileType::WASTELAND },
-		//{ {525, 425}, RandomSpawnLocation({460, 410, 0, 0}), TileType::WASTELAND },
-		//{ {475, 425}, RandomSpawnLocation({410, 410, 0, 0}), TileType::WASTELAND },
-		//{ {425, 425}, RandomSpawnLocation({410, 360, 0, 0}), TileType::WASTELAND },
-		{ {425, 375}, RandomSpawnLocation({410, 310, 0, 0}), TileType::WASTELAND },
-		//{ {425, 325}, RandomSpawnLocation({410, 260, 0, 0}), TileType::WASTELAND },
-		//{ {425, 275}, RandomSpawnLocation({460, 260, 0, 0}), TileType::WASTELAND },
-		//{ {475, 275}, RandomSpawnLocation({460, 210, 0, 0}), TileType::WASTELAND },
-		//{ {525, 225}, RandomSpawnLocation({510, 210, 0, 0}), TileType::WASTELAND },
+		{ {425, 375}, RandomSpawnLocation({410, 310, 0, 0}), TileType::GROVE },
 	};
 
 	return SpawnTile;
