@@ -392,6 +392,12 @@ void UTutorialLevel::FightEnd()
 {
 	if (true == FightZone->AllMonsterDeath())
 	{
+		MonsterType TutorialCheckMonster = GetMonsterType();
+		if (TutorialCheckMonster == MonsterType::Ratwolf)
+		{
+			int a = 0;
+		}
+
 		FightZone->SetActive(false);
 		PlayerFight->SetActive(false);
 
@@ -572,7 +578,6 @@ void UTutorialLevel::Talk5(float _DeltaTime)
 		DiaLog->TutorialGuideArrowEnd();
 		TalkCount = 0;
 		ChangeState(EStageState::Move);
-		//ChangeState(EStageState::Talk6);
 	}
 }
 

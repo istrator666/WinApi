@@ -110,7 +110,7 @@ void ATutorialRender::DrawTileMap()
 void ATutorialRender::DrawTile(int xPos, int yPos, int tileWidth, int tileHeight)
 {
 	Tile = CreateImageRenderer();
-	Tile->SetImage("tile08.png");
+	Tile->SetImage("Tiles", 10);
 	Tile->SetOrder(1);
 	Tile->SetActive(false);
 	Tile->SetTransform({ {xPos, yPos}, {tileWidth, tileHeight} });
