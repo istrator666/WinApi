@@ -59,8 +59,13 @@ public:
 	void Talk2Start();
 	void Talk3Start();
 	void Talk4Start();
-	void Talk5Start();
 	void Talk6Start();
+
+	//아이템 장착
+	void TutorialEQGuide();
+
+	//카드 설치
+	void TutorialCardSetup();
 
 protected:
 	void BeginPlay() override;

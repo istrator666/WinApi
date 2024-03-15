@@ -20,6 +20,8 @@ public:
 		void EQInventoryUI();
 
 		void TutorialAddEQ(FVector _MonsterPosition);
+		bool TutorialEQSetup();
+		bool TutorialEQSetUPComplete();
 		
 	protected:
 		void BeginPlay() override;

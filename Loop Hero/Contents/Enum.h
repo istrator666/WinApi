@@ -31,6 +31,8 @@ enum class EStageState
 	Talk7,
 	Talk8,
 	Talk9,
+	TutorialEQSetUP,
+	TutorialCardSetup,
 	Move,
 	Fight,
 	Pause,

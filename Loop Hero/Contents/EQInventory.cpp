@@ -19,39 +19,6 @@ void EQInventory::AEQInventoryUI::Tick(float _DeltaTime)
 {
 	AActor::Tick(_DeltaTime);
 
-
-	//if (nullptr != Map && nullptr != SelectNode && UEngineInput::IsUp(VK_LBUTTON) && 25 < SelectNode->CardRander->GetPosition().X && 600 > SelectNode->CardCollision->GetPosition().Y)
-	//{
-	//	// 마우스 좌표를 얻어서 50으로 나눈 후 타일에 들어가는지 확인
-	//	int X = static_cast<int>(GEngine->MainWindow.GetMousePosition().X / 50);
-	//	int Y = static_cast<int>(GEngine->MainWindow.GetMousePosition().Y / 50);
-
-	//	if (6 == Y && 8 == X)
-	//	{
-	//		Map->TileList[Y][X]->SetImage("Tiles", SelectNode->CardTileNumber);
-	//		SelectNode->CardRander->Destroy();
-	//		SelectNode->CardCollision->Destroy();
-	//		SelectNode = nullptr;
-	//	}
-	//}
-
-	if (nullptr != SelectEQInventoryIcon && UEngineInput::IsUp(VK_LBUTTON))
-	{
-		int X = static_cast<int>(GEngine->MainWindow.GetMousePosition().X / 50);
-		int Y = static_cast<int>(GEngine->MainWindow.GetMousePosition().Y / 50);
-
-
-		if (6 == Y && 8 == X)
-		{
-			//인벤토리 무기칸 좌표 얻어서 이미지 넣기
-
-			SelectEQInventoryIcon->Destroy();
-			SelectEQInventoryIconCollision->Destroy();
-			SelectEQInventoryIcon = nullptr;
-			SelectEQInventoryIconCollision = nullptr;
-		}
-	}
-
 	if (nullptr != EQInventoryIcon)
 	{
 		Movetime += _DeltaTime * 2.0f;
@@ -61,15 +28,6 @@ void EQInventory::AEQInventoryUI::Tick(float _DeltaTime)
 		EQInventoryIconCollision->SetPosition(CurPos);
 	}
 
-	if (1.0f <= Movetime)
-	{
-		std::vector<UCollision*> Result;
-		if (true == EQInventoryIconCollision->CollisionCheck(ECollision::Mouse, Result) && UEngineInput::IsDown(VK_LBUTTON))
-		{
-			SelectEQInventoryIcon = EQInventoryIcon;
-			SelectEQInventoryIconCollision = EQInventoryIconCollision;
-		}
-	}
 
 	if (nullptr != SelectEQInventoryIcon)
 	{
@@ -82,7 +40,6 @@ void EQInventory::AEQInventoryUI::Tick(float _DeltaTime)
 			SelectEQInventoryIconCollision = nullptr;
 		}
 	}
-
 }
 
 void EQInventory::AEQInventoryUI::EQInventoryUI()
@@ -92,9 +49,13 @@ void EQInventory::AEQInventoryUI::EQInventoryUI()
 	EQInventoryRender->SetOrder(5);
 	EQInventoryRender->SetTransform({ {1130, 360}, {295,730} });
 
+	EQIcon = CreateImageRenderer();
+	EQIcon->SetImage("Weapons.png");
+	EQIcon->CreateAnimation("Weapons", "Weapons.png", 0, 0, 0.3f, false);
+	EQIcon->ChangeAnimation("Weapons");
+	EQIcon->SetOrder(9);
+	EQIcon->SetActive(false);
 
-	//EQInventoryIcon->SetTransform({ {-42, -80}, {200,200} });
-	//EQInventoryIcon->SetTransform({ {-42, -284}, {200,200} });
 }
 
 void EQInventory::AEQInventoryUI::TutorialAddEQ(FVector _MonsterPosition)
@@ -114,5 +75,48 @@ void EQInventory::AEQInventoryUI::TutorialAddEQ(FVector _MonsterPosition)
 
 	StartPosition = { _MonsterPosition };
 	EndPosition = { 1088, 280 };
-	// { 1088, 76 };
+}
+
+bool EQInventory::AEQInventoryUI::TutorialEQSetup()
+{
+	if (1.0f <= Movetime)
+	{
+		std::vector<UCollision*> Result;
+		if (true == EQInventoryIconCollision->CollisionCheck(ECollision::Mouse, Result) && UEngineInput::IsDown(VK_LBUTTON))
+		{
+			SelectEQInventoryIcon = EQInventoryIcon;
+			SelectEQInventoryIconCollision = EQInventoryIconCollision;
+
+			return true;
+		}
+	}
+
+	return false;
+}
+
+bool EQInventory::AEQInventoryUI::TutorialEQSetUPComplete()
+{
+	if (nullptr != SelectEQInventoryIcon && UEngineInput::IsUp(VK_LBUTTON))
+	{
+		int X = static_cast<int>(GEngine->MainWindow.GetMousePosition().X);
+		int Y = static_cast<int>(GEngine->MainWindow.GetMousePosition().Y);
+
+		if (1063 <= X && 1113 >= X && 51 <= Y && 101 >= Y)
+		{
+			//인벤토리 무기칸 좌표 얻어서 이미지 넣기
+				// { 1088, 76 };
+
+			EQIcon->SetTransform({ { 1088, 76 }, {200, 200} });
+			EQIcon->SetActive(true);
+
+			SelectEQInventoryIcon->Destroy();
+			SelectEQInventoryIconCollision->Destroy();
+			SelectEQInventoryIcon = nullptr;
+			SelectEQInventoryIconCollision = nullptr;
+
+			return true;
+		}
+	}
+
+	return false;
 }

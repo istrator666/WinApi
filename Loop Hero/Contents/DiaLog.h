@@ -43,6 +43,9 @@ public:
 	int TextCount = 0;
 	UImageRenderer* DialogText = nullptr;
 	UImageRenderer* TutorialText = nullptr;
+	UImageRenderer* UPArrow = nullptr;
+	UImageRenderer* RightArrow = nullptr;
+	UImageRenderer* RightArrow2 = nullptr;
 
 protected:
 	void BeginPlay() override;
@@ -52,10 +55,6 @@ private:
 	UImageRenderer* DialogCharacter = nullptr;
 	UImageRenderer* DialogBox = nullptr;
 	UImageRenderer* DialogBackground = nullptr;
-
-	UImageRenderer* UPArrow = nullptr;
-	UImageRenderer* RightArrow = nullptr;
-	UImageRenderer* RightArrow2 = nullptr;
 
 	float DiaLogMove = 0.0f;
 	float DiaProgressbarTime = 1.0f;

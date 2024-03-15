@@ -24,9 +24,28 @@ void UTutorialLevel::Talk4Start()
 	APlashka->ChangePlashka(1);
 }
 
-void UTutorialLevel::Talk5Start()
+
+void UTutorialLevel::TutorialEQGuide()
 {
-	DiaLog->Text03();
+	if (true == EQInventory->TutorialEQSetUPComplete())
+	{
+		DiaLog->TutorialGuideArrowEnd();
+		ChangeState(EStageState::Talk5);
+		++TalkCount;
+	}
+
+	if (true == EQInventory->TutorialEQSetup())
+	{
+		DiaLog->RightArrow->SetActive(false);
+	}
+}
+
+void UTutorialLevel::TutorialCardSetup()
+{
+	if (true)
+	{
+
+	}
 }
 
 void UTutorialLevel::BeginPlay()
@@ -97,10 +116,17 @@ void UTutorialLevel::ChangeState(EStageState _State)
 	}
 	case EStageState::Talk5:
 	{
-		Talk5Start();
 		break;
 	}
 	case EStageState::Talk6:
+	{
+		break;
+	}
+	case EStageState::TutorialEQSetUP:
+	{
+		break;
+	}
+	case EStageState::TutorialCardSetup:
 	{
 		break;
 	}
@@ -152,6 +178,15 @@ void UTutorialLevel::StateUpdate(float _DeltaTime)
 		break;
 	}
 	case EStageState::Talk6:
+	{
+		break;
+	}
+	case EStageState::TutorialEQSetUP:
+	{	
+		TutorialEQGuide();
+		break;
+	}
+	case EStageState::TutorialCardSetup:
 	{
 		break;
 	}
@@ -496,30 +531,39 @@ void UTutorialLevel::Talk5(float _DeltaTime)
 {
 	FightStartCheckTest = true;
 
-	if (UEngineInput::IsDown(VK_LBUTTON) && 0 == TalkCount)
+	if (0 == TalkCount)
 	{
-		DiaLog->TextEnd();
-		DiaLog->TutorialGuideArrow04();
-		++TalkCount;
+		DiaLog->Text03();
+
+		if (UEngineInput::IsDown(VK_LBUTTON))
+		{
+			++TalkCount;
+		}
 	}
 	else if (UEngineInput::IsDown(VK_LBUTTON) && 1 == TalkCount)
 	{
-		DiaLog->TutorialGuideArrowEnd();
-		DiaLog->Text04();
-		++TalkCount;
-	}
-	else if (UEngineInput::IsDown(VK_LBUTTON) && 2 == TalkCount)
-	{
 		DiaLog->TextEnd();
-		DiaLog->TutorialGuideArrow05();
+		DiaLog->TutorialGuideArrow04();
+		ChangeState(EStageState::TutorialEQSetUP);
+	}
+	else if (2 == TalkCount)
+	{
+		DiaLog->Text04();
 		++TalkCount;
 	}
 	else if (UEngineInput::IsDown(VK_LBUTTON) && 3 == TalkCount)
 	{
-		DiaLog->TutorialGuideArrow06();
+		DiaLog->TextEnd();
+		DiaLog->TutorialGuideArrow05();
+		ChangeState(EStageState::TutorialCardSetup);
 		++TalkCount;
 	}
 	else if (UEngineInput::IsDown(VK_LBUTTON) && 4 == TalkCount)
+	{
+		DiaLog->TutorialGuideArrow06();
+		++TalkCount;
+	}
+	else if (UEngineInput::IsDown(VK_LBUTTON) && 5 == TalkCount)
 	{
 		DiaLog->TutorialGuideArrowEnd();
 		TalkCount = 0;
