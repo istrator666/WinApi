@@ -124,7 +124,7 @@ void ATutorialRender::ToggleTilesActiveState(bool newState)
 	{
 		for (int x = 0; x < TileInfo::Cols; ++x)
 		{
-			if (TileList[y][x] != nullptr)
+			if (TileList[y][x] != nullptr && TileList[y][x]->GetImageIndex() == 10)
 			{
 				TileList[y][x]->SetActive(newState);
 			}

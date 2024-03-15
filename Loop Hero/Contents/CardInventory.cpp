@@ -213,6 +213,8 @@ void ACardInventory::ACardInventory::Tick(float _DeltaTime)
 		if (UEngineInput::IsUp(VK_LBUTTON))
 		{
 			Map->ToggleTilesActiveState(false);
+			Map->TileList[6][8]->SetActive(true);
+
 			SelectNode->CardRander->SetImage("TutorialCard", SelectNode->CardTileNumber);
 			SelectNode->CardRander->SetScale({ 175,175 });
 			SelectNode->CardCollision->SetScale({ 80, 120 });
