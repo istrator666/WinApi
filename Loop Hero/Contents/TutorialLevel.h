@@ -144,7 +144,6 @@ private:
 
 	//»ç¿îµå 
 	UEngineSoundPlayer BackgroundBGM;
-	UEngineSoundPlayer PlayerTalk;
 	UEngineSoundPlayer NewDay;
 	UEngineSoundPlayer RetreatSound;
 
