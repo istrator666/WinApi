@@ -94,11 +94,19 @@ void ADiaLog::Text05()
 	DialogText->SetActive(true);
 	DialogText->SetTransform({ { 280, 540 }, { 0, 0} });
 	DialogText->SetText("숲의 랫울프군.");
-	//DialogText->SetText("역시 기억에 문제가 있군. 스트레스도 받은데다가 화려한 것도 보고 흥분한 상태가 되니 \n악몽마냥 다 잊어버린 것 같아...");
-	//DialogText->SetText("아니면 그냥 나쁜... 망할! 아무도 안 듣고 있어서 다행이군.");
 }
 
 void ADiaLog::Text06()
+{
+	DialogText->SetText("역시 기억에 문제가 있군. 스트레스도 받은데다가 화려한 것도 보고 흥분한 상태가 되니 \n악몽마냥 다 잊어버린 것 같아...");
+}
+
+void ADiaLog::Text07()
+{
+	DialogText->SetText("아니면 그냥 나쁜... 망할! 아무도 안 듣고 있어서 다행이군.");
+}
+
+void ADiaLog::Text08()
 {
 	DialogCharacter->SetActive(true);
 	DialogBox->SetActive(true);
@@ -107,7 +115,7 @@ void ADiaLog::Text06()
 	DialogText->SetText("좋아.저기엔 산이 있었고, 여기엔 숲이 있군. 세상이 완전히 달라졌어. 배낭에 있는 나뭇가지와 \n돌멩이가 확실한 그 증거야.");
 }
 
-void ADiaLog::Text07()
+void ADiaLog::Text09()
 {
 	DialogCharacter->SetActive(true);
 	DialogBox->SetActive(true);
@@ -176,7 +184,9 @@ void ADiaLog::TutorialGuideArrow07()
 {
 	TutorialText->SetActive(true);
 	RightArrow->SetActive(true);
+	RightArrow->SetPosition({ 1010, 280 });
 	RightArrow2->SetActive(true);
+	RightArrow2->SetPosition({ 200, 670 });
 	TutorialText->SetText("이미 알아차리셨듯, 전투 중에 새로운 물품이나 카드를 얻을 수 있습니다. \n어떤 물품은 대부분의 카드처럼 특별한 능력을 가지고 있습니다. 물품이나 카드에 마우스를 올려놓으면 그 정보를 알 수 \n있습니다. \n\n- 새로운 무기를 장비한 후 새 카드를 지도 위에 배치하여 계속 이어 가십시오.");
 }
 

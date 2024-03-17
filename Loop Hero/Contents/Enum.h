@@ -33,6 +33,7 @@ enum class EStageState
 	Talk9,
 	TutorialEQGuide,
 	TutorialCardGuide,
+	TutorialEQCardGuide,
 	Move,
 	Fight,
 	Pause,

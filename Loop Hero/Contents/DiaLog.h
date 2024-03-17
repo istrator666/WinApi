@@ -25,6 +25,8 @@ public:
 	void Text05();
 	void Text06();
 	void Text07();
+	void Text08();
+	void Text09();
 	void TextEnd();
 
 	void TutorialGuideArrow01();

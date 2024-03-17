@@ -60,13 +60,11 @@ public:
 	void Talk2Start();
 	void Talk3Start();
 	void Talk4Start();
-	void Talk6Start();
 
-	//아이템 장착
+	//아이템 장착, 카드 설치
 	void TutorialEQGuide();
-
-	//카드 설치
 	void TutorialCardGuide();
+	void TutorialEQCardGuide();
 
 protected:
 	void BeginPlay() override;
@@ -139,6 +137,7 @@ private:
 	FVector PlayerLocation;
 	bool FightStartCheckTest = true;
 	bool IsTalk5 = false;
+	bool IsTalk6 = false;
 
 
 	int TutorialDrop = 1;

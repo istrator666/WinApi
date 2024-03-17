@@ -24,7 +24,6 @@ void UTutorialLevel::Talk4Start()
 	APlashka->ChangePlashka(1);
 }
 
-
 void UTutorialLevel::TutorialEQGuide()
 {
 	if (true == EQInventory->TutorialEQSetUPComplete())
@@ -51,6 +50,41 @@ void UTutorialLevel::TutorialCardGuide()
 	if (true == CardInventory->TutorialCardSetUp(true))
 	{
 		DiaLog->RightArrow2->SetActive(false);
+	}
+}
+
+void UTutorialLevel::TutorialEQCardGuide()
+{
+	if (true == EQInventory->TutorialEQSetUPComplete())
+	{
+		++TalkCount;
+	}
+
+	if (true == EQInventory->TutorialEQSetup())
+	{
+		DiaLog->RightArrow->SetActive(false);
+	}
+
+	if (5 == TalkCount)
+	{
+		if (true == CardInventory->TutorialCardComplete())
+		{
+			TutorialRender->ToggleTilesActiveState(false);
+				++TalkCount;
+				DiaLog->RightArrow2->SetPosition({ 125, 670 });
+				
+				TravelitemPanel->SetActive(true);
+		}
+
+	}
+	else if (6 == TalkCount)
+	{
+		if (true == CardInventory->TutorialCardComplete())
+		{
+			TutorialRender->ToggleTilesActiveState(false);
+			++TalkCount;
+			ChangeState(EStageState::Talk6);
+		}
 	}
 }
 
@@ -92,9 +126,7 @@ void UTutorialLevel::Tick(float _DeltaTime)
 	ULevel::Tick(_DeltaTime);
 	PlayerLocation = Player->GetActorLocation();
 
-
 	StateUpdate(_DeltaTime);
-	//GamePause();
 }
 
 void UTutorialLevel::ChangeState(EStageState _State)
@@ -133,6 +165,10 @@ void UTutorialLevel::ChangeState(EStageState _State)
 		break;
 	}
 	case EStageState::TutorialCardGuide:
+	{
+		break;
+	}
+	case EStageState::TutorialEQCardGuide:
 	{
 		break;
 	}
@@ -185,6 +221,7 @@ void UTutorialLevel::StateUpdate(float _DeltaTime)
 	}
 	case EStageState::Talk6:
 	{
+		Talk6(_DeltaTime);
 		break;
 	}
 	case EStageState::TutorialEQGuide:
@@ -195,6 +232,11 @@ void UTutorialLevel::StateUpdate(float _DeltaTime)
 	case EStageState::TutorialCardGuide:
 	{
 		TutorialCardGuide();
+		break;
+	}
+	case EStageState::TutorialEQCardGuide:
+	{
+		TutorialEQCardGuide();
 		break;
 	}
 	case EStageState::Move:
@@ -247,6 +289,10 @@ void UTutorialLevel::Move(float _DeltaTime)
 		{
 			SpawnTileType(Tile);
 		}
+	}
+	else if (575 == PlayerLocation.X && 225 == PlayerLocation.Y)
+	{
+		ChangeState(EStageState::Pause);
 	}
 
 	Player->WayPoints(_DeltaTime);
@@ -385,6 +431,19 @@ void UTutorialLevel::Fight(float _DeltaTime)
 	IsFight = true;
 	StageprogressGauge->StageProgressGaugeUpdate(_DeltaTime / 5);
 	FightZone->Battle(_DeltaTime);
+
+	MonsterType TutorialCheckMonster = GetMonsterType();
+	if (TutorialCheckMonster == MonsterType::Ratwolf && true == FightZone->AllMonsterDeath())
+	{
+		IsTalk6 = true;
+		
+		if (true == IsTalk6)
+		{
+			ChangeState(EStageState::Talk6);
+			return;
+		}
+	}
+
 	FightEnd();
 }
 
@@ -392,12 +451,6 @@ void UTutorialLevel::FightEnd()
 {
 	if (true == FightZone->AllMonsterDeath())
 	{
-		MonsterType TutorialCheckMonster = GetMonsterType();
-		if (TutorialCheckMonster == MonsterType::Ratwolf)
-		{
-			int a = 0;
-		}
-
 		FightZone->SetActive(false);
 		PlayerFight->SetActive(false);
 
@@ -414,6 +467,16 @@ void UTutorialLevel::FightEnd()
 		FightCheckMonsters.clear();
 		MonsterFights.clear();
 		Monsters.clear();
+
+		if (true == IsTalk6)
+		{
+			ChangeState(EStageState::Talk6);
+			return;
+		}
+		else
+		{
+			ChangeState(EStageState::Move);
+		}
 
 		if (true == IsTalk5)
 		{
@@ -577,7 +640,65 @@ void UTutorialLevel::Talk5(float _DeltaTime)
 	{
 		DiaLog->TutorialGuideArrowEnd();
 		TalkCount = 0;
+		IsTalk5 = true;
 		ChangeState(EStageState::Move);
+	}
+}
+
+void UTutorialLevel::Talk6(float _DeltaTime)
+{
+	// FightEnd에서 이어서 할 수 있게 생각하기
+	// 그 후에 대화 관련 추가하기
+	//IsTalk6 = false;
+
+	if (0 == TalkCount)
+	{
+		DiaLog->Text05();
+
+		if (UEngineInput::IsDown(VK_LBUTTON))
+		{
+			++TalkCount;
+		}
+	}
+	else if (1 == TalkCount)
+	{
+		DiaLog->Text06();
+		++TalkCount;
+	}
+	else if (UEngineInput::IsDown(VK_LBUTTON) && 2 == TalkCount)
+	{
+		DiaLog->Text07();
+		++TalkCount;
+	}
+	else if (UEngineInput::IsDown(VK_LBUTTON) && 3 == TalkCount)
+	{
+		DiaLog->TextEnd();
+		FightEnd();
+		DiaLog->TutorialGuideArrow07();
+		++TalkCount;
+
+	}
+	else if (4 == TalkCount)
+	{
+		ChangeState(EStageState::TutorialEQCardGuide);
+	}
+	else if (7 == TalkCount)
+	{
+		DiaLog->TutorialGuideArrowEnd();
+		DiaLog->Text08();
+		++TalkCount;
+	}
+	else if (UEngineInput::IsDown(VK_LBUTTON) && 8 == TalkCount)
+	{
+		DiaLog->TextEnd();
+		DiaLog->TutorialGuideArrow08();
+		++TalkCount;
+	}
+	else if (UEngineInput::IsDown(VK_LBUTTON) && 9 == TalkCount)
+	{
+		DiaLog->TutorialGuideArrowEnd();
+		ChangeState(EStageState::Move);
+		TalkCount = 0;
 	}
 }
 

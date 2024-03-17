@@ -85,6 +85,7 @@ public:
 
 	private:
 		UImageRenderer* TravelitemPanelRender = nullptr;
+		UImageRenderer* TravelitemIconRender = nullptr;
 		void Mousehover();
 	};
 

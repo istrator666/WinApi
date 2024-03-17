@@ -126,9 +126,31 @@ bool ACardInventory::TutorialCardComplete()
 		int X = static_cast<int>(GEngine->MainWindow.GetMousePosition().X / 50);
 		int Y = static_cast<int>(GEngine->MainWindow.GetMousePosition().Y / 50);
 
-		if (6 == Y && 8 == X)
+		if (6 == Y && 8 == X && 0 == SelectNode->CardTileNumber)
 		{
 			Map->TileList[Y][X]->SetImage("Tiles", SelectNode->CardTileNumber);
+			SelectNode->CardRander->Destroy();
+			SelectNode->CardCollision->Destroy();
+
+			std::_List_iterator<std::_List_val<std::_List_simple_types<Node>>> it = std::find_if(CardList.begin(), CardList.end(), [this](const Node& node) {
+				return &node == SelectNode;
+				});
+			if (it != CardList.end())
+			{
+				CardList.erase(it);
+			}
+
+			SelectNode = nullptr;
+
+			return true;
+		}
+		else if (1 == SelectNode->CardTileNumber || 2 == SelectNode->CardTileNumber)
+		{
+			if (Map->TileList[Y][X]->GetImageIndex() == 10)
+			{
+				Map->TileList[Y][X]->SetImage("Tiles", SelectNode->CardTileNumber);
+			}
+
 			SelectNode->CardRander->Destroy();
 			SelectNode->CardCollision->Destroy();
 
