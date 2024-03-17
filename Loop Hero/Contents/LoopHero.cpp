@@ -32,7 +32,7 @@ void LoopHeroContentsCore::BeginPlay()
 	CreateLevel<UTutorialLevel>("Tutorial");
 	CreateLevel<UGameEndLevel>("GameEnd");
 	//CreateLevel<UTestStageLevel>("StageLevel");
-	ChangeLevel("Tutorial");
+	ChangeLevel("TitleLevel");
 }
 
 void LoopHeroContentsCore::Tick(float _DeltaTime)
