@@ -56,6 +56,13 @@ void EQInventory::AEQInventoryUI::EQInventoryUI()
 	EQIcon->SetOrder(9);
 	EQIcon->SetActive(false);
 
+	RetreatRender = CreateImageRenderer();
+	RetreatRender->SetImage("s_pobeg.png");
+	RetreatRender->CreateAnimation("Retreat", "s_pobeg.png", 0, 9, 0.1f, true);
+	RetreatRender->ChangeAnimation("Retreat");
+	RetreatRender->SetOrder(10);
+	RetreatRender->SetActive(false);
+	RetreatRender->SetTransform({ {1023, 688}, {250,250} });
 }
 
 void EQInventory::AEQInventoryUI::TutorialAddEQ(FVector _MonsterPosition)
@@ -119,4 +126,10 @@ bool EQInventory::AEQInventoryUI::TutorialEQSetUPComplete()
 	}
 
 	return false;
+}
+
+void EQInventory::AEQInventoryUI::Retreat()
+{
+	RetreatRender->SetActive(true);
+
 }

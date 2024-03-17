@@ -105,8 +105,7 @@ void UTutorialLevel::BeginPlay()
 	CardInventory->SetTutorialRender(TutorialRender);
 
 	Player = SpawnActor<APlayer>();
-	//Player->SetActorLocation({ 575, 225 });
-	Player->SetActorLocation({ 625, 325 });
+	Player->SetActorLocation({ 575, 225 });
 	StageMovePlayer(Player);
 
 	DiaLog = SpawnActor<ADiaLog>();
@@ -158,6 +157,11 @@ void UTutorialLevel::ChangeState(EStageState _State)
 	}
 	case EStageState::Talk6:
 	{
+		break;
+	}
+	case EStageState::TutorialEnd:
+	{
+
 		break;
 	}
 	case EStageState::TutorialEQGuide:
@@ -222,6 +226,11 @@ void UTutorialLevel::StateUpdate(float _DeltaTime)
 	case EStageState::Talk6:
 	{
 		Talk6(_DeltaTime);
+		break;
+	}
+	case EStageState::TutorialEnd:
+	{
+		TutorialEnd();
 		break;
 	}
 	case EStageState::TutorialEQGuide:
@@ -290,9 +299,9 @@ void UTutorialLevel::Move(float _DeltaTime)
 			SpawnTileType(Tile);
 		}
 	}
-	else if (575 == PlayerLocation.X && 225 == PlayerLocation.Y)
+	else if (575 == PlayerLocation.X && 225 == PlayerLocation.Y && true == IsGameEnd)
 	{
-		ChangeState(EStageState::Pause);
+		ChangeState(EStageState::TutorialEnd);
 	}
 
 	Player->WayPoints(_DeltaTime);
@@ -305,10 +314,10 @@ std::vector<FVector> UTutorialLevel::StagePoints(const std::string& _StageName)
 
 	std::vector<FVector> Tutorial =
 	{
-		//{575, 225, 0, 0},
-		//{625, 225, 0, 0},
-		//{625, 275, 0, 0},
-		//{625, 325, 0, 0},
+		{575, 225, 0, 0},
+		{625, 225, 0, 0},
+		{625, 275, 0, 0},
+		{625, 325, 0, 0},
 		{625, 375, 0, 0},
 		{575, 375, 0, 0},
 		{575, 425, 0, 0},
@@ -321,11 +330,6 @@ std::vector<FVector> UTutorialLevel::StagePoints(const std::string& _StageName)
 		{475, 275, 0, 0},
 		{475, 225, 0, 0},
 		{525, 225, 0, 0},
-
-		{575, 225, 0, 0},
-		{625, 225, 0, 0},
-		{625, 275, 0, 0},
-		{625, 325, 0, 0},
 	};
 
 	return Tutorial;
@@ -676,7 +680,6 @@ void UTutorialLevel::Talk6(float _DeltaTime)
 		FightEnd();
 		DiaLog->TutorialGuideArrow07();
 		++TalkCount;
-
 	}
 	else if (4 == TalkCount)
 	{
@@ -694,11 +697,44 @@ void UTutorialLevel::Talk6(float _DeltaTime)
 		DiaLog->TutorialGuideArrow08();
 		++TalkCount;
 	}
-	else if (UEngineInput::IsDown(VK_LBUTTON) && 9 == TalkCount)
+	else if (UEngineInput::IsDown(VK_RBUTTON) && 9 == TalkCount || UEngineInput::IsDown(VK_SPACE) && 9 == TalkCount)
 	{
 		DiaLog->TutorialGuideArrowEnd();
 		ChangeState(EStageState::Move);
 		TalkCount = 0;
+		IsGameEnd = true;
+	}
+}
+
+void UTutorialLevel::TutorialEnd()
+{
+	if (0 == TalkCount)
+	{
+		DiaLog->Text09();
+
+		if (UEngineInput::IsDown(VK_LBUTTON))
+		{
+			++TalkCount;
+		}
+	}
+	else if (1 == TalkCount)
+	{
+		APlashka->ChangePlashka(0);
+		DiaLog->TextEnd();
+		EQInventory->Retreat();
+		DiaLog->TutorialGuideArrow09();
+		++TalkCount;
+	}
+	else if (2 == TalkCount)
+	{
+		if (
+			990 <= GEngine->MainWindow.GetMousePosition().X && 1050 >= GEngine->MainWindow.GetMousePosition().X \
+			&& 650 <= GEngine->MainWindow.GetMousePosition().Y && 825 >= GEngine->MainWindow.GetMousePosition().Y \
+			&& UEngineInput::IsDown(VK_LBUTTON)
+			)
+		{
+			GEngine->ChangeLevel("GameEnd");
+		}
 	}
 }
 

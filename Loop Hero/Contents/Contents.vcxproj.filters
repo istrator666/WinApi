@@ -59,6 +59,12 @@
     <ClCompile Include="Mouse.cpp">
       <Filter>Actor\Unit</Filter>
     </ClCompile>
+    <ClCompile Include="GameEndLevel.cpp">
+      <Filter>Level</Filter>
+    </ClCompile>
+    <ClCompile Include="GameEndRender.cpp">
+      <Filter>Actor\Render</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="LoopHero.h" />
@@ -127,6 +133,12 @@
     </ClInclude>
     <ClInclude Include="Mouse.h">
       <Filter>Actor\Unit</Filter>
+    </ClInclude>
+    <ClInclude Include="GameEndLevel.h">
+      <Filter>Level</Filter>
+    </ClInclude>
+    <ClInclude Include="GameEndRender.h">
+      <Filter>Actor\Render</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

@@ -56,6 +56,7 @@ public:
 	void Talk4(float _DeltaTime);
 	void Talk5(float _DeltaTime);
 	void Talk6(float _DeltaTime);
+	void TutorialEnd();
 
 	void Talk2Start();
 	void Talk3Start();
@@ -138,6 +139,7 @@ private:
 	bool FightStartCheckTest = true;
 	bool IsTalk5 = false;
 	bool IsTalk6 = false;
+	bool IsGameEnd = false;
 
 
 	int TutorialDrop = 1;

@@ -27,6 +27,7 @@ void LoopHeroContentsCore::BeginPlay()
 	CreateLevel<UTitleLevel>("TitleLevel");
 	CreateLevel<UIntroLevel>("IntroLevel");
 	CreateLevel<UTutorialLevel>("Tutorial");
+	CreateLevel<UGameEndLevel>("GameEnd");
 	//CreateLevel<UTestStageLevel>("StageLevel");
 	ChangeLevel("Tutorial");
 }
@@ -73,12 +74,14 @@ void LoopHeroContentsCore::RecourceLoad()
 
 	// 튜토리얼
 	UEngineResourcesManager::GetInst().CuttingImage("Up.png", 5, 8);
+	UEngineResourcesManager::GetInst().CuttingImage("Down.png", 5, 8);
 	UEngineResourcesManager::GetInst().CuttingImage("Right.png", 5, 8);
 	UEngineResourcesManager::GetInst().CuttingImage("Left.png", 5, 8);
 
 	// UI
 	UEngineResourcesManager::GetInst().CuttingImage("PlashkaMove.png", 5, 4);
 	UEngineResourcesManager::GetInst().CuttingImage("PlashkaPause.png", 5, 1);
+	UEngineResourcesManager::GetInst().CuttingImage("s_pobeg.png", 5, 2);
 
 	//무기
 	UEngineResourcesManager::GetInst().CuttingImage("Weapons.png", 5, 3);

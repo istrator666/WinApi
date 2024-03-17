@@ -193,11 +193,15 @@ void ADiaLog::TutorialGuideArrow07()
 void ADiaLog::TutorialGuideArrow08()
 {
 	TutorialText->SetActive(true);
-	TutorialText->SetText("특정 행동을 하게 되면 당장은 아니지만 나중에 필요할 자원을 얻을 수 있습니다. 지금 당장 설명하진 않을 것 입니다. \n- 게임 모드를 바꿔 여정을 이어가십시오. (스페이 바, 마우스 우클릭, 모드 변경");
+	TutorialText->SetText("특정 행동을 하게 되면 당장은 아니지만 나중에 필요할 자원을 얻을 수 있습니다. 지금 당장 설명하진 않을 것 입니다. \n- 게임 모드를 바꿔 여정을 이어가십시오. (스페이 바, 마우스 우클릭, 모드 변경)");
 }
 
 void ADiaLog::TutorialGuideArrow09()
 {
+	UPArrow->SetImage("Down.png");
+	UPArrow->ChangeAnimation("Idle1");
+	UPArrow->SetPosition({1020, 610});
+	UPArrow->SetActive(true);
 	TutorialText->SetActive(true);
 	TutorialText->SetText("이 게임은 길을 따라 여정을 반복하는 게임입니다. 언제 영웅이 야영지로 돌아갈지는 당신이 결정해야 합니다... \n물론 적들의 이빨과 발톱이 결정을 내려줄 수도 있지만요. \n거의 언제든 후퇴할 수 있지만, 특별한 애니메이션이 나오면 안전하게 후퇴할 수 있습니다. \n\n- 버튼을 눌러 야영지로 퇴각하십시오.");
 }
@@ -246,6 +250,7 @@ void ADiaLog::ADiaLog::BeginPlay()
 	UPArrow->SetOrder(15);
 	UPArrow->SetTransform({ {565, 90}, {250,250} });
 	UPArrow->CreateAnimation("Idle", "Up.png", 0, 36, 0.25f, true);
+	UPArrow->CreateAnimation("Idle1", "Down.png", 0, 36, 0.25f, true);
 	UPArrow->ChangeAnimation("Idle");
 	UPArrow->SetActive(false);
 
@@ -262,7 +267,7 @@ void ADiaLog::ADiaLog::BeginPlay()
 	RightArrow2->SetOrder(15);
 	RightArrow2->SetTransform({ {1010, 80}, {250,250} });
 	RightArrow2->CreateAnimation("Idle", "Right.png", 0, 36, 0.25f, true);
-	RightArrow2->CreateAnimation("Idle1", "Left.png", 0, 0, 0.25f, true);
+	RightArrow2->CreateAnimation("Idle1", "Left.png", 0, 36, 0.25f, true);
 	RightArrow2->ChangeAnimation("Idle");
 	RightArrow2->SetActive(false);
 

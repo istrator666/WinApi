@@ -22,13 +22,15 @@ public:
 		void TutorialAddEQ(FVector _MonsterPosition);
 		bool TutorialEQSetup();
 		bool TutorialEQSetUPComplete();
-		
+		void Retreat();
+
 	protected:
 		void BeginPlay() override;
 		void Tick(float _DeltaTime) override;
 
 	private:
 		UImageRenderer* EQInventoryRender = nullptr;
+		UImageRenderer* RetreatRender = nullptr;
 
 		UImageRenderer* EQIcon = nullptr;
 		UCollision* EQIconCollision = nullptr;

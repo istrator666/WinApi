@@ -172,6 +172,14 @@
       <SubType>
       </SubType>
     </ClCompile>
+    <ClCompile Include="GameEndLevel.cpp">
+      <SubType>
+      </SubType>
+    </ClCompile>
+    <ClCompile Include="GameEndRender.cpp">
+      <SubType>
+      </SubType>
+    </ClCompile>
     <ClCompile Include="IntroLevel.cpp">
       <SubType>
       </SubType>
@@ -267,6 +275,14 @@
       </SubType>
     </ClInclude>
     <ClInclude Include="FightZone.h">
+      <SubType>
+      </SubType>
+    </ClInclude>
+    <ClInclude Include="GameEndLevel.h">
+      <SubType>
+      </SubType>
+    </ClInclude>
+    <ClInclude Include="GameEndRender.h">
       <SubType>
       </SubType>
     </ClInclude>
