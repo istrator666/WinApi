@@ -13,6 +13,7 @@
 
 #include <EngineBase/EngineRandom.h>
 #include "Struct.h"
+#include <EnginePlatform/EngineSound.h>
 
 class UTutorialLevel : public ULevel
 {
@@ -140,6 +141,12 @@ private:
 	bool IsTalk5 = false;
 	bool IsTalk6 = false;
 	bool IsGameEnd = false;
+
+	//»ç¿îµå 
+	UEngineSoundPlayer BackgroundBGM;
+	UEngineSoundPlayer PlayerTalk;
+	UEngineSoundPlayer NewDay;
+	UEngineSoundPlayer RetreatSound;
 
 
 	int TutorialDrop = 1;

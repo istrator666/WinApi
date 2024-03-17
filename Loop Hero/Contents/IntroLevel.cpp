@@ -1,5 +1,4 @@
 #include "IntroLevel.h"
-
 #include "EngineCore/EngineCore.h"
 
 UIntroLevel::UIntroLevel()
@@ -13,18 +12,16 @@ UIntroLevel::~UIntroLevel()
 void UIntroLevel::BeginPlay()
 {
 	ULevel::BeginPlay();
-
 	Intro = SpawnActor<AIntroRender>();
+	BackgroundBGM = UEngineSound::SoundPlay("snd_dialog_cutscene.ogg");
+	BackgroundBGM.Off();
+	BackgroundBGM.Loop();
 }
 
 void UIntroLevel::Tick(float _DeltaTime)
 {
 	ULevel::Tick(_DeltaTime);
-
-	//if (UEngineInput::IsDown('P'))
-	//{
-	//	GEngine->ChangeLevel("StageLevel");
-	//}
+	BackgroundBGM.On();
 
 	StateUpdate(_DeltaTime);
 }
@@ -34,6 +31,7 @@ void UIntroLevel::ChangeState(IntroState _State)
 	switch (_State)
 	{
 	case IntroState::Idle:
+		
 		break;
 	case IntroState::Next:
 		Next();
@@ -148,6 +146,7 @@ void UIntroLevel::Skip()
 	if (114 < Intro->ImageNumber)
 	{
 		GEngine->ChangeLevel("Tutorial");
+		BackgroundBGM.Off();
 	}
 	else
 	{

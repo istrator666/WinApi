@@ -91,6 +91,16 @@ void UTutorialLevel::TutorialEQCardGuide()
 void UTutorialLevel::BeginPlay()
 {
 	ULevel::BeginPlay();
+	BackgroundBGM = UEngineSound::SoundPlay("snd_music_tutor.ogg");
+	PlayerTalk = UEngineSound::SoundPlay("snd_talk_hero.ogg");
+	NewDay = UEngineSound::SoundPlay("snd_start_new_day.ogg");
+	RetreatSound = UEngineSound::SoundPlay("snd_retreat.ogg");
+
+	BackgroundBGM.Loop();
+	BackgroundBGM.Off();
+	PlayerTalk.Off();
+	NewDay.Off();
+	RetreatSound.Off();
 
 	TutorialRender = SpawnActor<ATutorialRender>();
 	TutorialRender->SetActorLocation({ 25, 25 });
@@ -124,6 +134,7 @@ void UTutorialLevel::Tick(float _DeltaTime)
 {
 	ULevel::Tick(_DeltaTime);
 	PlayerLocation = Player->GetActorLocation();
+	BackgroundBGM.On();
 
 	StateUpdate(_DeltaTime);
 }
@@ -134,6 +145,7 @@ void UTutorialLevel::ChangeState(EStageState _State)
 	{
 	case EStageState::Talk1:
 	{
+		PlayerTalk.On();
 		break;
 	}
 	case EStageState::Talk2:
@@ -293,6 +305,7 @@ void UTutorialLevel::Move(float _DeltaTime)
 	}
 	else if (425 == PlayerLocation.X && 425 == PlayerLocation.Y)
 	{
+		NewDay.On();
 		mSpawn = TutorialSpawnTileLocation();
 		for (SpawnTileData& Tile : mSpawn)
 		{
@@ -301,6 +314,7 @@ void UTutorialLevel::Move(float _DeltaTime)
 	}
 	else if (575 == PlayerLocation.X && 225 == PlayerLocation.Y && true == IsGameEnd)
 	{
+		NewDay.On();
 		ChangeState(EStageState::TutorialEnd);
 	}
 
@@ -522,6 +536,7 @@ void UTutorialLevel::Talk1(float _DeltaTime)
 
 		if (0 > TimeCheck)
 		{
+			PlayerTalk.Off();
 			++TalkCount;
 		}
 	}
@@ -561,6 +576,7 @@ void UTutorialLevel::Talk3(float _DeltaTime)
 {
 	if (0 == TalkCount)
 	{
+		NewDay.On();
 		MonsterSpawnTimeCheck(_DeltaTime);
 		++TalkCount;
 	}
@@ -734,6 +750,8 @@ void UTutorialLevel::TutorialEnd()
 			)
 		{
 			GEngine->ChangeLevel("GameEnd");
+			BackgroundBGM.Off();
+			RetreatSound.On();
 		}
 	}
 }

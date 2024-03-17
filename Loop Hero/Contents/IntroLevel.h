@@ -1,5 +1,6 @@
 #pragma once
 #include <EngineCore/Level.h>
+#include <EnginePlatform/EngineSound.h>
 #include "IntroRender.h"
 #include "Enum.h"
 
@@ -27,6 +28,7 @@ protected:
 
 private:
 	AIntroRender* Intro = nullptr;
+	UEngineSoundPlayer BackgroundBGM;
 
 	IntroState CurState = IntroState::Idle;
 	void ChangeState(IntroState _State);

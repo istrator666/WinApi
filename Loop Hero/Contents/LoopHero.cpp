@@ -4,6 +4,7 @@
 #include <EngineBase\EngineDirectory.h>
 #include <EngineBase\EngineFile.h>
 #include <EngineCore\EngineResourcesManager.h>
+#include <EnginePlatform/EngineSound.h>
 
 
 LoopHeroContentsCore::LoopHeroContentsCore()
@@ -23,6 +24,8 @@ void LoopHeroContentsCore::BeginPlay()
 	SetFrame(60);
 
 	RecourceLoad();
+
+	UEngineSound::SetGlobalVolume(0.3f);
 
 	CreateLevel<UTitleLevel>("TitleLevel");
 	CreateLevel<UIntroLevel>("IntroLevel");
@@ -58,6 +61,13 @@ void LoopHeroContentsCore::RecourceLoad()
 	for (UEngineFile& File : RecourceList)
 	{
 		UEngineResourcesManager::GetInst().LoadImg(File.GetFullPath());
+	}
+
+	std::list<UEngineFile> SoundList = RecourceDir.AllFile({ ".wav", ".mp3", ".ogg"}, true);
+
+	for (UEngineFile& File : SoundList)
+	{
+		UEngineSound::Load(File.GetFullPath());
 	}
 
 	// 플레이어

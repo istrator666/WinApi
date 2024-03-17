@@ -1,6 +1,7 @@
 #pragma once
 #include <EngineCore/Level.h>
 #include "TitleRender.h"
+#include <EnginePlatform/EngineSound.h>
 
 
 // Ό³Έν :
@@ -23,7 +24,7 @@ protected:
 
 private:
 	ATitleRender* Title = nullptr;
-
+	UEngineSoundPlayer BackgroundBGM;
 
 };
 
